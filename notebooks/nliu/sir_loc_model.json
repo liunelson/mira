@@ -24,22 +24,6 @@
     }
    },
    {
-    "id": "R_MTL",
-    "name": "R_MTL",
-    "grounding": {
-     "identifiers": {
-      "ido": "0000592"
-     },
-     "modifiers": {
-      "age": "MTL"
-     }
-    },
-    "units": {
-     "expression": "person",
-     "expression_mathml": "<ci>person</ci>"
-    }
-   },
-   {
     "id": "I_MTL",
     "name": "I_MTL",
     "grounding": {
@@ -56,11 +40,11 @@
     }
    },
    {
-    "id": "R_TOR",
-    "name": "R_TOR",
+    "id": "I_TOR",
+    "name": "I_TOR",
     "grounding": {
      "identifiers": {
-      "ido": "0000592"
+      "ido": "0000511"
      },
      "modifiers": {
       "age": "TOR"
@@ -88,11 +72,27 @@
     }
    },
    {
-    "id": "I_TOR",
-    "name": "I_TOR",
+    "id": "R_MTL",
+    "name": "R_MTL",
     "grounding": {
      "identifiers": {
-      "ido": "0000511"
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "MTL"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_TOR",
+    "name": "R_TOR",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
      },
      "modifiers": {
       "age": "TOR"
@@ -108,11 +108,11 @@
    {
     "id": "t1",
     "input": [
-     "R_MTL",
+     "I_MTL",
      "S_MTL"
     ],
     "output": [
-     "R_MTL",
+     "I_MTL",
      "I_MTL"
     ],
     "properties": {
@@ -122,11 +122,11 @@
    {
     "id": "t2",
     "input": [
-     "R_TOR",
+     "I_TOR",
      "S_MTL"
     ],
     "output": [
-     "R_TOR",
+     "I_TOR",
      "I_MTL"
     ],
     "properties": {
@@ -136,11 +136,11 @@
    {
     "id": "t3",
     "input": [
-     "R_TOR",
+     "I_TOR",
      "S_TOR"
     ],
     "output": [
-     "R_TOR",
+     "I_TOR",
      "I_TOR"
     ],
     "properties": {
@@ -150,11 +150,11 @@
    {
     "id": "t4",
     "input": [
-     "R_MTL",
+     "I_MTL",
      "S_TOR"
     ],
     "output": [
-     "R_MTL",
+     "I_MTL",
      "I_TOR"
     ],
     "properties": {
@@ -197,8 +197,8 @@
     },
     {
      "target": "t2",
-     "expression": "I_MTL*S_MTL*beta_1",
-     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>S_MTL</ci><ci>beta_1</ci></apply>"
+     "expression": "I_TOR*S_MTL*beta_1",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>S_MTL</ci><ci>beta_1</ci></apply>"
     },
     {
      "target": "t3",
@@ -207,8 +207,8 @@
     },
     {
      "target": "t4",
-     "expression": "I_TOR*S_TOR*beta_3",
-     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>S_TOR</ci><ci>beta_3</ci></apply>"
+     "expression": "I_MTL*S_TOR*beta_3",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>S_TOR</ci><ci>beta_3</ci></apply>"
     },
     {
      "target": "t5",
@@ -228,19 +228,14 @@
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
-     "target": "R_MTL",
-     "expression": "0.0",
-     "expression_mathml": "<cn>0.0</cn>"
-    },
-    {
      "target": "I_MTL",
      "expression": "0.500000000000000",
      "expression_mathml": "<cn>0.5</cn>"
     },
     {
-     "target": "R_TOR",
-     "expression": "0.0",
-     "expression_mathml": "<cn>0.0</cn>"
+     "target": "I_TOR",
+     "expression": "0.500000000000000",
+     "expression_mathml": "<cn>0.5</cn>"
     },
     {
      "target": "S_TOR",
@@ -248,9 +243,14 @@
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
-     "target": "I_TOR",
-     "expression": "0.500000000000000",
-     "expression_mathml": "<cn>0.5</cn>"
+     "target": "R_MTL",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "R_TOR",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
     }
    ],
    "parameters": [

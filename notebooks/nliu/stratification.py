@@ -52,7 +52,7 @@ observables = {
 t1 = ControlledConversion(
     subject = concepts['S'],
     outcome = concepts['I'],
-    controller = concepts['R'],
+    controller = concepts['I'],
     rate_law = S * I * beta
 )
 

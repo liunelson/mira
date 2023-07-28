@@ -22,11 +22,11 @@
     }
    },
    {
-    "id": "R",
-    "name": "R",
+    "id": "I",
+    "name": "I",
     "grounding": {
      "identifiers": {
-      "ido": "0000592"
+      "ido": "0000511"
      },
      "modifiers": {}
     },
@@ -36,11 +36,11 @@
     }
    },
    {
-    "id": "I",
-    "name": "I",
+    "id": "R",
+    "name": "R",
     "grounding": {
      "identifiers": {
-      "ido": "0000511"
+      "ido": "0000592"
      },
      "modifiers": {}
     },
@@ -54,11 +54,11 @@
    {
     "id": "t1",
     "input": [
-     "R",
+     "I",
      "S"
     ],
     "output": [
-     "R",
+     "I",
      "I"
     ],
     "properties": {
@@ -100,14 +100,14 @@
      "expression_mathml": "<cn>999.0</cn>"
     },
     {
-     "target": "R",
-     "expression": "0.0",
-     "expression_mathml": "<cn>0.0</cn>"
-    },
-    {
      "target": "I",
      "expression": "1.00000000000000",
      "expression_mathml": "<cn>1.0</cn>"
+    },
+    {
+     "target": "R",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
     }
    ],
    "parameters": [

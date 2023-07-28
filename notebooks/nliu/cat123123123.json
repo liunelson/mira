@@ -1,0 +1,449 @@
+{
+    "id": "e90450cc-e599-477d-bf3d-75dba83c3b2c",
+    "timestamp": "2023-07-28 02:07:35",
+    "name": "SIR Model + Location-travel strata model",
+    "description": "SIR model ; Location-travel strata model",
+    "username": null,
+    "model": {
+      "states": [
+        {
+          "id": "S_L1",
+          "name": "S_L1",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        },
+        {
+          "id": "S_L2",
+          "name": "S_L2",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        },
+        {
+          "id": "I_L1",
+          "name": "I_L1",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        },
+        {
+          "id": "I_L2",
+          "name": "I_L2",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        },
+        {
+          "id": "R_L1",
+          "name": "R_L1",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        },
+        {
+          "id": "R_L2",
+          "name": "R_L2",
+          "grounding": {
+            "identifiers": {
+              
+            },
+            "modifiers": {
+              
+            }
+          }
+        }
+      ],
+      "transitions": [
+        {
+          "id": "t12SS_t12",
+          "input": [
+            "S_L1"
+          ],
+          "output": [
+            "S_L2"
+          ],
+          "properties": {
+            "name": "t12SS_t12"
+          }
+        },
+        {
+          "id": "t12II_t12",
+          "input": [
+            "I_L1"
+          ],
+          "output": [
+            "I_L2"
+          ],
+          "properties": {
+            "name": "t12II_t12"
+          }
+        },
+        {
+          "id": "t12RR_t12",
+          "input": [
+            "R_L1"
+          ],
+          "output": [
+            "R_L2"
+          ],
+          "properties": {
+            "name": "t12RR_t12"
+          }
+        },
+        {
+          "id": "t12SS_t21",
+          "input": [
+            "S_L2"
+          ],
+          "output": [
+            "S_L1"
+          ],
+          "properties": {
+            "name": "t12SS_t21"
+          }
+        },
+        {
+          "id": "t12II_t21",
+          "input": [
+            "I_L2"
+          ],
+          "output": [
+            "I_L1"
+          ],
+          "properties": {
+            "name": "t12II_t21"
+          }
+        },
+        {
+          "id": "t12RR_t21",
+          "input": [
+            "R_L2"
+          ],
+          "output": [
+            "R_L1"
+          ],
+          "properties": {
+            "name": "t12RR_t21"
+          }
+        },
+        {
+          "id": "inf_infL1L1",
+          "input": [
+            "I_L1",
+            "S_L1"
+          ],
+          "output": [
+            "I_L1",
+            "I_L1"
+          ],
+          "properties": {
+            "name": "inf_infL1L1"
+          }
+        },
+        {
+          "id": "inf_infL2L2",
+          "input": [
+            "I_L2",
+            "S_L2"
+          ],
+          "output": [
+            "I_L2",
+            "I_L2"
+          ],
+          "properties": {
+            "name": "inf_infL2L2"
+          }
+        },
+        {
+          "id": "rec_recL1L1",
+          "input": [
+            "I_L1"
+          ],
+          "output": [
+            "R_L1"
+          ],
+          "properties": {
+            "name": "rec_recL1L1"
+          }
+        },
+        {
+          "id": "rec_recL2L2",
+          "input": [
+            "I_L2"
+          ],
+          "output": [
+            "R_L2"
+          ],
+          "properties": {
+            "name": "rec_recL2L2"
+          }
+        }
+      ]
+    },
+    "model_schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1",
+    "semantics": {
+      "ode": {
+        "rates": [
+          {
+            "target": "t12SS_t12",
+            "expression": "S_L1*p_1_t12SS*tau12",
+            "expression_mathml": "<apply><times/><ci>S_L1</ci><ci>p_1_t12SS</ci><ci>tau12</ci></apply>"
+          },
+          {
+            "target": "t12II_t12",
+            "expression": "I_L1*p_1_t12II*tau12",
+            "expression_mathml": "<apply><times/><ci>I_L1</ci><ci>p_1_t12II</ci><ci>tau12</ci></apply>"
+          },
+          {
+            "target": "t12RR_t12",
+            "expression": "R_L1*p_1_t12RR*tau12",
+            "expression_mathml": "<apply><times/><ci>R_L1</ci><ci>p_1_t12RR</ci><ci>tau12</ci></apply>"
+          },
+          {
+            "target": "t12SS_t21",
+            "expression": "S_L2*p_1_t12SS*tau21",
+            "expression_mathml": "<apply><times/><ci>S_L2</ci><ci>p_1_t12SS</ci><ci>tau21</ci></apply>"
+          },
+          {
+            "target": "t12II_t21",
+            "expression": "I_L2*p_1_t12II*tau21",
+            "expression_mathml": "<apply><times/><ci>I_L2</ci><ci>p_1_t12II</ci><ci>tau21</ci></apply>"
+          },
+          {
+            "target": "t12RR_t21",
+            "expression": "R_L2*p_1_t12RR*tau21",
+            "expression_mathml": "<apply><times/><ci>R_L2</ci><ci>p_1_t12RR</ci><ci>tau21</ci></apply>"
+          },
+          {
+            "target": "inf_infL1L1",
+            "expression": "I_L1*S_L1*beta*p_2_infL1L1",
+            "expression_mathml": "<apply><times/><ci>I_L1</ci><ci>S_L1</ci><ci>beta</ci><ci>p_2_infL1L1</ci></apply>"
+          },
+          {
+            "target": "inf_infL2L2",
+            "expression": "I_L2*S_L2*beta*p_2_infL2L2",
+            "expression_mathml": "<apply><times/><ci>I_L2</ci><ci>S_L2</ci><ci>beta</ci><ci>p_2_infL2L2</ci></apply>"
+          },
+          {
+            "target": "rec_recL1L1",
+            "expression": "I_L1*gamma*p_2_recL1L1",
+            "expression_mathml": "<apply><times/><ci>I_L1</ci><ci>gamma</ci><ci>p_2_recL1L1</ci></apply>"
+          },
+          {
+            "target": "rec_recL2L2",
+            "expression": "I_L2*gamma*p_2_recL2L2",
+            "expression_mathml": "<apply><times/><ci>I_L2</ci><ci>gamma</ci><ci>p_2_recL2L2</ci></apply>"
+          }
+        ],
+        "initials": [
+          {
+            "target": "S_L1",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          },
+          {
+            "target": "S_L2",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          },
+          {
+            "target": "I_L1",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          },
+          {
+            "target": "I_L2",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          },
+          {
+            "target": "R_L1",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          },
+          {
+            "target": "R_L2",
+            "expression": "0.16666666666666666",
+            "expression_mathml": "<cn>0.16666666666666666002</cn>"
+          }
+        ],
+        "parameters": [
+          { "id": "p_1_t12SS", "value": 1.0 },
+          { "id": "tau12", "value": 0.5 },
+          { "id": "p_1_t12II", "value": 1.0 },
+          { "id": "p_1_t12RR", "value": 1.0 },
+          { "id": "tau21", "value": 0.5 },
+          { "id": "beta", "value": 2.7e-7, "distribution": {
+              "type": "Uniform1",
+              "parameters": {
+                "minimum": 2.6e-7,
+                "maximum": 2.8e-7
+              }
+            }
+          },
+          { "id": "p_2_infL1L1", "value": 1.0 },
+          { "id": "p_2_infL2L2", "value": 1.0 },
+          { "id": "gamma", "value": 0.14, "distribution": {
+              "type": "Uniform1",
+              "parameters": {
+                "minimum": 0.1,
+                "maximum": 0.18
+              }
+            }
+          },
+          { "id": "p_2_recL1L1", "value": 1.0 },
+          { "id": "p_2_recL2L2", "value": 1.0 }
+        ],
+        "observables": [
+          {
+            "id": "noninf",
+            "name": "noninf",
+            "expression": "R_L1 + R_L2 + S_L1 + S_L2",
+            "expression_mathml": "<apply><plus/><ci>R_L1</ci><ci>R_L2</ci><ci>S_L1</ci><ci>S_L2</ci></apply>"
+          }
+        ],
+        "time": {
+          "id": "t",
+          "units": {
+            "expression": "day",
+            "expression_mathml": "<ci>day</ci>"
+          }
+        }
+      },
+      "span": [],
+      "typing": {
+        "map": [
+          [ "S_L1", "Pop" ],
+          [ "I_L1", "Pop" ],
+          [ "R_L1", "Pop" ],
+          [ "S_L2", "Pop" ],
+          [ "I_L2", "Pop" ],
+          [ "R_L2", "Pop" ],
+          [ "t12SS_t12", "Strata" ],
+          [ "t12II_t12", "Strata" ],
+          [ "t12RR_t12", "Strata" ],
+          [ "t12SS_t21", "Strata" ],
+          [ "t12II_t21", "Strata" ],
+          [ "t12RR_t21", "Strata" ],
+          [ "inf_infL1L1", "Infect" ],
+          [ "inf_infL2L2", "Infect" ],
+          [ "rec_recL1L1", "Recover" ],
+          [ "rec_recL2L2", "Recover" ]
+        ],
+        "system": {
+          "name": "SIR Model",
+          "model_version": "0.1",
+          "model": {
+            "transitions": [
+              {
+                "output": [
+                  "Pop",
+                  "Pop"
+                ],
+                "properties": {
+                  "name": "Infect",
+                  "description": "Infect"
+                },
+                "id": "Infect",
+                "input": [
+                  "Pop",
+                  "Pop"
+                ]
+              },
+              {
+                "output": [
+                  "Pop"
+                ],
+                "properties": {
+                  "name": "Recover",
+                  "description": "Recover"
+                },
+                "id": "Recover",
+                "input": [
+                  "Pop"
+                ]
+              },
+              {
+                "output": [
+                  "Pop"
+                ],
+                "properties": {
+                  "name": "Strata",
+                  "description": "1-to-1 process that represents a change in the demographic division of a human individual."
+                },
+                "id": "Strata",
+                "input": [
+                  "Pop"
+                ]
+              }
+            ],
+            "states": [
+              {
+                "name": "Pop",
+                "id": "Pop",
+                "description": "Compartment of individuals in a human population."
+              }
+            ]
+          },
+          "description": "SIR model",
+          "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json"
+        }
+      }
+    },
+    "metadata": {
+      "annotations": {
+        "authors": [
+          
+        ],
+        "references": [
+          
+        ],
+        "locations": [
+          
+        ],
+        "pathogens": [
+          
+        ],
+        "diseases": [
+          
+        ],
+        "hosts": [
+          
+        ],
+        "model_types": [
+          
+        ]
+      }
+    },
+    "concepts": [
+      
+    ]
+  }
