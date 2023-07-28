@@ -1,21 +1,21 @@
 {
- "name": "SIR model from MIRA, 2-age stratified with MIRA",
+ "name": "SIR model from MIRA, 2-location stratified with MIRA",
  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
  "schema_name": "petrinet",
- "description": "SIR model from MIRA, 2-age stratified with MIRA",
+ "description": "SIR model from MIRA, 2-location stratified with MIRA",
  "model_version": "0.1",
  "properties": {},
  "model": {
   "states": [
    {
-    "id": "S_A1",
-    "name": "S_A1",
+    "id": "S_MTL",
+    "name": "S_MTL",
     "grounding": {
      "identifiers": {
       "ido": "0000514"
      },
      "modifiers": {
-      "age": "A1"
+      "age": "MTL"
      }
     },
     "units": {
@@ -24,14 +24,14 @@
     }
    },
    {
-    "id": "R_A1",
-    "name": "R_A1",
+    "id": "R_MTL",
+    "name": "R_MTL",
     "grounding": {
      "identifiers": {
       "ido": "0000592"
      },
      "modifiers": {
-      "age": "A1"
+      "age": "MTL"
      }
     },
     "units": {
@@ -40,14 +40,14 @@
     }
    },
    {
-    "id": "I_A1",
-    "name": "I_A1",
+    "id": "I_MTL",
+    "name": "I_MTL",
     "grounding": {
      "identifiers": {
       "ido": "0000511"
      },
      "modifiers": {
-      "age": "A1"
+      "age": "MTL"
      }
     },
     "units": {
@@ -56,14 +56,14 @@
     }
    },
    {
-    "id": "R_A2",
-    "name": "R_A2",
+    "id": "R_TOR",
+    "name": "R_TOR",
     "grounding": {
      "identifiers": {
       "ido": "0000592"
      },
      "modifiers": {
-      "age": "A2"
+      "age": "TOR"
      }
     },
     "units": {
@@ -72,14 +72,14 @@
     }
    },
    {
-    "id": "S_A2",
-    "name": "S_A2",
+    "id": "S_TOR",
+    "name": "S_TOR",
     "grounding": {
      "identifiers": {
       "ido": "0000514"
      },
      "modifiers": {
-      "age": "A2"
+      "age": "TOR"
      }
     },
     "units": {
@@ -88,14 +88,14 @@
     }
    },
    {
-    "id": "I_A2",
-    "name": "I_A2",
+    "id": "I_TOR",
+    "name": "I_TOR",
     "grounding": {
      "identifiers": {
       "ido": "0000511"
      },
      "modifiers": {
-      "age": "A2"
+      "age": "TOR"
      }
     },
     "units": {
@@ -108,12 +108,12 @@
    {
     "id": "t1",
     "input": [
-     "R_A1",
-     "S_A1"
+     "R_MTL",
+     "S_MTL"
     ],
     "output": [
-     "R_A1",
-     "I_A1"
+     "R_MTL",
+     "I_MTL"
     ],
     "properties": {
      "name": "t1"
@@ -122,12 +122,12 @@
    {
     "id": "t2",
     "input": [
-     "R_A2",
-     "S_A1"
+     "R_TOR",
+     "S_MTL"
     ],
     "output": [
-     "R_A2",
-     "I_A1"
+     "R_TOR",
+     "I_MTL"
     ],
     "properties": {
      "name": "t2"
@@ -136,12 +136,12 @@
    {
     "id": "t3",
     "input": [
-     "R_A2",
-     "S_A2"
+     "R_TOR",
+     "S_TOR"
     ],
     "output": [
-     "R_A2",
-     "I_A2"
+     "R_TOR",
+     "I_TOR"
     ],
     "properties": {
      "name": "t3"
@@ -150,12 +150,12 @@
    {
     "id": "t4",
     "input": [
-     "R_A1",
-     "S_A2"
+     "R_MTL",
+     "S_TOR"
     ],
     "output": [
-     "R_A1",
-     "I_A2"
+     "R_MTL",
+     "I_TOR"
     ],
     "properties": {
      "name": "t4"
@@ -164,10 +164,10 @@
    {
     "id": "t5",
     "input": [
-     "I_A1"
+     "I_MTL"
     ],
     "output": [
-     "R_A1"
+     "R_MTL"
     ],
     "properties": {
      "name": "t5"
@@ -176,10 +176,10 @@
    {
     "id": "t6",
     "input": [
-     "I_A2"
+     "I_TOR"
     ],
     "output": [
-     "R_A2"
+     "R_TOR"
     ],
     "properties": {
      "name": "t6"
@@ -192,63 +192,63 @@
    "rates": [
     {
      "target": "t1",
-     "expression": "I_A1*S_A1*beta_0",
-     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A1</ci><ci>beta_0</ci></apply>"
+     "expression": "I_MTL*S_MTL*beta_0",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>S_MTL</ci><ci>beta_0</ci></apply>"
     },
     {
      "target": "t2",
-     "expression": "I_A1*S_A1*beta_1",
-     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A1</ci><ci>beta_1</ci></apply>"
+     "expression": "I_MTL*S_MTL*beta_1",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>S_MTL</ci><ci>beta_1</ci></apply>"
     },
     {
      "target": "t3",
-     "expression": "I_A2*S_A2*beta_2",
-     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A2</ci><ci>beta_2</ci></apply>"
+     "expression": "I_TOR*S_TOR*beta_2",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>S_TOR</ci><ci>beta_2</ci></apply>"
     },
     {
      "target": "t4",
-     "expression": "I_A2*S_A2*beta_3",
-     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A2</ci><ci>beta_3</ci></apply>"
+     "expression": "I_TOR*S_TOR*beta_3",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>S_TOR</ci><ci>beta_3</ci></apply>"
     },
     {
      "target": "t5",
-     "expression": "I_A1*gamma_0",
-     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>gamma_0</ci></apply>"
+     "expression": "I_MTL*gamma_0",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>gamma_0</ci></apply>"
     },
     {
      "target": "t6",
-     "expression": "I_A2*gamma_1",
-     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>gamma_1</ci></apply>"
+     "expression": "I_TOR*gamma_1",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>gamma_1</ci></apply>"
     }
    ],
    "initials": [
     {
-     "target": "S_A1",
+     "target": "S_MTL",
      "expression": "499.500000000000",
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
-     "target": "R_A1",
+     "target": "R_MTL",
      "expression": "0.0",
      "expression_mathml": "<cn>0.0</cn>"
     },
     {
-     "target": "I_A1",
+     "target": "I_MTL",
      "expression": "0.500000000000000",
      "expression_mathml": "<cn>0.5</cn>"
     },
     {
-     "target": "R_A2",
+     "target": "R_TOR",
      "expression": "0.0",
      "expression_mathml": "<cn>0.0</cn>"
     },
     {
-     "target": "S_A2",
+     "target": "S_TOR",
      "expression": "499.500000000000",
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
-     "target": "I_A2",
+     "target": "I_TOR",
      "expression": "0.500000000000000",
      "expression_mathml": "<cn>0.5</cn>"
     }
@@ -307,8 +307,8 @@
     {
      "id": "Total Population",
      "name": "Total Population",
-     "expression": "SympyExprStr(I_A1 + I_A2) + SympyExprStr(R_A1 + R_A2) + SympyExprStr(S_A1 + S_A2)",
-     "expression_mathml": "<apply><plus/><sympyexprstr><apply><plus/><ci>I_A1</ci><ci>I_A2</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>R_A1</ci><ci>R_A2</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>S_A1</ci><ci>S_A2</ci></apply></sympyexprstr></apply>"
+     "expression": "SympyExprStr(I_MTL + I_TOR) + SympyExprStr(R_MTL + R_TOR) + SympyExprStr(S_MTL + S_TOR)",
+     "expression_mathml": "<apply><plus/><sympyexprstr><apply><plus/><ci>I_MTL</ci><ci>I_TOR</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>R_MTL</ci><ci>R_TOR</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>S_MTL</ci><ci>S_TOR</ci></apply></sympyexprstr></apply>"
     }
    ],
    "time": {

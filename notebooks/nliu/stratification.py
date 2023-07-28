@@ -78,19 +78,19 @@ sir_model = TemplateModel(
 AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
 
 # %%
-# Do stratification with 2 age groups
+# Do stratification with 2 locations
 
-sir_age_model = stratify(
+sir_loc_model = stratify(
     sir_model,
     key = 'age',
-    strata = ['A1', 'A2'],
+    strata = ['TOR', 'MTL'],
     structure = [],
     cartesian_control = True,
     params_to_stratify = {'beta', 'gamma'}
 )
 
-sir_age_model.annotations.name = 'SIR model from MIRA, 2-age stratified with MIRA'
+sir_loc_model.annotations.name = 'SIR model from MIRA, 2-location stratified with MIRA'
 
-AskeNetPetriNetModel(Model(sir_age_model)).to_json_file('sir_age_model.json')
+AskeNetPetriNetModel(Model(sir_loc_model)).to_json_file('sir_loc_model.json')
 
 # %%
