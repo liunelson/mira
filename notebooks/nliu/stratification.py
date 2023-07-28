@@ -82,11 +82,13 @@ AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
 
 sir_loc_model = stratify(
     sir_model,
-    key = 'age',
+    key = 'location',
     strata = ['TOR', 'MTL'],
-    structure = [],
-    cartesian_control = True,
-    params_to_stratify = {'beta', 'gamma'}
+    structure = [['TOR', 'MTL'], ['MTL', 'TOR']],
+    directed = False,
+    cartesian_control = False,
+    params_to_stratify = {'beta', 'gamma'},
+    concepts_to_stratify = {'S', 'I', 'R'}
 )
 
 sir_loc_model.annotations.name = 'SIR model from MIRA, 2-location stratified with MIRA'
