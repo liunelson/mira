@@ -1,0 +1,338 @@
+{
+ "name": "SIR model from MIRA, 2-age stratified with MIRA",
+ "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
+ "schema_name": "petrinet",
+ "description": "SIR model from MIRA, 2-age stratified with MIRA",
+ "model_version": "0.1",
+ "properties": {},
+ "model": {
+  "states": [
+   {
+    "id": "S_A1",
+    "name": "S_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A1",
+    "name": "R_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A1",
+    "name": "I_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A2",
+    "name": "R_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_A2",
+    "name": "S_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A2",
+    "name": "I_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   }
+  ],
+  "transitions": [
+   {
+    "id": "t1",
+    "input": [
+     "R_A1",
+     "S_A1"
+    ],
+    "output": [
+     "R_A1",
+     "I_A1"
+    ],
+    "properties": {
+     "name": "t1"
+    }
+   },
+   {
+    "id": "t2",
+    "input": [
+     "R_A2",
+     "S_A1"
+    ],
+    "output": [
+     "R_A2",
+     "I_A1"
+    ],
+    "properties": {
+     "name": "t2"
+    }
+   },
+   {
+    "id": "t3",
+    "input": [
+     "R_A2",
+     "S_A2"
+    ],
+    "output": [
+     "R_A2",
+     "I_A2"
+    ],
+    "properties": {
+     "name": "t3"
+    }
+   },
+   {
+    "id": "t4",
+    "input": [
+     "R_A1",
+     "S_A2"
+    ],
+    "output": [
+     "R_A1",
+     "I_A2"
+    ],
+    "properties": {
+     "name": "t4"
+    }
+   },
+   {
+    "id": "t5",
+    "input": [
+     "I_A1"
+    ],
+    "output": [
+     "R_A1"
+    ],
+    "properties": {
+     "name": "t5"
+    }
+   },
+   {
+    "id": "t6",
+    "input": [
+     "I_A2"
+    ],
+    "output": [
+     "R_A2"
+    ],
+    "properties": {
+     "name": "t6"
+    }
+   }
+  ]
+ },
+ "semantics": {
+  "ode": {
+   "rates": [
+    {
+     "target": "t1",
+     "expression": "I_A1*S_A1*beta_0",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A1</ci><ci>beta_0</ci></apply>"
+    },
+    {
+     "target": "t2",
+     "expression": "I_A1*S_A1*beta_1",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A1</ci><ci>beta_1</ci></apply>"
+    },
+    {
+     "target": "t3",
+     "expression": "I_A2*S_A2*beta_2",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A2</ci><ci>beta_2</ci></apply>"
+    },
+    {
+     "target": "t4",
+     "expression": "I_A2*S_A2*beta_3",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A2</ci><ci>beta_3</ci></apply>"
+    },
+    {
+     "target": "t5",
+     "expression": "I_A1*gamma_0",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>gamma_0</ci></apply>"
+    },
+    {
+     "target": "t6",
+     "expression": "I_A2*gamma_1",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>gamma_1</ci></apply>"
+    }
+   ],
+   "initials": [
+    {
+     "target": "S_A1",
+     "expression": "499.500000000000",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "R_A1",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "I_A1",
+     "expression": "0.500000000000000",
+     "expression_mathml": "<cn>0.5</cn>"
+    },
+    {
+     "target": "R_A2",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "S_A2",
+     "expression": "499.500000000000",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "I_A2",
+     "expression": "0.500000000000000",
+     "expression_mathml": "<cn>0.5</cn>"
+    }
+   ],
+   "parameters": [
+    {
+     "id": "beta_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "beta_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "beta_2",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "beta_3",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "gamma_0",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "gamma_1",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    }
+   ],
+   "observables": [
+    {
+     "id": "Total Population",
+     "name": "Total Population",
+     "expression": "SympyExprStr(I_A1 + I_A2) + SympyExprStr(R_A1 + R_A2) + SympyExprStr(S_A1 + S_A2)",
+     "expression_mathml": "<apply><plus/><sympyexprstr><apply><plus/><ci>I_A1</ci><ci>I_A2</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>R_A1</ci><ci>R_A2</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>S_A1</ci><ci>S_A2</ci></apply></sympyexprstr></apply>"
+    }
+   ],
+   "time": {
+    "id": "t",
+    "units": {
+     "expression": "day",
+     "expression_mathml": "<ci>day</ci>"
+    }
+   }
+  }
+ },
+ "metadata": {
+  "annotations": {
+   "license": null,
+   "authors": [],
+   "references": [],
+   "time_scale": null,
+   "time_start": null,
+   "time_end": null,
+   "locations": [],
+   "pathogens": [],
+   "diseases": [],
+   "hosts": [],
+   "model_types": []
+  }
+ }
+}
