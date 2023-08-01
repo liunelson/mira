@@ -31,13 +31,13 @@ MIRA_REST_URL = 'http://34.230.33.149:8771/api'
 # %%
 def viz_mmt(mmt) -> NoReturn:
 
-    res = requests.post(url = f'{MIRA_REST_URL}/viz/to_image', data = sir_2age_d_model.json())
+    res = requests.post(url = f'{MIRA_REST_URL}/viz/to_image', data = mmt.json())
 
     with open('sir_2age_d_model.png', 'wb') as f:
         f.write(res.content)
 
-    im = Image.open('sir_2age_d_model.png')
-    im.show()
+    with Image.open('sir_2age_d_model.png').convert('RGB') as im:
+        im.show()
 
 # %%
 # Units
@@ -100,6 +100,9 @@ sir_model = TemplateModel(
     annotations = Annotations(name = 'SIR model')
 )
 
+# Visualize
+viz_mmt(sir_model)
+
 # Generate AMR JSON
 AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
 
@@ -119,6 +122,8 @@ sir_2age_model = stratify(
 
 sir_2age_model.annotations.name = 'SIR model + stratified by 2 age groups'
 
+viz_mmt(sir_2age_model)
+
 AskeNetPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
 
 # %%
@@ -132,7 +137,7 @@ initials = sir_2age_model.initials
 initials['D'] = Initial(concept = Concept(name = 'D'), value = 0)
 
 # New parameters
-parameters = {**parameters, **sir_2age_model.parameters, **{
+parameters = {**sir_2age_model.parameters, **{
     'd1': Parameter(name = 'd1', value = 1.0/20.0, units = per_day_units()),
     'd2': Parameter(name = 'd2', value = 1.0/20.0, units = per_day_units())
 }}
@@ -164,11 +169,75 @@ sir_2age_d_model = TemplateModel(
     annotations = Annotations(name = 'SIR model + stratified by 2 age groups + D')
 )
 
+viz_mmt(sir_2age_d_model)
+
 AskeNetPetriNetModel(Model(sir_2age_d_model)).to_json_file('sir_2age_d_model.json')
 
 # %%
+# Stratify by 2 locations
+
+sir_2age_d_2loc_model = stratify(
+    sir_2age_d_model,
+    key = 'location',
+    strata = ['L1', 'L2'],
+    structure = [['L1', 'L2'], ['L2', 'L1']],
+    directed = False,
+    cartesian_control = False,
+    params_to_stratify = set(sir_2age_d_model.parameters.keys()),
+    concepts_to_stratify = set(sir_2age_d_model.get_concepts_name_map().keys())
+)
+
+sir_2age_d_2loc_model.annotations.name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations'
+
+viz_mmt(sir_2age_d_2loc_model)
+
+AskeNetPetriNetModel(Model(sir_2age_d_2loc_model)).to_json_file('sir_2age_d_2loc_model.json')
 
 # %%
-# 'Z': Concept(name = 'D', units = person_units(), identifiers = {'ido': '0000511'})
+# Add Z compartment
 
+# New concept
+concepts['Z'] = Concept(name = 'Z', units = person_units(), identifiers = {'ido': '0000511'})
 
+# New `initials`
+initials = sir_2age_d_2loc_model.initials
+initials['Z'] = Initial(concept = Concept(name = 'Z'), value = 0)
+
+# New parameters
+parameters = {**sir_2age_d_2loc_model.parameters, **{
+    'z1': Parameter(name = 'z1', value = 1.0/50.0, units = per_day_units()),
+    'z2': Parameter(name = 'z2', value = 1.0/50.0, units = per_day_units())
+}}
+
+# New symbols
+D_L1, D_L2, Z, z1, z2 = sympy.symbols('D_L1 D_L2 Z z1 z2')
+
+# New templates
+# D_L1 -> Z
+t5 = NaturalConversion(
+    subject = sir_2age_d_2loc_model.get_concept('D_L1'),
+    outcome = concepts['Z'],
+    rate_law = z1 * D_L1
+)
+
+# D_L2 -> Z
+t6 = NaturalConversion(
+    subject = sir_2age_d_2loc_model.get_concept('D_L2'),
+    outcome = concepts['Z'],
+    rate_law = z2 * D_L2
+)
+
+sir_2age_d_2loc_z_model = TemplateModel(
+    templates = sir_2age_d_2loc_model.templates + [t5, t6],
+    parameters = parameters,
+    initials = initials,
+    time = Time(name = 't', units = day_units()),
+    # observables = observables,
+    annotations = Annotations(name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations + Z')
+)
+
+viz_mmt(sir_2age_d_2loc_z_model)
+
+AskeNetPetriNetModel(Model(sir_2age_d_2loc_z_model)).to_json_file('sir_2age_d_2loc_z_model.json')
+
+# %%
