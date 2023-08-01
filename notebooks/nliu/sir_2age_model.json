@@ -1,0 +1,441 @@
+{
+ "name": "SIR model + stratified by 2 age groups",
+ "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
+ "schema_name": "petrinet",
+ "description": "SIR model + stratified by 2 age groups",
+ "model_version": "0.1",
+ "properties": {},
+ "model": {
+  "states": [
+   {
+    "id": "S_A1",
+    "name": "S_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A1",
+    "name": "I_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A2",
+    "name": "I_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_A2",
+    "name": "S_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A1",
+    "name": "R_A1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A2",
+    "name": "R_A2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   }
+  ],
+  "transitions": [
+   {
+    "id": "t1",
+    "input": [
+     "I_A1",
+     "S_A1"
+    ],
+    "output": [
+     "I_A1",
+     "I_A1"
+    ],
+    "properties": {
+     "name": "t1"
+    }
+   },
+   {
+    "id": "t2",
+    "input": [
+     "I_A2",
+     "S_A1"
+    ],
+    "output": [
+     "I_A2",
+     "I_A1"
+    ],
+    "properties": {
+     "name": "t2"
+    }
+   },
+   {
+    "id": "t3",
+    "input": [
+     "I_A2",
+     "S_A2"
+    ],
+    "output": [
+     "I_A2",
+     "I_A2"
+    ],
+    "properties": {
+     "name": "t3"
+    }
+   },
+   {
+    "id": "t4",
+    "input": [
+     "I_A1",
+     "S_A2"
+    ],
+    "output": [
+     "I_A1",
+     "I_A2"
+    ],
+    "properties": {
+     "name": "t4"
+    }
+   },
+   {
+    "id": "t5",
+    "input": [
+     "I_A1"
+    ],
+    "output": [
+     "R_A1"
+    ],
+    "properties": {
+     "name": "t5"
+    }
+   },
+   {
+    "id": "t6",
+    "input": [
+     "I_A2"
+    ],
+    "output": [
+     "R_A2"
+    ],
+    "properties": {
+     "name": "t6"
+    }
+   },
+   {
+    "id": "t7",
+    "input": [
+     "S_A1"
+    ],
+    "output": [
+     "S_A2"
+    ],
+    "properties": {
+     "name": "t7"
+    }
+   },
+   {
+    "id": "t8",
+    "input": [
+     "S_A2"
+    ],
+    "output": [
+     "S_A1"
+    ],
+    "properties": {
+     "name": "t8"
+    }
+   },
+   {
+    "id": "t9",
+    "input": [
+     "I_A1"
+    ],
+    "output": [
+     "I_A2"
+    ],
+    "properties": {
+     "name": "t9"
+    }
+   },
+   {
+    "id": "t10",
+    "input": [
+     "I_A2"
+    ],
+    "output": [
+     "I_A1"
+    ],
+    "properties": {
+     "name": "t10"
+    }
+   },
+   {
+    "id": "t11",
+    "input": [
+     "R_A1"
+    ],
+    "output": [
+     "R_A2"
+    ],
+    "properties": {
+     "name": "t11"
+    }
+   },
+   {
+    "id": "t12",
+    "input": [
+     "R_A2"
+    ],
+    "output": [
+     "R_A1"
+    ],
+    "properties": {
+     "name": "t12"
+    }
+   }
+  ]
+ },
+ "semantics": {
+  "ode": {
+   "rates": [
+    {
+     "target": "t1",
+     "expression": "I_A1*S_A1*b_0",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A1</ci><ci>b_0</ci></apply>"
+    },
+    {
+     "target": "t2",
+     "expression": "I_A2*S_A1*b_1",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A1</ci><ci>b_1</ci></apply>"
+    },
+    {
+     "target": "t3",
+     "expression": "I_A2*S_A2*b_2",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>S_A2</ci><ci>b_2</ci></apply>"
+    },
+    {
+     "target": "t4",
+     "expression": "I_A1*S_A2*b_3",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>S_A2</ci><ci>b_3</ci></apply>"
+    },
+    {
+     "target": "t5",
+     "expression": "I_A1*g_0",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>g_0</ci></apply>"
+    },
+    {
+     "target": "t6",
+     "expression": "I_A2*g_1",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>g_1</ci></apply>"
+    },
+    {
+     "target": "t7",
+     "expression": "S_A1*p_A1_A2",
+     "expression_mathml": "<apply><times/><ci>S_A1</ci><ci>p_A1_A2</ci></apply>"
+    },
+    {
+     "target": "t8",
+     "expression": "S_A2*p_A2_A1",
+     "expression_mathml": "<apply><times/><ci>S_A2</ci><ci>p_A2_A1</ci></apply>"
+    },
+    {
+     "target": "t9",
+     "expression": "I_A1*p_A1_A2",
+     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>p_A1_A2</ci></apply>"
+    },
+    {
+     "target": "t10",
+     "expression": "I_A2*p_A2_A1",
+     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>p_A2_A1</ci></apply>"
+    },
+    {
+     "target": "t11",
+     "expression": "R_A1*p_A1_A2",
+     "expression_mathml": "<apply><times/><ci>R_A1</ci><ci>p_A1_A2</ci></apply>"
+    },
+    {
+     "target": "t12",
+     "expression": "R_A2*p_A2_A1",
+     "expression_mathml": "<apply><times/><ci>R_A2</ci><ci>p_A2_A1</ci></apply>"
+    }
+   ],
+   "initials": [
+    {
+     "target": "S_A1",
+     "expression": "499.500000000000",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "I_A1",
+     "expression": "0.500000000000000",
+     "expression_mathml": "<cn>0.5</cn>"
+    },
+    {
+     "target": "I_A2",
+     "expression": "0.500000000000000",
+     "expression_mathml": "<cn>0.5</cn>"
+    },
+    {
+     "target": "S_A2",
+     "expression": "499.500000000000",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "R_A1",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "R_A2",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    }
+   ],
+   "parameters": [
+    {
+     "id": "b_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_2",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_3",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_0",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_1",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "p_A1_A2",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1",
+     "value": 0.1
+    }
+   ],
+   "observables": [],
+   "time": {
+    "id": "t",
+    "units": {
+     "expression": "day",
+     "expression_mathml": "<ci>day</ci>"
+    }
+   }
+  }
+ },
+ "metadata": {
+  "annotations": {
+   "license": null,
+   "authors": [],
+   "references": [],
+   "time_scale": null,
+   "time_start": null,
+   "time_end": null,
+   "locations": [],
+   "pathogens": [],
+   "diseases": [],
+   "hosts": [],
+   "model_types": []
+  }
+ }
+}

@@ -1,8 +1,8 @@
 {
- "name": "SIR model from MIRA",
+ "name": "SIR model",
  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
  "schema_name": "petrinet",
- "description": "SIR model from MIRA",
+ "description": "SIR model",
  "model_version": "0.1",
  "properties": {},
  "model": {
@@ -84,13 +84,13 @@
    "rates": [
     {
      "target": "t1",
-     "expression": "I*S*beta",
-     "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>beta</ci></apply>"
+     "expression": "I*S*b",
+     "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply>"
     },
     {
      "target": "t2",
-     "expression": "I*gamma",
-     "expression_mathml": "<apply><times/><ci>I</ci><ci>gamma</ci></apply>"
+     "expression": "I*g",
+     "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
     }
    ],
    "initials": [
@@ -112,7 +112,7 @@
    ],
    "parameters": [
     {
-     "id": "beta",
+     "id": "b",
      "value": 0.4,
      "units": {
       "expression": "1/day",
@@ -120,7 +120,7 @@
      }
     },
     {
-     "id": "gamma",
+     "id": "g",
      "value": 0.09090909090909091,
      "units": {
       "expression": "1/day",
@@ -128,14 +128,7 @@
      }
     }
    ],
-   "observables": [
-    {
-     "id": "Total Population",
-     "name": "Total Population",
-     "expression": "SympyExprStr(I) + SympyExprStr(R) + SympyExprStr(S)",
-     "expression_mathml": "<apply><plus/><sympyexprstr><ci>I</ci></sympyexprstr><sympyexprstr><ci>R</ci></sympyexprstr><sympyexprstr><ci>S</ci></sympyexprstr></apply>"
-    }
-   ],
+   "observables": [],
    "time": {
     "id": "t",
     "units": {

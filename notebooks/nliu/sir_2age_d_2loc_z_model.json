@@ -1,0 +1,1368 @@
+{
+ "name": "SIR model + stratified by 2 age groups + D + stratified by 2 locations + Z",
+ "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
+ "schema_name": "petrinet",
+ "description": "SIR model + stratified by 2 age groups + D + stratified by 2 locations + Z",
+ "model_version": "0.1",
+ "properties": {},
+ "model": {
+  "states": [
+   {
+    "id": "S_A1_L1",
+    "name": "S_A1_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A1_L1",
+    "name": "I_A1_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_A1_L2",
+    "name": "S_A1_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A1_L2",
+    "name": "I_A1_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A2_L1",
+    "name": "I_A2_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_A2_L2",
+    "name": "I_A2_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_A2_L1",
+    "name": "S_A2_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_A2_L2",
+    "name": "S_A2_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A1_L1",
+    "name": "R_A1_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A1_L2",
+    "name": "R_A1_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A1",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A2_L1",
+    "name": "R_A2_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_A2_L2",
+    "name": "R_A2_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "age": "A2",
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "D_L1",
+    "name": "D_L1",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000509"
+     },
+     "modifiers": {
+      "location": "L1"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "D_L2",
+    "name": "D_L2",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000509"
+     },
+     "modifiers": {
+      "location": "L2"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "Z",
+    "name": "Z",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {}
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   }
+  ],
+  "transitions": [
+   {
+    "id": "t1",
+    "input": [
+     "I_A1_L1",
+     "S_A1_L1"
+    ],
+    "output": [
+     "I_A1_L1",
+     "I_A1_L1"
+    ],
+    "properties": {
+     "name": "t1"
+    }
+   },
+   {
+    "id": "t2",
+    "input": [
+     "I_A1_L2",
+     "S_A1_L2"
+    ],
+    "output": [
+     "I_A1_L2",
+     "I_A1_L2"
+    ],
+    "properties": {
+     "name": "t2"
+    }
+   },
+   {
+    "id": "t3",
+    "input": [
+     "I_A2_L1",
+     "S_A1_L1"
+    ],
+    "output": [
+     "I_A2_L1",
+     "I_A1_L1"
+    ],
+    "properties": {
+     "name": "t3"
+    }
+   },
+   {
+    "id": "t4",
+    "input": [
+     "I_A2_L2",
+     "S_A1_L2"
+    ],
+    "output": [
+     "I_A2_L2",
+     "I_A1_L2"
+    ],
+    "properties": {
+     "name": "t4"
+    }
+   },
+   {
+    "id": "t5",
+    "input": [
+     "I_A2_L1",
+     "S_A2_L1"
+    ],
+    "output": [
+     "I_A2_L1",
+     "I_A2_L1"
+    ],
+    "properties": {
+     "name": "t5"
+    }
+   },
+   {
+    "id": "t6",
+    "input": [
+     "I_A2_L2",
+     "S_A2_L2"
+    ],
+    "output": [
+     "I_A2_L2",
+     "I_A2_L2"
+    ],
+    "properties": {
+     "name": "t6"
+    }
+   },
+   {
+    "id": "t7",
+    "input": [
+     "I_A1_L1",
+     "S_A2_L1"
+    ],
+    "output": [
+     "I_A1_L1",
+     "I_A2_L1"
+    ],
+    "properties": {
+     "name": "t7"
+    }
+   },
+   {
+    "id": "t8",
+    "input": [
+     "I_A1_L2",
+     "S_A2_L2"
+    ],
+    "output": [
+     "I_A1_L2",
+     "I_A2_L2"
+    ],
+    "properties": {
+     "name": "t8"
+    }
+   },
+   {
+    "id": "t9",
+    "input": [
+     "I_A1_L1"
+    ],
+    "output": [
+     "R_A1_L1"
+    ],
+    "properties": {
+     "name": "t9"
+    }
+   },
+   {
+    "id": "t10",
+    "input": [
+     "I_A1_L2"
+    ],
+    "output": [
+     "R_A1_L2"
+    ],
+    "properties": {
+     "name": "t10"
+    }
+   },
+   {
+    "id": "t11",
+    "input": [
+     "I_A2_L1"
+    ],
+    "output": [
+     "R_A2_L1"
+    ],
+    "properties": {
+     "name": "t11"
+    }
+   },
+   {
+    "id": "t12",
+    "input": [
+     "I_A2_L2"
+    ],
+    "output": [
+     "R_A2_L2"
+    ],
+    "properties": {
+     "name": "t12"
+    }
+   },
+   {
+    "id": "t13",
+    "input": [
+     "S_A1_L1"
+    ],
+    "output": [
+     "S_A2_L1"
+    ],
+    "properties": {
+     "name": "t13"
+    }
+   },
+   {
+    "id": "t14",
+    "input": [
+     "S_A1_L2"
+    ],
+    "output": [
+     "S_A2_L2"
+    ],
+    "properties": {
+     "name": "t14"
+    }
+   },
+   {
+    "id": "t15",
+    "input": [
+     "S_A2_L1"
+    ],
+    "output": [
+     "S_A1_L1"
+    ],
+    "properties": {
+     "name": "t15"
+    }
+   },
+   {
+    "id": "t16",
+    "input": [
+     "S_A2_L2"
+    ],
+    "output": [
+     "S_A1_L2"
+    ],
+    "properties": {
+     "name": "t16"
+    }
+   },
+   {
+    "id": "t17",
+    "input": [
+     "I_A1_L1"
+    ],
+    "output": [
+     "I_A2_L1"
+    ],
+    "properties": {
+     "name": "t17"
+    }
+   },
+   {
+    "id": "t18",
+    "input": [
+     "I_A1_L2"
+    ],
+    "output": [
+     "I_A2_L2"
+    ],
+    "properties": {
+     "name": "t18"
+    }
+   },
+   {
+    "id": "t19",
+    "input": [
+     "I_A2_L1"
+    ],
+    "output": [
+     "I_A1_L1"
+    ],
+    "properties": {
+     "name": "t19"
+    }
+   },
+   {
+    "id": "t20",
+    "input": [
+     "I_A2_L2"
+    ],
+    "output": [
+     "I_A1_L2"
+    ],
+    "properties": {
+     "name": "t20"
+    }
+   },
+   {
+    "id": "t21",
+    "input": [
+     "R_A1_L1"
+    ],
+    "output": [
+     "R_A2_L1"
+    ],
+    "properties": {
+     "name": "t21"
+    }
+   },
+   {
+    "id": "t22",
+    "input": [
+     "R_A1_L2"
+    ],
+    "output": [
+     "R_A2_L2"
+    ],
+    "properties": {
+     "name": "t22"
+    }
+   },
+   {
+    "id": "t23",
+    "input": [
+     "R_A2_L1"
+    ],
+    "output": [
+     "R_A1_L1"
+    ],
+    "properties": {
+     "name": "t23"
+    }
+   },
+   {
+    "id": "t24",
+    "input": [
+     "R_A2_L2"
+    ],
+    "output": [
+     "R_A1_L2"
+    ],
+    "properties": {
+     "name": "t24"
+    }
+   },
+   {
+    "id": "t25",
+    "input": [
+     "I_A1_L1"
+    ],
+    "output": [
+     "D_L1"
+    ],
+    "properties": {
+     "name": "t25"
+    }
+   },
+   {
+    "id": "t26",
+    "input": [
+     "I_A1_L2"
+    ],
+    "output": [
+     "D_L2"
+    ],
+    "properties": {
+     "name": "t26"
+    }
+   },
+   {
+    "id": "t27",
+    "input": [
+     "I_A2_L1"
+    ],
+    "output": [
+     "D_L1"
+    ],
+    "properties": {
+     "name": "t27"
+    }
+   },
+   {
+    "id": "t28",
+    "input": [
+     "I_A2_L2"
+    ],
+    "output": [
+     "D_L2"
+    ],
+    "properties": {
+     "name": "t28"
+    }
+   },
+   {
+    "id": "t29",
+    "input": [
+     "S_A1_L1"
+    ],
+    "output": [
+     "S_A1_L2"
+    ],
+    "properties": {
+     "name": "t29"
+    }
+   },
+   {
+    "id": "t30",
+    "input": [
+     "S_A1_L2"
+    ],
+    "output": [
+     "S_A1_L1"
+    ],
+    "properties": {
+     "name": "t30"
+    }
+   },
+   {
+    "id": "t31",
+    "input": [
+     "I_A1_L1"
+    ],
+    "output": [
+     "I_A1_L2"
+    ],
+    "properties": {
+     "name": "t31"
+    }
+   },
+   {
+    "id": "t32",
+    "input": [
+     "I_A1_L2"
+    ],
+    "output": [
+     "I_A1_L1"
+    ],
+    "properties": {
+     "name": "t32"
+    }
+   },
+   {
+    "id": "t33",
+    "input": [
+     "I_A2_L1"
+    ],
+    "output": [
+     "I_A2_L2"
+    ],
+    "properties": {
+     "name": "t33"
+    }
+   },
+   {
+    "id": "t34",
+    "input": [
+     "I_A2_L2"
+    ],
+    "output": [
+     "I_A2_L1"
+    ],
+    "properties": {
+     "name": "t34"
+    }
+   },
+   {
+    "id": "t35",
+    "input": [
+     "S_A2_L1"
+    ],
+    "output": [
+     "S_A2_L2"
+    ],
+    "properties": {
+     "name": "t35"
+    }
+   },
+   {
+    "id": "t36",
+    "input": [
+     "S_A2_L2"
+    ],
+    "output": [
+     "S_A2_L1"
+    ],
+    "properties": {
+     "name": "t36"
+    }
+   },
+   {
+    "id": "t37",
+    "input": [
+     "R_A1_L1"
+    ],
+    "output": [
+     "R_A1_L2"
+    ],
+    "properties": {
+     "name": "t37"
+    }
+   },
+   {
+    "id": "t38",
+    "input": [
+     "R_A1_L2"
+    ],
+    "output": [
+     "R_A1_L1"
+    ],
+    "properties": {
+     "name": "t38"
+    }
+   },
+   {
+    "id": "t39",
+    "input": [
+     "R_A2_L1"
+    ],
+    "output": [
+     "R_A2_L2"
+    ],
+    "properties": {
+     "name": "t39"
+    }
+   },
+   {
+    "id": "t40",
+    "input": [
+     "R_A2_L2"
+    ],
+    "output": [
+     "R_A2_L1"
+    ],
+    "properties": {
+     "name": "t40"
+    }
+   },
+   {
+    "id": "t41",
+    "input": [
+     "D_L1"
+    ],
+    "output": [
+     "D_L2"
+    ],
+    "properties": {
+     "name": "t41"
+    }
+   },
+   {
+    "id": "t42",
+    "input": [
+     "D_L2"
+    ],
+    "output": [
+     "D_L1"
+    ],
+    "properties": {
+     "name": "t42"
+    }
+   },
+   {
+    "id": "t43",
+    "input": [
+     "D_L1"
+    ],
+    "output": [
+     "Z"
+    ],
+    "properties": {
+     "name": "t43"
+    }
+   },
+   {
+    "id": "t44",
+    "input": [
+     "D_L2"
+    ],
+    "output": [
+     "Z"
+    ],
+    "properties": {
+     "name": "t44"
+    }
+   }
+  ]
+ },
+ "semantics": {
+  "ode": {
+   "rates": [
+    {
+     "target": "t1",
+     "expression": "I_A1_L1*S_A1_L1*b_0_0",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>S_A1_L1</ci><ci>b_0_0</ci></apply>"
+    },
+    {
+     "target": "t2",
+     "expression": "I_A1_L2*S_A1_L2*b_0_1",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>S_A1_L2</ci><ci>b_0_1</ci></apply>"
+    },
+    {
+     "target": "t3",
+     "expression": "I_A2_L1*S_A1_L1*b_1_0",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>S_A1_L1</ci><ci>b_1_0</ci></apply>"
+    },
+    {
+     "target": "t4",
+     "expression": "I_A2_L2*S_A1_L2*b_1_1",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>S_A1_L2</ci><ci>b_1_1</ci></apply>"
+    },
+    {
+     "target": "t5",
+     "expression": "I_A2_L1*S_A2_L1*b_2_0",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>S_A2_L1</ci><ci>b_2_0</ci></apply>"
+    },
+    {
+     "target": "t6",
+     "expression": "I_A2_L2*S_A2_L2*b_2_1",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>S_A2_L2</ci><ci>b_2_1</ci></apply>"
+    },
+    {
+     "target": "t7",
+     "expression": "I_A1_L1*S_A2_L1*b_3_0",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>S_A2_L1</ci><ci>b_3_0</ci></apply>"
+    },
+    {
+     "target": "t8",
+     "expression": "I_A1_L2*S_A2_L2*b_3_1",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>S_A2_L2</ci><ci>b_3_1</ci></apply>"
+    },
+    {
+     "target": "t9",
+     "expression": "I_A1_L1*g_0_0",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>g_0_0</ci></apply>"
+    },
+    {
+     "target": "t10",
+     "expression": "I_A1_L2*g_0_1",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>g_0_1</ci></apply>"
+    },
+    {
+     "target": "t11",
+     "expression": "I_A2_L1*g_1_0",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>g_1_0</ci></apply>"
+    },
+    {
+     "target": "t12",
+     "expression": "I_A2_L2*g_1_1",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>g_1_1</ci></apply>"
+    },
+    {
+     "target": "t13",
+     "expression": "S_A1_L1*p_A1_A2_0",
+     "expression_mathml": "<apply><times/><ci>S_A1_L1</ci><ci>p_A1_A2_0</ci></apply>"
+    },
+    {
+     "target": "t14",
+     "expression": "S_A1_L2*p_A1_A2_1",
+     "expression_mathml": "<apply><times/><ci>S_A1_L2</ci><ci>p_A1_A2_1</ci></apply>"
+    },
+    {
+     "target": "t15",
+     "expression": "S_A2_L1*p_A2_A1_0",
+     "expression_mathml": "<apply><times/><ci>S_A2_L1</ci><ci>p_A2_A1_0</ci></apply>"
+    },
+    {
+     "target": "t16",
+     "expression": "S_A2_L2*p_A2_A1_1",
+     "expression_mathml": "<apply><times/><ci>S_A2_L2</ci><ci>p_A2_A1_1</ci></apply>"
+    },
+    {
+     "target": "t17",
+     "expression": "I_A1_L1*p_A1_A2_2",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>p_A1_A2_2</ci></apply>"
+    },
+    {
+     "target": "t18",
+     "expression": "I_A1_L2*p_A1_A2_3",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>p_A1_A2_3</ci></apply>"
+    },
+    {
+     "target": "t19",
+     "expression": "I_A2_L1*p_A2_A1_2",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>p_A2_A1_2</ci></apply>"
+    },
+    {
+     "target": "t20",
+     "expression": "I_A2_L2*p_A2_A1_3",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>p_A2_A1_3</ci></apply>"
+    },
+    {
+     "target": "t21",
+     "expression": "R_A1_L1*p_A1_A2_4",
+     "expression_mathml": "<apply><times/><ci>R_A1_L1</ci><ci>p_A1_A2_4</ci></apply>"
+    },
+    {
+     "target": "t22",
+     "expression": "R_A1_L2*p_A1_A2_5",
+     "expression_mathml": "<apply><times/><ci>R_A1_L2</ci><ci>p_A1_A2_5</ci></apply>"
+    },
+    {
+     "target": "t23",
+     "expression": "R_A2_L1*p_A2_A1_4",
+     "expression_mathml": "<apply><times/><ci>R_A2_L1</ci><ci>p_A2_A1_4</ci></apply>"
+    },
+    {
+     "target": "t24",
+     "expression": "R_A2_L2*p_A2_A1_5",
+     "expression_mathml": "<apply><times/><ci>R_A2_L2</ci><ci>p_A2_A1_5</ci></apply>"
+    },
+    {
+     "target": "t25",
+     "expression": "I_A1_L1*d1_0",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>d1_0</ci></apply>"
+    },
+    {
+     "target": "t26",
+     "expression": "I_A1_L2*d1_1",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>d1_1</ci></apply>"
+    },
+    {
+     "target": "t27",
+     "expression": "I_A2_L1*g",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>g</ci></apply>"
+    },
+    {
+     "target": "t28",
+     "expression": "I_A2_L2*g",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>g</ci></apply>"
+    },
+    {
+     "target": "t29",
+     "expression": "S_A1_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>S_A1_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t30",
+     "expression": "S_A1_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>S_A1_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t31",
+     "expression": "I_A1_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t32",
+     "expression": "I_A1_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t33",
+     "expression": "I_A2_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t34",
+     "expression": "I_A2_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t35",
+     "expression": "S_A2_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>S_A2_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t36",
+     "expression": "S_A2_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>S_A2_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t37",
+     "expression": "R_A1_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>R_A1_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t38",
+     "expression": "R_A1_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>R_A1_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t39",
+     "expression": "R_A2_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>R_A2_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t40",
+     "expression": "R_A2_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>R_A2_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t41",
+     "expression": "D_L1*p_L1_L2",
+     "expression_mathml": "<apply><times/><ci>D_L1</ci><ci>p_L1_L2</ci></apply>"
+    },
+    {
+     "target": "t42",
+     "expression": "D_L2*p_L2_L1",
+     "expression_mathml": "<apply><times/><ci>D_L2</ci><ci>p_L2_L1</ci></apply>"
+    },
+    {
+     "target": "t43",
+     "expression": "D_L1*z1",
+     "expression_mathml": "<apply><times/><ci>D_L1</ci><ci>z1</ci></apply>"
+    },
+    {
+     "target": "t44",
+     "expression": "D_L2*z2",
+     "expression_mathml": "<apply><times/><ci>D_L2</ci><ci>z2</ci></apply>"
+    }
+   ],
+   "initials": [
+    {
+     "target": "S_A1_L1",
+     "expression": "249.750000000000",
+     "expression_mathml": "<cn>249.75</cn>"
+    },
+    {
+     "target": "I_A1_L1",
+     "expression": "0.250000000000000",
+     "expression_mathml": "<cn>0.25</cn>"
+    },
+    {
+     "target": "S_A1_L2",
+     "expression": "249.750000000000",
+     "expression_mathml": "<cn>249.75</cn>"
+    },
+    {
+     "target": "I_A1_L2",
+     "expression": "0.250000000000000",
+     "expression_mathml": "<cn>0.25</cn>"
+    },
+    {
+     "target": "I_A2_L1",
+     "expression": "0.250000000000000",
+     "expression_mathml": "<cn>0.25</cn>"
+    },
+    {
+     "target": "I_A2_L2",
+     "expression": "0.250000000000000",
+     "expression_mathml": "<cn>0.25</cn>"
+    },
+    {
+     "target": "S_A2_L1",
+     "expression": "249.750000000000",
+     "expression_mathml": "<cn>249.75</cn>"
+    },
+    {
+     "target": "S_A2_L2",
+     "expression": "249.750000000000",
+     "expression_mathml": "<cn>249.75</cn>"
+    },
+    {
+     "target": "R_A1_L1",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "R_A1_L2",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "R_A2_L1",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "R_A2_L2",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "D_L1",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "D_L2",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    },
+    {
+     "target": "Z",
+     "expression": "0.0",
+     "expression_mathml": "<cn>0.0</cn>"
+    }
+   ],
+   "parameters": [
+    {
+     "id": "b_0_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_0_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_1_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_1_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_2_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_2_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_3_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "b_3_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_0_0",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_0_1",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_1_0",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "g_1_1",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "p_A1_A2_0",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_1",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_0",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_1",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_2",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_3",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_2",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_3",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_4",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_5",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_4",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_5",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_6",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_7",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_6",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_7",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_8",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_9",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_8",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_9",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_10",
+     "value": 0.1
+    },
+    {
+     "id": "p_A2_A1_11",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_10",
+     "value": 0.1
+    },
+    {
+     "id": "p_A1_A2_11",
+     "value": 0.1
+    },
+    {
+     "id": "d1_0",
+     "value": 0.05,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "d1_1",
+     "value": 0.05,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "p_L1_L2",
+     "value": 0.1
+    },
+    {
+     "id": "p_L2_L1",
+     "value": 0.1
+    },
+    {
+     "id": "z1",
+     "value": 0.02,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "z2",
+     "value": 0.02,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    }
+   ],
+   "observables": [],
+   "time": {
+    "id": "t",
+    "units": {
+     "expression": "day",
+     "expression_mathml": "<ci>day</ci>"
+    }
+   }
+  }
+ },
+ "metadata": {
+  "annotations": {
+   "license": null,
+   "authors": [],
+   "references": [],
+   "time_scale": null,
+   "time_start": null,
+   "time_end": null,
+   "locations": [],
+   "pathogens": [],
+   "diseases": [],
+   "hosts": [],
+   "model_types": []
+  }
+ }
+}
