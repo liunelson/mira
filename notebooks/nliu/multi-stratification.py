@@ -29,14 +29,14 @@ from typing import NoReturn
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
 
 # %%
-def viz_mmt(mmt) -> NoReturn:
+def viz_mmt(mmt, filename) -> NoReturn:
 
     res = requests.post(url = f'{MIRA_REST_URL}/viz/to_image', data = mmt.json())
 
-    with open('sir_2age_d_model.png', 'wb') as f:
+    with open(filename, 'wb') as f:
         f.write(res.content)
 
-    with Image.open('sir_2age_d_model.png').convert('RGB') as im:
+    with Image.open(filename).convert('RGB') as im:
         im.show()
 
 # %%
@@ -101,7 +101,7 @@ sir_model = TemplateModel(
 )
 
 # Visualize
-viz_mmt(sir_model)
+viz_mmt(sir_model, 'sir_model.png')
 
 # Generate AMR JSON
 AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
@@ -122,7 +122,7 @@ sir_2age_model = stratify(
 
 sir_2age_model.annotations.name = 'SIR model + stratified by 2 age groups'
 
-viz_mmt(sir_2age_model)
+viz_mmt(sir_2age_model, 'sir_2age_model.png')
 
 AskeNetPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
 
@@ -169,7 +169,7 @@ sir_2age_d_model = TemplateModel(
     annotations = Annotations(name = 'SIR model + stratified by 2 age groups + D')
 )
 
-viz_mmt(sir_2age_d_model)
+viz_mmt(sir_2age_d_model, 'sir_2age_d_model.png')
 
 AskeNetPetriNetModel(Model(sir_2age_d_model)).to_json_file('sir_2age_d_model.json')
 
@@ -189,7 +189,7 @@ sir_2age_d_2loc_model = stratify(
 
 sir_2age_d_2loc_model.annotations.name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations'
 
-viz_mmt(sir_2age_d_2loc_model)
+viz_mmt(sir_2age_d_2loc_model, 'sir_2age_d_2loc_model.png')
 
 AskeNetPetriNetModel(Model(sir_2age_d_2loc_model)).to_json_file('sir_2age_d_2loc_model.json')
 
@@ -236,7 +236,7 @@ sir_2age_d_2loc_z_model = TemplateModel(
     annotations = Annotations(name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations + Z')
 )
 
-viz_mmt(sir_2age_d_2loc_z_model)
+viz_mmt(sir_2age_d_2loc_z_model, 'sir_2age_d_2loc_z_model.png')
 
 AskeNetPetriNetModel(Model(sir_2age_d_2loc_z_model)).to_json_file('sir_2age_d_2loc_z_model.json')
 
