@@ -202,10 +202,10 @@
    {
     "id": "t7",
     "input": [
-     "S_A1"
+     "I_A1"
     ],
     "output": [
-     "S_A2"
+     "D"
     ],
     "properties": {
      "name": "t7"
@@ -214,85 +214,13 @@
    {
     "id": "t8",
     "input": [
-     "S_A2"
+     "I_A2"
     ],
     "output": [
-     "S_A1"
+     "D"
     ],
     "properties": {
      "name": "t8"
-    }
-   },
-   {
-    "id": "t9",
-    "input": [
-     "I_A1"
-    ],
-    "output": [
-     "I_A2"
-    ],
-    "properties": {
-     "name": "t9"
-    }
-   },
-   {
-    "id": "t10",
-    "input": [
-     "I_A2"
-    ],
-    "output": [
-     "I_A1"
-    ],
-    "properties": {
-     "name": "t10"
-    }
-   },
-   {
-    "id": "t11",
-    "input": [
-     "R_A1"
-    ],
-    "output": [
-     "R_A2"
-    ],
-    "properties": {
-     "name": "t11"
-    }
-   },
-   {
-    "id": "t12",
-    "input": [
-     "R_A2"
-    ],
-    "output": [
-     "R_A1"
-    ],
-    "properties": {
-     "name": "t12"
-    }
-   },
-   {
-    "id": "t13",
-    "input": [
-     "I_A1"
-    ],
-    "output": [
-     "D"
-    ],
-    "properties": {
-     "name": "t13"
-    }
-   },
-   {
-    "id": "t14",
-    "input": [
-     "I_A2"
-    ],
-    "output": [
-     "D"
-    ],
-    "properties": {
-     "name": "t14"
     }
    }
   ]
@@ -332,41 +260,11 @@
     },
     {
      "target": "t7",
-     "expression": "S_A1*p_A1_A2",
-     "expression_mathml": "<apply><times/><ci>S_A1</ci><ci>p_A1_A2</ci></apply>"
-    },
-    {
-     "target": "t8",
-     "expression": "S_A2*p_A2_A1",
-     "expression_mathml": "<apply><times/><ci>S_A2</ci><ci>p_A2_A1</ci></apply>"
-    },
-    {
-     "target": "t9",
-     "expression": "I_A1*p_A1_A2",
-     "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>p_A1_A2</ci></apply>"
-    },
-    {
-     "target": "t10",
-     "expression": "I_A2*p_A2_A1",
-     "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>p_A2_A1</ci></apply>"
-    },
-    {
-     "target": "t11",
-     "expression": "R_A1*p_A1_A2",
-     "expression_mathml": "<apply><times/><ci>R_A1</ci><ci>p_A1_A2</ci></apply>"
-    },
-    {
-     "target": "t12",
-     "expression": "R_A2*p_A2_A1",
-     "expression_mathml": "<apply><times/><ci>R_A2</ci><ci>p_A2_A1</ci></apply>"
-    },
-    {
-     "target": "t13",
      "expression": "I_A1*d1",
      "expression_mathml": "<apply><times/><ci>I_A1</ci><ci>d1</ci></apply>"
     },
     {
-     "target": "t14",
+     "target": "t8",
      "expression": "I_A2*g",
      "expression_mathml": "<apply><times/><ci>I_A2</ci><ci>g</ci></apply>"
     }
@@ -456,14 +354,6 @@
       "expression": "1/day",
       "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
      }
-    },
-    {
-     "id": "p_A1_A2",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1",
-     "value": 0.1
     },
     {
      "id": "d1",

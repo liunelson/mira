@@ -113,7 +113,7 @@ sir_2age_model = stratify(
     sir_model,
     key = 'age',
     strata = ['A1', 'A2'],
-    structure = [['A1', 'A2'], ['A2', 'A1']],
+    structure = [],
     directed = False,
     cartesian_control = True,
     params_to_stratify = {'b', 'g'},
@@ -187,7 +187,23 @@ sir_2age_d_2loc_model = stratify(
     concepts_to_stratify = set(sir_2age_d_model.get_concepts_name_map().keys())
 )
 
-sir_2age_d_2loc_model.annotations.name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations'
+viz_mmt(sir_2age_d_2loc_model, 'sir_2age_d_2loc_model.png')
+
+# %%
+# Exclude travel transitions between D_L1, D_L2 (since deceased people don't travel)
+templates = sir_2age_d_2loc_model.templates[:28] + sir_2age_d_2loc_model.templates[30:-2]
+
+# Rebuild model
+sir_2age_d_2loc_model = TemplateModel(
+    templates = templates,
+    parameters = sir_2age_d_2loc_model.parameters,
+    initials = sir_2age_d_2loc_model.initials,
+    time = Time(name = 't', units = day_units()),
+    # observables = observables,
+    annotations = Annotations(name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations')
+)
+
+# sir_2age_d_2loc_model.annotations.name = 'SIR model + stratified by 2 age groups + D + stratified by 2 locations'
 
 viz_mmt(sir_2age_d_2loc_model, 'sir_2age_d_2loc_model.png')
 

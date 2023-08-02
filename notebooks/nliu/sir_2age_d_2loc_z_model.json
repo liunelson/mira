@@ -422,10 +422,10 @@
    {
     "id": "t13",
     "input": [
-     "S_A1_L1"
+     "I_A1_L1"
     ],
     "output": [
-     "S_A2_L1"
+     "D_L1"
     ],
     "properties": {
      "name": "t13"
@@ -434,10 +434,10 @@
    {
     "id": "t14",
     "input": [
-     "S_A1_L2"
+     "I_A1_L2"
     ],
     "output": [
-     "S_A2_L2"
+     "D_L2"
     ],
     "properties": {
      "name": "t14"
@@ -446,10 +446,10 @@
    {
     "id": "t15",
     "input": [
-     "S_A2_L1"
+     "I_A2_L1"
     ],
     "output": [
-     "S_A1_L1"
+     "D_L1"
     ],
     "properties": {
      "name": "t15"
@@ -458,10 +458,10 @@
    {
     "id": "t16",
     "input": [
-     "S_A2_L2"
+     "I_A2_L2"
     ],
     "output": [
-     "S_A1_L2"
+     "D_L2"
     ],
     "properties": {
      "name": "t16"
@@ -470,10 +470,10 @@
    {
     "id": "t17",
     "input": [
-     "I_A1_L1"
+     "S_A1_L1"
     ],
     "output": [
-     "I_A2_L1"
+     "S_A1_L2"
     ],
     "properties": {
      "name": "t17"
@@ -482,10 +482,10 @@
    {
     "id": "t18",
     "input": [
-     "I_A1_L2"
+     "S_A1_L2"
     ],
     "output": [
-     "I_A2_L2"
+     "S_A1_L1"
     ],
     "properties": {
      "name": "t18"
@@ -494,10 +494,10 @@
    {
     "id": "t19",
     "input": [
-     "I_A2_L1"
+     "I_A1_L1"
     ],
     "output": [
-     "I_A1_L1"
+     "I_A1_L2"
     ],
     "properties": {
      "name": "t19"
@@ -506,10 +506,10 @@
    {
     "id": "t20",
     "input": [
-     "I_A2_L2"
+     "I_A1_L2"
     ],
     "output": [
-     "I_A1_L2"
+     "I_A1_L1"
     ],
     "properties": {
      "name": "t20"
@@ -518,10 +518,10 @@
    {
     "id": "t21",
     "input": [
-     "R_A1_L1"
+     "I_A2_L1"
     ],
     "output": [
-     "R_A2_L1"
+     "I_A2_L2"
     ],
     "properties": {
      "name": "t21"
@@ -530,10 +530,10 @@
    {
     "id": "t22",
     "input": [
-     "R_A1_L2"
+     "I_A2_L2"
     ],
     "output": [
-     "R_A2_L2"
+     "I_A2_L1"
     ],
     "properties": {
      "name": "t22"
@@ -542,10 +542,10 @@
    {
     "id": "t23",
     "input": [
-     "R_A2_L1"
+     "S_A2_L1"
     ],
     "output": [
-     "R_A1_L1"
+     "S_A2_L2"
     ],
     "properties": {
      "name": "t23"
@@ -554,10 +554,10 @@
    {
     "id": "t24",
     "input": [
-     "R_A2_L2"
+     "S_A2_L2"
     ],
     "output": [
-     "R_A1_L2"
+     "S_A2_L1"
     ],
     "properties": {
      "name": "t24"
@@ -566,10 +566,10 @@
    {
     "id": "t25",
     "input": [
-     "I_A1_L1"
+     "R_A1_L1"
     ],
     "output": [
-     "D_L1"
+     "R_A1_L2"
     ],
     "properties": {
      "name": "t25"
@@ -578,10 +578,10 @@
    {
     "id": "t26",
     "input": [
-     "I_A1_L2"
+     "R_A1_L2"
     ],
     "output": [
-     "D_L2"
+     "R_A1_L1"
     ],
     "properties": {
      "name": "t26"
@@ -590,10 +590,10 @@
    {
     "id": "t27",
     "input": [
-     "I_A2_L1"
+     "R_A2_L1"
     ],
     "output": [
-     "D_L1"
+     "R_A2_L2"
     ],
     "properties": {
      "name": "t27"
@@ -602,10 +602,10 @@
    {
     "id": "t28",
     "input": [
-     "I_A2_L2"
+     "R_A2_L2"
     ],
     "output": [
-     "D_L2"
+     "R_A2_L1"
     ],
     "properties": {
      "name": "t28"
@@ -614,10 +614,10 @@
    {
     "id": "t29",
     "input": [
-     "S_A1_L1"
+     "D_L1"
     ],
     "output": [
-     "S_A1_L2"
+     "Z"
     ],
     "properties": {
      "name": "t29"
@@ -626,181 +626,13 @@
    {
     "id": "t30",
     "input": [
-     "S_A1_L2"
+     "D_L2"
     ],
     "output": [
-     "S_A1_L1"
+     "Z"
     ],
     "properties": {
      "name": "t30"
-    }
-   },
-   {
-    "id": "t31",
-    "input": [
-     "I_A1_L1"
-    ],
-    "output": [
-     "I_A1_L2"
-    ],
-    "properties": {
-     "name": "t31"
-    }
-   },
-   {
-    "id": "t32",
-    "input": [
-     "I_A1_L2"
-    ],
-    "output": [
-     "I_A1_L1"
-    ],
-    "properties": {
-     "name": "t32"
-    }
-   },
-   {
-    "id": "t33",
-    "input": [
-     "I_A2_L1"
-    ],
-    "output": [
-     "I_A2_L2"
-    ],
-    "properties": {
-     "name": "t33"
-    }
-   },
-   {
-    "id": "t34",
-    "input": [
-     "I_A2_L2"
-    ],
-    "output": [
-     "I_A2_L1"
-    ],
-    "properties": {
-     "name": "t34"
-    }
-   },
-   {
-    "id": "t35",
-    "input": [
-     "S_A2_L1"
-    ],
-    "output": [
-     "S_A2_L2"
-    ],
-    "properties": {
-     "name": "t35"
-    }
-   },
-   {
-    "id": "t36",
-    "input": [
-     "S_A2_L2"
-    ],
-    "output": [
-     "S_A2_L1"
-    ],
-    "properties": {
-     "name": "t36"
-    }
-   },
-   {
-    "id": "t37",
-    "input": [
-     "R_A1_L1"
-    ],
-    "output": [
-     "R_A1_L2"
-    ],
-    "properties": {
-     "name": "t37"
-    }
-   },
-   {
-    "id": "t38",
-    "input": [
-     "R_A1_L2"
-    ],
-    "output": [
-     "R_A1_L1"
-    ],
-    "properties": {
-     "name": "t38"
-    }
-   },
-   {
-    "id": "t39",
-    "input": [
-     "R_A2_L1"
-    ],
-    "output": [
-     "R_A2_L2"
-    ],
-    "properties": {
-     "name": "t39"
-    }
-   },
-   {
-    "id": "t40",
-    "input": [
-     "R_A2_L2"
-    ],
-    "output": [
-     "R_A2_L1"
-    ],
-    "properties": {
-     "name": "t40"
-    }
-   },
-   {
-    "id": "t41",
-    "input": [
-     "D_L1"
-    ],
-    "output": [
-     "D_L2"
-    ],
-    "properties": {
-     "name": "t41"
-    }
-   },
-   {
-    "id": "t42",
-    "input": [
-     "D_L2"
-    ],
-    "output": [
-     "D_L1"
-    ],
-    "properties": {
-     "name": "t42"
-    }
-   },
-   {
-    "id": "t43",
-    "input": [
-     "D_L1"
-    ],
-    "output": [
-     "Z"
-    ],
-    "properties": {
-     "name": "t43"
-    }
-   },
-   {
-    "id": "t44",
-    "input": [
-     "D_L2"
-    ],
-    "output": [
-     "Z"
-    ],
-    "properties": {
-     "name": "t44"
     }
    }
   ]
@@ -870,161 +702,91 @@
     },
     {
      "target": "t13",
-     "expression": "S_A1_L1*p_A1_A2_0",
-     "expression_mathml": "<apply><times/><ci>S_A1_L1</ci><ci>p_A1_A2_0</ci></apply>"
-    },
-    {
-     "target": "t14",
-     "expression": "S_A1_L2*p_A1_A2_1",
-     "expression_mathml": "<apply><times/><ci>S_A1_L2</ci><ci>p_A1_A2_1</ci></apply>"
-    },
-    {
-     "target": "t15",
-     "expression": "S_A2_L1*p_A2_A1_0",
-     "expression_mathml": "<apply><times/><ci>S_A2_L1</ci><ci>p_A2_A1_0</ci></apply>"
-    },
-    {
-     "target": "t16",
-     "expression": "S_A2_L2*p_A2_A1_1",
-     "expression_mathml": "<apply><times/><ci>S_A2_L2</ci><ci>p_A2_A1_1</ci></apply>"
-    },
-    {
-     "target": "t17",
-     "expression": "I_A1_L1*p_A1_A2_2",
-     "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>p_A1_A2_2</ci></apply>"
-    },
-    {
-     "target": "t18",
-     "expression": "I_A1_L2*p_A1_A2_3",
-     "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>p_A1_A2_3</ci></apply>"
-    },
-    {
-     "target": "t19",
-     "expression": "I_A2_L1*p_A2_A1_2",
-     "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>p_A2_A1_2</ci></apply>"
-    },
-    {
-     "target": "t20",
-     "expression": "I_A2_L2*p_A2_A1_3",
-     "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>p_A2_A1_3</ci></apply>"
-    },
-    {
-     "target": "t21",
-     "expression": "R_A1_L1*p_A1_A2_4",
-     "expression_mathml": "<apply><times/><ci>R_A1_L1</ci><ci>p_A1_A2_4</ci></apply>"
-    },
-    {
-     "target": "t22",
-     "expression": "R_A1_L2*p_A1_A2_5",
-     "expression_mathml": "<apply><times/><ci>R_A1_L2</ci><ci>p_A1_A2_5</ci></apply>"
-    },
-    {
-     "target": "t23",
-     "expression": "R_A2_L1*p_A2_A1_4",
-     "expression_mathml": "<apply><times/><ci>R_A2_L1</ci><ci>p_A2_A1_4</ci></apply>"
-    },
-    {
-     "target": "t24",
-     "expression": "R_A2_L2*p_A2_A1_5",
-     "expression_mathml": "<apply><times/><ci>R_A2_L2</ci><ci>p_A2_A1_5</ci></apply>"
-    },
-    {
-     "target": "t25",
      "expression": "I_A1_L1*d1_0",
      "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>d1_0</ci></apply>"
     },
     {
-     "target": "t26",
+     "target": "t14",
      "expression": "I_A1_L2*d1_1",
      "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>d1_1</ci></apply>"
     },
     {
-     "target": "t27",
+     "target": "t15",
      "expression": "I_A2_L1*g",
      "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>g</ci></apply>"
     },
     {
-     "target": "t28",
+     "target": "t16",
      "expression": "I_A2_L2*g",
      "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>g</ci></apply>"
     },
     {
-     "target": "t29",
+     "target": "t17",
      "expression": "S_A1_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>S_A1_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t30",
+     "target": "t18",
      "expression": "S_A1_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>S_A1_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t31",
+     "target": "t19",
      "expression": "I_A1_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>I_A1_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t32",
+     "target": "t20",
      "expression": "I_A1_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>I_A1_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t33",
+     "target": "t21",
      "expression": "I_A2_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>I_A2_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t34",
+     "target": "t22",
      "expression": "I_A2_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>I_A2_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t35",
+     "target": "t23",
      "expression": "S_A2_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>S_A2_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t36",
+     "target": "t24",
      "expression": "S_A2_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>S_A2_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t37",
+     "target": "t25",
      "expression": "R_A1_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>R_A1_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t38",
+     "target": "t26",
      "expression": "R_A1_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>R_A1_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t39",
+     "target": "t27",
      "expression": "R_A2_L1*p_L1_L2",
      "expression_mathml": "<apply><times/><ci>R_A2_L1</ci><ci>p_L1_L2</ci></apply>"
     },
     {
-     "target": "t40",
+     "target": "t28",
      "expression": "R_A2_L2*p_L2_L1",
      "expression_mathml": "<apply><times/><ci>R_A2_L2</ci><ci>p_L2_L1</ci></apply>"
     },
     {
-     "target": "t41",
-     "expression": "D_L1*p_L1_L2",
-     "expression_mathml": "<apply><times/><ci>D_L1</ci><ci>p_L1_L2</ci></apply>"
-    },
-    {
-     "target": "t42",
-     "expression": "D_L2*p_L2_L1",
-     "expression_mathml": "<apply><times/><ci>D_L2</ci><ci>p_L2_L1</ci></apply>"
-    },
-    {
-     "target": "t43",
+     "target": "t29",
      "expression": "D_L1*z1",
      "expression_mathml": "<apply><times/><ci>D_L1</ci><ci>z1</ci></apply>"
     },
     {
-     "target": "t44",
+     "target": "t30",
      "expression": "D_L2*z2",
      "expression_mathml": "<apply><times/><ci>D_L2</ci><ci>z2</ci></apply>"
     }
@@ -1202,102 +964,6 @@
       "expression": "1/day",
       "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
      }
-    },
-    {
-     "id": "p_A1_A2_0",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_1",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_0",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_1",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_2",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_3",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_2",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_3",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_4",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_5",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_4",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_5",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_6",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_7",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_6",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_7",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_8",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_9",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_8",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_9",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_10",
-     "value": 0.1
-    },
-    {
-     "id": "p_A2_A1_11",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_10",
-     "value": 0.1
-    },
-    {
-     "id": "p_A1_A2_11",
-     "value": 0.1
     },
     {
      "id": "d1_0",
