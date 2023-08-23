@@ -71,7 +71,7 @@ initials = {
 S, I, R, b, g = sympy.symbols('S I R b g')
 
 # Observables
-# observables = {'total_population': Observable(name = 'Total Population', expression = S + I + R)}
+observables = {'total_population': Observable(name = 'Total Population', expression = S + I + R)}
 
 # %%
 # S -> I transition
@@ -96,7 +96,7 @@ sir_model = TemplateModel(
     parameters = parameters,
     initials = initials,
     time = Time(name = 't', units = day_units()),
-    # observables = observables,
+    observables = observables,
     annotations = Annotations(name = 'SIR model')
 )
 

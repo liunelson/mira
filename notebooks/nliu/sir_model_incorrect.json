@@ -1,8 +1,8 @@
 {
- "name": "SIR model",
+ "name": "SIR model with incorrect templates",
  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
  "schema_name": "petrinet",
- "description": "SIR model",
+ "description": "SIR model with incorrect templates",
  "model_version": "0.1",
  "properties": {},
  "model": {
@@ -54,11 +54,9 @@
    {
     "id": "t1",
     "input": [
-     "I",
      "S"
     ],
     "output": [
-     "I",
      "I"
     ],
     "properties": {

@@ -1,8 +1,8 @@
 {
- "name": "SIR model + stratified by 2 age groups",
+ "name": "Incorrect SIR model + stratified by 2 age groups",
  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
  "schema_name": "petrinet",
- "description": "SIR model + stratified by 2 age groups",
+ "description": "Incorrect SIR model + stratified by 2 age groups",
  "model_version": "0.1",
  "properties": {},
  "model": {
@@ -108,11 +108,9 @@
    {
     "id": "t1",
     "input": [
-     "I_A1",
      "S_A1"
     ],
     "output": [
-     "I_A1",
      "I_A1"
     ],
     "properties": {
@@ -122,11 +120,9 @@
    {
     "id": "t2",
     "input": [
-     "I_A2",
      "S_A2"
     ],
     "output": [
-     "I_A2",
      "I_A2"
     ],
     "properties": {
