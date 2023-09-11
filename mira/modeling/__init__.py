@@ -92,10 +92,14 @@ class Model:
         if key in self.variables:
             return self.variables[key]
 
-        if initials and concept.name in initials:
-            initial_value = initials[concept.name].value
-        else:
-            initial_value = None
+        # We don't assume that the initial dict key is the same as the
+        # name of the given concept the initial applies to, so we check
+        # concept name match instead of key match.
+        initial_value = None
+        if initials:
+            for k, v in initials.items():
+                if v.concept.name == concept.name:
+                    initial_value = v.value
 
         data = {
             'name': concept.name,
@@ -141,10 +145,15 @@ class Model:
                 value = self.template_model.parameters[key].value
                 distribution = self.template_model.parameters[key].distribution
                 self.get_create_parameter(
-                        ModelParameter(key, value, distribution,
-                                       placeholder=False))
+                    ModelParameter(key, value, distribution,
+                                   placeholder=False))
 
         for template in self.template_model.templates:
+            if isinstance(template, StaticConcept):
+                self.assemble_variable(template.subject,
+                                       self.template_model.initials)
+                continue
+
             # Handle subjects
             if has_subject(template):
                 s = self.assemble_variable(template.subject,
@@ -240,4 +249,3 @@ def num_controllers(template):
         return len(template.controllers)
     else:
         return 0
-

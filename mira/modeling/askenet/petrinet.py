@@ -2,7 +2,8 @@
 at https://github.com/DARPA-ASKEM/Model-Representations/tree/main/petrinet.
 """
 
-__all__ = ["AskeNetPetriNetModel", "ModelSpecification"]
+__all__ = ["AskeNetPetriNetModel", "ModelSpecification",
+           "template_model_to_petrinet_json"]
 
 
 import json
@@ -12,14 +13,15 @@ from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
-from mira.metamodel import expression_to_mathml, safe_parse_expr
+from mira.metamodel import expression_to_mathml, safe_parse_expr, \
+    TemplateModel
 
 from .. import Model
 from .utils import add_metadata_annotations
 
 logger = logging.getLogger(__name__)
 
-SCHEMA_VERSION = '0.5'
+SCHEMA_VERSION = '0.6'
 SCHEMA_URL = ('https://raw.githubusercontent.com/DARPA-ASKEM/'
               'Model-Representations/petrinet_v%s/petrinet/'
               'petrinet_schema.json') % SCHEMA_VERSION
@@ -103,9 +105,12 @@ class AskeNetPetriNetModel:
                 self.initials.append(initial_data)
 
         for key, observable in model.observables.items():
+            display_name = observable.observable.display_name \
+                if observable.observable.display_name \
+                else observable.observable.name
             obs_data = {
                 'id': observable.observable.name,
-                'name': observable.observable.name,
+                'name': display_name,
                 'expression': str(observable.observable.expression),
                 'expression_mathml': expression_to_mathml(
                     observable.observable.expression.args[0]),
@@ -199,11 +204,13 @@ class AskeNetPetriNetModel:
     def to_json(self, name=None, description=None, model_version=None):
         """Return a JSON dict structure of the Petri net model."""
         return {
-            'name': name or self.model_name,
-            'schema': SCHEMA_URL,
-            'schema_name': 'petrinet',
-            'description': description or self.model_description,
-            'model_version': model_version or '0.1',
+            'header': {
+                'name': name or self.model_name,
+                'schema': SCHEMA_URL,
+                'schema_name': 'petrinet',
+                'description': description or self.model_description,
+                'model_version': model_version or '0.1',
+            },
             'properties': self.properties,
             'model': {
                 'states': self.states,
@@ -221,11 +228,13 @@ class AskeNetPetriNetModel:
 
     def to_pydantic(self, name=None, description=None, model_version=None) -> "ModelSpecification":
         return ModelSpecification(
-            name=name or self.model_name,
-            schema=SCHEMA_URL,
-            schema_name='petrinet',
-            description=description or self.model_description,
-            model_version=model_version or '0.1',
+            header=Header(
+                name=name or self.model_name,
+                schema=SCHEMA_URL,
+                schema_name='petrinet',
+                description=description or self.model_description,
+                model_version=model_version or '0.1',
+            ),
             properties=self.properties,
             model=PetriModel(
                 states=[State.parse_obj(s) for s in self.states],
@@ -267,6 +276,21 @@ class AskeNetPetriNetModel:
                           model_version=model_version)
         with open(fname, 'w') as fh:
             json.dump(js, fh, indent=indent, **kwargs)
+
+
+def template_model_to_petrinet_json(tm: TemplateModel):
+    """Convert a template model to a PetriNet JSON dict.
+
+    Parameters
+    ----------
+    tm :
+        The template model to convert.
+
+    Returns
+    -------
+    A JSON dict representing the PetriNet model.
+    """
+    return AskeNetPetriNetModel(Model(tm)).to_json()
 
 
 class Initial(BaseModel):
@@ -356,12 +380,16 @@ class Ode(BaseModel):
     ode: Optional[OdeSemantics]
 
 
-class ModelSpecification(BaseModel):
+class Header(BaseModel):
     name: str
     schema_url: str = Field(..., alias='schema')
     schema_name: str
     description: str
     model_version: str
+
+
+class ModelSpecification(BaseModel):
+    header: Header
     properties: Optional[Dict]
     model: PetriModel
     semantics: Optional[Ode]
