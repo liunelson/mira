@@ -44,12 +44,13 @@ from tabulate import tabulate
 from tqdm.auto import tqdm
 from typing_extensions import Literal
 
-from mira.dkg.askemo import get_askemo_terms, get_askemosw_terms
+from mira.dkg.askemo import get_askemo_terms, get_askemosw_terms, get_askem_climate_ontology_terms
 from mira.dkg.models import EntityType
 from mira.dkg.resources import SLIMS, get_ncbitaxon
 from mira.dkg.resources.extract_ncit import get_ncit_subset
 from mira.dkg.resources.probonto import get_probonto_terms
 from mira.dkg.units import get_unit_terms
+from mira.dkg.physical_constants import get_physical_constant_terms
 from mira.dkg.constants import EDGE_HEADER, NODE_HEADER
 from mira.dkg.utils import PREFIXES
 
@@ -91,6 +92,13 @@ cases: Dict[str, DKGConfig] = {
         use_case="genereg",
         prefixes=["hgnc", "go", "wikipathways", "probonto"],
     ),
+    "climate": DKGConfig(
+        use_case="climate",
+        prefix="askem.climate",
+        func=get_askem_climate_ontology_terms,
+        prefixes=["probonto"],
+        iri="https://github.com/indralab/mira/blob/main/mira/dkg/askemo/askem.climate.json",
+    ),
 }
 
 
@@ -131,6 +139,8 @@ class UseCasePaths:
             prefixes.append(self.askemo_prefix)
         if self.use_case == "space":
             prefixes.append("uat")
+        if self.use_case == "climate":
+            prefixes.append("eiffel")
         self.EDGES_PATHS: Dict[str, Path] = {
             prefix: self.module.join("sources", name=f"edges_{prefix}.tsv")
             for prefix in prefixes
@@ -201,7 +211,7 @@ class NodeInfo(NamedTuple):
 )
 @click.option("--do-upload", is_flag=True, help="Upload to S3 on completion")
 @click.option("--refresh", is_flag=True, help="Refresh caches")
-@click.option("--use-case", default="epi")
+@click.option("--use-case", default="epi", type=click.Choice(list(cases)))
 def main(
     add_xref_edges: bool,
     summaries: bool,
@@ -319,7 +329,7 @@ def construct(
                     xref.type or "oboinowl:hasDbXref" for xref in term.xrefs or []
                 ),
                 synonym_types=";".join(
-                    synonym.type or "skos:exactMatch" for synonym in term.synonyms or []
+                    synonym.type or "oboInOwl:hasExactSynonym" for synonym in term.synonyms or []
                 ),
             )
             for parent_curie in term.parents:
@@ -407,6 +417,37 @@ def construct(
         writer.writerow(EDGE_HEADER)
         writer.writerows(probonto_edges)
 
+    if use_case == "climate":
+        from .resources.cso import get_cso_obo
+
+        for term in get_cso_obo().iter_terms():
+            node_sources[term.curie].add("cso")
+            nodes[term.curie] = get_node_info(term)
+
+        from .resources.extract_eiffel_ontology import get_eiffel_ontology_terms
+
+        eiffel_edges = []
+        for term in tqdm(get_eiffel_ontology_terms(), unit="term", desc="Eiffel"):
+            node_sources[term.curie].add("eiffel")
+            nodes[term.curie] = get_node_info(term)
+            for typedef, object_references in term.relationships.items():
+                for object_reference in object_references:
+                    eiffel_edges.append(
+                        (
+                            term.curie,
+                            object_reference.curie,
+                            typedef.name.replace(" ", "").lower(),
+                            typedef.curie,
+                            "eiffel",
+                            "eiffel",
+                            "",
+                        )
+                    )
+
+        with use_case_paths.EDGES_PATHS["eiffel"].open("w") as file:
+            writer = csv.writer(file, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(EDGE_HEADER)
+            writer.writerows(eiffel_edges)
     if use_case == "epi":
         from .resources.geonames import get_geonames_terms
         geonames_edges = []
@@ -504,6 +545,47 @@ def construct(
             property_values="",
             xref_types=";".join("oboinowl:hasDbXref" for _ in xrefs),
             synonym_types="",
+        )
+
+    click.secho("Physical Constants", fg="green", bold=True)
+    for wikidata_id, label, description, synonyms, xrefs, value, formula, symbols in tqdm(
+        get_physical_constant_terms(), desc="Physical Constants"
+    ):
+        curie = f"wikidata:{wikidata_id}"
+        node_sources[curie].add("wikidata")
+
+        prop_predicates, prop_values = [], []
+        if value:
+            prop_predicates.append("debio:0000042")
+            prop_values.append(str(value))
+        # TODO process mathml and make readable
+        # if formula:
+        #     prop_predicates.append("debio:0000043")
+        #     prop_values.append(str(formula))
+
+        synonym_types, synonym_values = [], []
+        for syn in synonyms:
+            synonym_values.append(syn)
+            synonym_types.append("oboInOwl:hasExactSynonym")
+        for symbol in symbols:
+            synonym_values.append(symbol)
+            synonym_types.append("debio:0000031")
+
+        nodes[curie] = NodeInfo(
+            curie=curie,
+            prefix="wikidata;constant",
+            label=label,
+            synonyms=";".join(synonym_values),
+            synonym_types=";".join(synonym_types),
+            deprecated="false",
+            type="class",
+            definition=description,
+            xrefs=";".join(xrefs),
+            xref_types=";".join("oboinowl:hasDbXref" for _ in xrefs),
+            alts="",
+            version="",
+            property_predicates=";".join(prop_predicates),
+            property_values=";".join(prop_values),
         )
 
     def _get_edge_name(curie_: str, strict: bool = False) -> str:
@@ -984,7 +1066,7 @@ def get_node_info(term: pyobo.Term, type: EntityType = "class"):
         property_values="",
         xref_types="",
         synonym_types=";".join(
-            synonym.type.curie if synonym.type is not None else "skos:exactMatch"
+            synonym.type.curie if synonym.type is not None else "oboInOwl:hasExactSynonym"
             for synonym in term.synonyms or []
         ),
     )

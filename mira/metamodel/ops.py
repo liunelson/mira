@@ -1,5 +1,5 @@
 """Operations for template models."""
-
+import logging
 from copy import deepcopy
 from collections import defaultdict, Counter
 import itertools as itt
@@ -13,7 +13,6 @@ from .templates import *
 from .units import Unit
 from .utils import SympyExprStr
 
-
 __all__ = [
     "stratify",
     "simplify_rate_laws",
@@ -24,11 +23,16 @@ __all__ = [
 ]
 
 
+logger = logging.getLogger(__name__)
+
+
 def stratify(
     template_model: TemplateModel,
     *,
     key: str,
     strata: Collection[str],
+    strata_curie_to_name: Optional[Mapping[str, str]] = None,
+    strata_name_lookup: bool = False,
     structure: Optional[Iterable[Tuple[str, str]]] = None,
     directed: bool = False,
     conversion_cls: Type[Template] = NaturalConversion,
@@ -52,6 +56,15 @@ def stratify(
         The (singular) name of the stratification, e.g., ``"city"``
     strata :
         A list of the values for stratification, e.g., ``["boston", "nyc"]``
+        or ``[geonames:4930956, geonames:5128581]``.
+    strata_curie_to_name :
+        If provided, should map from a key used in ``strata`` to a name.
+        For example, ``{"geonames:4930956": "boston",
+        "geonames:5128581": "nyc"}``.
+    strata_name_lookup :
+        If true, will try to look up the entity names of the strata values
+        under the assumption that they are curies. This flag has no impact
+        if ``strata_curie_to_name`` is given.
     structure :
         An iterable of pairs corresponding to a directed network structure
         where each of the pairs has two strata. If none given, will assume a complete
@@ -99,6 +112,19 @@ def stratify(
     """
     strata = sorted(strata)
 
+    if strata_name_lookup and strata_curie_to_name is None:
+        from mira.dkg.web_client import get_entities_web, MissingBaseUrlError
+        try:
+            entity_map = {e.id: e.name for e in get_entities_web(strata)}
+            # Update the mapping with the strata values that are missing from
+            # the map
+            strata_curie_to_name = {s: entity_map.get(s, s) for s in strata}
+        except MissingBaseUrlError as err:
+            logger.warning(
+                "Web client not available, cannot look up strata names",
+                exc_info=True
+            )
+
     if structure is None:
         structure = list(itt.combinations(strata, 2))
         # directed = False  # TODO: What's the function of this? Commented
@@ -109,7 +135,9 @@ def stratify(
     concept_names_map = template_model.get_concepts_name_map()
     concept_names = set(concept_names_map.keys())
 
+    # List of new templates
     templates = []
+    # Counter to keep track of how many times a parameter has been stratified
     params_count = Counter()
 
     # Figure out excluded concepts
@@ -134,6 +162,7 @@ def stratify(
             if set(template.get_concept_names()) - exclude_concepts:
                 new_template = template.with_context(
                     do_rename=modify_names, exclude_concepts=exclude_concepts,
+                    curie_to_name_map=strata_curie_to_name,
                     **{key: stratum},
                 )
                 rewrite_rate_law(template_model=template_model,
@@ -201,7 +230,7 @@ def stratify(
             continue
         # We need to keep the original param if it has been broken
         # up but not in every instance. We then also
-        # generte the counted parameter variants
+        # generate the counted parameter variants
         elif parameter_key in keep_unstratified_parameters:
             parameters[parameter_key] = parameter
         # note that `params_count[key]` will be 1 higher than the number of uses
@@ -220,10 +249,12 @@ def stratify(
             continue
         for stratum in strata:
             new_concept = initial.concept.with_context(
-                do_rename=modify_names, **{key: stratum},
+                do_rename=modify_names,
+                curie_to_name_map=strata_curie_to_name,
+                **{key: stratum},
             )
             initials[new_concept.name] = Initial(
-                concept=new_concept, value=initial.value / len(strata),
+                concept=new_concept, expression=SympyExprStr(initial.expression.args[0] / len(strata))
             )
 
     observables = {}
@@ -234,7 +265,9 @@ def stratify(
             new_symbols = []
             for stratum in strata:
                 new_concept = concept_names_map[sym].with_context(
-                    do_rename=modify_names, **{key: stratum},
+                    do_rename=modify_names,
+                    curie_to_name_map=strata_curie_to_name,
+                    **{key: stratum},
                 )
                 new_symbols.append(sympy.Symbol(new_concept.name))
             expr = expr.subs(sympy.Symbol(sym), sympy.Add(*new_symbols))
@@ -245,19 +278,28 @@ def stratify(
     for (source_stratum, target_stratum), concept in itt.product(structure, concept_map.values()):
         if concept.name in exclude_concepts:
             continue
-        param_name = f"p_{source_stratum}_{target_stratum}"
+        # Get stratum names from map if provided, otherwise use the stratum
+        source_stratum_name = strata_curie_to_name.get(
+            source_stratum, source_stratum
+        ) if strata_curie_to_name else source_stratum
+        target_stratum_name = strata_curie_to_name.get(
+            target_stratum, target_stratum
+        ) if strata_curie_to_name else target_stratum
+        param_name = f"p_{source_stratum_name}_{target_stratum_name}"
         if param_name not in parameters:
             parameters[param_name] = Parameter(name=param_name, value=0.1)
         subject = concept.with_context(do_rename=modify_names,
+                                       curie_to_name_map=strata_curie_to_name,
                                        **{key: source_stratum})
         outcome = concept.with_context(do_rename=modify_names,
+                                       curie_to_name_map=strata_curie_to_name,
                                        **{key: target_stratum})
         # todo will need to generalize for different kwargs for different conversions
         template = conversion_cls(subject=subject, outcome=outcome)
         template.set_mass_action_rate_law(param_name)
         templates.append(template)
         if not directed:
-            param_name = f"p_{target_stratum}_{source_stratum}"
+            param_name = f"p_{target_stratum_name}_{source_stratum_name}"
             if param_name not in parameters:
                 parameters[param_name] = Parameter(name=param_name, value=0.1)
             reverse_template = conversion_cls(subject=outcome, outcome=subject)
@@ -276,9 +318,37 @@ def stratify(
     return new_model
 
 
-def rewrite_rate_law(template_model: TemplateModel, old_template: Template,
-                     new_template: Template, params_count,
-                     params_to_stratify=None, params_to_preserve=None):
+def rewrite_rate_law(
+    template_model: TemplateModel,
+    old_template: Template,
+    new_template: Template,
+    params_count: Counter,
+    params_to_stratify: Optional[Collection[str]] = None,
+    params_to_preserve: Optional[Collection[str]] = None,
+):
+    """Rewrite the rate law of a template based on a new template.
+
+    This function is used in the context of stratification.
+
+    Parameters
+    ----------
+    template_model :
+        The unstratified template model containing the templates.
+    old_template :
+        The original template.
+    new_template :
+        The new template. One of the templates created by stratification of
+        ``old_template``.
+    params_count :
+        A counter that keeps track of how many times a parameter has been
+        stratified.
+    params_to_stratify :
+        A list of parameters to stratify. If none given, will stratify all
+        parameters.
+    params_to_preserve :
+        A list of parameters to preserve. If none given, will stratify all
+        parameters.
+    """
     # Rewrite the rate law by substituting new symbols corresponding
     # to the stratified controllers in for the originals
     rate_law = old_template.rate_law
@@ -361,7 +431,7 @@ def simplify_rate_laws(template_model: TemplateModel):
     return template_model
 
 
-def aggregate_parameters(template_model, exclude=None):
+def aggregate_parameters(template_model: TemplateModel) -> TemplateModel:
     """Return a template model after aggregating parameters for mass-action
     rate laws.
 
@@ -369,8 +439,6 @@ def aggregate_parameters(template_model, exclude=None):
     ----------
     template_model :
         A template model whose rate laws will be aggregated.
-    exclude :
-        A list of parameters to exclude from aggregation.
 
     Returns
     -------
@@ -501,8 +569,28 @@ def simplify_rate_law(template: Template,
     return new_templates
 
 
-def get_term_roles(term, template, parameters):
-    """Return terms in a rate law by role."""
+def get_term_roles(
+    term,
+    template: Template,
+    parameters: Mapping[str, Parameter]
+) -> Mapping[str, List[str]]:
+    """Return terms in a rate law by role.
+
+    Parameters
+    ----------
+    term :
+        A sympy expression.
+    template :
+        A template.
+    parameters :
+        A dict of parameters in the template model, needed to interpret
+        the semantics of rate laws.
+
+    Returns
+    -------
+    :
+        A dict of lists of symbols in the term by role.
+    """
     term_roles = defaultdict(list)
     for symbol in term.free_symbols:
         if symbol.name in parameters:
@@ -517,7 +605,7 @@ def get_term_roles(term, template, parameters):
 
 def counts_to_dimensionless(tm: TemplateModel,
                             counts_unit: str,
-                            norm_factor: float):
+                            norm_factor: float) -> TemplateModel:
     """Convert all quantities using a given counts unit to dimensionless units.
 
     Parameters
@@ -560,8 +648,9 @@ def counts_to_dimensionless(tm: TemplateModel,
                     # for the concept and if so, we normalize it as well
                     if concept.name in tm.initials and concept.name not in initials_normalized:
                         init = tm.initials[concept.name]
-                        if init.value is not None:
-                            init.value /= (norm_factor ** exponent)
+                        if init.expression is not None:
+                            init.expression = SympyExprStr(
+                                init.expression.args[0] / (norm_factor ** exponent))
                             if init.concept.units:
                                 init.concept.units.expression = \
                                     SympyExprStr(init.concept.units.expression.args[0] /
@@ -583,9 +672,19 @@ def counts_to_dimensionless(tm: TemplateModel,
     return tm
 
 
-def deactivate_templates(template_model: TemplateModel,
-                         condition: Callable[[Template], bool]):
-    """Deactivate templates that satisfy a given condition."""
+def deactivate_templates(
+    template_model: TemplateModel,
+    condition: Callable[[Template], bool]
+):
+    """Deactivate templates that satisfy a given condition.
+
+    Parameters
+    ----------
+    template_model :
+        A template model.
+    condition :
+        A function that takes a template and returns a boolean.
+    """
     for template in template_model.templates:
         if condition(template):
             template.deactivate()

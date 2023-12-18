@@ -21,7 +21,7 @@ from fastapi import (
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
-from mira.examples.sir import sir_bilayer, sir, sir_parameterized_init
+from mira.examples.sir import sir_bilayer, sir, sir_parameterized_init, sir_2_city
 from mira.metamodel import (
     NaturalConversion, Template, ControlledConversion,
     stratify, Concept, ModelComparisonGraphdata, TemplateModelDelta,
@@ -29,16 +29,16 @@ from mira.metamodel import (
     counts_to_dimensionless
 )
 from mira.modeling import Model
-from mira.modeling.askenet.petrinet import AskeNetPetriNetModel, ModelSpecification
+from mira.modeling.amr.petrinet import AMRPetriNetModel, ModelSpecification
 from mira.modeling.bilayer import BilayerModel
-from mira.modeling.petri import PetriNetModel, PetriNetResponse
+from mira.modeling.acsets.petri import PetriNetModel, PetriNetResponse
 from mira.modeling.viz import GraphicalModel
-from mira.sources.askenet.flux_span import reproduce_ode_semantics, \
+from mira.sources.amr.flux_span import reproduce_ode_semantics, \
     test_file_path, docker_test_file_path
-from mira.sources.askenet.petrinet import template_model_from_askenet_json
+from mira.sources.amr.petrinet import template_model_from_amr_json
 from mira.sources.bilayer import template_model_from_bilayer
 from mira.sources.biomodels import get_sbml_model
-from mira.sources.petri import template_model_from_petri_json
+from mira.sources.acsets.petri import template_model_from_petri_json
 from mira.sources.sbml import template_model_from_sbml_string
 
 __all__ = [
@@ -89,8 +89,9 @@ template_model_example_w_context = TemplateModel(
 
 #: PetriNetModel json example
 petrinet_json = PetriNetModel(Model(sir)).to_pydantic()
-askenet_petrinet_json = AskeNetPetriNetModel(Model(sir)).to_pydantic()
-askenet_petrinet_json_units_values = AskeNetPetriNetModel(
+amr_petrinet_json = AMRPetriNetModel(Model(sir)).to_pydantic()
+amr_petrinet_json_2_city = AMRPetriNetModel(Model(sir_2_city)).to_pydantic()
+amr_petrinet_json_units_values = AMRPetriNetModel(
     Model(sir_parameterized_init)
 ).to_pydantic()
 
@@ -101,9 +102,9 @@ askenet_petrinet_json_units_values = AskeNetPetriNetModel(
     tags=["modeling"],
     description=dedent("""\
         This endpoint consumes a JSON representation of a MIRA template model and converts
-        it into the ACSet standard for petri nets (implicitly defined `here <https://github.com/\
-        AlgebraicJulia/py-acsets/blob/main/src/acsets/petris.py>_), which can be used with the
-        Algebraic Julia ecosystem.
+        it into the ACSet standard for petri nets (implicitly defined 
+        [here](https://github.com/AlgebraicJulia/py-acsets/blob/main/src/acsets/petris.py)),
+        which can be used with the Algebraic Julia ecosystem.
         
         Note, this endpoint used to be called "/api/to_petrinet" but has been renamed as the ASKEM
         standard now uses that endpoint.
@@ -123,9 +124,10 @@ def model_to_petri(template_model: Dict[str, Any] = Body(..., example=template_m
     tags=["modeling"],
     response_model=TemplateModel,
     description=dedent("""\
-        This endpoint consumes a JSON representation of an `ACSet petri net <https://github.com/\
-        AlgebraicJulia/py-acsets/blob/main/src/acsets/petris.py>_ and produces a JSON representation
-        of a MIRA template model, which can be directly used with the MIRA ecosystem to do model
+        This endpoint consumes a JSON representation of an
+        [ACSet petri net](https://github.com/AlgebraicJulia/py-acsets/blob/main/src/acsets/petris.py)
+        and produces a JSON representation of a MIRA template model, 
+        which can be directly used with the MIRA ecosystem to do model
         extension, stratification, and comparison.
 
         Note, this endpoint used to be called "/api/from_petrinet" but has been renamed as the ASKEM
@@ -143,17 +145,18 @@ def petri_to_model(petri_json: Dict[str, Any] = Body(..., example=petrinet_json)
     tags=["modeling"],
     description=dedent("""\
         This endpoint consumes a JSON representation of a MIRA template model and converts
-        it into the `ASKEM standard for petri nets <https://github.com/DARPA-ASKEM/Model-\
-        Representations/blob/main/petrinet/petrinet_schema.json>_, which can be directly
-        consumed by other project members that implement this standard.
+        it into the
+        [ASKEM standard for petri nets](https://github.com/DARPA-ASKEM/Model-Representations/blob/main/petrinet/petrinet_schema.json),
+        which can be directly consumed by other project members that 
+        implement this standard.
     """.rstrip()),
 )
-def model_to_askenet(template_model: Dict[str, Any] = Body(..., example=template_model_example)):
-    """Create an AskeNet Petri model from a TemplateModel."""
+def model_to_amr(template_model: Dict[str, Any] = Body(..., example=template_model_example)):
+    """Create an AMR Petri model from a TemplateModel."""
     tm = TemplateModel.from_json(template_model)
     model = Model(tm)
-    askenet_petrinet_model = AskeNetPetriNetModel(model)
-    return askenet_petrinet_model.to_pydantic()
+    amr_petrinet_model = AMRPetriNetModel(model)
+    return amr_petrinet_model.to_pydantic()
 
 
 @model_blueprint.post(
@@ -161,15 +164,16 @@ def model_to_askenet(template_model: Dict[str, Any] = Body(..., example=template
     tags=["modeling"],
     response_model=TemplateModel,
     description=dedent("""\
-        This endpoint consumes a JSON representation of an `ASKEM petri net <https://github.\
-        com/DARPA-ASKEM/Model-Representations/blob/main/petrinet/petrinet_schema.json>_ and
-        produces a JSON representation of a MIRA template model, which can be directly used
-        with the MIRA ecosystem to do model extension, stratification, and comparison. 
+        This endpoint consumes a JSON representation of an
+        [ASKEM petri net](https://github.com/DARPA-ASKEM/Model-Representations/blob/main/petrinet/petrinet_schema.json)
+        and produces a JSON representation of a MIRA template model, 
+        which can be directly used with the MIRA ecosystem to do model 
+        extension, stratification, and comparison.
     """.rstrip()),
 )
-def askenet_to_model(askenet_json: Dict[str, Any] = Body(..., example=askenet_petrinet_json)):
-    """Create a TemplateModel from an AskeNet model."""
-    return template_model_from_askenet_json(askenet_json)
+def amr_to_model(amr_json: Dict[str, Any] = Body(..., example=amr_petrinet_json)):
+    """Create a TemplateModel from an AMR model."""
+    return template_model_from_amr_json(amr_json)
 
 
 # Model stratification
@@ -188,6 +192,24 @@ class StratificationQuery(BaseModel):
         ...,
         description="A list of the values for stratification",
         example=["boston", "nyc"]
+    )
+    strata_name_map: Union[Dict[str, str], None] = Field(
+        None,
+        description="A mapping of the strata values to names to be used in "
+                    "renaming the concepts. If none given, will use the "
+                    "strata values as the names. This option only has an "
+                    "effect if ``modify_names`` is true.",
+        example={
+            "geonames:4930956": "Boston", "geonames:5128581": "New York City"
+        },
+    )
+    strata_name_lookup: bool = Field(
+        False,
+        description="If true, will try to look up the entity names of the "
+                    "strata values under the assumption that they are "
+                    "curies. This flag has no impact if ``strata_name_map`` "
+                    "is given.",
+        example=True
     )
     structure: Union[List[List[str]], None] = Field(
         None,
@@ -267,22 +289,42 @@ class StratificationQuery(BaseModel):
 
 @model_blueprint.post("/stratify", response_model=TemplateModel, tags=["modeling"])
 def model_stratification(
+    request: Request,
     stratification_query: StratificationQuery = Body(
         ...,
         example={
             "template_model": template_model_example,
             "key": "city",
-            "strata": ["boston", "nyc"],
+            "strata": ["geonames:4930956", "geonames:5128581"],
+            "strata_name_lookup": True,
             "params_to_stratify": ["beta"],
         },
     )
 ):
     """Stratify a model according to the specified stratification"""
+    strata = stratification_query.strata
     tm = TemplateModel.from_json(stratification_query.template_model)
+
+    if (stratification_query.strata_name_map is None and
+            stratification_query.strata_name_lookup):
+        strata_name_map = {}
+        for sn in strata:
+            if ":" in sn:
+                res = request.app.state.client.get_entity(sn)
+                mapped_name = res.name if res is not None else sn
+            else:
+                mapped_name = sn
+            strata_name_map[sn] = mapped_name
+    elif stratification_query.strata_name_map:
+        strata_name_map = stratification_query.strata_name_map
+    else:
+        strata_name_map = None
+
     template_model = stratify(
         template_model=tm,
         key=stratification_query.key,
-        strata=stratification_query.strata,
+        strata=strata,
+        strata_curie_to_name=strata_name_map,
         structure=stratification_query.structure,
         directed=stratification_query.directed,
         conversion_cls=stratification_query.get_conversion_cls(),
@@ -330,7 +372,7 @@ def dimension_transform(
         query: Dict[str, Any] = Body(
             ...,
             example={
-                "model": askenet_petrinet_json_units_values,
+                "model": amr_petrinet_json_units_values,
                 "counts_units": "persons",
                 "norm_factor": 1e5,
             },
@@ -339,13 +381,13 @@ def dimension_transform(
     """Convert all entity concentrations to dimensionless units"""
     # convert to template model
     amr_json = query.pop("model")
-    tm = template_model_from_askenet_json(amr_json)
+    tm = template_model_from_amr_json(amr_json)
 
     # Create a dimensionless model
     dimless_model = counts_to_dimensionless(tm=tm, **query)
 
-    # Transform back to askenet model
-    return AskeNetPetriNetModel(Model(dimless_model)).to_pydantic()
+    # Transform back to amr model
+    return AMRPetriNetModel(Model(dimless_model)).to_pydantic()
 
 
 @model_blueprint.get(
@@ -523,16 +565,6 @@ def _generate_template_model_delta(
     template_model1: TemplateModel,
     template_model2: TemplateModel,
 ) -> TemplateModelDelta:
-    # def _is_ontological_child(child_curie: str, parent_curie: str) -> bool:
-    #     res = request.app.state.client.query_relations(
-    #         source_curie=child_curie,
-    #         relation_type=DKG_REFINER_RELS,
-    #         target_curie=parent_curie,
-    #     )
-    #     # res is a list of lists, so check that there is at least one
-    #     # element in the outer list and that the first element/list contains
-    #     # something
-    #    return len(res) > 0 and len(res[0]) > 0
     tmd = TemplateModelDelta(
         template_model1=template_model1,
         template_model2=template_model2,
@@ -610,9 +642,10 @@ def add_transition(
         ...,
         example={
             "template_model": template_model_example,
-            "subject_concept": "<Add concept example>",
-            "object_concept": "<Add concept example>",
-            "parameter": "<Add parameter example>",
+            "subject_concept": {"name": "infected population",
+                                "identifiers": {"ido": "0000511"}},
+            "outcome_concept": {"name": "dead",
+                                "identifiers": {"ncit": "C28554"}},
         },
     )
 ):
@@ -621,7 +654,7 @@ def add_transition(
     template_model = tm.add_transition(
         subject_concept=add_transition_query.subject_concept,
         outcome_concept=add_transition_query.outcome_concept,
-        parameter=add_transition_query.parameter,
+        mass_action_parameter=add_transition_query.parameter,
     )
     return template_model
 
@@ -667,16 +700,14 @@ def model_comparison(
 
 class AMRComparisonQuery(BaseModel):
     petrinet_models: List[Dict[str, Any]] = Field(
-        ..., example=[  # fixme: create more examples
-            askenet_petrinet_json,
-        ]
+        ..., example=[amr_petrinet_json, amr_petrinet_json_2_city]
     )
 
 
 @model_blueprint.post("/askenet_model_comparison",
                       response_model=ModelComparisonResponse,
                       tags=["modeling"],
-                      description="This endpoint consumes a list of askenet "
+                      description="This endpoint consumes a list of amr "
                                   "petrinet JSON objects and returns "
                                   "similarity scores and the data comparing "
                                   "the models")
@@ -686,7 +717,7 @@ def askepetrinet_model_comparison(
 ):
     """Compare a list of models to each other"""
     template_models = [
-        template_model_from_askenet_json(m) for m in query.petrinet_models
+        template_model_from_amr_json(m) for m in query.petrinet_models
     ]
     graph_comparison_data = ModelComparisonGraphdata.from_template_models(
         template_models,
@@ -700,14 +731,18 @@ def askepetrinet_model_comparison(
     return resp
 
 
-flux_span_path = docker_test_file_path if docker_test_file_path.exists() else \
-    test_file_path
+if docker_test_file_path.exists():
+    flux_span_query_example = json.loads(docker_test_file_path.read_text())
+elif test_file_path.exists():
+    flux_span_query_example = json.loads(test_file_path.read_text())
+else:
+    flux_span_query_example = None
 
 
 class FluxSpanQuery(BaseModel):
     model: Dict[str, Any] = Field(
         ...,
-        example=json.load(flux_span_path.open()),
+        example=flux_span_query_example,
         description="The model to recover the ODE-semantics from.",
     )
 
@@ -724,5 +759,5 @@ def reproduce_ode_semantics_endpoint(
 ):
     """Reproduce ODE semantics from a stratified model (flux span)."""
     tm = reproduce_ode_semantics(query.model)
-    am = AskeNetPetriNetModel(Model(tm))
+    am = AMRPetriNetModel(Model(tm))
     return am.to_pydantic()

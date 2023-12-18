@@ -1,5 +1,14 @@
-__all__ = ["Annotations", "TemplateModel", "Initial", "Parameter",
-           "Distribution", "Observable", "Time", "model_has_grounding"]
+__all__ = [
+    "Annotations",
+    "TemplateModel",
+    "Initial",
+    "Parameter",
+    "Distribution",
+    "Observable",
+    "Time",
+    "model_has_grounding",
+    "Concept",
+]
 
 import datetime
 import sys
@@ -7,39 +16,92 @@ from typing import List, Dict, Set, Optional, Mapping, Tuple, Any
 
 import networkx as nx
 import sympy
+import mira.metamodel.io
 from pydantic import BaseModel, Field
-
 from .templates import *
 from .units import Unit
 from .utils import safe_parse_expr, SympyExprStr
 
 
 class Initial(BaseModel):
-    """An initial condition."""
+    """Represents the initial conditions for parameters present in the
+    model."""
 
-    concept: Concept
-    value: float
+    concept: Concept = Field(
+        description="The concept associated with the initial."
+    )
+    expression: SympyExprStr = Field(
+        description="The expression for the initial."
+    )
 
     class Config:
         arbitrary_types_allowed = True
         json_encoders = {
             SympyExprStr: lambda e: str(e),
         }
-        json_decoders = {
-            SympyExprStr: lambda e: sympy.parse_expr(e)
-        }
+        json_decoders = {SympyExprStr: lambda e: sympy.parse_expr(e)}
 
     @classmethod
-    def from_json(cls, data: Dict[str, Any]) -> "Initial":
-        value = data.pop('value')
-        concept_json = data.pop('concept')
+    def from_json(cls, data: Dict[str, Any], locals_dict=None) -> "Initial":
+        """
+        Returns an Initial from a dictionary.
+
+        Parameters
+        ----------
+        data : Dict[str,Any]
+            Mapping of Initial attributes to their values.
+        locals_dict : Dict[str,Any]
+            Mapping of string symbols to their sympy equivalent.
+
+        Returns
+        -------
+        :
+            The newly created initial.
+        """
+        expression_str = data.pop("expression")
+        concept_json = data.pop("concept")
         # Get Concept
         concept = Concept.from_json(concept_json)
-        return cls(concept=concept, value=value)
+        # We now create the expression by parsing the expressions string
+        # with respect to a dict of local symbols
+        expression = safe_parse_expr(expression_str, local_dict=locals_dict)
+        return cls(concept=concept, expression=SympyExprStr(expression))
+
+    def substitute_parameter(self, name, value):
+        """
+        Substitute a parameter value into the initial expression.
+
+        Parameters
+        ----------
+        name : str
+            The name of the parameter to substitute.
+        value :
+            The value to substitute.
+        """
+        self.expression = self.expression.subs(sympy.Symbol(name), value)
+
+    def get_parameter_names(self, known_param_names) -> Set[str]:
+        """
+        Get the names of all parameters in the expression.
+
+        Parameters
+        ----------
+        known_param_names : list[str]
+            List of parameter names.
+
+        Returns
+        -------
+        :
+            The set of parameter names.
+        """
+        return {str(s) for s in self.expression.free_symbols} & set(
+            known_param_names
+        )
 
 
 class Distribution(BaseModel):
     """A distribution of values for a parameter."""
+
     type: str = Field(
         description="The type of distribution, e.g. 'uniform', 'normal', etc."
     )
@@ -50,11 +112,14 @@ class Distribution(BaseModel):
 
 class Parameter(Concept):
     """A Parameter is a special type of Concept that carries a value."""
+
     value: Optional[float] = Field(
-        default_factory=None, description="Value of the parameter.")
+        default_factory=None, description="Value of the parameter."
+    )
 
     distribution: Optional[Distribution] = Field(
-        default_factory=None, description="A distribution of values for the parameter."
+        default_factory=None,
+        description="A distribution of values for the parameter.",
     )
 
 
@@ -65,36 +130,57 @@ class Observable(Concept):
     readout is not defined as a state variable but is rather a function of
     state variables.
     """
+
     class Config:
         arbitrary_types_allowed = True
         json_encoders = {
             SympyExprStr: lambda e: str(e),
         }
-        json_decoders = {
-            SympyExprStr: lambda e: safe_parse_expr(e)
-        }
+        json_decoders = {SympyExprStr: lambda e: safe_parse_expr(e)}
 
     expression: SympyExprStr = Field(
         description="The expression for the observable."
     )
 
     def substitute_parameter(self, name, value):
-        """Substitute a parameter value into the observable expression."""
+        """
+        Substitute a parameter value into the observable expression.
+
+        Parameters
+        ----------
+        name : str
+            The name of the parameter to substitute.
+        value :
+            The value to substitute.
+        """
         self.expression = self.expression.subs(sympy.Symbol(name), value)
 
     def get_parameter_names(self, known_param_names) -> Set[str]:
-        """Get the names of all parameters in the expression."""
-        return {str(s) for s in self.expression.free_symbols} & set(known_param_names)
+        """
+        Get the names of all parameters in the expression.
+
+        Parameters
+        ----------
+        known_param_names : list[str]
+            List of parameter names.
+
+        Returns
+        -------
+        :
+            The set of parameter names.
+        """
+        return {str(s) for s in self.expression.free_symbols} & set(
+            known_param_names
+        )
 
 
 class Time(BaseModel):
     """A special type of Concept that represents time."""
+
     name: str = Field(
         default="t", description="The symbol of the time variable in the model."
     )
-    units: Optional[Unit] = Field(
-        description="The units of the time variable."
-    )
+    units: Optional[Unit] = Field(description="The units of the time variable.")
 
 
 class Author(BaseModel):
@@ -113,7 +199,7 @@ class Annotations(BaseModel):
 
     name: Optional[str] = Field(
         description="A human-readable label for the model",
-        example="SIR model of scenarios of COVID-19 spread in CA and NY"
+        example="SIR model of scenarios of COVID-19 spread in CA and NY",
     )
     # identifiers: Dict[str, str] = Field(
     #     description="Structured identifiers corresponding to the model artifact "
@@ -138,7 +224,7 @@ class Annotations(BaseModel):
         "time series data for a particular region. Capable of measuring and "
         "forecasting the impacts of social distancing, these models highlight the "
         "dangers of relaxing nonpharmaceutical public health interventions in the "
-        "absence of a vaccine or antiviral therapies."
+        "absence of a vaccine or antiviral therapies.",
     )
     license: Optional[str] = Field(
         description="Information about the licensing of the model artifact. "
@@ -227,15 +313,14 @@ class Annotations(BaseModel):
         example=[
             "ncbitaxon:9606",
         ],
-
     )
     model_types: List[str] = Field(
         default_factory=list,
         description="This field describes the type(s) of the model using the Mathematical "
-                    "Modeling Ontology (MAMO), which has terms like 'ordinary differential equation "
-                    " model', 'population model', etc. These should be annotated as CURIEs in the form "
-                    "of mamo:<local unique identifier>. For example, the Bertozzi 2020 model is a population "
-                    "model (mamo:0000028) and ordinary differential equation model (mamo:0000046)",
+        "Modeling Ontology (MAMO), which has terms like 'ordinary differential equation "
+        " model', 'population model', etc. These should be annotated as CURIEs in the form "
+        "of mamo:<local unique identifier>. For example, the Bertozzi 2020 model is a population "
+        "model (mamo:0000028) and ordinary differential equation model (mamo:0000046)",
         example=[
             "mamo:0000028",
             "mamo:0000046",
@@ -249,41 +334,40 @@ class TemplateModel(BaseModel):
     templates: List[SpecifiedTemplate] = Field(
         ..., description="A list of any child class of Templates"
     )
-    parameters: Dict[str, Parameter] = \
-        Field(default_factory=dict,
-              description="A dict of parameter values where keys correspond "
-                          "to how the parameter appears in rate laws.")
-    initials: Dict[str, Initial] = \
-        Field(default_factory=dict,
-              description="A dict of initial condition values where keys"
-                          "correspond to concept names they apply to.")
+    parameters: Dict[str, Parameter] = Field(
+        default_factory=dict,
+        description="A dict of parameter values where keys correspond "
+        "to how the parameter appears in rate laws.",
+    )
+    initials: Dict[str, Initial] = Field(
+        default_factory=dict,
+        description="A dict of initial condition values where keys"
+        "correspond to concept names they apply to.",
+    )
 
-    observables: Dict[str, Observable] = \
-        Field(default_factory=dict,
-              description="A list of observables that are readouts "
-                          "from the model.")
+    observables: Dict[str, Observable] = Field(
+        default_factory=dict,
+        description="A list of observables that are readouts "
+        "from the model.",
+    )
 
-    annotations: Optional[Annotations] = \
-        Field(
-            default_factory=None,
-            description="A structure containing model-level annotations. "
-            "Note that all annotations are optional.",
-        )
+    annotations: Optional[Annotations] = Field(
+        default_factory=None,
+        description="A structure containing model-level annotations. "
+        "Note that all annotations are optional.",
+    )
 
-    time: Optional[Time] = \
-        Field(
-            default_factory=None,
-            description="A structure containing time-related annotations. "
-            "Note that all annotations are optional.",
-        )
+    time: Optional[Time] = Field(
+        default_factory=None,
+        description="A structure containing time-related annotations. "
+        "Note that all annotations are optional.",
+    )
 
     class Config:
         json_encoders = {
             SympyExprStr: lambda e: str(e),
         }
-        json_decoders = {
-            SympyExprStr: lambda e: safe_parse_expr(e)
-        }
+        json_decoders = {SympyExprStr: lambda e: safe_parse_expr(e)}
 
     def get_parameters_from_rate_law(self, rate_law) -> Set[str]:
         """Given a rate law, find its elements that are model parameters.
@@ -294,13 +378,13 @@ class TemplateModel(BaseModel):
 
         Parameters
         ----------
-        rate_law :
-            A sympy expression or symbol, whose names are extracted
+        rate_law : sympy.Symbol | sympy.Expr
+            A sympy expression or symbol, whose names are extracted.
 
         Returns
         -------
         :
-            A set of parameter names (as strings)
+            A set of parameter names (as strings).
         """
         if rate_law is None:
             return set()
@@ -311,14 +395,25 @@ class TemplateModel(BaseModel):
                 params.add(rate_law.name)
         # There are many sympy classes that have args that can occur here
         # so it's better to check for the presence of args
-        elif not hasattr(rate_law, 'args'):
-            raise ValueError(f"Rate law is of invalid type {type(rate_law)}: {rate_law}")
+        elif not hasattr(rate_law, "args"):
+            raise ValueError(
+                f"Rate law is of invalid type {type(rate_law)}: {rate_law}"
+            )
         else:
             for arg in rate_law.args:
                 params |= self.get_parameters_from_rate_law(arg)
         return params
 
     def update_parameters(self, parameter_dict):
+        """
+        Update parameter values.
+
+        Parameters
+        ----------
+        parameter_dict : Dict[str,float]
+            Mapping of parameter name to value.
+
+        """
         for k, v in parameter_dict.items():
             if k in self.parameters:
                 self.parameters[k].value = v
@@ -339,27 +434,49 @@ class TemplateModel(BaseModel):
             if k not in used_parameters:
                 self.parameters.pop(k)
 
-    def eliminate_duplicate_parameter(self, redundant_parameter,
-                                      preserved_parameter):
+    def eliminate_duplicate_parameter(
+        self, redundant_parameter, preserved_parameter
+    ):
         """Eliminate a duplicate parameter from the model.
 
         This happens when there are two redundant parameters only one of which
         is actually used in the model. This function removes the redundant
         parameter and updates the rate laws to use the preserved parameter.
+
+        Parameters
+        ----------
+        redundant_parameter : str
+            The name of the parameter to remove.
+        preserved_parameter : str
+            The new name of the parameter to preserve.
         """
         # Update the rate laws
         for template in self.templates:
-            template.update_parameter_name(redundant_parameter,
-                                           preserved_parameter)
+            template.update_parameter_name(
+                redundant_parameter, preserved_parameter
+            )
         self.parameters.pop(redundant_parameter)
 
     @classmethod
     def from_json(cls, data) -> "TemplateModel":
-        local_symbols = {p: sympy.Symbol(p) for p in data.get('parameters', [])}
-        for template_dict in data.get('templates', []):
+        """
+        Return a template model from a dictionary
+
+        Parameters
+        ----------
+        data : Dict[str,Any]
+            Mapping of template model attributes to their values.
+
+        Returns
+        -------
+        :
+            Returns the newly created template model.
+        """
+        local_symbols = {p: sympy.Symbol(p) for p in data.get("parameters", [])}
+        for template_dict in data.get("templates", []):
             # We need to figure out the template class based on the type
             # entry in the data
-            template_cls = getattr(sys.modules[__name__], template_dict['type'])
+            template_cls = getattr(sys.modules[__name__], template_dict["type"])
             for concept_key in template_cls.concept_keys:
                 # Note the special handling here for list-like vs single
                 # concepts
@@ -368,12 +485,15 @@ class TemplateModel(BaseModel):
                     if not isinstance(concept_data, list):
                         concept_data = [concept_data]
                     for concept_dict in concept_data:
-                        if concept_dict.get('name'):
-                            local_symbols[concept_dict.get('name')] = \
-                                sympy.Symbol(concept_dict.get('name'))
+                        if concept_dict.get("name"):
+                            local_symbols[
+                                concept_dict.get("name")
+                            ] = sympy.Symbol(concept_dict.get("name"))
         # We can now use these symbols to deserialize rate laws
-        templates = [Template.from_json(template, rate_symbols=local_symbols)
-                     for template in data["templates"]]
+        templates = [
+            Template.from_json(template, rate_symbols=local_symbols)
+            for template in data["templates"]
+        ]
 
         #: A lookup from concept name in the model to the full
         #: concept object to be used for preparing initial values
@@ -382,36 +502,49 @@ class TemplateModel(BaseModel):
             for template in templates
             for concept in template.get_concepts()
         }
+        # Handle parameters
+        parameters = {
+            par_key: Parameter.from_json(par_dict)
+            for par_key, par_dict in data.get("parameters", {}).items()
+        }
 
         initials = {}
-        for name, value in data.get('initials', {}).items():
+        for name, value in data.get("initials", {}).items():
             if isinstance(value, float):
                 # If the data is just a float, upgrade it to
                 # a :class:`Initial` instance
                 initials[name] = Initial(
                     concept=concepts[name],
-                    value=value,
+                    expression=SympyExprStr(sympy.Float(value)),
                 )
             else:
                 # If the data is not a float, assume it's JSON
                 # for a :class:`Initial` instance and parse it to Initial
-                initials[name] = Initial.from_json(value)
+                local_symbols = {
+                    p.name: sympy.Symbol(p.name) for p in parameters.values()
+                }
+                initials[name] = Initial.from_json(
+                    value, locals_dict=local_symbols
+                )
 
-        # Handle parameters
-        parameters = {
-            par_key: Parameter.from_json(par_dict)
-            for par_key, par_dict in data.get('parameters', {}).items()
-        }
-
-        return cls(templates=templates,
-                   parameters=parameters,
-                   initials=initials,
-                   annotations=data.get('annotations'))
+        return cls(
+            templates=templates,
+            parameters=parameters,
+            initials=initials,
+            annotations=data.get("annotations"),
+        )
 
     def generate_model_graph(self) -> nx.DiGraph:
+        """
+        Generate a graph based off the template model.
+
+        Returns
+        -------
+        :
+            A graph
+        """
         graph = nx.DiGraph()
         for template in self.templates:
-
             # Add node for template itself
             node_id = get_template_graph_key(template)
             graph.add_node(
@@ -425,7 +558,9 @@ class TemplateModel(BaseModel):
 
             # Add in/outgoing nodes for the concepts of this template
             for role, concepts in template.get_concepts_by_role().items():
-                for concept in concepts if isinstance(concepts, list) else [concepts]:
+                for concept in (
+                    concepts if isinstance(concepts, list) else [concepts]
+                ):
                     # Note: this includes the node's name as well as its
                     # grounding
                     concept_key = get_concept_graph_key(concept)
@@ -449,8 +584,7 @@ class TemplateModel(BaseModel):
                         color="orange",
                         concept_identity_key=concept_identity_key,
                     )
-                    role_label = "controller" if role == "controllers" \
-                        else role
+                    role_label = "controller" if role == "controllers" else role
                     if role_label in {"controller", "subject"}:
                         source, target = concept_key, node_id
                     else:
@@ -460,29 +594,58 @@ class TemplateModel(BaseModel):
         return graph
 
     def draw_graph(
-        self, path: str, prog: str = "dot", args: str = "", format: Optional[str] = None
+        self,
+        path: str,
+        prog: str = "dot",
+        args: str = "",
+        format: Optional[str] = None,
     ):
-        """Draw a pygraphviz graph of the TemplateModel
+        """Draw a pygraphviz graph of the TemplateModel.
 
         Parameters
         ----------
         path :
-            The path to the output file
+            The path to the output file.
         prog :
             The graphviz layout program to use, such as "dot", "neato", etc.
         format :
-            Set the file format explicitly
+            Set the file format explicitly.
         args :
             Additional arguments to pass to the graphviz bash program as a
-            string. Example: args="-Nshape=box -Edir=forward -Ecolor=red"
+            string. Example: args="-Nshape=box -Edir=forward -Ecolor=red".
         """
         # draw graph
         graph = self.generate_model_graph()
         agraph = nx.nx_agraph.to_agraph(graph)
         agraph.draw(path, format=format, prog=prog, args=args)
 
-    def draw_jupyter(self, path: str = "model.png", prog: str = "dot", args: str = "", format: Optional[str] = None):
-        """Display in jupyter."""
+    def draw_jupyter(
+        self,
+        path: str = "model.png",
+        prog: str = "dot",
+        args: str = "",
+        format: Optional[str] = None,
+    ):
+        """
+        Display in jupyter.
+
+        Parameters
+        ----------
+        path :
+            The path to the output file.
+        prog :
+            The graphviz layout program to use, such as "dot", "neato", etc.
+        format :
+            Set the file format explicitly.
+        args :
+            Additional arguments to pass to the graphviz bash program as a
+            string. Example: args="-Nshape=box -Edir=forward -Ecolor=red".
+
+        Returns
+        -------
+        : Image
+            The image of the graph.
+        """
         from IPython.display import Image
 
         self.draw_graph(path=path, prog=prog, args=args, format=format)
@@ -490,47 +653,85 @@ class TemplateModel(BaseModel):
         return Image(path)
 
     def graph_as_json(self) -> Dict:
-        """Serialize the TemaplateModel graph as node-link data"""
+        """
+        Serialize the TemplateModel graph as node-link data.
+
+        Returns
+        -------
+        :
+            The node-link data as a dictionary.
+        """
         graph = self.generate_model_graph()
         return nx.node_link_data(graph)
 
     def print_params_table(self):
+        """Print the table full of parameters."""
         import tabulate
+
         contexts = set()
         for key, param in self.parameters.items():
             contexts |= set(param.context.keys())
 
-        header = ['name', 'identifier'] + sorted(contexts)
+        header = ["name", "identifier"] + sorted(contexts)
         rows = [header]
         for key, param in self.parameters.items():
-            identifier_curie = ':'.join(list(param.identifiers.items())[0])
-            context_entries = [param.context.get(context)
-                               for context in sorted(contexts)]
+            identifier_curie = ":".join(list(param.identifiers.items())[0])
+            context_entries = [
+                param.context.get(context) for context in sorted(contexts)
+            ]
             rows.append([key, identifier_curie] + context_entries)
 
-        print(tabulate.tabulate(rows, headers='firstrow'))
+        print(tabulate.tabulate(rows, headers="firstrow"))
 
     def get_concepts_map(self):
-        """Return a mapping from concept keys to concepts that
+        """
+        Return a mapping from concept keys to concepts that
         appear in this template model's templates.
+
+        Returns
+        -------
+        : Dict[str,Concept]
+            The mapping of concept keys to concepts that appear in this
+            template model's templates.
         """
         return {concept.get_key(): concept for concept in _iter_concepts(self)}
 
     def get_concepts_name_map(self):
-        """Return a mapping from concept names to concepts that
+        """
+        Return a mapping from concept names to concepts that
         appear in this template model's templates.
+
+        Returns
+        -------
+        : Dict[str,Concept]
+            Mapping of concept names to concepts that appear in this
+            template model's templates.
         """
         return {concept.name: concept for concept in _iter_concepts(self)}
 
     def get_concept(self, name: str) -> Optional[Concept]:
-        """Return the first concept that has the given name."""
+        """
+        Return the first concept that has the given name.
+
+        Parameters
+        ----------
+        name :
+            The name to be queried for.
+
+        Returns
+        -------
+        :
+            The first concept that has the given name if it's present in the
+            TemplateModel.
+        """
         names = self.get_concepts_by_name(name)
         if names:
             return names[0]
         return None
 
     def reset_base_names(self):
-        """Reset the base names of all concepts in this model to the current name."""
+        """Reset the base names of all concepts in this model
+        to the current name."""
         for template in self.templates:
             for concept in template.get_concepts():
                 concept._base_name = concept.name
@@ -543,7 +744,17 @@ class TemplateModel(BaseModel):
         .. warning::
 
             this could give duplicates if there are nodes with
-            compositional grounding
+            compositional grounding.
+
+        Parameters
+        ----------
+        name :
+            The name to be queried for.
+
+        Returns
+        -------
+        :
+            A list of concepts that have the given name.
         """
         name = name.casefold()
         return [
@@ -553,35 +764,57 @@ class TemplateModel(BaseModel):
             if concept.name.casefold() == name
         ]
 
-    def extend(self, template_model: "TemplateModel",
-               parameter_mapping: Optional[Mapping[str, Parameter]] = None,
-               initial_mapping: Optional[Mapping[str, Initial]] = None):
-        """Extend this template model with another template model."""
+    def extend(
+        self,
+        template_model: "TemplateModel",
+        parameter_mapping: Optional[Mapping[str, Parameter]] = None,
+        initial_mapping: Optional[Mapping[str, Initial]] = None,
+    ):
+        """
+        Extend this template model with another template model.
+
+        Parameters
+        ----------
+        template_model :
+            The template model to add
+        parameter_mapping :
+            Mapping of parameter names to `Parameter`
+        initial_mapping :
+            Mapping of initial names to `Initial`
+
+        Returns
+        -------
+        : TemplateModel
+            The template model with added templates from the added
+            template model
+        """
         model = self
         for template in template_model.templates:
-            model = model.add_template(template,
-                                       parameter_mapping=parameter_mapping,
-                                       initial_mapping=initial_mapping)
+            model = model.add_template(
+                template,
+                parameter_mapping=parameter_mapping,
+                initial_mapping=initial_mapping,
+            )
         return model
 
     def add_template(
-            self,
-            template: Template,
-            parameter_mapping: Optional[Mapping[str, Parameter]] = None,
-            initial_mapping: Optional[Mapping[str, Initial]] = None,
+        self,
+        template: Template,
+        parameter_mapping: Optional[Mapping[str, Parameter]] = None,
+        initial_mapping: Optional[Mapping[str, Initial]] = None,
     ) -> "TemplateModel":
-        """Add a template to the model
+        """Add a template to the model.
 
         Parameters
         ----------
         template :
-            The template to add
+            The template to add.
         parameter_mapping :
-            A mapping from parameter names in the template to Parameter
-            instances in the model.
+            A mapping from parameter names in the template to Parameters in
+            the model.
         initial_mapping :
-            A mapping from concept names in the template to Initial
-            instances in the model
+            A mapping from concept names in the template to Initials in the
+            model.
 
         Returns
         -------
@@ -590,14 +823,16 @@ class TemplateModel(BaseModel):
         """
         # todo: handle adding parameters and initials
         if parameter_mapping is None and initial_mapping is None:
-            return TemplateModel(templates=self.templates + [template],
-                                 parameters=self.parameters,
-                                 initials=self.initials,
-                                 observables=self.observables,
-                                 annotations=self.annotations,
-                                 time=self.time)
+            return TemplateModel(
+                templates=self.templates + [template],
+                parameters=self.parameters,
+                initials=self.initials,
+                observables=self.observables,
+                annotations=self.annotations,
+                time=self.time,
+            )
         elif parameter_mapping is None:
-            initials = (self.initials or {})
+            initials = self.initials or {}
             initials.update(initial_mapping or {})
             return TemplateModel(
                 templates=self.templates + [template],
@@ -608,7 +843,7 @@ class TemplateModel(BaseModel):
                 time=self.time,
             )
         elif initial_mapping is None:
-            parameters = (self.parameters or {})
+            parameters = self.parameters or {}
             parameters.update(parameter_mapping or {})
             return TemplateModel(
                 templates=self.templates + [template],
@@ -619,9 +854,9 @@ class TemplateModel(BaseModel):
                 time=self.time,
             )
         else:
-            initials = (self.initials or {})
+            initials = self.initials or {}
             initials = initials.update(initial_mapping or {})
-            parameters = (self.parameters or {})
+            parameters = self.parameters or {}
             parameters.update(parameter_mapping or {})
             return TemplateModel(
                 templates=self.templates + [template],
@@ -634,51 +869,223 @@ class TemplateModel(BaseModel):
 
     def add_transition(
         self,
-        subject_concept: Concept,
-        outcome_concept: Concept,
-        parameter: Optional[Parameter] = None,
+        transition_name: str = None,
+        subject_concept: Concept = None,
+        outcome_concept: Concept = None,
+        rate_law_sympy: SympyExprStr = None,
+        params_dict: Mapping = None,
+        mass_action_parameter: Optional[Parameter] = None,
     ) -> "TemplateModel":
-        """Add a NaturalConversion between a source and an outcome.
-
-        We assume mass action kinetics with a single parameter.
         """
-        template = NaturalConversion(
-            subject=subject_concept,
-            outcome=outcome_concept,
+        Add a transition to a template model. Only Natural
+        templates between a source and an outcome are supported.
+        Multiple parameters can be added explicitly or implicitly.
+
+        Parameters
+        ----------
+        transition_name :
+            Name of the new transition to be added.
+        subject_concept :
+            The subject of the new transition.
+        outcome_concept :
+            The outcome of the new transition.
+        rate_law_sympy :
+            The rate law associated with the new transition.
+        params_dict :
+            Mapping of parameter attribute to their respective
+            values.
+        mass_action_parameter :
+            The mass action parameter that will be set to the transition's
+            mass action rate law if provided.
+        Returns
+        -------
+        :
+            The new template model with the added transition.
+        """
+        if subject_concept and outcome_concept:
+            template = NaturalConversion(
+                name=transition_name,
+                subject=subject_concept,
+                outcome=outcome_concept,
+                rate_law=rate_law_sympy,
+            )
+        elif subject_concept and outcome_concept is None:
+            template = NaturalDegradation(
+                name=transition_name,
+                subject=subject_concept,
+                rate_law=rate_law_sympy,
+            )
+        else:
+            template = NaturalProduction(
+                name=transition_name,
+                outcome=outcome_concept,
+                rate_law=rate_law_sympy,
+            )
+        if params_dict and template.rate_law:
+            # add explicitly parameters to template model
+            for free_symbol_sympy in template.rate_law.free_symbols:
+                free_symbol_str = str(free_symbol_sympy)
+                if free_symbol_str in params_dict:
+                    name = params_dict[free_symbol_str].get("display_name")
+                    description = params_dict[free_symbol_str].get(
+                        "description"
+                    )
+                    value = params_dict[free_symbol_str].get("value")
+                    units = params_dict[free_symbol_str].get("units")
+                    distribution = params_dict[free_symbol_str].get(
+                        "distribution"
+                    )
+                    self.add_parameter(
+                        parameter_id=free_symbol_str,
+                        name=name,
+                        description=description,
+                        value=value,
+                        distribution=distribution,
+                        units_mathml=units,
+                    )
+        # If there are no explicitly defined parameters
+        # Extract new parameters from rate laws without any other information about that parameter
+        elif template.rate_law:
+            free_symbol_str = {
+                str(symbol) for symbol in template.rate_law.free_symbols
+            }
+
+            # Remove subject name from list of free symbols if the template is not NaturalProduction
+            if not isinstance(template, NaturalProduction):
+                free_symbol_str -= {template.subject.name}
+            free_symbol_str -= set(self.parameters)
+            for new_param in free_symbol_str:
+                self.add_parameter(new_param)
+
+        elif mass_action_parameter:
+            template.set_mass_action_rate_law(mass_action_parameter.name)
+        pm = (
+            {mass_action_parameter.name: mass_action_parameter}
+            if mass_action_parameter
+            else None
         )
-        if parameter:
-            template.set_mass_action_rate_law(parameter.name)
-        pm = {parameter.name: parameter} if parameter else None
         return self.add_template(template, parameter_mapping=pm)
 
     def substitute_parameter(self, name, value=None):
-        """Substitute a parameter with a value."""
+        """
+        Substitute a parameter with the value argument if supplied,
+        else substitute the parameter with the parameter's value.
+
+        Parameters
+        ----------
+        name : str
+            The name of the parameter to substitute.
+        value :
+            The value to substitute.
+
+
+        Returns
+        -------
+        :
+            `None` if there does not exist a parameter with the given name.
+            Else not return value.
+        """
         if name not in self.parameters:
             return
         if value is None:
             value = self.parameters[name].value
-        self.parameters = {k: v for k, v in self.parameters.items()
-                           if k != name}
+        self.parameters = {
+            k: v for k, v in self.parameters.items() if k != name
+        }
         for template in self.templates:
             template.substitute_parameter(name, value)
         for observable in self.observables.values():
             observable.substitute_parameter(name, value)
 
+    def add_parameter(
+        self,
+        parameter_id: str,
+        name: str = None,
+        description: str = None,
+        value: float = None,
+        distribution=None,
+        units_mathml: str = None,
+    ):
+        """
+        Add a parameter to the template model.
+
+        Parameters
+        ----------
+        parameter_id :
+            The id of the parameter.
+        name :
+            The name of the  parameter.
+        description :
+            The description of the parameter.
+        value :
+            The value of the newly added parameter.
+        distribution : Dict[str,Any]
+            Dictionary of distribution attributes to their values to be
+            passed into the `Distribution` constructor.
+        units_mathml :
+            The unit of the parameter in mathml form.
+
+        """
+        distribution = Distribution(**distribution) if distribution else None
+        if units_mathml:
+            units = {
+                "expression": mira.metamodel.io.mathml_to_expression(
+                    units_mathml
+                ),
+                "expression_mathml": units_mathml,
+            }
+        else:
+            units = None
+
+        data = {
+            "name": parameter_id,
+            "display_name": name,
+            "description": description,
+            "value": value,
+            "distribution": distribution,
+            "units": units,
+        }
+
+        parameter = Parameter(**data)
+        self.parameters[parameter_id] = parameter
+
     def eliminate_parameter(self, name):
-        """Eliminate a parameter from the model by substituting 0."""
+        """
+        Eliminate a parameter from the model by substituting 0.
+
+        Parameters
+        ----------
+        name : str
+            The name of the parameter to be eliminated.
+        """
         self.substitute_parameter(name, value=0)
 
     def set_parameters(self, param_dict):
-        """Set the parameters of this model to the values in the given dict."""
+        """
+        Set the parameters of this model to the values in the given dict.
+
+        Parameters
+        ----------
+        param_dict : Dict[str,float]
+            Mapping of parameter name to its new value.
+
+        """
         for name, value in param_dict.items():
             if self.parameters and name in self.parameters:
                 self.parameters[name].value = value
 
     def set_initials(self, initial_dict):
-        """Set the initials of this model to the values in the given dict."""
-        for name, value in initial_dict.items():
+        """
+        Set the initials of this model to the expression in the given dict.
+
+        Parameters
+        ----------
+        initial_dict : Dict[str,SympyExprStr]
+            Mapping of initial name to its new expression.
+        """
+        for name, expression in initial_dict.items():
             if self.initials and name in self.initials:
-                self.initials[name].value = value
+                self.initials[name].expression = expression
 
 
 def _iter_concepts(template_model: TemplateModel):
@@ -728,13 +1135,29 @@ def get_template_graph_key(template: Template) -> Tuple[str, ...]:
     if len(key) > 1:
         return tuple(key)
     else:
-        return key[0],
+        return (key[0],)
 
 
-def model_has_grounding(template_model: TemplateModel, prefix: str,
-                        identifier: str) -> bool:
-    """Return whether a model contains a given grounding in any role."""
-    search_curie = f'{prefix}:{identifier}'
+def model_has_grounding(
+    template_model: TemplateModel, prefix: str, identifier: str
+) -> bool:
+    """
+    Returns true or false if a given search curie is present within the
+    TemplateModel.
+
+    Parameters
+    ----------
+    template_model :
+        The TemplateModel to query.
+    prefix :
+        The prefix of the search curie.
+    identifier :
+        The identifier of the search curie.
+    Returns
+    -------
+    :
+    """
+    search_curie = f"{prefix}:{identifier}"
     for template in template_model.templates:
         for concept in template.get_concepts():
             for concept_prefix, concept_id in concept.identifiers.items():

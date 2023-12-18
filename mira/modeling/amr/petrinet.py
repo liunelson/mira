@@ -2,9 +2,8 @@
 at https://github.com/DARPA-ASKEM/Model-Representations/tree/main/petrinet.
 """
 
-__all__ = ["AskeNetPetriNetModel", "ModelSpecification",
+__all__ = ["AMRPetriNetModel", "ModelSpecification",
            "template_model_to_petrinet_json"]
-
 
 import json
 import logging
@@ -27,7 +26,7 @@ SCHEMA_URL = ('https://raw.githubusercontent.com/DARPA-ASKEM/'
               'petrinet_schema.json') % SCHEMA_VERSION
 
 
-class AskeNetPetriNetModel:
+class AMRPetriNetModel:
     """A class representing a PetriNet model."""
 
     def __init__(self, model: Model):
@@ -93,10 +92,8 @@ class AskeNetPetriNetModel:
             #   'expression': str,
             #   'expression_mathml': str,
             # }
-            initial = var.data.get('initial_value')
+            initial = var.data.get('expression')
             if initial is not None:
-                if isinstance(initial, (float, int)):
-                    initial = safe_parse_expr(str(initial))
                 initial_data = {
                     'target': name,
                     'expression': str(initial),
@@ -180,6 +177,10 @@ class AskeNetPetriNetModel:
             if param.placeholder:
                 continue
             param_dict = {'id': str(key)}
+            if param.display_name:
+                param_dict['name'] = param.display_name
+            if param.description:
+                param_dict['description'] = param.description
             if param.value is not None:
                 param_dict['value'] = param.value
             if not param.distribution:
@@ -201,8 +202,32 @@ class AskeNetPetriNetModel:
 
         add_metadata_annotations(self.metadata, model)
 
-    def to_json(self, name=None, description=None, model_version=None):
-        """Return a JSON dict structure of the Petri net model."""
+    def to_json(
+        self,
+        name: str = None,
+        description: str = None,
+        model_version: str = None
+    ):
+        """Return a JSON dict structure of the Petri net model.
+
+        Parameters
+        ----------
+        name :
+            The name of the model. Defaults to the name of the original
+            template model that produced the input Model instance or, if not
+            available, 'Model'.
+        description :
+            A description of the model. Defaults to the description of the
+            original template model that produced the input Model instance or,
+            if not available, the name of the model.
+        model_version :
+            The version of the model. Defaults to '0.1'.
+
+        Returns
+        -------
+        : JSON
+            A JSON dict representing the Petri net model.
+        """
         return {
             'header': {
                 'name': name or self.model_name,
@@ -227,6 +252,26 @@ class AskeNetPetriNetModel:
         }
 
     def to_pydantic(self, name=None, description=None, model_version=None) -> "ModelSpecification":
+        """Return a Pydantic model representation of the Petri net model.
+
+        Parameters
+        ----------
+        name :
+            The name of the model. Defaults to the name of the original
+            template model that produced the input Model instance or, if not
+            available, 'Model'.
+        description :
+            A description of the model. Defaults to the description of the
+            original template model that produced the input Model instance or,
+            if not available, the name of the model.
+        model_version :
+            The version of the model. Defaults to '0.1'.
+
+        Returns
+        -------
+        :
+            A Pydantic model representation of the Petri net model.
+        """
         return ModelSpecification(
             header=Header(
                 name=name or self.model_name,
@@ -250,8 +295,19 @@ class AskeNetPetriNetModel:
             metadata=self.metadata,
         )
 
-    def to_json_str(self, **kwargs):
-        """Return a JSON string representation of the Petri net model."""
+    def to_json_str(self, **kwargs) -> str:
+        """Return a JSON string representation of the Petri net model.
+
+        Parameters
+        ----------
+        kwargs :
+            Additional keyword arguments to pass to :func:`json.dumps`.
+
+        Returns
+        -------
+        :
+            A JSON string representation of the Petri net model.
+        """
         return json.dumps(self.to_json(), **kwargs)
 
     def to_json_file(self, fname, name=None, description=None,
@@ -290,7 +346,7 @@ def template_model_to_petrinet_json(tm: TemplateModel):
     -------
     A JSON dict representing the PetriNet model.
     """
-    return AskeNetPetriNetModel(Model(tm)).to_json()
+    return AMRPetriNetModel(Model(tm)).to_json()
 
 
 class Initial(BaseModel):
@@ -389,6 +445,7 @@ class Header(BaseModel):
 
 
 class ModelSpecification(BaseModel):
+    """A Pydantic model corresponding to the PetriNet JSON schema."""
     header: Header
     properties: Optional[Dict]
     model: PetriModel

@@ -1,14 +1,16 @@
 """API endpoints."""
 
+import itertools as itt
 from typing import Any, List, Mapping, Optional, Union
 
 import pydantic
-from fastapi import APIRouter, Body, Path, Query, Request, HTTPException
+from fastapi import APIRouter, Body, HTTPException, Path, Query, Request
 from neo4j.graph import Relationship
 from pydantic import BaseModel, Field
+from scipy.spatial import distance
 from typing_extensions import Literal
 
-from mira.dkg.client import Entity, AskemEntity
+from mira.dkg.client import AskemEntity, Entity
 from mira.dkg.utils import DKG_REFINER_RELS
 
 __all__ = [
@@ -156,7 +158,6 @@ def get_transitive_closure(
     relation_types: List[str] = Query(
         ...,
         description="A list of relation types to get a transitive closure for",
-        title="This is a title",
         example=DKG_REFINER_RELS,
     ),
 ):
@@ -330,11 +331,17 @@ def get_relations(
 class IsOntChildResult(BaseModel):
     """Result of a query to /is_ontological_child"""
 
-    child_curie: str = Field(..., description="The child CURIE")
-    parent_curie: str = Field(..., description="The parent CURIE")
-    is_child: bool = Field(..., description="True if the child CURIE is an "
-                                            "ontological child of the parent "
-                                            "CURIE")
+    child_curie: str = Field(...,
+                             example="vo:0001113",
+                             description="The child CURIE")
+    parent_curie: str = Field(...,
+                              example="obi:0000047",
+                              description="The parent CURIE")
+    is_child: bool = Field(
+        ...,
+        description="True if the child CURIE is an ontological child of the "
+                    "parent CURIE"
+    )
 
 
 class IsOntChildQuery(BaseModel):
@@ -377,7 +384,7 @@ def is_ontological_child(
 )
 def search(
     request: Request,
-    q: str = Query(..., example="infect"),
+    q: str = Query(..., example="infect", description="The search query"),
     limit: int = 25,
     offset: int = 0,
     prefixes: Optional[str] = Query(
@@ -444,3 +451,70 @@ def common_parent(
     entity = request.app.state.client.get_common_parents(query.curie1,
                                                          query.curie2)
     return entity
+
+
+class Distance(BaseModel):
+    """Represents the distance between two entities."""
+
+    source: str = Field(..., title="source CURIE")
+    target: str = Field(..., title="target CURIE")
+    distance: float = Field(..., title="cosine distance")
+
+
+@api_blueprint.post(
+    "/entity_similarity", response_model=List[Distance], tags=["entities"]
+)
+def entity_similarity(
+    request: Request,
+    sources: List[str] = Body(
+        ...,
+        description="A list of CURIEs to use as sources",
+        title="source CURIEs",
+        examples=[["ido:0000511", "ido:0000592", "ido:0000597", "ido:0000514"]],
+    ),
+    targets: Optional[List[str]] = Body(
+        default=None,
+        title="target CURIEs",
+        description="If not given, source queries used for all-by-all comparison",
+        examples=[["ido:0000566", "ido:0000567"]],
+    ),
+):
+    """Get the pairwise similarities between elements referenced by CURIEs in the first list and second list."""
+    """Test locally with:
+    
+    import requests
+
+    def main():
+        curies = ["probonto:k0000000", "probonto:k0000007", "probonto:k0000008"]
+        res = requests.post(
+            "http://0.0.0.0:8771/api/entity_similarity",
+            json={"sources": curies, "targets": curies},
+        )
+        res.raise_for_status()
+        print(res.json())
+
+    if __name__ == "__main__":
+        main()    
+    """
+    vectors = request.app.state.vectors
+    if not vectors:
+        raise HTTPException(
+            status_code=500, detail="No entity vectors available"
+        )
+    if targets is None:
+        targets = sources
+    rv = []
+    for source, target in itt.product(sources, targets):
+        if source == target:
+            continue
+        source_vector = vectors.get(source)
+        if source_vector is None:
+            continue
+        target_vector = vectors.get(target)
+        if target_vector is None:
+            continue
+        cosine_distance = distance.cosine(source_vector, target_vector)
+        rv.append(
+            Distance(source=source, target=target, distance=cosine_distance)
+        )
+    return rv

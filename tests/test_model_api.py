@@ -6,7 +6,6 @@ import uuid
 from pathlib import Path
 from typing import List, Union
 
-import pytest
 import sympy
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -15,21 +14,22 @@ from mira.examples.sir import sir_parameterized, sir, \
     sir_parameterized_init, sir_init_val_norm
 from mira.dkg.model import model_blueprint, ModelComparisonResponse
 from mira.dkg.api import RelationQuery
-from mira.dkg.web_client import is_ontological_child_web, get_relations_web
+from mira.dkg.web_client import is_ontological_child_web, get_relations_web, \
+    get_entity_web
 from mira.metamodel import Concept, ControlledConversion, NaturalConversion, \
     TemplateModel, Distribution, Annotations, Time, Observable, SympyExprStr
 from mira.metamodel.ops import stratify
 from mira.metamodel.comparison import TemplateModelComparison, \
     TemplateModelDelta, RefinementClosure, ModelComparisonGraphdata
 from mira.modeling import Model
-from mira.modeling.askenet.petrinet import AskeNetPetriNetModel
+from mira.modeling.amr.petrinet import AMRPetriNetModel
 from mira.modeling.bilayer import BilayerModel
-from mira.modeling.petri import PetriNetModel, PetriNetResponse
+from mira.modeling.acsets.petri import PetriNetModel, PetriNetResponse
 from mira.modeling.viz import GraphicalModel
-from mira.sources.askenet.petrinet import template_model_from_askenet_json
+from mira.sources.amr.petrinet import template_model_from_amr_json
 from mira.sources.bilayer import template_model_from_bilayer
 from mira.sources.biomodels import get_sbml_model
-from mira.sources.petri import template_model_from_petri_json
+from mira.sources.acsets.petri import template_model_from_petri_json
 from mira.sources.sbml import template_model_from_sbml_string
 from tests import sorted_json_str, remove_all_sympy
 import requests
@@ -97,6 +97,14 @@ class MockNeo4jClient:
         )
         res = get_relations_web(relations_model=rq)
         return [r.dict(exclude_unset=True) for r in res]
+
+    @staticmethod
+    def get_entity(curie: str):
+        try:
+            res = get_entity_web(curie=curie)
+            return res.dict(exclude_unset=True)
+        except requests.exceptions.HTTPError:
+            return None
 
 
 class State:
@@ -182,7 +190,7 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(resp_json_str, tm_json_str)
 
     def test_askenet_to_template_model(self):
-        askenet_json = AskeNetPetriNetModel(Model(sir_parameterized)).to_json()
+        askenet_json = AMRPetriNetModel(Model(sir_parameterized)).to_json()
         response = self.client.post("/api/from_petrinet", json=askenet_json)
         self.assertEqual(200, response.status_code, msg=response.content)
         template_model = TemplateModel.from_json(response.json())
@@ -190,7 +198,7 @@ class TestModelApi(unittest.TestCase):
 
     @SBMLMATH_REQUIRED
     def test_askenet_to_template_model_no_sympy(self):
-        askenet_json = AskeNetPetriNetModel(Model(
+        askenet_json = AMRPetriNetModel(Model(
             sir_parameterized_init)).to_json()
         # Remove sympy expressions and leave the mathml expressions
         remove_all_sympy(askenet_json, method="pop")
@@ -202,7 +210,7 @@ class TestModelApi(unittest.TestCase):
     def test_askenet_from_template_model(self):
         response = self.client.post("/api/to_petrinet", json=json.loads(sir_parameterized.json()))
         self.assertEqual(200, response.status_code, msg=response.content)
-        template_model = template_model_from_askenet_json(response.json())
+        template_model = template_model_from_amr_json(response.json())
         self.assertIsInstance(template_model, TemplateModel)
 
     def test_stratify(self):
@@ -210,23 +218,31 @@ class TestModelApi(unittest.TestCase):
         sir_templ_model = _get_sir_templatemodel()
         key = "city"
         strata = ["geonames:5128581", "geonames:4930956"]
+        strata_name_map = {
+            "geonames:5128581": "New York City",
+            "geonames:4930956": "Boston",
+        }
         query_json = {
             "template_model": sir_templ_model.dict(),
             "key": key,
             "strata": strata,
+            "strata_name_map": strata_name_map,
         }
         response = self.client.post("/api/stratify", json=query_json)
         self.assertEqual(200, response.status_code)
         resp_json_str = sorted_json_str(response.json())
 
         strat_templ_model = stratify(
-            template_model=sir_templ_model, key=key, strata=set(strata)
+            template_model=sir_templ_model,
+            key=key,
+            strata=set(strata),
+            strata_curie_to_name=strata_name_map
         )
         strat_str = sorted_json_str(strat_templ_model.dict())
 
         self.assertEqual(strat_str, resp_json_str)
 
-        # Test directed True
+        # Test directed True, also skip the name map
         query_json = {
             "template_model": sir_templ_model.dict(),
             "key": key,
@@ -324,6 +340,7 @@ class TestModelApi(unittest.TestCase):
         )
         # This assert print a decently readable diff if it fails, but is
         # less restrictive than the string comparison below
+
         assert tm == local
         self.assertEqual(
             sorted_json_str(tm.dict()), sorted_json_str(local.dict())
@@ -502,7 +519,7 @@ class TestModelApi(unittest.TestCase):
         )
 
     def test_n_way_comparison_askenet(self):
-        # Copy all data from the askenet test, but set location context for
+        # Copy all data from the amr test, but set location context for
         # the second model
         sir_templ_model = _get_sir_templatemodel()
         sir_parameterized_ctx = TemplateModel(
@@ -533,7 +550,7 @@ class TestModelApi(unittest.TestCase):
                 template.name = f"t{idx + 1}"
             sp.time = Time(id='t')
             askenet_list.append(
-                AskeNetPetriNetModel(Model(sp)).to_json()
+                AMRPetriNetModel(Model(sp)).to_json()
             )
 
         response = self.client.post(
@@ -604,11 +621,12 @@ class TestModelApi(unittest.TestCase):
         assert tm_dimless.parameters['beta'].value == \
                old_beta * sir_init_val_norm
 
-        assert tm_dimless.initials['susceptible_population'].value == \
-               (sir_init_val_norm - 1) / sir_init_val_norm
-        assert tm_dimless.initials['infected_population'].value == \
-               1 / sir_init_val_norm
-        assert tm_dimless.initials['immune_population'].value == 0
+        assert tm_dimless.initials['susceptible_population'].expression.args[0].\
+            equals((sir_init_val_norm - 1) / sir_init_val_norm)
+
+        assert SympyExprStr(1 / sir_init_val_norm).equals(
+            SympyExprStr(float(tm_dimless.initials['infected_population'].expression.args[0])))
+        assert SympyExprStr(0).equals(tm_dimless.initials['immune_population'].expression)
 
         for initial in tm_dimless.initials.values():
             assert initial.concept.units.expression.args[0].equals(1)
@@ -620,7 +638,7 @@ class TestModelApi(unittest.TestCase):
         old_beta = sir_parameterized_init.parameters['beta'].value
 
         # transform to askenetpetrinet
-        amr_json = AskeNetPetriNetModel(Model(sir_parameterized_init)).to_json()
+        amr_json = AMRPetriNetModel(Model(sir_parameterized_init)).to_json()
 
         # Post to /api/counts_to_dimensionless_amr
         response = self.client.post(
@@ -635,7 +653,7 @@ class TestModelApi(unittest.TestCase):
 
         # transform json > amr > template model
         amr_dimless_json = response.json()
-        tm_dimless = template_model_from_askenet_json(amr_dimless_json)
+        tm_dimless = template_model_from_amr_json(amr_dimless_json)
 
         for template in tm_dimless.templates:
             for concept in template.get_concepts():
@@ -646,19 +664,20 @@ class TestModelApi(unittest.TestCase):
             1 / sympy.Symbol('day'))
         assert tm_dimless.parameters['beta'].value == old_beta * norm
 
-        assert tm_dimless.initials['susceptible_population'].value \
-               == (norm - 1) / norm
-        assert tm_dimless.initials['infected_population'].value == 1 / norm
-        assert tm_dimless.initials['immune_population'].value == 0
+        # These assertion statements work when the equal method is called by the created SympyExprStr object but not
+        # fails to evaluate when the expression from the template model calls the equal method
+        assert SympyExprStr((norm - 1) / norm).equals(tm_dimless.initials['susceptible_population'].expression)
+        assert SympyExprStr(1 / norm).equals(tm_dimless.initials['infected_population'].expression)
+        assert SympyExprStr(0).equals(tm_dimless.initials['immune_population'].expression)
 
         for initial in tm_dimless.initials.values():
             assert initial.concept.units.expression.args[0].equals(1)
 
     def test_reconstruct_ode_semantics_endpoint(self):
         # Load test file
-        from mira.sources.askenet.flux_span import test_file_path, \
+        from mira.sources.amr.flux_span import test_file_path, \
             docker_test_file_path
-        from mira.sources.askenet.petrinet import template_model_from_askenet_json
+        from mira.sources.amr.petrinet import template_model_from_amr_json
         path = test_file_path if test_file_path.exists() else \
             docker_test_file_path
 
@@ -670,7 +689,7 @@ class TestModelApi(unittest.TestCase):
         self.assertEqual(200, response.status_code)
 
         flux_span_amr_json = response.json()
-        flux_span_tm = template_model_from_askenet_json(flux_span_amr_json)
+        flux_span_tm = template_model_from_amr_json(flux_span_amr_json)
         assert len(flux_span_tm.templates) == 10
         assert len(flux_span_tm.parameters) == 11
         assert all(t.rate_law for t in flux_span_tm.templates)

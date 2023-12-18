@@ -1,4 +1,7 @@
-__all__ = ["model_from_url", "model_from_json_file", "template_model_from_askenet_json"]
+"""This module implements parsing RegNet models defined in
+https://github.com/DARPA-ASKEM/Model-Representations/tree/main/regnet.
+"""
+__all__ = ["model_from_url", "model_from_json_file", "template_model_from_amr_json"]
 
 
 import json
@@ -24,7 +27,7 @@ def model_from_url(url: str) -> TemplateModel:
     """
     res = requests.get(url)
     model_json = res.json()
-    return template_model_from_askenet_json(model_json)
+    return template_model_from_amr_json(model_json)
 
 
 def model_from_json_file(fname: str) -> TemplateModel:
@@ -42,10 +45,10 @@ def model_from_json_file(fname: str) -> TemplateModel:
     """
     with open(fname) as f:
         model_json = json.load(f)
-    return template_model_from_askenet_json(model_json)
+    return template_model_from_amr_json(model_json)
 
 
-def template_model_from_askenet_json(model_json) -> TemplateModel:
+def template_model_from_amr_json(model_json) -> TemplateModel:
     """Return a model from a JSON object.
 
     Parameters
@@ -82,20 +85,17 @@ def template_model_from_askenet_json(model_json) -> TemplateModel:
 
     # Next we process initial conditions
     initials = {}
-    for state in model.get('states', []):
-        initial_expression = state.get('initial')
+    for vertex in model.get('vertices', []):
+        initial_expression = vertex.get('initial')
         if isinstance(initial_expression, str):
             initial_sympy = safe_parse_expr(initial_expression,
                                             local_dict=symbols)
-            initial_sympy = initial_sympy.subs(param_values)
-            try:
-                initial_val = float(initial_sympy)
-            except TypeError:
-                continue
         elif isinstance(initial_expression, (int, float)):
-            initial_val = float(initial_expression)
-        initial = Initial(concept=concepts[state['id']],
-                          value=initial_val)
+            initial_sympy = sympy.sympify(initial_expression)
+        else:
+            continue
+        initial = Initial(concept=concepts[vertex['id']],
+                          expression=initial_sympy)
         initials[initial.concept.name] = initial
 
     # Now we iterate over all the transitions and build templates
