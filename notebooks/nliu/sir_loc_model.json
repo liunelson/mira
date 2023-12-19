@@ -1,9 +1,11 @@
 {
- "name": "SIR model from MIRA, 2-location stratified with MIRA",
- "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.5/petrinet/petrinet_schema.json",
- "schema_name": "petrinet",
- "description": "SIR model from MIRA, 2-location stratified with MIRA",
- "model_version": "0.1",
+ "header": {
+  "name": "SIR model from MIRA, 2-location stratified with MIRA",
+  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+  "schema_name": "petrinet",
+  "description": "SIR model from MIRA, 2-location stratified with MIRA",
+  "model_version": "0.1"
+ },
  "properties": {},
  "model": {
   "states": [
@@ -288,33 +290,33 @@
    "initials": [
     {
      "target": "S_MTL",
-     "expression": "499.500000000000",
+     "expression": "499.5",
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
      "target": "I_MTL",
-     "expression": "0.500000000000000",
+     "expression": "0.5",
      "expression_mathml": "<cn>0.5</cn>"
     },
     {
      "target": "S_TOR",
-     "expression": "499.500000000000",
+     "expression": "499.5",
      "expression_mathml": "<cn>499.5</cn>"
     },
     {
      "target": "I_TOR",
-     "expression": "0.500000000000000",
+     "expression": "0.5",
      "expression_mathml": "<cn>0.5</cn>"
     },
     {
      "target": "R_MTL",
-     "expression": "0.0",
-     "expression_mathml": "<cn>0.0</cn>"
+     "expression": "0",
+     "expression_mathml": "<cn>0</cn>"
     },
     {
      "target": "R_TOR",
-     "expression": "0.0",
-     "expression_mathml": "<cn>0.0</cn>"
+     "expression": "0",
+     "expression_mathml": "<cn>0</cn>"
     }
    ],
    "parameters": [

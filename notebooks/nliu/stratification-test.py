@@ -19,7 +19,8 @@ from mira.metamodel import *
 # from mira.metamodel import ControlledConversion, NaturalConversion, Concept, Template, TemplateModel
 from mira.modeling import Model
 # from mira.modeling.viz import GraphicalModel
-from mira.modeling.askenet.petrinet import AskeNetPetriNetModel
+# from mira.modeling.AMR.petrinet import AMRPetriNetModel
+from mira.modeling.amr.petrinet import AMRPetriNetModel
 
 import requests
 from PIL import Image
@@ -62,9 +63,9 @@ parameters = {
 
 # Initial conditions
 initials = {
-    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1),
-    'I': Initial(concept = Concept(name = 'I'), value = 1),
-    'R': Initial(concept = Concept(name = 'R'), value = 0)
+    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1, expression = sympy.Float(1_000 - 1)),
+    'I': Initial(concept = Concept(name = 'I'), value = 1, expression = sympy.Float(1)),
+    'R': Initial(concept = Concept(name = 'R'), value = 0, expression = sympy.Float(0))
 }
 
 # Symbols
@@ -111,7 +112,7 @@ sir_model = TemplateModel(
 viz_mmt(sir_model, 'sir_model.png')
 
 # Generate AMR JSON
-AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
+AMRPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
 
 # %%
 # Build SIR model from the "incorrect" templates
@@ -128,7 +129,7 @@ sir_model_incorrect = TemplateModel(
 viz_mmt(sir_model_incorrect, 'sir_model_incorrect.png')
 
 # Generate AMR JSON
-AskeNetPetriNetModel(Model(sir_model_incorrect)).to_json_file('sir_model_incorrect.json')
+AMRPetriNetModel(Model(sir_model_incorrect)).to_json_file('sir_model_incorrect.json')
 
 # %%
 # Do stratification with 2 age groups
@@ -148,7 +149,7 @@ sir_2age_model.annotations.name = 'SIR model + stratified by 2 age groups'
 
 viz_mmt(sir_2age_model, 'sir_2age_model.png')
 
-AskeNetPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
+AMRPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
 
 # %%
 # Repeat with "incorrect" model
@@ -168,12 +169,12 @@ sir_2age_model_incorrect.annotations.name = 'Incorrect SIR model + stratified by
 
 viz_mmt(sir_2age_model_incorrect, 'sir_2age_model_incorrect.png')
 
-AskeNetPetriNetModel(Model(sir_2age_model_incorrect)).to_json_file('sir_2age_model_incorrect.json')
+AMRPetriNetModel(Model(sir_2age_model_incorrect)).to_json_file('sir_2age_model_incorrect.json')
 
 # %%
 # Compare the resulting ODE systems
 
-sir_2age_model_amr = AskeNetPetriNetModel(Model(sir_2age_model)).to_json()
+sir_2age_model_amr = AMRPetriNetModel(Model(sir_2age_model)).to_json()
 __ = [
     print(f'{rate["target"]}: {rate["expression"].replace("*", " ")}') 
     for rate in sir_2age_model_amr["semantics"]["ode"]["rates"]
@@ -181,7 +182,7 @@ __ = [
 
 print("\n")
 
-sir_2age_model_incorrect_amr = AskeNetPetriNetModel(Model(sir_2age_model_incorrect)).to_json()
+sir_2age_model_incorrect_amr = AMRPetriNetModel(Model(sir_2age_model_incorrect)).to_json()
 __ = [
     print(f'{rate["target"]}: {rate["expression"].replace("*", " ")}') 
     for rate in sir_2age_model_incorrect_amr["semantics"]["ode"]["rates"]
@@ -219,7 +220,7 @@ sir_2age_model.annotations.name = 'SIR model + stratified by 2 age groups'
 
 viz_mmt(sir_2age_model, 'sir_2age_model.png')
 
-# AskeNetPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
+# AMRPetriNetModel(Model(sir_2age_model)).to_json_file('sir_2age_model.json')
 
 # Repeat with "incorrect" model
 sir_2age_model_incorrect = stratify(
@@ -237,11 +238,11 @@ sir_2age_model_incorrect.annotations.name = 'Incorrect SIR model + stratified by
 
 viz_mmt(sir_2age_model_incorrect, 'sir_2age_model_incorrect.png')
 
-# AskeNetPetriNetModel(Model(sir_2age_model_incorrect)).to_json_file('sir_2age_model_incorrect.json')
+# AMRPetriNetModel(Model(sir_2age_model_incorrect)).to_json_file('sir_2age_model_incorrect.json')
 
 
 # Compare the resulting ODE systems
-sir_2age_model_amr = AskeNetPetriNetModel(Model(sir_2age_model)).to_json()
+sir_2age_model_amr = AMRPetriNetModel(Model(sir_2age_model)).to_json()
 __ = [
     print(f'{rate["target"]}: {rate["expression"].replace("*", " ")}') 
     for rate in sir_2age_model_amr["semantics"]["ode"]["rates"]
@@ -249,7 +250,7 @@ __ = [
 
 print("\n")
 
-sir_2age_model_incorrect_amr = AskeNetPetriNetModel(Model(sir_2age_model_incorrect)).to_json()
+sir_2age_model_incorrect_amr = AMRPetriNetModel(Model(sir_2age_model_incorrect)).to_json()
 __ = [
     print(f'{rate["target"]}: {rate["expression"].replace("*", " ")}') 
     for rate in sir_2age_model_incorrect_amr["semantics"]["ode"]["rates"]

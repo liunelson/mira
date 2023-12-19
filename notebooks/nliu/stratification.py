@@ -10,7 +10,8 @@ from mira.metamodel import *
 # from mira.metamodel import ControlledConversion, NaturalConversion, Concept, Template, TemplateModel
 from mira.modeling import Model
 # from mira.modeling.viz import GraphicalModel
-from mira.modeling.askenet.petrinet import AskeNetPetriNetModel
+# from mira.modeling.askenet.petrinet import AskeNetPetriNetModel
+from mira.modeling.amr.petrinet import AMRPetriNetModel
 
 # %%
 # Units
@@ -35,9 +36,9 @@ parameters = {
 
 # Initial conditions
 initials = {
-    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1),
-    'I': Initial(concept = Concept(name = 'I'), value = 1),
-    'R': Initial(concept = Concept(name = 'R'), value = 0),
+    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1, expression = sympy.Float(1_000 - 1)),
+    'I': Initial(concept = Concept(name = 'I'), value = 1, expression = sympy.Float(1)),
+    'R': Initial(concept = Concept(name = 'R'), value = 0, expression = sympy.Float(0))
 }
 
 # Symbols
@@ -75,7 +76,7 @@ sir_model = TemplateModel(
 )
 
 # Generate AMR JSON
-AskeNetPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
+AMRPetriNetModel(Model(sir_model)).to_json_file('sir_model.json')
 
 # %%
 # Do stratification with 2 locations
@@ -93,6 +94,6 @@ sir_loc_model = stratify(
 
 sir_loc_model.annotations.name = 'SIR model from MIRA, 2-location stratified with MIRA'
 
-AskeNetPetriNetModel(Model(sir_loc_model)).to_json_file('sir_loc_model.json')
+AMRPetriNetModel(Model(sir_loc_model)).to_json_file('sir_loc_model.json')
 
 # %%

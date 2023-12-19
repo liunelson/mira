@@ -18,7 +18,7 @@ import itertools
 from mira.metamodel import *
 from mira.modeling import Model
 # from mira.modeling.viz import GraphicalModel
-from mira.modeling.askenet.petrinet import AskeNetPetriNetModel
+from mira.modeling.askenet.petrinet import AMRPetriNetModel
 
 import requests
 from PIL import Image
@@ -64,10 +64,10 @@ parameters = {
 
 # Initial conditions
 initials = {
-    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1),
-    'I': Initial(concept = Concept(name = 'I'), value = 1),
-    'R': Initial(concept = Concept(name = 'R'), value = 0),
-    'D': Initial(concept = Concept(name = 'D'), value = 0)
+    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1, expression = sympy.Float(1_000 - 1)),
+    'I': Initial(concept = Concept(name = 'I'), value = 1, expression = sympy.Float(1)),
+    'R': Initial(concept = Concept(name = 'R'), value = 0, expression = sympy.Float(0)),
+    'D': Initial(concept = Concept(name = 'D'), value = 0, expression = sympy.Float(0)),
 }
 
 # Symbols
@@ -114,7 +114,7 @@ model = TemplateModel(
 viz_mmt(model, 'sird_model.png')
 
 # Generate AMR JSON
-AskeNetPetriNetModel(Model(model)).to_json_file('sird_model.json')
+AMRPetriNetModel(Model(model)).to_json_file('sird_model.json')
 
 # %%
 # Stratify with 2 strata
@@ -136,7 +136,7 @@ model_stratified.annotations.name = 'SIRD model stratified by 2 age groups'
 
 viz_mmt(model_stratified, 'sird_stratified_model.png')
 
-AskeNetPetriNetModel(Model(model_stratified)).to_json_file('sird_stratified_model.json')
+AMRPetriNetModel(Model(model_stratified)).to_json_file('sird_stratified_model.json')
 
 # %%
 # New rate laws
