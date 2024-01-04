@@ -36,9 +36,9 @@ parameters = {
 
 # Initial conditions
 initials = {
-    'S': Initial(concept = Concept(name = 'S'), value = 1_000 - 1, expression = sympy.Float(1_000 - 1)),
-    'I': Initial(concept = Concept(name = 'I'), value = 1, expression = sympy.Float(1)),
-    'R': Initial(concept = Concept(name = 'R'), value = 0, expression = sympy.Float(0))
+    'S': Initial(concept = Concept(name = 'S'), expression = sympy.Float(1_000 - 1)),
+    'I': Initial(concept = Concept(name = 'I'), expression = sympy.Float(1)),
+    'R': Initial(concept = Concept(name = 'R'), expression = sympy.Float(0))
 }
 
 # Symbols
