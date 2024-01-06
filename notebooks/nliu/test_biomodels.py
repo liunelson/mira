@@ -21,14 +21,14 @@ from mira.sources.sbml import template_model_from_sbml_file
 # from mira.sources.biomodels import query_biomodels, get_template_model
 
 # %%
-PATH = "data/biomodels_sbml_popmodel" # 25/25
-# PATH = "data/biomodels_sbml_ode" # 61/100
-# PATH = "data/biomodels_sbml_constraint" # 0
-# PATH = "data/biomodels_sbml_pn" # 0
-# PATH = "data/biomodels_sbml_phys" # 6/8
-# PATH = "data/biomodels_sbml_meta" # 3/10
-# PATH = "data/biomodels_sbml_ppint" # 1/1
-# PATH = "data/biomodels_sbml_math" # 7/8
+PATH = "data/biomodels/biomodels_sbml_popmodel" # 25/25
+# PATH = "data/biomodels/biomodels_sbml_ode" # 61/100
+# PATH = "data/biomodels/biomodels_sbml_constraint" # 0
+# PATH = "data/biomodels/biomodels_sbml_pn" # 0
+# PATH = "data/biomodels/biomodels_sbml_phys" # 6/8
+# PATH = "data/biomodels/biomodels_sbml_meta" # 3/10
+# PATH = "data/biomodels/biomodels_sbml_ppint" # 1/1
+# PATH = "data/biomodels/biomodels_sbml_math" # 7/8
 
 fnames = glob.glob(os.path.join(PATH, "*.*ml"))
 
