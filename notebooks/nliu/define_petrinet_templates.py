@@ -25,7 +25,6 @@ import sympy as sp
 import tqdm
 
 from mira.metamodel import *
-from mira.metamodel import expression_to_mathml
 from mira.modeling import Model
 from mira.modeling.amr.petrinet import AMRPetriNetModel
 
