@@ -71,6 +71,8 @@ models["NaturalConversion"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "NaturalConversionTemplateModel")
 )
+models["NaturalConversion"].parameters.update({"p": parameters["p"]})
+
 
 models["NaturalProduction"] = TemplateModel(
     templates = [NaturalProduction(
@@ -84,6 +86,8 @@ models["NaturalProduction"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "NaturalProductionTemplateModel")
 )
+models["NaturalProduction"].parameters.update({"p": parameters["p"]})
+
 
 models["NaturalDegradation"] = TemplateModel(
     templates = [NaturalDegradation(
@@ -97,6 +101,8 @@ models["NaturalDegradation"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "NaturalDegradationTemplateModel")
 )
+models["NaturalDegradation"].parameters.update({"p": parameters["p"]})
+
 
 models["ControlledConversion"] = TemplateModel(
     templates = [ControlledConversion(
@@ -112,6 +118,8 @@ models["ControlledConversion"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "ControlledConversionTemplateModel")
 )
+models["ControlledConversion"].parameters.update({"p": parameters["p"]})
+
 
 models["ControlledProduction"] = TemplateModel(
     templates = [ControlledProduction(
@@ -126,6 +134,8 @@ models["ControlledProduction"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "ControlledProductionTemplateModel")
 )
+models["ControlledProduction"].parameters.update({"p": parameters["p"]})
+
 
 models["ControlledDegradation"] = TemplateModel(
     templates = [ControlledDegradation(
@@ -140,6 +150,8 @@ models["ControlledDegradation"] = TemplateModel(
     time = time,
     annotations = Annotations(name = "ControlledDegradationTemplateModel")
 )
+models["ControlledDegradation"].parameters.update({"p": parameters["p"]})
+
 
 models["Observable"] = TemplateModel(
     templates = [],
