@@ -65,14 +65,12 @@ models["NaturalConversion"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p * A * B"),
         name = "NaturalConversion"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"], "B": initials["B"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"], "B": initials["B"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "NaturalConversionTemplateModel")
 )
-models["NaturalConversion"].parameters.update({"p": parameters["p"]})
-
 
 models["NaturalProduction"] = TemplateModel(
     templates = [NaturalProduction(
@@ -80,13 +78,12 @@ models["NaturalProduction"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p"),
         name = "NaturalProduction"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "NaturalProductionTemplateModel")
 )
-models["NaturalProduction"].parameters.update({"p": parameters["p"]})
 
 
 models["NaturalDegradation"] = TemplateModel(
@@ -95,13 +92,12 @@ models["NaturalDegradation"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p * A"),
         name = "NaturalDegradation"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "NaturalDegradationTemplateModel")
 )
-models["NaturalDegradation"].parameters.update({"p": parameters["p"]})
 
 
 models["ControlledConversion"] = TemplateModel(
@@ -112,13 +108,12 @@ models["ControlledConversion"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p * A * B"),
         name = "ControlledConversion"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"], "B": initials["B"], "C": initials["C"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"], "B": initials["B"], "C": initials["C"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "ControlledConversionTemplateModel")
 )
-models["ControlledConversion"].parameters.update({"p": parameters["p"]})
 
 
 models["ControlledProduction"] = TemplateModel(
@@ -128,14 +123,12 @@ models["ControlledProduction"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p * C"),
         name = "ControlledProduction"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"], "C": initials["C"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"], "C": initials["C"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "ControlledProductionTemplateModel")
 )
-models["ControlledProduction"].parameters.update({"p": parameters["p"]})
-
 
 models["ControlledDegradation"] = TemplateModel(
     templates = [ControlledDegradation(
@@ -144,24 +137,23 @@ models["ControlledDegradation"] = TemplateModel(
         rate_law = sp.parsing.sympy_parser.parse_expr("p * A * C"),
         name = "ControlledDegradation"
     )],
-    parameter_mapping = {"p": parameters["p"]},
-    initial_mapping = {"A": initials["A"], "C": initials["C"]},
+    parameters = {"p": parameters["p"]},
+    initials = {"A": initials["A"], "C": initials["C"]},
     observables = {},
     time = time,
     annotations = Annotations(name = "ControlledDegradationTemplateModel")
 )
-models["ControlledDegradation"].parameters.update({"p": parameters["p"]})
 
 
 models["Observable"] = TemplateModel(
     templates = [],
-    parameter_mapping = None,
-    initial_mapping = None,
+    parameters = {},
+    initials = {},
     observables = {"O": observables["O"]},
     annotations = Annotations(name = "ObservableTemplateModel")
 )
 
-
+# %%
 # Save as AMR JSON
 for k, tm in tqdm.tqdm(models.items()):
     with open(os.path.join(PATH, f"{k}.json"), "w") as f:
