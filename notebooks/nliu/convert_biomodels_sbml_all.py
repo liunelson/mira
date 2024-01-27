@@ -127,18 +127,38 @@ with open(os.path.join(PATH, "model_data_oa.json"), "w") as f:
 # %%
 # Download publication PDF if open access URL is available
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+}
+
 num_pdf = 0
+pdf_fail = []
 for m in tqdm.tqdm(models.keys()):
+
     url = models[m]["publication_link_oa"]
-    if len(url) > 0:
-        r = requests.get(url)
-        if r.ok:
-            num_pdf += 1
-            p = os.path.join(PATH, m, f"{m}.pdf")
-            if ~os.path.isfile(p):
-                with open(p, "wb") as f:
-                    f.write(r.content)
+    fp = os.path.join(PATH, m, f"{m}.pdf")
+
+    if len(url) == 0:
+        continue
+
+    if os.path.isfile(fp):
+        continue
+
+    try:
+        r = requests.get(url, headers = headers)
+        if ~r.ok:
+            continue
+
+        num_pdf += 1
+        with open(fp, "wb") as f:
+            f.write(r.content)
+    
+    except:
+        pdf_fail.append(m)
 
 print(f"Number of publication PDF downloaded: {num_pdf / len(models) * 100} % of models")
+
+# Failed: 'MODEL2003050002', 'BIOMD0000000904'
 
 # %%
