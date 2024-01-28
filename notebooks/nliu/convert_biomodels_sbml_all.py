@@ -30,7 +30,9 @@ URL_OA = "https://api.openaccessbutton.org"
 # %%
 # Load all model metadata
 models = {}
-with open(os.path.join(PATH, "model_data.json"), "r") as f:
+# fp = "model_data.json"
+fp = "model_data_oa.json"
+with open(os.path.join(PATH, fp), "r") as f:
     models = json.load(f)
 
 # %%
@@ -160,5 +162,37 @@ for m in tqdm.tqdm(models.keys()):
 print(f"Number of publication PDF downloaded: {num_pdf / len(models) * 100} % of models")
 
 # Failed: 'MODEL2003050002', 'BIOMD0000000904'
+
+# %%
+# Stats
+
+num = {k: 0 for k in ["models", "xml", "json", "pub", "oa", "pdf"]}
+for m in tqdm.tqdm(models.keys()):
+    for k in num.keys():
+
+        if k == "models":
+            num[k] += 1
+
+        if (k == "pub") & (len(models[m]["publication_link"]) > 0):
+            num[k] += 1
+
+        if (k == "oa") & (len(models[m]["publication_link_oa"]) > 0):
+            num[k] += 1
+
+        fp = os.path.join(PATH, m, f"{m}.{k}")
+        if os.path.isfile(fp):
+            num[k] += 1
+
+
+print(f"Number of models:\t\t{num['models']}")
+print(f"\twith SBML:\t\t{num['xml'] / num['models'] * 100:.1f}%")
+print(f"\tconvertable to AMR:\t{num['json'] / num['models'] * 100:.1f}%")
+print(f"\twith PDF link:\t\t{num['pub'] / num['models'] * 100:.1f}%")
+print(f"\twith OA PDF link:\t{num['oa'] / num['models'] * 100:.1f}%")
+print(f"\twith downloaded PDF:\t{num['pdf'] / num['models'] * 100:.1f}%")
+
+# %%
+# models with OA PDF link but no downloaded PDF
+x = [m for m in models if (len(models[m]["publication_link_oa"]) > 0) & (~os.path.isfile(os.path.join(PATH, m, f"{m}.pdf")))]
 
 # %%
