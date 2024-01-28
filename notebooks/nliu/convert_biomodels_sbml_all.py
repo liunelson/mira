@@ -134,6 +134,7 @@ headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
 }
 
+# %%
 num_pdf = 0
 pdf_fail = []
 for m in tqdm.tqdm(models.keys()):
@@ -196,3 +197,6 @@ print(f"\twith downloaded PDF:\t{num['pdf'] / num['models'] * 100:.1f}%")
 x = [m for m in models if (len(models[m]["publication_link_oa"]) > 0) & (~os.path.isfile(os.path.join(PATH, m, f"{m}.pdf")))]
 
 # %%
+
+
+
