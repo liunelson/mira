@@ -30,6 +30,7 @@ import json
 import sympy as sp
 import tqdm
 from typing import Optional
+import copy
 
 from mira.metamodel import *
 from mira.metamodel import expression_to_mathml
@@ -101,7 +102,7 @@ sir_tm = TemplateModel(
 
 sir_json = AMRPetriNetModel(Model(sir_tm)).to_json()
 
-
+# %%
 # Save as AMR JSON
 with open(os.path.join(PATH, "sir.json"), "w") as f:
     json.dump(sir_json, f, indent = 4)
@@ -123,21 +124,47 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
         model_json = json.load(f)
         model_tm = template_model_from_amr_json(model_json)
 
+    # # Define set of global variables/concepts by localizing unique variables
+    # vars = [v for t in model_tm.templates for v in t.get_concept_names()]
+    # vars_common = {v: v for v in set(vars) if vars.count(v) > 1}
+    # vars_local = {v: f"{t.name}{i}.{v}" for i, t in enumerate(model_tm.templates) for v in t.get_concept_names() if v not in vars_common.keys()}
+    # vars_global = vars_common | vars_local
+    # vars_concepts_global = {vars_global[vname]: copy.deepcopy(v) for vname, v in model_tm.get_concepts_name_map().items()}
+    # for vname, v in vars_concepts_global.items():
+    #     v.name = vname
+
+    # # Define set of global initials by localizing unique initials
+    # inits_concepts_global = {iname: copy.deepcopy(init) for iname, init in model_tm.initials.items()}
+    # for iname, init in inits_concepts_global.items():
+    #     init.concept.name = vars_global[init.concept.name]
+
+    # # Define set of global parameters by localizing unique parameters
+    # params = [p for t in model_tm.templates for p in t.get_parameter_names()]
+    # params_common = {p: p for p in set(params) if params.count(p) > 1}
+    # params_local = {p: f"{t.name}{i}.{p}" for i, t in enumerate(model_tm.templates) for p in t.get_parameter_names() if p not in params_common}
+    # params_global = params_common | params_local
+    # params_concepts_global = {params_global[pname]: copy.deepcopy(p) for pname, p in model_tm.parameters.items()}
+    # for pname, p in params_concepts_global.items():
+    #     p.name = pname
+
+
     # Define a new MIRA TemplateModel for each template in the model
     templates_tm = []
     templates_json = []
-    for t in model_tm.templates:
+    for i, __ in enumerate(model_tm.templates):
 
-        initials = {c.name: model_tm.initials[c.name] for c in t.get_concepts()}
-        parameters = {p: model_tm.parameters[p] for p in t.get_parameter_names()}
-
+        t = copy.deepcopy(model_tm.templates[i])
+        
         tm = TemplateModel(
             templates = [t],
-            parameters = parameters,
-            initials = {c.name: model_tm.initials[c.name] for c in t.get_concepts()},
+            # parameters = {params_global[p]: params_concepts_global[params_global[p]] for p in t.get_parameter_names()},
+            # initials = {vars_global[c.name]: inits_concepts_global[c.name] for c in t.get_concepts()},
+            # annotations = Annotations(name = f"{t.name}{i}")
+            parameters = {p: sir_tm.parameters[p] for p in t.get_parameter_names()},
+            initials = {v: sir_tm.initials[v] for v in t.get_concept_names()},
+            annotations = Annotations(name = f"{t.name}"),
             observables = {},
-            time = model_tm.time,
-            annotations = Annotations(name = t.name)
+            time = model_tm.time
         )
         templates_tm.append(tm)
         templates_json.append(AMRPetriNetModel(Model(tm)).to_json())
@@ -171,11 +198,11 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
             with open(os.path.join(p, f"{name}.json"), "w") as f:
                 json.dump(j, f, indent = 4)
 
-    return model_json, templates_json
+    return model_json, templates_json, templates_tm
 
 # %%
 p = os.path.join(PATH, "sir.json")
-sir_json, sir_templates_json = convert_model_into_templates(p, save = True)
+sir_json, sir_templates_json, sir_templates_tm = convert_model_into_templates(p, save = True)
 
 # %%[markdown]
 # ## Convert a set of templates into a flat model
