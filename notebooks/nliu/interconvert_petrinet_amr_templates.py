@@ -112,17 +112,21 @@ with open(os.path.join(PATH, "sir.json"), "w") as f:
 
 # %%
 # Convert a model into a set of templates
-def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = True) -> tuple[dict, list[dict]]:
+def convert_model_into_templates(model_amr: dict = None, model_amr_path: str = None, save: Optional[bool] = True) -> tuple[dict, list[dict]]:
 
     """
     Convert a model in AMR repr into a list of models in AMR 
     that have only 1 MIRA TemplateModel inside.
     """
 
+    if model_amr != None:
+        model_tm = template_model_from_amr_json(model_amr)
+
     # Load model AMR as MIRA TemplateModel
-    with open(model_amr_path, "r") as f:
-        model_json = json.load(f)
-        model_tm = template_model_from_amr_json(model_json)
+    if (model_amr == None) & (model_amr_path != None):
+        with open(model_amr_path, "r") as f:
+            model_amr = json.load(f)
+            model_tm = template_model_from_amr_json(model_amr)
 
     # # Define set of global variables/concepts by localizing unique variables
     # vars = [v for t in model_tm.templates for v in t.get_concept_names()]
@@ -150,7 +154,7 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
 
     # Define a new MIRA TemplateModel for each template in the model
     templates_tm = []
-    templates_json = []
+    templates_amr = []
     for i, __ in enumerate(model_tm.templates):
 
         t = copy.deepcopy(model_tm.templates[i])
@@ -160,14 +164,14 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
             # parameters = {params_global[p]: params_concepts_global[params_global[p]] for p in t.get_parameter_names()},
             # initials = {vars_global[c.name]: inits_concepts_global[c.name] for c in t.get_concepts()},
             # annotations = Annotations(name = f"{t.name}{i}")
-            parameters = {p: sir_tm.parameters[p] for p in t.get_parameter_names()},
-            initials = {v: sir_tm.initials[v] for v in t.get_concept_names()},
+            parameters = {p: model_tm.parameters[p] for p in t.get_parameter_names()},
+            initials = {v: model_tm.initials[v] for v in t.get_concept_names()},
             annotations = Annotations(name = f"{t.name}"),
             observables = {},
             time = model_tm.time
         )
         templates_tm.append(tm)
-        templates_json.append(AMRPetriNetModel(Model(tm)).to_json())
+        templates_amr.append(AMRPetriNetModel(Model(tm)).to_json())
 
     # Define a new MIRA TemplateModel for each observable in the model
     # concepts = model_tm.get_concepts_name_map()
@@ -183,7 +187,7 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
             annotations = Annotations(name = obs_name)
         )
         templates_tm.append(tm)
-        templates_json.append(AMRPetriNetModel(Model(tm)).to_json())
+        templates_amr.append(AMRPetriNetModel(Model(tm)).to_json())
 
     # Save templates as AMR
     if save == True:
@@ -193,16 +197,16 @@ def convert_model_into_templates(model_amr_path: str, save: Optional[bool] = Tru
         if not os.path.exists(p):
             os.makedirs(p)
 
-        for j in templates_json:
+        for j in templates_amr:
             name = j["header"]["name"]
             with open(os.path.join(p, f"{name}.json"), "w") as f:
                 json.dump(j, f, indent = 4)
 
-    return model_json, templates_json, templates_tm
+    return model_amr, templates_amr, templates_tm
 
 # %%
 p = os.path.join(PATH, "sir.json")
-sir_json, sir_templates_json, sir_templates_tm = convert_model_into_templates(p, save = True)
+sir_json, sir_templates_amr, sir_templates_tm = convert_model_into_templates(p, save = True)
 
 # %%[markdown]
 # ## Convert a set of templates into a flat model
@@ -216,13 +220,13 @@ def convert_templates_into_model(templates_amr_path: str, save: Optional[bool]) 
     """
     
     # Load the list of templates in AMR repr as MIRA TemplateModel
-    templates_json = []
+    templates_amr = []
     templates_tm = []
     fnames = glob.glob(os.path.join(templates_amr_path, "*.json"))
     for fname in fnames:
         with open(fname, "r") as f:
             j = json.load(f)
-            templates_json.append(j)
+            templates_amr.append(j)
             templates_tm.append(template_model_from_amr_json(j))
 
     # Define a new model from the union of all templates and observables in TemplateModel list
