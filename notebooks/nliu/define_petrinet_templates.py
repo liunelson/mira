@@ -62,7 +62,7 @@ models["NaturalConversion"] = TemplateModel(
     templates = [NaturalConversion(
         subject = concepts["A"],
         outcome = concepts["B"],
-        rate_law = sp.parsing.sympy_parser.parse_expr("p * A * B"),
+        rate_law = sp.parsing.sympy_parser.parse_expr("p * A"),
         name = "NaturalConversion"
     )],
     parameters = {"p": parameters["p"]},

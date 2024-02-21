@@ -27,7 +27,7 @@
 import os
 import glob
 import json
-import sympy as sp
+import sympy
 import tqdm
 from typing import Optional
 import copy
@@ -44,10 +44,10 @@ PATH = "data/sir_templates_example"
 # %%
 # Define common objects
 
-S, I, R, b, g, N = sp.symbols('S I R b g N')
+S, I, R, b, g, N = sympy.symbols('S I R b g N')
 
-day_units = lambda: Unit(expression = sp.Symbol("day"))
-per_day_units = lambda: Unit(expression = 1 / sp.Symbol("day"))
+day_units = lambda: Unit(expression = sympy.Symbol("day"))
+per_day_units = lambda: Unit(expression = 1 / sympy.Symbol("day"))
 
 concepts = {
     "S": Concept(name = "S", units = None, description = "SusceptiblePopulationVariable"),
@@ -56,7 +56,7 @@ concepts = {
 }
 
 initials = {
-    c: Initial(concept = concepts[c], expression = sp.Float(1)) for c in concepts.keys()
+    c: Initial(concept = concepts[c], expression = sympy.Float(1)) for c in concepts.keys()
 }
 
 parameters = {
@@ -272,3 +272,4 @@ def remove_template(tm: TemplateModel, tnames: list = []) -> TemplateModel:
     return tm_new
 
 # %%
+

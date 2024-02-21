@@ -4,29 +4,86 @@
 # Email: [nliu@uncharted.software](mailto:nliu@uncharted.software)
 
 # %%[markdown]
-# # Define AMR of Template Models for PetriNet Framework
+# # Test MIRA Import and Export of StockFlow Models
 # 
-# We define template models as the "basis vectors" of the PetriNet framework: 
-# any PetriNet model should be a linear combination of such template models. 
+# MIRA supports ingestion of StockFlow models in the Vensim MDL and Stella XMILE file formats.
+# * [https://github.com/liunelson/mira/tree/nliu/experiment/mira/sources/system_dynamics](https://github.com/liunelson/mira/tree/nliu/experiment/mira/sources/system_dynamics)
+# * [https://github.com/liunelson/mira/blob/nliu/experiment/mira/modeling/amr/stockflow.py](https://github.com/liunelson/mira/blob/nliu/experiment/mira/modeling/amr/stockflow.py)
 # 
-# Per the [MIRA package](https://github.com/gyorilab/mira/blob/main/mira/metamodel/templates.py):
-# 1. natural conversion
-# 2. natural production
-# 3. natural degradation
-# 4. controlled conversion
-# 5. controlled production
-# 6. controlled degradation
-# 7. observable (not originally in MIRA)
+# We get example models from the 
+# * [SDXorg repository](https://exchange.iseesystems.com/directory/isee)
+# * [ISEE Exchange repository](https://exchange.iseesystems.com/directory/isee)
+
 
 # %%
 import os
+import glob
 import json
-import sympy as sp
 import tqdm
 
 from mira.metamodel import *
-from mira.modeling import Model
-from mira.modeling.amr.petrinet import AMRPetriNetModel
+from mira.sources.system_dynamics.vensim import template_model_from_mdl_file
+from mira.sources.system_dynamics.stella import template_model_from_stella_model_file
+from mira.modeling.amr.stockflow import AMRStockFlowModel
+from mira.modeling.amr.stockflow import template_model_to_stockflow_json
+
+# %%
+# MIRA_REST_URL = 'http://34.230.33.149:8771/api'
+PATH = "data/stockflow_examples/SDXorg"
+
+# %%[markdown]
+# # Test Vensim MDL Models
+
+# %%
+models = []
+for m in os.listdir(PATH):
+
+    p = os.path.join(PATH, m, "*.mdl")
+    fp = glob.glob(p)
+    if len(fp) == 0:
+        continue
+
+    try:
+        models[m]["tm"] = template_model_from_mdl_file(fp)
+    except Exception as err:
+        print(err)
+
+    try:
+        models[m]["amr"] = template_model_to_stockflow_json(models[m]["tm"])
+    except Exception as er:
+        print(err)
+
+
+# %%
+p = os.path.join(PATH, "SIR.mdl")
+model = vensim.template_model_from_mdl_file(p)
+
+model.draw_jupyter()
+
+# %%
+p = os.path.join(PATH, "SIR.xmile")
+model = stella.template_model_from_stella_model_file(p)
+
+model.draw_jupyter()
+
+# %%
+p = os.path.join(PATH, "roessler_chaos.mdl")
+model = vensim.template_model_from_mdl_file(p)
+
+model.draw_jupyter()
+
+# %%
+p = os.path.join(PATH, "workforce.mdl")
+model = vensim.template_model_from_mdl_file(p)
+
+model.draw_jupyter()
+
+# %%
+p = os.path.join(PATH, "COVID-19-Model.stmx")
+model = stella.template_model_from_stella_model_file(p)
+
+model.draw_jupyter()
+
 
 # %%
 PATH = "data/petrinet_templates"
