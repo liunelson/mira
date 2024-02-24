@@ -21,546 +21,256 @@ from mira.metamodel import *
 from mira.modeling import Model
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 from mira.modeling.amr.regnet import template_model_to_regnet_json
-from mira.modeling.amr.stockflow import template_model_to_stockflow_json
+from mira.modeling.amr.regnet import AMRRegNetModel
 
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
 
 # %%[markdown]
-# v0 from Tenzin
+# Chen Model
+# 
+# d r_i / d t = C_i p_1 - V_i r_i
+# d p_i / d t = L_i r_i - U_i p_i
+# for i = 1, 2, 3
+# 
+# r_i -> ControlledProduction + ControlledDegradation
+# p_i -> ControlledProduction + ControlledDegradation
 
 # %%
-model_amr = {
- 'header': {
-  'name': 'IndiaNonSubscriptedPulsed',
-  'schema': '',
-  'description': 'v0 MIRA parse by Tenzin of the Vensim MDL model (IndiaNonSubscriptedPulsed.mdl) from https://doi.org/10.48550/arXiv.2004.08859',
-  'schema_name': 'stockflow',
-  'model_version': '0.1'},
- 'properties': {},
- 'model': {'flows': [{'id': '1',
-    'name': 'new_cases_reported',
-    'upstream_stock': None,
-    'downstream_stock': 'cumulative_cases_reported',
-    'rate_expression': 'disease_progression + isolation_rate_asym + isolation_rate_sym + q_disease_progress_rate',
-    'rate_expression_mathml': '<apply><plus/><ci>disease_progression</ci><ci>isolation_rate_asym</ci><ci>isolation_rate_sym</ci><ci>q_disease_progress_rate</ci></apply>'},
-   {'id': '2',
-    'name': 'deaths',
-    'upstream_stock': 'infected_sym_extreme_icu',
-    'downstream_stock': 'dead',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '3',
-    'name': 'deaths_overflow',
-    'upstream_stock': 'infected_sym_icu_overflow',
-    'downstream_stock': 'dead',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '4',
-    'name': 'exposure',
-    'upstream_stock': 'susceptibles',
-    'downstream_stock': 'exposed',
-    'rate_expression': 'contacts_total_per_susceptible*infectivity*susceptibles',
-    'rate_expression_mathml': '<apply><times/><ci>contacts_total_per_susceptible</ci><ci>infectivity</ci><ci>susceptibles</ci></apply>'},
-   {'id': '5',
-    'name': 'infectivity_setting',
-    'upstream_stock': 'exposed',
-    'downstream_stock': 'infectious_asymptomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '6',
-    'name': 'disease_progression',
-    'upstream_stock': 'infectious_symptomatics_mild',
-    'downstream_stock': 'incoming_demand_on_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '7',
-    'name': 'iso_disease_progress_rate',
-    'upstream_stock': 'isolated_symtomatics_mild',
-    'downstream_stock': 'incoming_demand_on_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '8',
-    'name': 'q_disease_progress_rate',
-    'upstream_stock': 'quarantined_symtomatics_mild',
-    'downstream_stock': 'incoming_demand_on_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '9',
-    'name': 'hospital_admissions',
-    'upstream_stock': 'incoming_demand_on_hospital',
-    'downstream_stock': 'infected_sym_serious_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '10',
-    'name': 'hospital_overflow',
-    'upstream_stock': 'incoming_demand_on_hospital',
-    'downstream_stock': 'infected_sym_hospital_overflow',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '11',
-    'name': 'icu_admissions',
-    'upstream_stock': 'infected_sym_serious_hospital',
-    'downstream_stock': 'infected_sym_extreme_icu',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '12',
-    'name': 'recoveries_icu',
-    'upstream_stock': 'infected_sym_extreme_icu',
-    'downstream_stock': 'recovered_from_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '13',
-    'name': 'recoveries_serioush_overflow',
-    'upstream_stock': 'infected_sym_hospital_overflow',
-    'downstream_stock': 'recovered_from_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '14',
-    'name': 'worsening_rate_overflow',
-    'upstream_stock': 'infected_sym_hospital_overflow',
-    'downstream_stock': 'infected_sym_icu_overflow',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '15',
-    'name': 'icu_overflow',
-    'upstream_stock': 'infected_sym_serious_hospital',
-    'downstream_stock': 'infected_sym_icu_overflow',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '16',
-    'name': 'recoveries_icu_overflow',
-    'upstream_stock': 'infected_sym_icu_overflow',
-    'downstream_stock': 'recovered_from_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '17',
-    'name': 'recoveries_serioush',
-    'upstream_stock': 'infected_sym_serious_hospital',
-    'downstream_stock': 'recovered_from_hospital',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '18',
-    'name': 'infection_rate_new_arrivals',
-    'upstream_stock': None,
-    'downstream_stock': 'infectious_asymptomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '19',
-    'name': 'isolation_rate_asym',
-    'upstream_stock': 'infectious_asymptomatics',
-    'downstream_stock': 'isolated_asymptomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '20',
-    'name': 'quarantining_rate_asym',
-    'upstream_stock': 'infectious_asymptomatics',
-    'downstream_stock': 'quarantined_asymptomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '21',
-    'name': 'recoveries_asym',
-    'upstream_stock': 'infectious_asymptomatics',
-    'downstream_stock': 'recovered_asymtomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '22',
-    'name': 'symptom_setting',
-    'upstream_stock': 'infectious_asymptomatics',
-    'downstream_stock': 'infectious_symptomatics_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '23',
-    'name': 'isolation_rate_sym',
-    'upstream_stock': 'infectious_symptomatics_mild',
-    'downstream_stock': 'isolated_symtomatics_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '24',
-    'name': 'quarantine_rate_sym',
-    'upstream_stock': 'infectious_symptomatics_mild',
-    'downstream_stock': 'quarantined_symtomatics_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '25',
-    'name': 'recoveries_infected_sym_mild',
-    'upstream_stock': 'infectious_symptomatics_mild',
-    'downstream_stock': 'recovered_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '26',
-    'name': 'incubation_rate_iso',
-    'upstream_stock': 'isolated_asymptomatics',
-    'downstream_stock': 'isolated_symtomatics_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '27',
-    'name': 'recoveries_iso_asym',
-    'upstream_stock': 'isolated_asymptomatics',
-    'downstream_stock': 'recovered_asymtomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '28',
-    'name': 'recoveries_iso_sym',
-    'upstream_stock': 'isolated_symtomatics_mild',
-    'downstream_stock': 'recovered_isolated_symptomatic_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '29',
-    'name': 'incubation_rate_quarantines',
-    'upstream_stock': 'quarantined_asymptomatics',
-    'downstream_stock': 'quarantined_symtomatics_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '30',
-    'name': 'recoveries_q_asym',
-    'upstream_stock': 'quarantined_asymptomatics',
-    'downstream_stock': 'recovered_asymtomatics',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'},
-   {'id': '31',
-    'name': 'recoveries_qsym',
-    'upstream_stock': 'quarantined_symtomatics_mild',
-    'downstream_stock': 'recovered_mild',
-    'rate_expression': '0',
-    'rate_expression_mathml': '<cn>0</cn>'}],
-  'stocks': [{'id': 'cumulative_cases_reported',
-    'name': 'cumulative_cases_reported',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infected_sym_extreme_icu',
-    'name': 'infected_sym_extreme_icu',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'dead',
-    'name': 'dead',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infected_sym_icu_overflow',
-    'name': 'infected_sym_icu_overflow',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'susceptibles',
-    'name': 'susceptibles',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'exposed',
-    'name': 'exposed',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infectious_asymptomatics',
-    'name': 'infectious_asymptomatics',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infectious_symptomatics_mild',
-    'name': 'infectious_symptomatics_mild',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'incoming_demand_on_hospital',
-    'name': 'incoming_demand_on_hospital',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'isolated_symtomatics_mild',
-    'name': 'isolated_symtomatics_mild',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'quarantined_symtomatics_mild',
-    'name': 'quarantined_symtomatics_mild',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infected_sym_serious_hospital',
-    'name': 'infected_sym_serious_hospital',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'infected_sym_hospital_overflow',
-    'name': 'infected_sym_hospital_overflow',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'recovered_from_hospital',
-    'name': 'recovered_from_hospital',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'isolated_asymptomatics',
-    'name': 'isolated_asymptomatics',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'quarantined_asymptomatics',
-    'name': 'quarantined_asymptomatics',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'recovered_asymtomatics',
-    'name': 'recovered_asymtomatics',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'recovered_mild',
-    'name': 'recovered_mild',
-    'grounding': {'identifiers': {}, 'modifiers': {}},
-    'units': {'expression': 'Persons',
-     'expression_mathml': '<ci>Persons</ci>'}},
-   {'id': 'recovered_isolated_symptomatic_mild',
-    'name': 'recovered_isolated_symptomatic_mild',
-    'grounding': {'identifiers': {}, 'modifiers': {}}}],
-  'auxiliaries': [{'id': 'disease_progression',
-    'name': 'disease_progression',
-    'expression': 'disease_progression',
-    'expression_mathml': '<ci>disease_progression</ci>'},
-   {'id': 'isolation_rate_asym',
-    'name': 'isolation_rate_asym',
-    'expression': 'isolation_rate_asym',
-    'expression_mathml': '<ci>isolation_rate_asym</ci>'},
-   {'id': 'isolation_rate_sym',
-    'name': 'isolation_rate_sym',
-    'expression': 'isolation_rate_sym',
-    'expression_mathml': '<ci>isolation_rate_sym</ci>'},
-   {'id': 'q_disease_progress_rate',
-    'name': 'q_disease_progress_rate',
-    'expression': 'q_disease_progress_rate',
-    'expression_mathml': '<ci>q_disease_progress_rate</ci>'}],
-  'links': [{'id': 'link1',
-    'source': 'disease_progression',
-    'target': 'flow1'},
-   {'id': 'link2', 'source': 'isolation_rate_asym', 'target': 'flow1'},
-   {'id': 'link3', 'source': 'isolation_rate_sym', 'target': 'flow1'},
-   {'id': 'link4', 'source': 'q_disease_progress_rate', 'target': 'flow1'},
-   {'id': 'link5', 'source': 'susceptibles', 'target': 'flow4'},
-   {'id': 'link6',
-    'source': 'contacts_total_per_susceptible',
-    'target': 'flow4'},
-   {'id': 'link7', 'source': 'infectivity', 'target': 'flow4'}]},
- 'semantics': {'ode': {'parameters': [{'id': 'disease_progression',
-     'value': 0.0,
-     'units': {'expression': 'person/day',
-      'expression_mathml': '<apply><divide/><ci>person</ci><ci>day</ci></apply>'}},
-    {'id': 'isolation_rate_asym',
-     'value': 0.0,
-     'units': {'expression': 'person/day',
-      'expression_mathml': '<apply><divide/><ci>person</ci><ci>day</ci></apply>'}},
-    {'id': 'isolation_rate_sym',
-     'value': 0.0,
-     'units': {'expression': 'person/day',
-      'expression_mathml': '<apply><divide/><ci>person</ci><ci>day</ci></apply>'}},
-    {'id': 'q_disease_progress_rate',
-     'value': 0.0,
-     'units': {'expression': 'person/day',
-      'expression_mathml': '<apply><divide/><ci>person</ci><ci>day</ci></apply>'}},
-    {'id': 'open_duration', 'value': 10.0},
-    {'id': 'end_lockdown_time', 'value': 400.0},
-    {'id': 'lockdown_period', 'value': 0.0},
-    {'id': 'high_contact_tracing_and_isolation', 'value': 0.0},
-    {'id': 'net_fr_requiring_icu', 'value': 0.0},
-    {'id': 'infection_rate_new_arrivals', 'value': 0.0},
-    {'id': 'contacts_per_day', 'value': 0.0},
-    {'id': 'hygiene_mask_impact', 'value': 0.0},
-    {'id': 'net_fr_fatality', 'value': 0.0},
-    {'id': 'interaction_intensity', 'value': 0.0},
-    {'id': 'april_14', 'value': 50.0},
-    {'id': 'policy_high_contact_tracing_and_isolation', 'value': 0.0},
-    {'id': 'base_contacts_other', 'value': 6.0},
-    {'id': 'physical_distance_impact', 'value': 0.0},
-    {'id': 'density_ratio',
-     'description': 'Area and Density has to be properly defined',
-     'value': 1.0},
-    {'id': 'effect_of_density_on_contacts', 'value': 0.0},
-    {'id': 'policy_multiplier_home', 'value': 1.0},
-    {'id': 'base_contact_home', 'value': 8.0},
-    {'id': 'base_contact_school', 'value': 5.0},
-    {'id': 'base_contact_work', 'value': 7.0},
-    {'id': 'policy_multiplier_school', 'value': 1.0},
-    {'id': 'policy_multiplier_work', 'value': 1.0},
-    {'id': 'reference_population_density', 'value': 1.0},
-    {'id': 'policy_multiplier_other', 'value': 1.0},
-    {'id': 'lack_of_awareness_multiplier', 'value': 0.0},
-    {'id': 'loaendtime', 'value': 50.0},
-    {'id': 'loastarttime', 'value': 15.0},
-    {'id': 'regular_hygiene_level', 'value': 1.0},
-    {'id': 'high_fr_iso_sym', 'value': 0.8},
-    {'id': 'high_contact_tracing_policy', 'value': 0.8},
-    {'id': 'low_contact_tracing_policy', 'value': 0.1},
-    {'id': 'high_hygiene_level', 'value': 0.8},
-    {'id': 'low_fr_iso_sym', 'value': 0.25},
-    {'id': 'loastartlevel', 'value': 1.2},
-    {'id': 'loaendlevel', 'value': 1.0},
-    {'id': 'fr_becoming_serious',
-     'description': '0.02,0.02,0.02,0.02,0.17,0.17,0.17,0.17,0.17,0.28,0.28,0.27,0.27,0.4,0.4,0. 47',
-     'value': 0.15},
-    {'id': 'fr_fatality', 'value': 0.23},
-    {'id': 'default_infectivity', 'value': 0.015},
-    {'id': 'default_delay_disease_diagnosis', 'value': 5.0},
-    {'id': 'testing_impact_on_delay', 'value': 1.0},
-    {'id': 'delay_asymp_noninfective_to_infective', 'value': 3.0},
-    {'id': 'contacts_calibration_multiplier', 'value': 1.1},
-    {'id': 'area_of_states', 'value': 1.0},
-    {'id': 'ppe_availability', 'value': 0.8},
-    {'id': 'fr_q_asym_via_awareness', 'value': 0.0},
-    {'id': 'fr_q_asym_via_tracing', 'value': 0.0},
-    {'id': 'delay_for_death', 'value': 5.0},
-    {'id': 'delay_asymp_infective_to_symp', 'value': 2.0},
-    {'id': 'delay_iso_asym', 'value': 1.0},
-    {'id': 'delay_iso_sym', 'value': 2.5},
-    {'id': 'delay_q_asym', 'value': 1.0},
-    {'id': 'delay_q_sym', 'value': 2.5},
-    {'id': 'delay_recovery_asym', 'value': 11.0},
-    {'id': 'delay_recovery_sym_extreme', 'value': 14.0},
-    {'id': 'delay_recovery_sym_mild', 'value': 14.0},
-    {'id': 'delay_recovery_sym_serious', 'value': 14.0},
-    {'id': 'delay_worsening', 'value': 5.0},
-    {'id': 'fr_developing_symptoms', 'value': 0.7},
-    {'id': 'fraction_iso_asym', 'value': 0.0},
-    {'id': 'fr_isoq_sym', 'value': 0.0},
-    {'id': 'fr_multiplier_fatality', 'value': 2.0},
-    {'id': 'fr_multiplier_icu', 'value': 2.0},
-    {'id': 'fraction_q_sym', 'value': 0.0},
-    {'id': 'fr_requiring_icu', 'value': 0.22},
-    {'id': 'healthcare_capacity_multiplier', 'value': 200.0},
-    {'id': 'infectivity_reduction_for_asym', 'value': 0.5},
-    {'id': 'isolation_effect_on_asym_contacts', 'value': 0.5},
-    {'id': 'isolation_effect_on_sym_contacts', 'value': 0.5},
-    {'id': 'lock_down_duration',
-     'description': 'Indicates number of days of lockdown. Keep as 0 for no lockdown',
-     'value': 14.0},
-    {'id': 'lock_down_start_day', 'value': 30.0},
-    {'id': 'lockdown_effect_on_contacts', 'value': 0.3},
-    {'id': 'net_delay_dprogress_iso_sym', 'value': 0.0},
-    {'id': 'net_delay_dprogress_q_sym', 'value': 0.0},
-    {'id': 'net_delay_incubation_iso_asym', 'value': 0.0},
-    {'id': 'net_delay_incubation_q_asym', 'value': 0.0},
-    {'id': 'net_delay_recovery_iso_asym', 'value': 0.0},
-    {'id': 'net_delay_recovery_iso_sym', 'value': 0.0},
-    {'id': 'net_delay_recovery_q_asym', 'value': 0.0},
-    {'id': 'net_delay_recovery_q_sym', 'value': 0.0},
-    {'id': 'normal_hospital_beds_per_person', 'value': 0.0009},
-    {'id': 'patients_per_unit', 'value': 1.0},
-    {'id': 'quarantine_effect_on_asym_contacts', 'value': 1.0},
-    {'id': 'quarantine_effect_on_sym_contacts', 'value': 0.75},
-    {'id': 'default_ro_base_infectivity_estimation', 'value': 4.6},
-    {'id': 'total_population',
-     'description': '1.3392e+09',
-     'value': 1339200000.0},
-    {'id': 'typical_duration_when_infection_is_spread', 'value': 7.0},
-    {'id': 'typical_worsening_rate', 'value': 0.0},
-    {'id': 'recoveries_serioush', 'value': 0.0},
-    {'id': 'recoveries_icu_overflow', 'value': 0.0},
-    {'id': 'deaths_overflow', 'value': 0.0},
-    {'id': 'incubation_rate_quarantines', 'value': 0.0},
-    {'id': 'recoveries_q_asym', 'value': 0.0},
-    {'id': 'recoveries_qsym', 'value': 0.0},
-    {'id': 'deaths', 'value': 0.0},
-    {'id': 'recoveries_iso_sym', 'value': 0.0},
-    {'id': 'recoveries_iso_asym', 'value': 0.0},
-    {'id': 'symptom_setting', 'value': 0.0},
-    {'id': 'iso_disease_progress_rate', 'value': 0.0},
-    {'id': 'incubation_rate_iso', 'value': 0.0},
-    {'id': 'recoveries_icu', 'value': 0.0},
-    {'id': 'recoveries_infected_sym_mild', 'value': 0.0},
-    {'id': 'recoveries_asym', 'value': 0.0},
-    {'id': 'hospital_admissions', 'value': 0.0},
-    {'id': 'hospital_overflow', 'value': 0.0},
-    {'id': 'icu_admissions', 'value': 0.0},
-    {'id': 'icu_overflow', 'value': 0.0},
-    {'id': 'infectivity_setting', 'value': 0.0},
-    {'id': 'managable_hospital_inflow', 'value': 0.0},
-    {'id': 'managable_icu_inflow', 'value': 0.0},
-    {'id': 'quarantine_rate_sym', 'value': 0.0},
-    {'id': 'quarantining_rate_asym', 'value': 0.0},
-    {'id': 'sum_isolation_sym_mild', 'value': 0.0},
-    {'id': 'sum_quarantine_sym_mild', 'value': 0.0},
-    {'id': 'sum_recovered_via_hosp', 'value': 0.0},
-    {'id': 'sum_susceptibles', 'value': 0.0},
-    {'id': 'sum_symtomatics', 'value': 0.0},
-    {'id': 'sum_asymtomatics', 'value': 0.0},
-    {'id': 'sum_cumulative_cases_reported', 'value': 0.0},
-    {'id': 'sum_deaths', 'value': 0.0},
-    {'id': 'sum_isolation_asym', 'value': 0.0},
-    {'id': 'sum_in_hospital', 'value': 0.0},
-    {'id': 'sum_in_hospital_overflow', 'value': 0.0},
-    {'id': 'sum_in_icu', 'value': 0.0},
-    {'id': 'sum_in_icu_overflow', 'value': 0.0},
-    {'id': 'sum_quarantine_asym', 'value': 0.0},
-    {'id': 'sum_recovered_asym', 'value': 0.0},
-    {'id': 'sum_recovered_mild', 'value': 0.0},
-    {'id': 'sumnoninfectives', 'value': 0.0},
-    {'id': 'recoveries_serioush_overflow', 'value': 0.0},
-    {'id': 'worsening_rate_overflow', 'value': 0.0}],
-   'initials': [{'target': 'cumulative_cases_reported',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infected_sym_extreme_icu',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'dead',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infected_sym_icu_overflow',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'susceptibles',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'exposed',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infectious_asymptomatics',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infectious_symptomatics_mild',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'incoming_demand_on_hospital',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'isolated_symtomatics_mild',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'quarantined_symtomatics_mild',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infected_sym_serious_hospital',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'infected_sym_hospital_overflow',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'recovered_from_hospital',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'isolated_asymptomatics',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'quarantined_asymptomatics',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'recovered_asymtomatics',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'recovered_mild',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'},
-    {'target': 'recovered_isolated_symptomatic_mild',
-     'expression': '0.0',
-     'expression_mathml': '<cn>0.0</cn>'}],
-   'observables': [],
-   'time': {'id': 't'}}},
- 'metadata': {}}
+def GenerateChenModel(config: dict = {}) -> TemplateModel:
+
+  num_types = 3
+
+  # Units
+  nM_units = lambda: Unit(expression = sympy.Symbol("nM"))
+  min_units = lambda: Unit(expression = sympy.Symbol("min"))
+  per_min_units = lambda: Unit(expression = 1 / sympy.Symbol("min"))
+  nM_per_min_units = lambda: Unit(expression = sympy.Symbol("nM") / sympy.Symbol("min"))
+
+  # Basic components
+  concepts = {}
+  initials = {}
+  for s, m in zip(("r", "p"), ("mRNA", "protein")):
+
+    concepts = concepts | {
+      f"{s}_{i}": Concept(name = f"{s}_{i}", display_name = f"{s}_{i}", units = nM_units(), description = f"Concentration of Type-{i} {m} in units of nM)")
+      for i in range(1, num_types + 1)
+    }
+
+    initials = initials | {
+      c: Initial(concept = concepts[c], expression = sympy.Float(0.5)) for c in concepts.keys()
+    }
+
+  parameters = {}
+  for s, m, n, u in zip(("C", "L", "V", "U"), ("mRNA", "protein", "mRNA", "protein"), ("Transcription", "Translation", "Degradation", "Degradation"), (per_min_units(), per_min_units(), per_min_units(), per_min_units())):
+    parameters = parameters | {
+      f"{s}_{i}": Parameter(name = f"{s}_{i}", display_name = f"{s}_{i}", value = 1.0, units = u, description = f"{n} rate for type-{i} proteins")
+      for i in range(1, num_types + 1)
+    }
+
+
+  # Templates
+  templates = []
+  for i in range(1, num_types + 1):
+    
+    r_i = f"r_{i}"
+    p_1 = "p_1"
+    p_i = f"p_{i}"
+    C_i = f"C_{i}"
+    L_i = f"L_{i}"
+    V_i = f"V_{i}"
+    U_i = f"U_{i}"
+
+    # transcription of type-i mRNA
+    templates.append(ControlledProduction(
+      outcome = concepts[r_i],
+      controller = concepts[p_1],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"{C_i} * {p_1}"),
+      name = f"TranscriptionOf{r_i}ControlledBy{p_1}"
+    ))
+
+    # degradation of type-i mRNA
+    templates.append(ControlledDegradation(
+      subject = concepts[r_i],
+      controller = concepts[r_i],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"{V_i} * {r_i}"),
+      name = f"DegradationOf{r_i}"
+    ))
+
+    # translation of type-i protein
+    templates.append(ControlledProduction(
+      outcome = concepts[p_i],
+      controller = concepts[r_i],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"{L_i} * {r_i}"),
+      name = f"TranslationOf{p_i}ControlledBy{r_i}"
+    ))
+
+    # degradation of type-i protein
+    templates.append(ControlledDegradation(
+      subject = concepts[p_i],
+      controller = concepts[p_i],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"{U_i} * {p_i}"),
+      name = f"DegradationOf{p_i}"
+    ))
+
+  # Generate model
+  model = TemplateModel(
+    templates = templates,
+    parameters = parameters,
+    initials = initials,
+    observables = {},
+    time = Time(name = "t", units = min_units()),
+    annotations = Annotations(name = f"ChenModelWith{num_types}Types")
+  )
+
+  return model
 
 # %%
-with open("./data/milestone_18_hackathon/scenario_5/IndiaNonSubscriptedPulsed_stockflow_v0.json", "w") as f:
-    json.dump(model_amr, f, indent = 3)
+ChenModel = GenerateChenModel()
+
+ChenModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/ChenModel.png")
+
+with open("./data/milestone_18_hackathon/scenario_6/ChenModel_regnet_amr.json", "w") as f:
+  model_amr = template_model_to_regnet_json(ChenModel)
+  json.dump(model_amr, f, indent = 3)
+
+with open("./data/milestone_18_hackathon/scenario_6/ChenModel_petrinet_amr.json", "w") as f:
+  model_amr = template_model_to_petrinet_json(ChenModel)
+  json.dump(model_amr, f, indent = 3)
+
+# %%[markdown]
+# Hunt Model
+# 
+# d r_1 / d t = (1 / (1 + p_1 ** 2 / a_1 ** 2)) C_1 p_1 - (1 / (1 + p_2 / b_1)) V_1 r_1
+# 
+# d r_i / d t = (1 / (1 + p_i / a_i)) C_i p_1 - (1 / (1 + p_2 / b_i)) V_i r_i
+# 
+# d p_i / d t = (1 / (1 + p_i / d_i)) L_i r_i - U_i p_i
+# 
+# for i = 1, 2, 3
+# 
+# r_i -> GroupedControlledProduction + GroupedControlledDegradation
+# p_i -> GroupedControlledProduction + GroupedControlledDegradation
+  
+# %%
+def GenerateHuntModel(config: dict = {}) -> TemplateModel:
+
+  num_types = 3
+
+  # Units
+  nM_units = lambda: Unit(expression = sympy.Symbol("nM"))
+  min_units = lambda: Unit(expression = sympy.Symbol("min"))
+  per_min_units = lambda: Unit(expression = 1 / sympy.Symbol("min"))
+  nM_per_min_units = lambda: Unit(expression = sympy.Symbol("nM") / sympy.Symbol("min"))
+
+  # Basic components
+  concepts = {}
+  initials = {}
+  for s, m in zip(("r", "p"), ("mRNA", "protein")):
+
+    concepts = concepts | {
+      f"{s}_{i}": Concept(name = f"{s}_{i}", display_name = f"{s}_{i}", units = nM_units(), description = f"Concentration of Type-{i} {m} in units of nM)")
+      for i in range(1, num_types + 1)
+    }
+
+    initials = initials | {
+      c: Initial(concept = concepts[c], expression = sympy.Float(0.5)) for c in concepts.keys()
+    }
+
+  parameters = {}
+  for s, m, n, u in zip(("C", "L", "V", "U", "a", "b", "d"), ("mRNA", "protein", "mRNA", "protein", "mRNA", "mRNA", "protein"), ("Transcription", "Translation", "Degradation", "Degradation", "Effectiveness factor for feedback on transcription", "Effectiveness factor for feedback on degradation", "Effectiveness factor for feedback on translation"), (per_min_units(), per_min_units(), per_min_units(), per_min_units(), nM_units(), nM_units(), nM_units())):
+    parameters = parameters | {
+      f"{s}_{i}": Parameter(name = f"{s}_{i}", display_name = f"{s}_{i}", value = 1.0, units = u, description = f"{n} rate for type-{i} proteins")
+      for i in range(1, num_types + 1)
+    }
+
+
+  # Templates
+  templates = []
+  for i in range(1, num_types + 1):
+    
+    r_i = f"r_{i}"
+    p_1 = "p_1"
+    p_2 = "p_2"
+    p_i = f"p_{i}"
+    C_i = f"C_{i}"
+    L_i = f"L_{i}"
+    V_i = f"V_{i}"
+    U_i = f"U_{i}"
+    a_i = f"a_{i}"
+    b_i = f"b_{i}"
+    d_i = f"d_{i}"
+
+    if i == 1:
+
+      # transcription of type-1 mRNA
+      templates.append(GroupedControlledProduction(
+        outcome = concepts[r_i],
+        controllers = [concepts[p_1], concepts[p_i]],
+        rate_law = sympy.parsing.sympy_parser.parse_expr(f"(1 / (1 + ({p_i})**2 / ({a_i})**2)) * {C_i} * {p_1}"),
+        name = f"TranscriptionOf{r_i}ControlledBy{p_1}"
+      ))
+
+    else:
+
+      # transcription of type-i mRNA, i = 2, 3
+      templates.append(GroupedControlledProduction(
+        outcome = concepts[r_i],
+        controllers = [concepts[p_1], concepts[p_i]],
+        rate_law = sympy.parsing.sympy_parser.parse_expr(f"(1 / (1 + {p_i} / {a_i})) * {C_i} * {p_1}"),
+        name = f"TranscriptionOf{r_i}ControlledBy{p_1}"
+      ))
+
+    # degradation of type-i mRNA
+    templates.append(GroupedControlledDegradation(
+      subject = concepts[r_i],
+      controllers = [concepts[r_i], concepts[p_2]],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"(1 / (1 + {p_2} / {b_i})) * {V_i} * {r_i}"),
+      name = f"DegradationOf{r_i}"
+    ))
+
+
+    # translation of type-i protein
+    templates.append(GroupedControlledProduction(
+      outcome = concepts[p_i],
+      controllers = [concepts[r_i], concepts[p_i]],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"(1 / (1 + {p_i} / {d_i})) * {L_i} * {r_i}"),
+      name = f"TranslationOf{p_i}ControlledBy{r_i}And{p_i}"
+    ))
+
+    # degradation of type-i protein
+    templates.append(ControlledDegradation(
+      subject = concepts[p_i],
+      controller = concepts[p_i],
+      rate_law = sympy.parsing.sympy_parser.parse_expr(f"{U_i} * {p_i}"),
+      name = f"DegradationOf{p_i}"
+    ))
+
+  # Generate model
+  model = TemplateModel(
+    templates = templates,
+    parameters = parameters,
+    initials = initials,
+    observables = {},
+    time = Time(name = "t", units = min_units()),
+    annotations = Annotations(name = f"HuntModelWith{num_types}Types")
+  )
+
+  return model
+
+# %%
+HuntModel = GenerateHuntModel()
+
+HuntModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/ChenModel.png")
+
+# %%
+with open("./data/milestone_18_hackathon/scenario_6/HuntModel_regnet_amr.json", "w") as f:
+  model_amr = template_model_to_regnet_json(HuntModel)
+  json.dump(model_amr, f, indent = 3)
+
+# %%
+with open("./data/milestone_18_hackathon/scenario_6/HuntModel_petrinet_amr.json", "w") as f:
+  model_amr = template_model_to_petrinet_json(HuntModel)
+  json.dump(model_amr, f, indent = 3)
 
 # %%

@@ -25,7 +25,7 @@ from mira.modeling.amr.stockflow import template_model_to_stockflow_json
 
 from mira.modeling.amr.stockflow import AMRStockFlowModel
 from mira.modeling.amr.stockflow import template_model_to_stockflow_json
-from mira.modeling.amr.stockflow import template_model_from_amr_json
+from mira.sources.amr.stockflow import template_model_from_amr_json
 
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
@@ -569,7 +569,6 @@ with open("./data/milestone_18_hackathon/scenario_5/IndiaNonSubscriptedPulsed_st
 
 # %%
 # Convert to PetriNet AMR JSON
-model = template_model_from_amr_json("./data/milestone_18_hackathon/scenario_5/IndiaNonSubscriptedPulsed_stockflow_v0.json")
-
-
-# %%
+    
+# Broken due to `"upstream_stock" = None`
+# model = template_model_from_amr_json(model_amr)
