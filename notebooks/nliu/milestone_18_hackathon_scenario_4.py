@@ -179,13 +179,3 @@ for n in [2, 4, 6]:
 
 # %%
 
-
-
-
-
-# %%
-with open("./data/milestone_18_hackathon/scenario_4_LV6_initials.csv", "w") as f:
-    
-
-config["initials"]
-
