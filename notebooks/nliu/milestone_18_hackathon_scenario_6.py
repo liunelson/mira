@@ -306,7 +306,7 @@ def GenerateHuntModel(config: dict = {}) -> TemplateModel:
 # %%
 HuntModel = GenerateHuntModel()
 
-HuntModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/ChenModel.png")
+HuntModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/HuntModel.png")
 
 # %%
 with open("./data/milestone_18_hackathon/scenario_6/HuntModel_regnet_amr.json", "w") as f:
