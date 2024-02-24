@@ -157,9 +157,9 @@ for n in [2, 4, 6]:
         }
 
     if len(config) > 0:    
-        __ = pandas.DataFrame(config["initials"], index = [f"X_{i}" for i in range(1, n + 1)], columns = ["Initials"]).to_csv("./data/milestone_18_hackathon/scenario_4_LV{n}_initials.csv")
-        __ = pandas.DataFrame(config["parameters"]["r"], index = [f"X_{i}" for i in range(1, n + 1)], columns = ["GrowthRate"]).to_csv("./data/milestone_18_hackathon/scenario_4_LV{n}_r.csv")
-        __ = pandas.DataFrame(config["parameters"]["a"], index = [f"X_{i}" for i in range(1, n + 1)], columns = [f"X_{i}" for i in range(1, n + 1)]).to_csv("./data/milestone_18_hackathon/scenario_4_LV{n}_a.csv")
+        __ = pandas.DataFrame(config["initials"], index = [f"X_{i}" for i in range(1, n + 1)], columns = ["Initials"]).to_csv(f"./data/milestone_18_hackathon/scenario_4_LV{n}_initials.csv")
+        __ = pandas.DataFrame(config["parameters"]["r"], index = [f"X_{i}" for i in range(1, n + 1)], columns = ["GrowthRate"]).to_csv(f"./data/milestone_18_hackathon/scenario_4_LV{n}_r.csv")
+        __ = pandas.DataFrame(config["parameters"]["a"], index = [f"X_{i}" for i in range(1, n + 1)], columns = [f"X_{i}" for i in range(1, n + 1)]).to_csv(f"./data/milestone_18_hackathon/scenario_4_LV{n}_a.csv")
 
 
     # Generate model
