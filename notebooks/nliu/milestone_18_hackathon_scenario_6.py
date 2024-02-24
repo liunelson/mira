@@ -68,6 +68,18 @@ def GenerateChenModel(config: dict = {}) -> TemplateModel:
       for i in range(1, num_types + 1)
     }
 
+  # Initialize with config values if given
+  if isinstance(config, dict):
+
+    if "initials" in config.keys():
+      for c in concepts:
+        v, i = c.split("_")
+        initials[c].expression = sympy.Float(config["initials"][v][int(i) - 1])
+
+    if "parameters" in config.keys():
+      for p in parameters:
+        v, i = p.split("_")
+        parameters[p].value = config["parameters"][v][int(i) - 1]
 
   # Templates
   templates = []
@@ -126,7 +138,27 @@ def GenerateChenModel(config: dict = {}) -> TemplateModel:
   return model
 
 # %%
-ChenModel = GenerateChenModel()
+# Model configuration (Chen and Hunt)
+config = {
+  "initials": {
+    "r": [3, 6, 5],
+    "p": [100, 500, 1]
+  },
+  "parameters": {
+    "C": [0.03, 0.03, 0.024],
+    "L": [2, 2, 2],
+    "V": [0.03, 0.03, 0.03],
+    "U": [0.15, 0.15, 0.015],
+    "a": [60, 140, 170],
+    "b": [120, 140, 180],
+    "d": [120, 150, 260]
+  }
+}
+__ = pandas.DataFrame(list(config["initials"].values()), columns = [1, 2, 3], index = ["r_i (concentration of type-i mRNA in units of nM)", "p_i (concentration of type-i protein in units of nM)"]).transpose().to_csv(f"./data/milestone_18_hackathon/scenario_6/initials.csv")
+__ = pandas.DataFrame(list(config["parameters"].values()), columns = [1, 2, 3], index = list(config["parameters"].keys())).transpose().to_csv(f"./data/milestone_18_hackathon/scenario_6/params.csv")
+
+# %%
+ChenModel = GenerateChenModel(config = config)
 
 ChenModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/ChenModel.png")
 
@@ -184,7 +216,19 @@ def GenerateHuntModel(config: dict = {}) -> TemplateModel:
       for i in range(1, num_types + 1)
     }
 
+  # Initialize with config values if given
+  if isinstance(config, dict):
 
+    if "initials" in config.keys():
+      for c in concepts:
+        v, i = c.split("_")
+        initials[c].expression = sympy.Float(config["initials"][v][int(i) - 1])
+
+    if "parameters" in config.keys():
+      for p in parameters:
+        v, i = p.split("_")
+        parameters[p].value = config["parameters"][v][int(i) - 1]
+        
   # Templates
   templates = []
   for i in range(1, num_types + 1):
