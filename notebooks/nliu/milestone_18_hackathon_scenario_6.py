@@ -162,6 +162,7 @@ ChenModel = GenerateChenModel(config = config)
 
 ChenModel.draw_jupyter("./data/milestone_18_hackathon/scenario_6/ChenModel.png")
 
+# %%
 with open("./data/milestone_18_hackathon/scenario_6/ChenModel_regnet_amr.json", "w") as f:
   model_amr = template_model_to_regnet_json(ChenModel)
   json.dump(model_amr, f, indent = 3)
@@ -228,7 +229,7 @@ def GenerateHuntModel(config: dict = {}) -> TemplateModel:
       for p in parameters:
         v, i = p.split("_")
         parameters[p].value = config["parameters"][v][int(i) - 1]
-        
+
   # Templates
   templates = []
   for i in range(1, num_types + 1):
