@@ -15,6 +15,12 @@ logger = logging.getLogger(__name__)
 class AMRStockFlowModel:
     """A class representing a Stock and Flow Model"""
 
+    SCHEMA_VERSION = "0.1"
+    SCHEMA_URL = (
+        f"https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/"
+        f"stockflow_v{SCHEMA_VERSION}/stockflow/stockflow_schema.json"
+    )
+
     def __init__(self, model: Model):
         """Instantiate a stock and flow model from a generic transition model.
 
@@ -164,7 +170,7 @@ class AMRStockFlowModel:
                 if flow.template.name else f"t{idx + 1}"
             flow_dict = {"id": fid}
             flow_dict['name'] = flow.template.display_name
-            flow_dict['upstream_stock'] = flow.consumed[0].concept.name
+            flow_dict['upstream_stock'] = flow.consumed[0].concept.name if flow.consumed else None
             flow_dict['downstream_stock'] = flow.produced[0].concept.name if flow.produced else None
 
             if flow.template.rate_law:
@@ -189,7 +195,7 @@ class AMRStockFlowModel:
         return {
             'header': {
                 'name': self.model_name,
-                'schema': '',
+                'schema': self.SCHEMA_URL,
                 'description': self.model_description,
                 'schema_name': 'stockflow',
                 'model_version': '0.1',
