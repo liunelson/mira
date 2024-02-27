@@ -14,6 +14,7 @@ import pandas
 import sympy
 from typing import Optional, Iterable
 
+from mira.modeling.viz import GraphicalModel
 from mira.metamodel import *
 from mira.modeling import Model
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
@@ -148,7 +149,7 @@ for n in [2, 4, 6]:
             "parameters": {
                 "r": [0.53, 0.42, 0.49, 0.33, 0.7, 0.3],
                 "a": [
-                    [-0.5, -0.01, 0.02, -0.009, -0.002, 0.01], 
+                    [-0.5, -0.01, 0.002, -0.009, -0.002, 0.01], 
                     [0, -0.5, 0, -0.169, 0, 0], 
                     [-0.002, -0.003, -0.5, 0.02, 0.03, -0.04],
                     [0, -0.226, -0.04, -0.5, 0, 0.01], 
@@ -183,6 +184,84 @@ for n in [2, 4, 6]:
 # # Ben Gyori's Scenario 4 Models
 
 # %%
+# Base LV model to be stratified    
+         
+def GenerateLotkeVolterraModel(num_species: int = 1, config: dict = {}) -> TemplateModel:
+
+    # Units
+    cfu_units = lambda: Unit(expression = sympy.Symbol("CFU"))
+    day_units = lambda: Unit(expression = sympy.Symbol("day"))
+    cfu_per_day_units = lambda: Unit(expression = sympy.Symbol("CFU") / sympy.Symbol("day"))
+
+    # Basic components
+    concepts = {
+        "X": Concept(name = "X", display_name = "X", units = cfu_units(), description = f"Population of a species in units of CFU") 
+    }
+    initials = {
+        c: Initial(concept = concepts[c], expression = sympy.Float(1)) for c in concepts.keys()
+    }
+    parameters = {
+        p: Parameter(name = p, value = 1, units = cfu_per_day_units(), description = description)
+        for p, description in zip(("r", "a"), ("Intrinsic growth rate in units of CFU/day", "Interaction coefficient between species in units of CFU/day"))
+    }
+
+    # Define base templates
+    templates = [
+        NaturalReplication(
+            subject = concepts["X"],
+            name = "IntrinsicGrowth"
+        ),
+        ControlledReplication(
+            subject = concepts["X"],
+            controller = concepts["X"],
+            name = "InteractionWithX"
+        )
+    ]
+    templates[0].set_mass_action_rate_law("r")
+    templates[1].set_mass_action_rate_law("a")
+
+    # Define model
+    model = TemplateModel(
+        templates = templates,
+        initials = initials,
+        parameters = parameters,
+        annotations = Annotations(name = f"BaseLotkeVolterraModelWith1Species")
+    )
+
+    if num_species > 1:
+        
+        model = stratify(
+            model, 
+            key = "species",
+            strata = [str(i) for i in range(1, num_species + 1)],
+            structure = [],
+            cartesian_control = True
+        )
+
+    return model
+
+
+# %%
+models["base"] = GenerateLotkeVolterraModel(num_species = 1, config = config)
+
+models["base"].draw_jupyter()
+
+# %%
+GraphicalModel.for_jupyter(model)
+
+# %%
+# Export to AMR JSON
+with open(f"./data/milestone_18_hackathon/scenario_4_LV1_regnet.json", "w") as f:
+    j = template_model_to_regnet_json(models["base"])
+    json.dump(j, f, indent = 3)
+
+with open(f"./data/milestone_18_hackathon/scenario_4_LV1_petrinet.json", "w") as f:
+    j = template_model_to_petrinet_json(models["base"])
+    json.dump(j, f, indent = 3) 
+
+# %%
+# 4- and 6-species LV models
+        
 MIRA_HACKATHON_PATH = "../hackathon_2024.02" 
 
 for n in ("scenario4_4spec_regnet.json", "scenario4_6spec_regnet.json"):
@@ -194,11 +273,8 @@ for n in ("scenario4_4spec_regnet.json", "scenario4_6spec_regnet.json"):
 models_ode = {n: OdeModel(Model(models[n]), initialized=True) for n in models.keys()}
 
 # %%
-models_ode["scenario4_4spec_regnet.json"]
-
-# %%
-res = simulate_ode_model(models_ode["scenario4_4spec_regnet.json"], times = numpy.linspace(0, 30, 100))
-plt.plot(res)
-plt.ylim([0, 1.2])
+# res = simulate_ode_model(models_ode["scenario4_4spec_regnet.json"], times = numpy.linspace(0, 30, 100))
+# plt.plot(res)
+# plt.ylim([0, 1.2])
 
 # %%
