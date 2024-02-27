@@ -26,7 +26,7 @@ import tqdm
 
 from mira.metamodel import *
 from mira.modeling import Model
-from mira.modeling.amr.petrinet import AMRPetriNetModel
+from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 
 # %%
 PATH = "data/petrinet_templates"
@@ -159,5 +159,62 @@ for k, tm in tqdm.tqdm(models.items()):
     with open(os.path.join(PATH, f"{k}.json"), "w") as f:
         j = AMRPetriNetModel(Model(tm)).to_json()
         json.dump(j, f, indent = 4)
+
+# %%
+day_units = lambda: Unit(expression = sp.Symbol("day"))
+per_day_units = lambda: Unit(expression = 1 / sp.Symbol("day"))
+
+concepts = {c: Concept(name = c) for c in "SEIRD"}
+parameters = {p: Parameter(name = p, value = 1.0) for p in "abcrd"}
+initials = {c: Initial(concept = concepts[c], expression = SympyExprStr(sp.Float(1))) for c in concepts.keys()}
+time = Time(name = "t", units = day_units())
+
+t_exposure = ControlledConversion(
+    subject = concepts["S"],
+    outcome = concepts["E"],
+    controller = concepts["I"],
+    name = "Exposure"
+)
+t_exposure.set_mass_action_rate_law("a")
+
+t_infection = NaturalConversion(
+    subject = concepts["E"],
+    outcome = concepts["I"],
+    name = "Exposure"
+)
+t_infection.set_mass_action_rate_law("b")
+
+t_recovery = NaturalConversion(
+    subject = concepts["I"],
+    outcome = concepts["R"],
+    name = "Recovery"
+)
+t_recovery.set_mass_action_rate_law("r")
+
+t_recovery = NaturalConversion(
+    subject = concepts["I"],
+    outcome = concepts["R"],
+    name = "Recovery"
+)
+t_recovery.set_mass_action_rate_law("r")
+
+t_death = NaturalConversion(
+    subject = concepts["I"],
+    outcome = concepts["D"],
+    name = "Death"
+)
+t_death.set_mass_action_rate_law("d")
+
+model = TemplateModel(
+    templates = [t_exposure, t_infection, t_recovery, t_death],
+    parameters = parameters,
+    initials = initials,
+    observables = {},
+    time = time,
+    annotations = Annotations(name = "SEIRDH model")
+)
+
+with open("./data/seird.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model), f, indent = 3)
 
 # %%

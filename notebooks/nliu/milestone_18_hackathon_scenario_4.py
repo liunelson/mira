@@ -18,6 +18,8 @@ from mira.metamodel import *
 from mira.modeling import Model
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 from mira.modeling.amr.regnet import template_model_to_regnet_json
+from mira.sources.amr.regnet import template_model_from_amr_json
+from mira.modeling.ode import OdeModel, simulate_ode_model
 
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
@@ -177,5 +179,26 @@ for n in [2, 4, 6]:
         j = template_model_to_petrinet_json(models[n])
         json.dump(j, f, indent = 3) 
 
-# %%
+# %%[markdown]
+# # Ben Gyori's Scenario 4 Models
 
+# %%
+MIRA_HACKATHON_PATH = "../hackathon_2024.02" 
+
+for n in ("scenario4_4spec_regnet.json", "scenario4_6spec_regnet.json"):
+    p = os.path.join(MIRA_HACKATHON_PATH, "scenario4", n)
+    with open(p, "r") as f:
+        models[n] = template_model_from_amr_json(json.load(f))
+
+# %%
+models_ode = {n: OdeModel(Model(models[n]), initialized=True) for n in models.keys()}
+
+# %%
+models_ode["scenario4_4spec_regnet.json"]
+
+# %%
+res = simulate_ode_model(models_ode["scenario4_4spec_regnet.json"], times = numpy.linspace(0, 30, 100))
+plt.plot(res)
+plt.ylim([0, 1.2])
+
+# %%
