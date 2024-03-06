@@ -570,5 +570,5 @@ with open("./data/milestone_18_hackathon/scenario_5/IndiaNonSubscriptedPulsed_st
 # %%
 # Convert to PetriNet AMR JSON
     
-# Broken due to `"upstream_stock" = None`
+
 # model = template_model_from_amr_json(model_amr)
