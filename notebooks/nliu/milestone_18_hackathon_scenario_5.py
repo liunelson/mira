@@ -15,20 +15,14 @@ import json
 import numpy
 import pandas
 import sympy
-from typing import Optional, Iterable
 
-from mira.metamodel import *
-from mira.modeling import Model
-from mira.modeling.amr.petrinet import template_model_to_petrinet_json
-from mira.modeling.amr.regnet import template_model_to_regnet_json
+from mira.modeling import Concept, TemplateModel, Annotations
+from mira.sources.system_dynamics.vensim import template_model_from_mdl_url, template_model_from_mdl_file
 from mira.modeling.amr.stockflow import template_model_to_stockflow_json
-
-from mira.modeling.amr.stockflow import AMRStockFlowModel
-from mira.modeling.amr.stockflow import template_model_to_stockflow_json
-from mira.sources.amr.stockflow import template_model_from_amr_json
 
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
+PATH = "./data/milestone_18_hackathon/scenario_5"
 
 # %%[markdown]
 # v0 from Tenzin
@@ -567,8 +561,65 @@ model_amr = {
 with open("./data/milestone_18_hackathon/scenario_5/IndiaNonSubscriptedPulsed_stockflow_v0.json", "w") as f:
     json.dump(model_amr, f, indent = 3)
 
-# %%
-# Convert to PetriNet AMR JSON
-    
+# %%[markdown]
+# Load Vensim MDL to TemplateModel 
 
-# model = template_model_from_amr_json(model_amr)
+# %%
+# Need a custom grounding map
+grounding_map_df = pandas.read_csv(os.path.join(PATH, "grounding_map.csv"))
+
+# %%
+def curie_to_identifiers(curie):
+    prefix, identifier = curie.split(":")
+    return {prefix: identifier}
+
+# %%
+grounding_map = {}
+for display_name, identifiers, context_str in grounding_map_df.values:
+    if pandas.isna(identifiers):
+        continue
+    curie, name =  identifiers.split("/")
+    context = {}
+    if pandas.notna(context_str):
+        for part in context_str.split("|"):
+            part_key, part_identifier = part.split("=")
+            if "/" in part_identifier:
+                part_curie, part_name = part_identifier.split("/")
+            else:
+                part_curie, part_name = part_identifier, None
+            # print(curie, name, part_key, part_curie, part_name)
+            context[part_key] = part_curie
+            
+    grounding_map[display_name] = Concept(
+        name=name, 
+        display_name=display_name,
+        identifiers=curie_to_identifiers(curie),
+        context=context,
+    )
+
+# %%
+initials = {"susceptibles": 1.3392e+09}
+
+# %%
+model_tm = template_model_from_mdl_file(
+    os.path.join(PATH, "IndiaNonSubscriptedPulsed.mdl"),
+    grounding_map = grounding_map,
+    initials = initials,
+    initials_from_integ = True
+)
+
+model_tm.annotations = Annotations(name = "18-Month Milestone Hackathon - Epi Scenario 5")
+
+# %%
+for i, t in enumerate(model_tm.templates):
+    print(f"r_{i} = {t.rate_law!r}")
+
+# %%
+# Export StockFlow AMR JSON
+
+model_json = template_model_to_stockflow_json(model_tm)
+
+with open(os.path.join(PATH, "scenario_5_stockflow.json"), "w") as f:
+    json.dump(model_json, f, indent = 4)
+
+# %%

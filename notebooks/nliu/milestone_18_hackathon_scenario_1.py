@@ -109,10 +109,27 @@ for i, template in enumerate(model.templates):
     )
 
 # %%
-# Update the model configuration
-    
-# update_parameters({"a_0": 1.0})
-    
+# Optional: apply interventions
+
+model_json = template_model_to_petrinet_json(model)
+
+interventions = [
+    {
+        "name": "",
+        "value": 0,
+        "time": 0,
+        "type": "static_state_interventions"
+    },
+    {
+    }
+]
+
+# %%
+with open("../hackathon_2024.02/scenario1/scenario1_age_strat.json", "r") as f:
+    j = json.load(f)
+
+tm = TemplateModel.from_json(j)
+
 
 
 # %%
