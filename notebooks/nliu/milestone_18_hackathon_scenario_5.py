@@ -603,7 +603,7 @@ initials = {"susceptibles": 1.3392e+09}
 # %%
 model_tm = template_model_from_mdl_file(
     os.path.join(PATH, "IndiaNonSubscriptedPulsed.mdl"),
-    grounding_map = grounding_map,
+    # grounding_map = grounding_map,
     initials = initials,
     initials_from_integ = True
 )
