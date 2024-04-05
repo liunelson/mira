@@ -189,7 +189,7 @@ class AMRStockFlowModel:
                     str_symbol = str(symbol)
 
                     link_dict['source'] = str_symbol
-                    link_dict['target'] = "flow" + fid
+                    link_dict['target'] = fid
                     link_id += 1
                     self.links.append(link_dict)
 
@@ -208,12 +208,12 @@ class AMRStockFlowModel:
                 'flows': self.flows,
                 'stocks': self.stocks,
                 'auxiliaries': self.auxiliaries,
+                'observables': self.observables,
                 'links': self.links
             },
             'semantics': {'ode': {
                 'parameters': self.parameters,
                 'initials': self.initials,
-                'observables': self.observables,
                 'time': self.time if self.time else {'id': 't'}
             }},
             'metadata': self.metadata,
