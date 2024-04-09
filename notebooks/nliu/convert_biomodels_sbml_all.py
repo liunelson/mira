@@ -196,6 +196,29 @@ print(f"\twith downloaded PDF:\t{num['pdf'] / num['models'] * 100:.1f}%")
 # models with OA PDF link but no downloaded PDF
 x = [m for m in models if (len(models[m]["publication_link_oa"]) > 0) & (~os.path.isfile(os.path.join(PATH, m, f"{m}.pdf")))]
 
+# # %%
+# from mira.sources.amr.petrinet import template_model_from_amr_json
+
+# PATH = "./data/biomodels/biomodels_sbml_all"
+
+# models_amr = []
+
+# for d in tqdm.tqdm(os.listdir(PATH)):
+#     if os.path.isdir(os.path.join(PATH, d)):
+#         l = os.listdir(os.path.join(PATH, d))
+#         for f in l:
+#             if f.split(".")[1] == "json":
+#                 with open(os.path.join(PATH, d, f), "r") as f:
+#                     models_amr.append(json.load(f))
+
+# models_tm = []
+# for m in tqdm.tqdm(models_amr):
+#     try:
+#         models_tm.append(template_model_from_amr_json(m))
+#     except:
+#         models_tm.append(None)
+
+
 # %%
 
 
