@@ -30,12 +30,15 @@ __all__ = [
     "has_subject",
     "has_outcome",
     "has_controller",
-    "num_controllers"
+    "num_controllers",
+    "get_binding_templates",
+    "conversion_to_deg_prod",
 ]
 
 import logging
 import sys
 from collections import ChainMap
+from copy import deepcopy
 from itertools import product
 from typing import (
     Callable,
@@ -734,6 +737,30 @@ class Template(BaseModel):
         """
         template = self.copy(deep=True)
         template.set_mass_action_rate_law(parameter, independent=independent)
+        return template
+
+    def set_rate_law(self, rate_law: Union[str, sympy.Expr, SympyExprStr],
+                     local_dict=None):
+        """Set the rate law of this template to the given rate law."""
+        if isinstance(rate_law, SympyExprStr):
+            self.rate_law = rate_law
+        elif isinstance(rate_law, sympy.Expr):
+            self.rate_law = SympyExprStr(rate_law)
+        elif isinstance(rate_law, str):
+            try:
+                rate = SympyExprStr(safe_parse_expr(rate_law,
+                                                    local_dict=local_dict))
+            except Exception as e:
+                logger.warning(f"Could not parse rate law into "
+                               f"symbolic expression: {rate_law}. "
+                               f"Not setting rate law.")
+                return
+            self.rate_law = rate
+
+    def with_rate_law(self, rate_law: Union[str, sympy.Expr, SympyExprStr],
+                      local_dict=None) -> "Template":
+        template = self.copy(deep=True)
+        template.set_rate_law(rate_law, local_dict=local_dict)
         return template
 
     def get_parameter_names(self) -> Set[str]:
@@ -1824,3 +1851,54 @@ def num_controllers(template):
         return len(template.controllers)
     else:
         return 0
+
+
+def get_binding_templates(a, b, c, kf, kr):
+    """Return a list of templates emulating a reversible binding process."""
+    af = lambda: Concept(name=a)
+    bf = lambda: Concept(name=b)
+    cf = lambda: Concept(name=c)
+    templates = [
+        GroupedControlledProduction(controllers=[af(), bf()],
+                                    outcome=cf()).with_mass_action_rate_law(kf),
+        ControlledDegradation(controller=af(),
+                              subject=bf()).with_mass_action_rate_law(kf),
+        ControlledDegradation(controller=bf(),
+                              subject=af()).with_mass_action_rate_law(kf),
+        NaturalDegradation(subject=cf()).with_mass_action_rate_law(kr),
+        ControlledProduction(controller=cf(),
+                             outcome=af()).with_mass_action_rate_law(kr),
+        ControlledProduction(controller=cf(),
+                             outcome=bf()).with_mass_action_rate_law(kr)
+    ]
+    return templates
+
+
+def conversion_to_deg_prod(conv_template):
+    """Given a conversion template, compile into degradation/production templates."""
+    if not is_conversion(conv_template):
+        return [conv_template]
+    nc = num_controllers(conv_template)
+    if nc == 0:
+        tdeg = NaturalDegradation(subject=conv_template.subject,
+                                  rate_law=conv_template.rate_law)
+        tprod = ControlledProduction(outcome=conv_template.outcome,
+                                     controller=conv_template.subject,
+                                     rate_law=conv_template.rate_law)
+    elif nc == 1:
+        tdeg = ControlledDegradation(subject=conv_template.subject,
+                                     controller=conv_template.controller,
+                                     rate_law=conv_template.rate_law)
+        tprod = GroupedControlledProduction(outcome=conv_template.outcome,
+                                            controllers=[conv_template.controller,
+                                                         conv_template.subject],
+                                            rate_law=conv_template.rate_law)
+    else:
+        tdeg = GroupedControlledDegradation(subject=conv_template.subject,
+                                            controllers=conv_template.controllers,
+                                            rate_law=conv_template.rate_law)
+        tprod = GroupedControlledProduction(outcome=conv_template.outcome,
+                                            controllers=conv_template.controllers +
+                                                        [conv_template.subject],
+                                            rate_law=conv_template.rate_law)
+    return deepcopy([tdeg, tprod])

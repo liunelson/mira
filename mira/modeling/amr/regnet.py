@@ -9,6 +9,7 @@ __all__ = ["AMRRegNetModel", "ModelSpecification",
 import json
 import logging
 from copy import deepcopy
+from collections import defaultdict
 from typing import Dict, List, Optional, Union
 
 import sympy
@@ -84,6 +85,9 @@ class AMRRegNetModel:
             self._states_by_id[name] = state_data
 
         idx = 0
+        # It's possible that something is naturally degraded/replicated
+        # by multiple transitions so we need to collect and aggregate rates
+        intrinsic_by_var = defaultdict(list)
         for transition in model.transitions.values():
             # Regnets cannot represent conversions (only
             # production/degradation) so we skip these
@@ -102,7 +106,7 @@ class AMRRegNetModel:
                                                   == transition.produced[0].key)):
                 if natdeg:
                     var = vmap[transition.consumed[0].key]
-                    sign = True
+                    sign = False
                 elif natrep:
                     var = vmap[transition.produced[0].key]
                     sign = True
@@ -113,7 +117,8 @@ class AMRRegNetModel:
                 state_for_var = self._states_by_id.get(var)
                 if transition.template.rate_law:
                     pnames = transition.template.get_parameter_names()
-                    rate_const = list(pnames)[0] if pnames else None
+                    # We just choose an arbitrary one deterministically
+                    rate_const = sorted(pnames)[0] if pnames else None
                     if state_for_var:
                         state_for_var['rate_constant'] = rate_const
                 if state_for_var:
@@ -121,11 +126,7 @@ class AMRRegNetModel:
 
                 if transition.template.rate_law:
                     rate_law = transition.template.rate_law.args[0]
-                    self.rates.append({
-                        'target': var,
-                        'expression': str(rate_law),
-                        'expression_mathml': expression_to_mathml(rate_law)
-                    })
+                    intrinsic_by_var[var].append(rate_law)
             # Beyond these, we can assume that the transition is a
             # form of replication or degradation corresponding to
             # a regular transition in the regnet framework
@@ -144,7 +145,7 @@ class AMRRegNetModel:
                     # the same as the produced variable, in which case.
                     if not indep_ctrl:
                         indep_ctrl = {transition.produced[0].key}
-                    transition_dict['source'] = vmap[list(indep_ctrl)[0]]
+                    transition_dict['source'] = vmap[sorted(indep_ctrl)[0]]
                 else:
                     transition_dict['source'] = vmap[transition.control[0].key]
                 transition_dict['target'] = \
@@ -157,7 +158,8 @@ class AMRRegNetModel:
                 if transition.template.rate_law:
                     rate_law = transition.template.rate_law.args[0]
                     pnames = transition.template.get_parameter_names()
-                    rate_const = list(pnames)[0] if pnames else None
+                    # We just choose an arbitrary one deterministically
+                    rate_const = sorted(pnames)[0] if pnames else None
 
                     transition_dict['properties'] = {
                         'name': tid,
@@ -171,6 +173,14 @@ class AMRRegNetModel:
 
                 self.transitions.append(transition_dict)
                 idx += 1
+
+        for var, rates in intrinsic_by_var.items():
+            rate_law = sum(rates)
+            self.rates.append({
+                'target': var,
+                'expression': str(rate_law),
+                'expression_mathml': expression_to_mathml(rate_law)
+            })
 
         for key, param in model.parameters.items():
             if param.placeholder:

@@ -252,9 +252,10 @@ class Model:
                     ModelParameter(key, display_name=display_name, description=description,
                                    distribution=distribution,
                                    value=value,
+                                   concept=self.template_model.parameters[key],
                                    placeholder=False))
 
-        for template in self.template_model.templates:
+        for idx, template in enumerate(self.template_model.templates):
             if isinstance(template, StaticConcept):
                 self.assemble_variable(template.subject,
                                        self.template_model.initials)
@@ -276,8 +277,14 @@ class Model:
             if num_controllers(template) == 1:
                 c = self.assemble_variable(template.controller,
                                            self.template_model.initials)
-                control = (c,)
-                control_key = c.key
+                if is_replication(template):
+                    s = self.assemble_variable(template.subject,
+                                               self.template_model.initials)
+                    control = (c, s)
+                    control_key = (c.key, s.key)
+                else:
+                    control = (c,)
+                    control_key = c.key
             elif num_controllers(template) > 1:
                 control = tuple(
                     self.assemble_variable(controller,
@@ -285,6 +292,10 @@ class Model:
                     for controller in template.controllers
                 )
                 control_key = tuple(c.key for c in control)
+            elif is_replication(template):
+                s = self.assemble_variable(template.subject,
+                                           self.template_model.initials)
+                control, control_key = (s,), s.key
             else:
                 control = tuple()
                 control_key = None
@@ -298,7 +309,7 @@ class Model:
                 produced, produced_key = tuple(), None
 
             tkey_elements = tuple(
-                element for element in [consumed_key, produced_key, control_key]
+                element for element in [consumed_key, produced_key, control_key, str(idx)]
                 if element is not None
             )
             tkey = get_transition_key(tkey_elements, template.type)
@@ -324,6 +335,7 @@ class Model:
                     ModelParameter(key, display_name=display_name, description=description,
                                    distribution=distribution,
                                    value=value,
+                                   concept=self.template_model.parameters[key],
                                    placeholder=False))
 
     def get_create_parameter(self, parameter: ModelParameter) -> ModelParameter:

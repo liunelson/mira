@@ -12,6 +12,8 @@ def get_parseable_expression(s: str) -> str:
     s = s.replace('lambda', 'XXlambdaXX')
     # Handle dots which also cannot be parsed
     s = re.sub(r'\.(?=\D)', 'XX_XX', s)
+    # Handle superscripts which are not allowed in sympy
+    s = re.sub(r"\^{(.*?)}", r"XXCXX{_\1}", s)
     # Handle curly braces which are not allowed in sympy
     s = s.replace('{', 'XXCBO').replace('}', 'XXCBC')
     s = unicodedata.normalize('NFKC', s)
@@ -20,6 +22,7 @@ def get_parseable_expression(s: str) -> str:
 
 def revert_parseable_expression(s: str) -> str:
     """Return an expression to its original form."""
+    s = s.replace('XXCXX', '^')
     s = s.replace('XXCBO', '{').replace('XXCBC', '}')
     s = s.replace('XX_XX', '.')
     s = s.replace('XXlambdaXX', 'lambda')
@@ -43,6 +46,10 @@ class SympyExprStr(sympy.Expr):
     def validate(cls, v):
         if isinstance(v, cls):
             return v
+        elif isinstance(v, float):
+            return cls(sympy.Float(v))
+        elif isinstance(v, int):
+            return cls(sympy.Integer(v))
         return cls(v)
 
     @classmethod
