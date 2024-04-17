@@ -35,7 +35,7 @@ per_day_units = lambda: Unit(expression = 1 / sympy.Symbol("day"))
 # Basic components
 concepts = {
     c: Concept(name = c, display_name = c, description = f"Population of {d} agents")
-    for c, d in zip(["S", "I", "R", "D", "H"], ["susceptible", "infected", "recovered", "deceased", "hospitalized"])
+    for c, d in zip(["S", "C", "R", "D", "H"], ["susceptible", "infected", "recovered", "deceased", "hospitalized"])
 }
 
 initials = {
@@ -47,35 +47,35 @@ model = TemplateModel(
     templates = [
         ControlledConversion(
             subject = concepts["S"],
-            outcome = concepts["I"],
-            controller = concepts["I"],
-            name = "S_to_I_via_I",
-        ),
+            outcome = concepts["C"],
+            controller = concepts["C"],
+            name = "S_to_C_via_C",
+        ).with_mass_action_rate_law("a"),
         NaturalConversion(
-            subject = concepts["I"],
+            subject = concepts["C"],
             outcome = concepts["H"],
-            name = "I_to_H",
-        ),
+            name = "C_to_H",
+        ).with_mass_action_rate_law("b"),
         NaturalConversion(
-            subject = concepts["I"],
+            subject = concepts["C"],
             outcome = concepts["R"],
-            name = "I_to_R"
-        ),
+            name = "C_to_R"
+        ).with_mass_action_rate_law("c"),
         NaturalConversion(
             subject = concepts["H"],
             outcome = concepts["R"],
             name = "H_to_R"
-        ),
+        ).with_mass_action_rate_law("d"),
         NaturalConversion(
             subject = concepts["H"],
             outcome = concepts["D"],
             name = "H_to_D"
-        )
+        ).with_mass_action_rate_law("e")
     ],
     initials = initials,
     observables = {},
     time = Time(name = "t", units = day_units()),
-    annotations = Annotations(name = f"SIRHD")
+    annotations = Annotations(name = f"SCRHD")
 )
 
 # %%
@@ -83,148 +83,146 @@ model = TemplateModel(
 GraphicalModel.for_jupyter(model)
 
 # %%
-# Alphabet
-alpha = list(map(chr, range(ord('a'), ord('z')+1)))
+# # Alphabet
+# alpha = list(map(chr, range(ord('a'), ord('z')+1)))
 
-# Set mass action kinetics
-for i, template in enumerate(model.templates):
-    p = alpha[i]
-    template.set_mass_action_rate_law(p)
-    model.add_parameter(
-        parameter_id = p,
-        name = p,
-        value = 1.0,
-        description = f"Rate constant for {template.name}"
-    )
+# # Set mass action kinetics
+# for i, template in enumerate(model.templates):
+#     p = alpha[i]
+#     template.set_mass_action_rate_law(p)
+#     model.add_parameter(
+#         parameter_id = p,
+#         name = p,
+#         value = 1.0,
+#         description = f"Rate constant for {template.name}"
+#     )
 
 # %%
 # Customize the I-to-H rate law
-
-vaxItoH, ageItoH = sympy.symbols('vaxItoH, ageItoH')
+# vaxItoH, ageItoH = sympy.symbols('vaxItoH, ageItoH')
 for t in model.templates:
-    if t.name == "I_to_H":
-        t.rate_law = t.rate_law.args[0] * vaxItoH * ageItoH
+    if t.name == "C_to_H":
+        # t.rate_law = t.rate_law.args[0] * vaxItoH * ageItoH
+        t.set_rate_law("C * b * vaxCtoH * ageCtoH")
+        # Not safe to "I", might be interpreted as imaginary "i"
+
+# %%
+# Initialize the parameters
+model.parameters = {p: Parameter(name = p, value = 1.0) for p in model.get_all_used_parameters()}
 
 # %%
 # Stratify by vaccination status
 model_vax = stratify(
     model, 
     key = "vaxstatus", 
-    strata = ["unvax", "vax"], 
+    strata = ["u", "v"], 
     cartesian_control = True, 
     structure = [],
-    concepts_to_stratify = None,
-    params_to_stratify = ["vaxI_to_H"]
+    concepts_to_stratify = ["S", "C"],
+    params_to_stratify = ["a", "vaxCtoH"]
 )
 
 GraphicalModel.for_jupyter(model_vax)
 
 # %%
 # Add vaccination dynamics
-
-t = NaturalConversion(
-    subject = model_vax.get_concepts_name_map()["S_unvax"],
-    outcome = model_vax.get_concepts_name_map()["S_vax"],
-    name = "vaccination"
+model_vax = model_vax.add_template(
+    NaturalConversion(
+        subject = model_vax.get_concepts_name_map()["S_u"],
+        outcome = model_vax.get_concepts_name_map()["S_v"],
+        name = "vaccination"
+    ).with_mass_action_rate_law("f")
 )
-t.set_mass_action_rate_law(alpha[len(model_vax.parameters)])
 
-model_vax = model_vax.add_template(t)
+model.parameters["f"] = Parameter(name = "f", value = 1.0)
 
 # %%
 GraphicalModel.for_jupyter(model_vax)
 
 # %%
+def generate_summary_table(model):
 
-########################
+    data = {"name": [t.name for t in model.templates]}
+    for k in ("subject", "outcome", "controller"):
+        data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
 
+    data["controllers"] = [[c.name for c in getattr(t, k)] if hasattr(t, "controllers") else None for t in model.templates]
+    data["controller(s)"] = [i if j == None else j for i, j in zip(data["controller"], data["controllers"])]
+    __ = data.pop("controller")
+    __ = data.pop("controllers")
 
+    data["rate_law"] = [t.rate_law for t in model.templates]
 
-# %%
-# Stratified by 16 age groups
-num_ages = 16
-model_age = stratify(
-    model, 
-    key = "age",
-    strata = [f"A{i}" for i in range(num_ages)],
-    cartesian_control = True, 
-    structure = [], 
-    directed = True,
-    params_to_stratify = [p for t in model.templates if t.subject.name in ("S") for p in t.get_parameter_names()],
-    concepts_to_stratify = ["S", "E", "M", "C"]
-)
+    df = pandas.DataFrame(data)
+
+    return df
 
 # %%
-GraphicalModel.for_jupyter(model_age)
+generate_summary_table(model)
 
 # %%
-# Multi-stratify the base model
-# 1. number of vaccine doses: zero, once, twice
-# 2. age group: y, o
-# 3. sex: male or female
-# 4. ethnicity: white, black, asian, latino
-
-model_vac = stratify(
-    model, 
-    key = "vac",
-    strata = ["0", "1", "2"],
-    cartesian_control = True, 
-    structure = [["0", "1"], ["1", "2"]], 
-    directed = True,
-    params_to_stratify = None,
-    concepts_to_stratify = None
-)
+generate_summary_table(model_vax)
 
 # %%
-model_vac_age = stratify(
-    model_vac,
+# Export to AMR
+with open("./notebooks/nliu/scenario2_vax.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_vax), f, indent = 4)
+
+# %%
+# Stratified by 2 age groups
+model_vax_age = stratify(
+    model_vax, 
     key = "age",
     strata = ["y", "o"],
-    cartesian_control = True,
-    structure = [],
-    directed = True,
-    params_to_stratify = None,
+    cartesian_control = True, 
+    structure = [], 
+    params_to_preserve = ["b", "vaxCtoH_0", "vaxCtoH_1"],
     concepts_to_stratify = None
 )
 
 # %%
-model_vac_age_sex = stratify(
-    model_vac_age,
-    key = "sex",
-    strata = ["m", "f", "q"],
-    cartesian_control = True,
-    structure = [],
-    directed = True,
-    params_to_stratify = None,
-    concepts_to_stratify = None
-)
+generate_summary_table(model_vax_age)
 
 # %%
-model_vac_age_sex_eth = stratify(
-    model_vac_age_sex,
-    key = "ethnicity",
-    strata = ["w", "b", "l", "a"],
-    cartesian_control = True,
-    structure = [],
-    directed = True,
-    params_to_stratify = None,
-    concepts_to_stratify = None
-)
+GraphicalModel.for_jupyter(model_vax_age)
 
 # %%
-# GraphicalModel.for_jupyter(model_vac_age_sex_eth)
+# Export to AMR
+with open("./notebooks/nliu/scenario2_vax_age.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_vax_age), f, indent = 4)
 
 # %%
-model_age.annotations.name = "SEIIRD_Age16"
-model_vac.annotations.name = "SEIIRD_Vac3"
-model_vac_age.annotations.name = "SEIIRD_Vac3_Age2"
-model_vac_age_sex.annotations.name = "SEIIRD_Vac3_Age2_Sex3"
-model_vac_age_sex_eth.annotations.name = "SEIIRD_Vac3_Age2_Sex3_Eth4"
+def generate_matrices(model, parameter_name):
 
-# %%
-for name, m in zip(("model", "model_age", "model_vac", "model_vac_age", "model_vac_age_sex", "model_vac_age_sex_eth"), (model, model_age, model_vac, model_vac_age, model_vac_age_sex, model_vac_age_sex_eth)):
-    with open(os.path.join(PATH, f"{name}.json"), "w") as f:
-        j = template_model_to_petrinet_json(m)
-        json.dump(j, f, indent = 4)
+    parameters = list(model.get_all_used_parameters())
+    root_parameters = {p.split("_")[0]: [] for p in parameters}
+    for p in parameters:
+        root_parameters[p.split("_")[0]].extend(p.split("_"))
+
+    root_matrices = {p: {k: [] for k in ("subject_outcome", "subject_controller(s)", "outcome_controller(s)")} for p in root_parameters.keys()}
+
+    for t in model.templates:
+        if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0:
+
+            x = []
+            for k in ("subject", "outcome"):
+                if hasattr(t, k):
+                    x.append(getattr(t, k).name)
+                else:
+                    None
+
+            if hasattr(t, "subject") & hasattr(t, "outcome")
+
+
+
+    root_matrices[parameter_name]["subject_outcome"] = [
+        [t.subject.name, t.outcome.name, set(root_parameters[parameter_name]).intersection(t.get_parameter_names())] if hasattr(t, "subject") & hasattr(t, "outcome") 
+
+        for t in model.templates if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0
+    ]
+
+    return root_matrices
+
+matrices = generate_matrices(model_vax, "a")
 
 # %%
