@@ -1,9 +1,9 @@
 {
     "header": {
-        "name": "SCRHD",
+        "name": "SCRHD Vax",
         "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
         "schema_name": "petrinet",
-        "description": "SCRHD",
+        "description": "SCRHD Vax",
         "model_version": "0.1"
     },
     "properties": {},

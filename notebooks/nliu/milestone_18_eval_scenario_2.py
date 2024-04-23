@@ -111,6 +111,11 @@ for t in model.templates:
 model.parameters = {p: Parameter(name = p, value = 1.0) for p in model.get_all_used_parameters()}
 
 # %%
+with open("./scenario2.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model), f, indent = 4)
+
+
+# %%
 # Stratify by vaccination status
 model_vax = stratify(
     model, 
@@ -121,7 +126,9 @@ model_vax = stratify(
     concepts_to_stratify = ["S", "C"],
     params_to_stratify = ["a", "vaxCtoH"]
 )
+model_vax.annotations.name = "SCRHD Vax"
 
+# %%
 GraphicalModel.for_jupyter(model_vax)
 
 # %%
@@ -152,6 +159,7 @@ def generate_summary_table(model):
     __ = data.pop("controllers")
 
     data["rate_law"] = [t.rate_law for t in model.templates]
+    data["interactor_rate_law"] = [t.get_interactor_rate_law() for t in model.templates]
 
     df = pandas.DataFrame(data)
 
@@ -165,7 +173,7 @@ generate_summary_table(model_vax)
 
 # %%
 # Export to AMR
-with open("./notebooks/nliu/scenario2_vax.json", "w") as f:
+with open("./scenario2_vax.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model_vax), f, indent = 4)
 
 # %%
@@ -179,6 +187,7 @@ model_vax_age = stratify(
     params_to_preserve = ["b", "vaxCtoH_0", "vaxCtoH_1"],
     concepts_to_stratify = None
 )
+model_vax_age.annotations.name = "SCRHD Vax Age"
 
 # %%
 generate_summary_table(model_vax_age)
@@ -188,41 +197,87 @@ GraphicalModel.for_jupyter(model_vax_age)
 
 # %%
 # Export to AMR
-with open("./notebooks/nliu/scenario2_vax_age.json", "w") as f:
+with open("./scenario2_vax_age.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model_vax_age), f, indent = 4)
 
 # %%
-def generate_matrices(model, parameter_name):
+def generate_odesys(model, latex_align: bool = False) -> list:
 
-    parameters = list(model.get_all_used_parameters())
-    root_parameters = {p.split("_")[0]: [] for p in parameters}
-    for p in parameters:
-        root_parameters[p.split("_")[0]].extend(p.split("_"))
-
-    root_matrices = {p: {k: [] for k in ("subject_outcome", "subject_controller(s)", "outcome_controller(s)")} for p in root_parameters.keys()}
+    odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
 
     for t in model.templates:
-        if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0:
-
-            x = []
-            for k in ("subject", "outcome"):
-                if hasattr(t, k):
-                    x.append(getattr(t, k).name)
-                else:
-                    None
-
-            if hasattr(t, "subject") & hasattr(t, "outcome")
+        if hasattr(t, "subject"):
+            var = t.subject.name
+            odeterms[var] -= t.rate_law.args[0]
+        
+        if hasattr(t, "outcome"):
+            var = t.outcome.name
+            odeterms[var] += t.rate_law.args[0]
 
 
+    # Convert to LaTeX
+    if latex_align == True:
+        odesys = [
+            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} & = " + sympy.latex(terms)
+            for var, terms in odeterms.items()
+        ]
+        odesys = "\\begin{align*}\n" + "\n".join(["    " + expr + "\\\\" for expr in odesys]) + "\n\\end{align}"
 
-    root_matrices[parameter_name]["subject_outcome"] = [
-        [t.subject.name, t.outcome.name, set(root_parameters[parameter_name]).intersection(t.get_parameter_names())] if hasattr(t, "subject") & hasattr(t, "outcome") 
+    else:
+        odesys = [
+            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} = " + sympy.latex(terms)
+            for var, terms in odeterms.items()
+        ]
 
-        for t in model.templates if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0
-    ]
+    return odesys
 
-    return root_matrices
+odesys = generate_odesys(model, latex_align = True)
+print(odesys)
 
-matrices = generate_matrices(model_vax, "a")
+# %%
+m, a, i, n = sympy.symbols('m a i n')
+x, y, z = sympy.symbols("x y z", cls = sympy.Function)
+z = sympy.summation((m * x(i) + a - y(i)) ** 2, (i, 0, 3))
+print(sympy.latex(z))
+
+x = sympy.IndexedBase("x")
+y = sympy.IndexedBase("y")
+z = sympy.Sum((m * x[i] + a - y[i]) ** 2, (i, 0, 3))
+print(sympy.latex(z.doit()))
+
+
+# %%
+# def generate_matrices(model, parameter_name):
+
+#     parameters = list(model.get_all_used_parameters())
+#     root_parameters = {p.split("_")[0]: [] for p in parameters}
+#     for p in parameters:
+#         root_parameters[p.split("_")[0]].extend(p.split("_"))
+
+#     root_matrices = {p: {k: [] for k in ("subject_outcome", "subject_controller(s)", "outcome_controller(s)")} for p in root_parameters.keys()}
+
+#     for t in model.templates:
+#         if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0:
+
+#             x = []
+#             for k in ("subject", "outcome"):
+#                 if hasattr(t, k):
+#                     x.append(getattr(t, k).name)
+#                 else:
+#                     None
+
+#             if hasattr(t, "subject") & hasattr(t, "outcome")
+
+
+
+#     root_matrices[parameter_name]["subject_outcome"] = [
+#         [t.subject.name, t.outcome.name, set(root_parameters[parameter_name]).intersection(t.get_parameter_names())] if hasattr(t, "subject") & hasattr(t, "outcome") 
+
+#         for t in model.templates if len(set(root_parameters[parameter_name]).intersection(t.get_parameter_names())) > 0
+#     ]
+
+#     return root_matrices
+
+# matrices = generate_matrices(model_vax, "a")
 
 # %%
