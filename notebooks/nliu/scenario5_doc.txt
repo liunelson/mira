@@ -1,0 +1,131 @@
+Scenario 5: The Lac Operon (Workbench Only) *
+Estimated % of time: Workbench 15%
+*This scenario is meant to be conducted by workbench modelers only. There is no baseline for this scenario. This scenario will not be presented in the Decision-maker Panel.
+In E. Coli, lactose metabolism is regulated by a group of genes called the lac operon. This group is a sequence of six genes that do the following (and are described in Figure 4):
+• The last three genes (z, y, a) in the sequence are transcribed and translated into three enzymes that are involved in the metabolism of lactose (which allows bacteria to use the sugar lactose as an energy source):
+i. 𝛽-galactosidase (synthesized from gene z), which degrades lactose by splinng it into glucose and galactose
+ii. lactose permease (synthesized from gene y), a protein that transports lactose into the cell
+iii. transacetylase (synthesized from gene a), which has a smaller, supporIng role in the metabolism process
+• The first three genes (i, p, o) regulate enzyme producIon:
+i. Gene i is transcribed and translated into a protein called the lac repressor
+ii. When lactose is not present in the environment, the lac repressor binds to gene o (the operator gene), and blocks RNA polymerase (RNAP) from binding to gene p (the promoter gene) to start the transcripIon of genes z, y, and a, menIoned above.
+iii. When lactose is present, it binds to the lac repressor and removes it from gene o, which then allows genes z, y, and a to be transcribed, and the enzymes 𝛽- galactosidase, lactose permease, and transacetylase, to be synthesized.
+• Note that this is a somewhat simplified model, and in reality, the absence and presence of glucose also plays a role in regulaIng these processes.
+Figure 4. Regula-on of lactose metabolism
+ 22
+A simplified representaIon of lac operon dynamics can be described by the following chemical reacIons and kineIc constants.
+# 1
+2 3
+4
+5
+6 7
+8
+9 10 11 12 13
+Chemical Reac)on
+Reac)on Descrip)on Kine)c Constants (1/seconds)
+Table 2. Reac-ons and Kine-c Constants for Scenario 5: The Lac Operon (Workbench Only) *
+   !!
+   𝑖→𝑖+𝑟 "
+  Gene 𝑖 is transcribed into 𝑟 (the mRNA "
+for lac repressor protein, represented as 𝐼)
+  𝑘# = 0.02
+    !"
+𝑟 is transcribed into lac repressor 𝑘 "$
+= 0.1
+𝑟→𝑟+𝐼 ""
+protein 𝐼
+𝑘$
+𝐼 + 𝐿𝑎𝑐𝑡𝑜𝑠𝑒 ⇌ 𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒
+𝑘%
+     𝐼 interacts with lactose and becomes bound to it (represented by 𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒), in equilibrium with the reverse process
+    𝑘& = 0.005 𝑘% = 0.1
+ 𝑘'
+𝐼 + 𝑂𝑝 ⇌ 𝐼 ∙ 𝑂𝑝
+𝑘(
+   𝐼 binds with the lac operon (represented as a single en?ty Op in this context) where the bound complex is represented by 𝐼 ∙ 𝑂𝑝; in equilibrium the reverse process also occurs, where 𝐼 becomes unbound from the lac operon
+   𝑘' = 1
+𝑘( = 0.01
+ 𝑘) 𝑅𝑁𝐴𝑃+𝑂𝑝 ⇌ 𝑅𝑁𝐴𝑃∙𝑂𝑝
+𝑘*
+  RNA polymerase (RNAP) binds with the lac operon, (represented in this context by Op) where the bound complex is represented by 𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝; in equilibrium the reverse process also occurs, where RNAP becomes unbound from the lac operon
+  𝑘) = 0.1 𝑘* = 0.01
+!#
+   𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝 → 𝑂𝑝 + 𝑅𝑁𝐴𝑃 + 𝑟 +,-
+  RNAP bound to the lac operon,
+transcribes genes z, y, and a into a single
+mRNA 𝑟 +,-
+    𝑘. = 0.03
+     !!$
+is translated into 𝛽- galactosidase (𝑍)
+𝑟 AB𝑟 +𝑍 +,- +,-
+𝑘 #/
+𝑘 = 0.01 #'
+𝑘#( = 0.01
+mRNA 𝑟 +,-
+= 0.1
+!!! 𝐿𝑎𝑐𝑡𝑜𝑠𝑒 + 𝑍 AB 𝑍
+     Lactose is degraded by 𝛽-galactosidase; the details of how it is split into glucose and galactose are omiied
+    𝑘## =1𝑒−5
+  !!"
+𝑟 AB∅
+= 0.01 𝑘#& = 0.002 𝑘#% = 0.002
+"
+mRNA 𝑟 is degraded "
+Protein 𝐼 is degraded
+Protein 𝐼 bound to lactose is degraded
+mRNA 𝑟 is degraded +,-
+𝛽-galactosidase is degraded
+𝑘 #$
+!!%
+𝐼 AB ∅
+!!&
+𝐼 ⋅ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒 AB 𝐿𝑎𝑐𝑡𝑜𝑠𝑒
+!!(
+𝑍 AB ∅
+      !!'
+   𝑟 AB∅ +,-
+      23
+
+Molecular interacIons are discrete in nature and are ideally represented by stochasIc simulaIons. However, for the purpose of this scenario, we ignore this aspect and esImate the chemical reacIons by the following system of determinisIc ODEs:
+𝑑[𝑖] = 0
+% %'(
+𝑑[𝐼]=𝑘 [𝑟]−𝑘 [𝐼][𝐿𝑎𝑐𝑡𝑜𝑠𝑒]+𝑘 [𝐼∙𝐿𝑎𝑐𝑡𝑜𝑠𝑒]−𝑘 [𝐼][𝑂𝑝]+𝑘 [𝐼∙𝑂𝑝]−𝑘 [𝐼]
+𝑑𝑡 𝑑[𝑟]
+𝑑𝑡
+𝑑𝑡
+'(2 3 4 5 %2
+( =𝑘[𝑖]−𝑘 [𝑟]
+𝑑[𝐿𝑎𝑐𝑡𝑜𝑠𝑒] = (𝑘3 + 𝑘%3)[𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒] − 𝑘2[𝐼][𝐿𝑎𝑐𝑡𝑜𝑠𝑒] − 𝑘%%[𝑍][𝐿𝑎𝑐𝑡𝑜𝑠𝑒] 𝑑𝑡
+ 𝑑[𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒] = 𝑘2[𝐼][𝐿𝑎𝑐𝑡𝑜𝑠𝑒] − (𝑘3 + 𝑘%3)[𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒]
+ 𝑑[𝑂𝑝]𝑑𝑡
+𝑑𝑡 = 𝑘5[𝐼 ∙ 𝑂𝑝] − 𝑘4[𝐼][𝑂𝑝] − 𝑘6[𝑂𝑝][𝑅𝑁𝐴𝑃] + (𝑘7 + 𝑘8)[𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝]
+𝑑[𝐼 ∙ 𝑂𝑝] = 𝑘4[𝐼][𝑂𝑝] − 𝑘5[𝐼 ∙ 𝑂𝑝] 𝑑𝑡
+ 𝑑[𝑅𝑁𝐴𝑃] = (𝑘7 + 𝑘8)[𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝] − 𝑘6[𝑂𝑝][𝑅𝑁𝐴𝑃] 𝑑𝑡
+ 𝑑[𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝] = 𝑘6[𝑂𝑝][𝑅𝑁𝐴𝑃] − (𝑘7 + 𝑘8)[𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝] 𝑑𝑡
+ 𝑑[𝑟 ]
+9#. =𝑘 [𝑅𝑁𝐴𝑃∙𝑂𝑝]−𝑘 [𝑟 ]
+8 %4 9#. 𝑑[𝑍]=𝑘 [𝑟 ]−𝑘 [𝑍][𝐿𝑎𝑐𝑡𝑜𝑠𝑒]−𝑘 [𝑍]
+ 𝑑𝑡 𝑑𝑡
+%: 9#. %% %5
+Where:
+• 𝑖 is lac operon gene 𝑖
+• 𝑟 is the mRNA for the lac repressor protein 𝐼 (
+• 𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒 is the protein 𝐼 bound to lactose
+• 𝑂𝑝 is the lac operon and in this model, is treated as a single enIty in the context of
+binding reacIons
+• 𝐼 ∙ 𝑂𝑝 is the protein 𝐼 bound to the lac operon
+• 𝑅𝑁𝐴𝑃 is RNA Polymerase (the enzyme that transcribes DNA into RNA)
+• 𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝 is RNA Polymerase bound to the lac operon
+• 𝑟 is the mRNA created from the transcripIon of the lac operon genes 9#.
+• 𝑍 is 𝛽-galactosidase, one of the enzymes translated from the mRNA 𝑟 9#.
+• [ ] represents concentraIon of a species, in units of number of molecules per cell
+1. Implement and simulate the dynamics of the lac operon as a regulatory network in a single cell, using parameter values from Table 2, and iniIal condiIons from Table 3, for a Ime period of 1000 seconds, and with the following condiIons:
+24
+
+a. Simulate the system when there is no lactose present in the environment (let [𝐿𝑎𝑐𝑡𝑜𝑠𝑒]: = 0 molecules/cell). Plot the mRNA and protein trajectories. When does 𝑍 reach peak concentraIon, and what is the peak concentraIon amount?
+b. Simulate when there is lactose present in the environment (let [𝐿𝑎𝑐𝑡𝑜𝑠𝑒]: = 500 molecules/cell). Plot the mRNA and protein trajectories. When does 𝑍 reach peak concentraIon, and what is the peak concentraIon amount?
+c. How does the 𝑍 trajectory in the presence of lactose, compare to its trajectory in the absence of lactose?
+Table 3. Ini-al Condi-ons for Scenario 5: The Lac Operon (Workbench Only) *, Ques-on 1. All concentra-ons are in units of number of molecules per cell
+[𝑖] [𝑟 ] [𝐼] [𝑂𝑝] [𝐼 ∙ 𝑂𝑝] [𝑅𝑁𝐴𝑃] [𝑅𝑁𝐴𝑃 ∙ 𝑂𝑝] [𝑟 ] [𝑍] [𝐼 ∙ 𝐿𝑎𝑐𝑡𝑜𝑠𝑒] !"!!!!! !#$%!! !
+1 0 50 1 0 100 0     0 0 0
+2. Now simulate the model for 1000 seconds, where lactose is not present for the first 500 seconds, and 2000 molecules of lactose are added to the cell at t = 500 seconds. Plot and comment on the behavior of the mRNA and protein trajectories over the course of the simulaIon.

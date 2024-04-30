@@ -1,0 +1,396 @@
+{
+ "header": {
+  "name": "SIR model from MIRA, 2-location stratified with MIRA",
+  "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+  "schema_name": "petrinet",
+  "description": "SIR model from MIRA, 2-location stratified with MIRA",
+  "model_version": "0.1"
+ },
+ "properties": {},
+ "model": {
+  "states": [
+   {
+    "id": "S_MTL",
+    "name": "S_MTL",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "location": "MTL"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_MTL",
+    "name": "I_MTL",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "location": "MTL"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "S_TOR",
+    "name": "S_TOR",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000514"
+     },
+     "modifiers": {
+      "location": "TOR"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "I_TOR",
+    "name": "I_TOR",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000511"
+     },
+     "modifiers": {
+      "location": "TOR"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_MTL",
+    "name": "R_MTL",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "location": "MTL"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   },
+   {
+    "id": "R_TOR",
+    "name": "R_TOR",
+    "grounding": {
+     "identifiers": {
+      "ido": "0000592"
+     },
+     "modifiers": {
+      "location": "TOR"
+     }
+    },
+    "units": {
+     "expression": "person",
+     "expression_mathml": "<ci>person</ci>"
+    }
+   }
+  ],
+  "transitions": [
+   {
+    "id": "t1",
+    "input": [
+     "I_MTL",
+     "S_MTL"
+    ],
+    "output": [
+     "I_MTL",
+     "I_MTL"
+    ],
+    "properties": {
+     "name": "t1"
+    }
+   },
+   {
+    "id": "t2",
+    "input": [
+     "I_TOR",
+     "S_TOR"
+    ],
+    "output": [
+     "I_TOR",
+     "I_TOR"
+    ],
+    "properties": {
+     "name": "t2"
+    }
+   },
+   {
+    "id": "t3",
+    "input": [
+     "I_MTL"
+    ],
+    "output": [
+     "R_MTL"
+    ],
+    "properties": {
+     "name": "t3"
+    }
+   },
+   {
+    "id": "t4",
+    "input": [
+     "I_TOR"
+    ],
+    "output": [
+     "R_TOR"
+    ],
+    "properties": {
+     "name": "t4"
+    }
+   },
+   {
+    "id": "t5",
+    "input": [
+     "S_TOR"
+    ],
+    "output": [
+     "S_MTL"
+    ],
+    "properties": {
+     "name": "t5"
+    }
+   },
+   {
+    "id": "t6",
+    "input": [
+     "S_MTL"
+    ],
+    "output": [
+     "S_TOR"
+    ],
+    "properties": {
+     "name": "t6"
+    }
+   },
+   {
+    "id": "t7",
+    "input": [
+     "I_TOR"
+    ],
+    "output": [
+     "I_MTL"
+    ],
+    "properties": {
+     "name": "t7"
+    }
+   },
+   {
+    "id": "t8",
+    "input": [
+     "I_MTL"
+    ],
+    "output": [
+     "I_TOR"
+    ],
+    "properties": {
+     "name": "t8"
+    }
+   },
+   {
+    "id": "t9",
+    "input": [
+     "R_TOR"
+    ],
+    "output": [
+     "R_MTL"
+    ],
+    "properties": {
+     "name": "t9"
+    }
+   },
+   {
+    "id": "t10",
+    "input": [
+     "R_MTL"
+    ],
+    "output": [
+     "R_TOR"
+    ],
+    "properties": {
+     "name": "t10"
+    }
+   }
+  ]
+ },
+ "semantics": {
+  "ode": {
+   "rates": [
+    {
+     "target": "t1",
+     "expression": "I_MTL*S_MTL*beta_0",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>S_MTL</ci><ci>beta_0</ci></apply>"
+    },
+    {
+     "target": "t2",
+     "expression": "I_TOR*S_TOR*beta_1",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>S_TOR</ci><ci>beta_1</ci></apply>"
+    },
+    {
+     "target": "t3",
+     "expression": "I_MTL*gamma_0",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>gamma_0</ci></apply>"
+    },
+    {
+     "target": "t4",
+     "expression": "I_TOR*gamma_1",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>gamma_1</ci></apply>"
+    },
+    {
+     "target": "t5",
+     "expression": "S_TOR*p_TOR_MTL",
+     "expression_mathml": "<apply><times/><ci>S_TOR</ci><ci>p_TOR_MTL</ci></apply>"
+    },
+    {
+     "target": "t6",
+     "expression": "S_MTL*p_MTL_TOR",
+     "expression_mathml": "<apply><times/><ci>S_MTL</ci><ci>p_MTL_TOR</ci></apply>"
+    },
+    {
+     "target": "t7",
+     "expression": "I_TOR*p_TOR_MTL",
+     "expression_mathml": "<apply><times/><ci>I_TOR</ci><ci>p_TOR_MTL</ci></apply>"
+    },
+    {
+     "target": "t8",
+     "expression": "I_MTL*p_MTL_TOR",
+     "expression_mathml": "<apply><times/><ci>I_MTL</ci><ci>p_MTL_TOR</ci></apply>"
+    },
+    {
+     "target": "t9",
+     "expression": "R_TOR*p_TOR_MTL",
+     "expression_mathml": "<apply><times/><ci>R_TOR</ci><ci>p_TOR_MTL</ci></apply>"
+    },
+    {
+     "target": "t10",
+     "expression": "R_MTL*p_MTL_TOR",
+     "expression_mathml": "<apply><times/><ci>R_MTL</ci><ci>p_MTL_TOR</ci></apply>"
+    }
+   ],
+   "initials": [
+    {
+     "target": "S_MTL",
+     "expression": "499.5",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "I_MTL",
+     "expression": "0.5",
+     "expression_mathml": "<cn>0.5</cn>"
+    },
+    {
+     "target": "S_TOR",
+     "expression": "499.5",
+     "expression_mathml": "<cn>499.5</cn>"
+    },
+    {
+     "target": "I_TOR",
+     "expression": "0.5",
+     "expression_mathml": "<cn>0.5</cn>"
+    },
+    {
+     "target": "R_MTL",
+     "expression": "0",
+     "expression_mathml": "<cn>0</cn>"
+    },
+    {
+     "target": "R_TOR",
+     "expression": "0",
+     "expression_mathml": "<cn>0</cn>"
+    }
+   ],
+   "parameters": [
+    {
+     "id": "beta_0",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "beta_1",
+     "value": 0.4,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "gamma_0",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "gamma_1",
+     "value": 0.09090909090909091,
+     "units": {
+      "expression": "1/day",
+      "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+     }
+    },
+    {
+     "id": "p_TOR_MTL",
+     "value": 0.1
+    },
+    {
+     "id": "p_MTL_TOR",
+     "value": 0.1
+    }
+   ],
+   "observables": [
+    {
+     "id": "Total Population",
+     "name": "Total Population",
+     "expression": "SympyExprStr(I_MTL + I_TOR) + SympyExprStr(R_MTL + R_TOR) + SympyExprStr(S_MTL + S_TOR)",
+     "expression_mathml": "<apply><plus/><sympyexprstr><apply><plus/><ci>I_MTL</ci><ci>I_TOR</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>R_MTL</ci><ci>R_TOR</ci></apply></sympyexprstr><sympyexprstr><apply><plus/><ci>S_MTL</ci><ci>S_TOR</ci></apply></sympyexprstr></apply>"
+    }
+   ],
+   "time": {
+    "id": "t",
+    "units": {
+     "expression": "day",
+     "expression_mathml": "<ci>day</ci>"
+    }
+   }
+  }
+ },
+ "metadata": {
+  "annotations": {
+   "license": null,
+   "authors": [],
+   "references": [],
+   "time_scale": null,
+   "time_start": null,
+   "time_end": null,
+   "locations": [],
+   "pathogens": [],
+   "diseases": [],
+   "hosts": [],
+   "model_types": []
+  }
+ }
+}

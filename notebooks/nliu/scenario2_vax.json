@@ -1,0 +1,391 @@
+{
+    "header": {
+        "name": "SCRHD Vax",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SCRHD Vax",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S_u",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vaxstatus": "u"
+                    }
+                }
+            },
+            {
+                "id": "C_u",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vaxstatus": "u"
+                    }
+                }
+            },
+            {
+                "id": "C_v",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vaxstatus": "v"
+                    }
+                }
+            },
+            {
+                "id": "S_v",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vaxstatus": "v"
+                    }
+                }
+            },
+            {
+                "id": "H",
+                "name": "H",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "D",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "C_u",
+                    "S_u"
+                ],
+                "output": [
+                    "C_u",
+                    "C_u"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [
+                    "C_v",
+                    "S_u"
+                ],
+                "output": [
+                    "C_v",
+                    "C_u"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "C_v",
+                    "S_v"
+                ],
+                "output": [
+                    "C_v",
+                    "C_v"
+                ],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
+                    "C_u",
+                    "S_v"
+                ],
+                "output": [
+                    "C_u",
+                    "C_v"
+                ],
+                "properties": {
+                    "name": "t4"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "C_u"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "C_v"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t6"
+                }
+            },
+            {
+                "id": "t7",
+                "input": [
+                    "C_u"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t7"
+                }
+            },
+            {
+                "id": "t8",
+                "input": [
+                    "C_v"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t8"
+                }
+            },
+            {
+                "id": "H_to_R",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "H_to_R"
+                }
+            },
+            {
+                "id": "H_to_D",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "H_to_D"
+                }
+            },
+            {
+                "id": "vaccination",
+                "input": [
+                    "S_u"
+                ],
+                "output": [
+                    "S_v"
+                ],
+                "properties": {
+                    "name": "vaccination"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "C_u*S_u*a_0",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_u</ci><ci>a_0</ci></apply>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "C_v*S_u*a_1",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_u</ci><ci>a_1</ci></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "C_v*S_v*a_2",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_v</ci><ci>a_2</ci></apply>"
+                },
+                {
+                    "target": "t4",
+                    "expression": "C_u*S_v*a_3",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_v</ci><ci>a_3</ci></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "C_u*ageCtoH*b*vaxCtoH_0",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_0</ci></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "C_v*ageCtoH*b*vaxCtoH_1",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_1</ci></apply>"
+                },
+                {
+                    "target": "t7",
+                    "expression": "C_u*c",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>c</ci></apply>"
+                },
+                {
+                    "target": "t8",
+                    "expression": "C_v*c",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>c</ci></apply>"
+                },
+                {
+                    "target": "H_to_R",
+                    "expression": "H*d",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
+                },
+                {
+                    "target": "H_to_D",
+                    "expression": "H*e",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>e</ci></apply>"
+                },
+                {
+                    "target": "vaccination",
+                    "expression": "S_u*f",
+                    "expression_mathml": "<apply><times/><ci>S_u</ci><ci>f</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S_u",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "C_u",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "C_v",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_v",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "H",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "D",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "a_0",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_2",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_3",
+                    "value": 1.0
+                },
+                {
+                    "id": "ageCtoH",
+                    "value": 1.0
+                },
+                {
+                    "id": "b",
+                    "value": 1.0
+                },
+                {
+                    "id": "vaxCtoH_0",
+                    "value": 1.0
+                },
+                {
+                    "id": "vaxCtoH_1",
+                    "value": 1.0
+                },
+                {
+                    "id": "c",
+                    "value": 1.0
+                },
+                {
+                    "id": "d",
+                    "value": 1.0
+                },
+                {
+                    "id": "e",
+                    "value": 1.0
+                },
+                {
+                    "id": "f",
+                    "value": 1.0
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

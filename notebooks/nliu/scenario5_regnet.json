@@ -1,0 +1,675 @@
+{
+  "id": "7dd81aca-d664-4027-9720-e7ac3201f4ac",
+  "name": "Zero Lactose",
+  "createdOn": "2024-04-09T21:51:11.613+00:00",
+  "temporary": false,
+  "publicAsset": false,
+  "description": "[Lactose] = 0 at time zero",
+  "configuration": {
+    "id": "5816343c-7ec5-461e-a397-ac18fd889cf1",
+    "name": "LacOperon_from_equations",
+    "createdOn": "2024-04-09T21:33:20.018+00:00",
+    "updatedOn": "2024-04-09T21:39:33.769+00:00",
+    "temporary": false,
+    "publicAsset": false,
+    "header": {
+      "name": "LacOperon_from_equations",
+      "description": "This is a Regnet model from mathml equations",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/regnet_v0.1/regnet/regnet_schema.json",
+      "schema_name": "regnet",
+      "model_version": "0.1"
+    },
+    "model": {
+      "vertices": [
+        {
+          "id": "I",
+          "name": "I",
+          "initial": "I0",
+          "rate_constant": "k_{13}",
+          "sign": false
+        },
+        {
+          "id": "L",
+          "name": "L",
+          "initial": "L0"
+        },
+        {
+          "id": "M",
+          "name": "M",
+          "initial": "M0",
+          "rate_constant": "k_{14}",
+          "sign": false
+        },
+        {
+          "id": "N",
+          "name": "N",
+          "initial": "N0",
+          "rate_constant": "k_{6}",
+          "sign": false
+        },
+        {
+          "id": "O",
+          "name": "O",
+          "initial": "O0"
+        },
+        {
+          "id": "R",
+          "name": "R",
+          "initial": "R0"
+        },
+        {
+          "id": "S",
+          "name": "S",
+          "initial": "S0",
+          "rate_constant": "k_{9}",
+          "sign": true
+        },
+        {
+          "id": "Z",
+          "name": "Z",
+          "initial": "Z0",
+          "rate_constant": "k_{16}",
+          "sign": false
+        },
+        {
+          "id": "i",
+          "name": "i",
+          "initial": "i0",
+          "rate_constant": "k_{1}",
+          "sign": true
+        },
+        {
+          "id": "r_{I}",
+          "name": "r_{I}",
+          "initial": "r_{I}0",
+          "rate_constant": "k_{2}",
+          "sign": true
+        },
+        {
+          "id": "r_{lac}",
+          "name": "r_{lac}",
+          "initial": "r_{lac}0",
+          "rate_constant": "k_{10}",
+          "sign": true
+        }
+      ],
+      "edges": [
+        {
+          "id": "s22",
+          "source": "Z",
+          "target": "L",
+          "sign": false,
+          "properties": {
+            "name": "k_{11}"
+          }
+        },
+        {
+          "id": "s23",
+          "source": "L",
+          "target": "Z",
+          "sign": false,
+          "properties": {
+            "name": "k_{11}"
+          }
+        },
+        {
+          "id": "t0",
+          "source": "N",
+          "target": "I",
+          "sign": true,
+          "properties": {
+            "name": "k_{6}"
+          }
+        },
+        {
+          "id": "t1",
+          "source": "I",
+          "target": "N",
+          "sign": false,
+          "properties": {
+            "name": "k_{6}"
+          }
+        },
+        {
+          "id": "t10",
+          "source": "S",
+          "target": "O",
+          "sign": true,
+          "properties": {
+            "name": "k_{8}"
+          }
+        },
+        {
+          "id": "t11",
+          "source": "O",
+          "target": "S",
+          "sign": false,
+          "properties": {
+            "name": "k_{8}"
+          }
+        },
+        {
+          "id": "t12",
+          "source": "I",
+          "target": "N",
+          "sign": true,
+          "properties": {
+            "name": "k_{5}"
+          }
+        },
+        {
+          "id": "t13",
+          "source": "O",
+          "target": "O",
+          "sign": true,
+          "properties": {
+            "name": "k_{5}"
+          }
+        },
+        {
+          "id": "t14",
+          "source": "I",
+          "target": "N",
+          "sign": true,
+          "properties": {
+            "name": "k_{5}"
+          }
+        },
+        {
+          "id": "t15",
+          "source": "O",
+          "target": "I",
+          "sign": true,
+          "properties": {
+            "name": "k_{5}"
+          }
+        },
+        {
+          "id": "t16",
+          "source": "S",
+          "target": "R",
+          "sign": true,
+          "properties": {
+            "name": "k_{8}"
+          }
+        },
+        {
+          "id": "t17",
+          "source": "R",
+          "target": "S",
+          "sign": false,
+          "properties": {
+            "name": "k_{8}"
+          }
+        },
+        {
+          "id": "t18",
+          "source": "O",
+          "target": "S",
+          "sign": true,
+          "properties": {
+            "name": "k_{7}"
+          }
+        },
+        {
+          "id": "t19",
+          "source": "R",
+          "target": "R",
+          "sign": true,
+          "properties": {
+            "name": "k_{7}"
+          }
+        },
+        {
+          "id": "t2",
+          "source": "M",
+          "target": "L",
+          "sign": true,
+          "properties": {
+            "name": "k_{14}"
+          }
+        },
+        {
+          "id": "t20",
+          "source": "O",
+          "target": "S",
+          "sign": true,
+          "properties": {
+            "name": "k_{7}"
+          }
+        },
+        {
+          "id": "t21",
+          "source": "R",
+          "target": "O",
+          "sign": true,
+          "properties": {
+            "name": "k_{7}"
+          }
+        },
+        {
+          "id": "t3",
+          "source": "L",
+          "target": "M",
+          "sign": false,
+          "properties": {
+            "name": "k_{14}"
+          }
+        },
+        {
+          "id": "t4",
+          "source": "I",
+          "target": "M",
+          "sign": true,
+          "properties": {
+            "name": "k_{3}"
+          }
+        },
+        {
+          "id": "t5",
+          "source": "L",
+          "target": "L",
+          "sign": true,
+          "properties": {
+            "name": "k_{3}"
+          }
+        },
+        {
+          "id": "t6",
+          "source": "I",
+          "target": "M",
+          "sign": true,
+          "properties": {
+            "name": "k_{3}"
+          }
+        },
+        {
+          "id": "t7",
+          "source": "L",
+          "target": "I",
+          "sign": true,
+          "properties": {
+            "name": "k_{3}"
+          }
+        },
+        {
+          "id": "t8",
+          "source": "N",
+          "target": "O",
+          "sign": true,
+          "properties": {
+            "name": "k_{6}"
+          }
+        },
+        {
+          "id": "t9",
+          "source": "O",
+          "target": "N",
+          "sign": false,
+          "properties": {
+            "name": "k_{6}"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "id": "I0",
+          "name": "I0",
+          "description": "The total I population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 49,
+              "maximum": 51
+            }
+          },
+          "value": 50
+        },
+        {
+          "id": "L0",
+          "name": "L0",
+          "description": "The total L population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "M0",
+          "name": "M0",
+          "description": "The total M population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "N0",
+          "name": "N0",
+          "description": "The total N population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "O0",
+          "name": "O0",
+          "description": "The total O population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "R0",
+          "name": "R0",
+          "description": "The total R population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 99,
+              "maximum": 101
+            }
+          },
+          "value": 100
+        },
+        {
+          "id": "S0",
+          "name": "S0",
+          "description": "The total S population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "Z0",
+          "name": "Z0",
+          "description": "The total Z population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "i0",
+          "name": "i0",
+          "description": "The total i population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 2
+            }
+          },
+          "value": 1
+        },
+        {
+          "id": "k_{10}",
+          "name": "k_{10}",
+          "description": "k_{10} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.05,
+              "maximum": 0.15
+            }
+          },
+          "value": 0.1
+        },
+        {
+          "id": "k_{11}",
+          "name": "k_{11}",
+          "description": "k_{11} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.000005,
+              "maximum": 0.000015
+            }
+          },
+          "value": 0.00001
+        },
+        {
+          "id": "k_{12}",
+          "name": "k_{12}",
+          "description": "k_{12} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.005,
+              "maximum": 0.015
+            }
+          },
+          "value": 0.01
+        },
+        {
+          "id": "k_{13}",
+          "name": "k_{13}",
+          "description": "k_{13} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.001,
+              "maximum": 0.003
+            }
+          },
+          "value": 0.002
+        },
+        {
+          "id": "k_{14}",
+          "name": "k_{14}",
+          "description": "k_{14} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.001,
+              "maximum": 0.003
+            }
+          },
+          "value": 0.002
+        },
+        {
+          "id": "k_{15}",
+          "name": "k_{15}",
+          "description": "k_{15} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.005,
+              "maximum": 0.015
+            }
+          },
+          "value": 0.01
+        },
+        {
+          "id": "k_{16}",
+          "name": "k_{16}",
+          "description": "k_{16} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.005,
+              "maximum": 0.015
+            }
+          },
+          "value": 0.01
+        },
+        {
+          "id": "k_{1}",
+          "name": "k_{1}",
+          "description": "k_{1} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.01,
+              "maximum": 0.03
+            }
+          },
+          "value": 0.02
+        },
+        {
+          "id": "k_{2}",
+          "name": "k_{2}",
+          "description": "k_{2} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.05,
+              "maximum": 0.15
+            }
+          },
+          "value": 0.1
+        },
+        {
+          "id": "k_{3}",
+          "name": "k_{3}",
+          "description": "k_{3} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.004,
+              "maximum": 0.006
+            }
+          },
+          "value": 0.005
+        },
+        {
+          "id": "k_{4}",
+          "name": "k_{4}",
+          "description": "k_{4} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.05,
+              "maximum": 0.15
+            }
+          },
+          "value": 0.1
+        },
+        {
+          "id": "k_{5}",
+          "name": "k_{5}",
+          "description": "k_{5} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.5,
+              "maximum": 1.5
+            }
+          },
+          "value": 1
+        },
+        {
+          "id": "k_{6}",
+          "name": "k_{6}",
+          "description": "k_{6} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.005,
+              "maximum": 0.015
+            }
+          },
+          "value": 0.01
+        },
+        {
+          "id": "k_{7}",
+          "name": "k_{7}",
+          "description": "k_{7} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.05,
+              "maximum": 0.15
+            }
+          },
+          "value": 0.1
+        },
+        {
+          "id": "k_{8}",
+          "name": "k_{8}",
+          "description": "k_{8} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.005,
+              "maximum": 0.015
+            }
+          },
+          "value": 0.01
+        },
+        {
+          "id": "k_{9}",
+          "name": "k_{9}",
+          "description": "k_{9} rate",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0.025,
+              "maximum": 0.035
+            }
+          },
+          "value": 0.03
+        },
+        {
+          "id": "r_{I}0",
+          "name": "r_{I}0",
+          "description": "The total r_{I} population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        },
+        {
+          "id": "r_{lac}0",
+          "name": "r_{lac}0",
+          "description": "The total r_{lac} population at timestep 0",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "minimum": 0,
+              "maximum": 0.1
+            }
+          },
+          "value": 0
+        }
+      ]
+    },
+    "metadata": {
+      "timeseries": {},
+      "initials": {},
+      "parameters": {}
+    }
+  },
+  "model_id": "5816343c-7ec5-461e-a397-ac18fd889cf1"
+}

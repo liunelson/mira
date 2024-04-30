@@ -1,0 +1,229 @@
+{
+    "header": {
+        "name": "SCRHD",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SCRHD",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "C",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "H",
+                "name": "H",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "D",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C",
+                    "S"
+                ],
+                "output": [
+                    "C",
+                    "C"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "C_to_H",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "C_to_H"
+                }
+            },
+            {
+                "id": "C_to_R",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "C_to_R"
+                }
+            },
+            {
+                "id": "H_to_R",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "H_to_R"
+                }
+            },
+            {
+                "id": "H_to_D",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "H_to_D"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "S_to_C_via_C",
+                    "expression": "C*S*a",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>S</ci><ci>a</ci></apply>"
+                },
+                {
+                    "target": "C_to_H",
+                    "expression": "C*ageCtoH*b*vaxCtoH",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH</ci></apply>"
+                },
+                {
+                    "target": "C_to_R",
+                    "expression": "C*c",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>c</ci></apply>"
+                },
+                {
+                    "target": "H_to_R",
+                    "expression": "H*d",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
+                },
+                {
+                    "target": "H_to_D",
+                    "expression": "H*e",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>e</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "C",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "H",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "D",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "a",
+                    "value": 1.0
+                },
+                {
+                    "id": "ageCtoH",
+                    "value": 1.0
+                },
+                {
+                    "id": "b",
+                    "value": 1.0
+                },
+                {
+                    "id": "vaxCtoH",
+                    "value": 1.0
+                },
+                {
+                    "id": "c",
+                    "value": 1.0
+                },
+                {
+                    "id": "d",
+                    "value": 1.0
+                },
+                {
+                    "id": "e",
+                    "value": 1.0
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
