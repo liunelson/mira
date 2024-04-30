@@ -192,30 +192,6 @@
                 }
             },
             {
-                "id": "H_to_R",
-                "input": [
-                    "H"
-                ],
-                "output": [
-                    "R"
-                ],
-                "properties": {
-                    "name": "H_to_R"
-                }
-            },
-            {
-                "id": "H_to_D",
-                "input": [
-                    "H"
-                ],
-                "output": [
-                    "D"
-                ],
-                "properties": {
-                    "name": "H_to_D"
-                }
-            },
-            {
                 "id": "H_to_D",
                 "input": [
                     "H"
@@ -288,16 +264,6 @@
                     "target": "H_to_R",
                     "expression": "H*d",
                     "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
-                },
-                {
-                    "target": "H_to_R",
-                    "expression": "H*d",
-                    "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
-                },
-                {
-                    "target": "H_to_D",
-                    "expression": "H*e",
-                    "expression_mathml": "<apply><times/><ci>H</ci><ci>e</ci></apply>"
                 },
                 {
                     "target": "H_to_D",
@@ -390,6 +356,10 @@
                 },
                 {
                     "id": "e",
+                    "value": 1.0
+                },
+                {
+                    "id": "f",
                     "value": 1.0
                 }
             ],

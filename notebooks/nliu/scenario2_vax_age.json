@@ -509,7 +509,7 @@
                     "H_o"
                 ],
                 "output": [
-                    "R_o"
+                    "D_o"
                 ],
                 "properties": {
                     "name": "t27"
@@ -521,7 +521,7 @@
                     "H_y"
                 ],
                 "output": [
-                    "R_y"
+                    "D_y"
                 ],
                 "properties": {
                     "name": "t28"
@@ -530,10 +530,10 @@
             {
                 "id": "t29",
                 "input": [
-                    "H_o"
+                    "S_u_o"
                 ],
                 "output": [
-                    "D_o"
+                    "S_v_o"
                 ],
                 "properties": {
                     "name": "t29"
@@ -542,61 +542,13 @@
             {
                 "id": "t30",
                 "input": [
-                    "H_y"
-                ],
-                "output": [
-                    "D_y"
-                ],
-                "properties": {
-                    "name": "t30"
-                }
-            },
-            {
-                "id": "t31",
-                "input": [
-                    "H_o"
-                ],
-                "output": [
-                    "D_o"
-                ],
-                "properties": {
-                    "name": "t31"
-                }
-            },
-            {
-                "id": "t32",
-                "input": [
-                    "H_y"
-                ],
-                "output": [
-                    "D_y"
-                ],
-                "properties": {
-                    "name": "t32"
-                }
-            },
-            {
-                "id": "t33",
-                "input": [
-                    "S_u_o"
-                ],
-                "output": [
-                    "S_v_o"
-                ],
-                "properties": {
-                    "name": "t33"
-                }
-            },
-            {
-                "id": "t34",
-                "input": [
                     "S_u_y"
                 ],
                 "output": [
                     "S_v_y"
                 ],
                 "properties": {
-                    "name": "t34"
+                    "name": "t30"
                 }
             }
         ]
@@ -736,43 +688,23 @@
                 },
                 {
                     "target": "t27",
-                    "expression": "H_o*d_2",
-                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>d_2</ci></apply>"
-                },
-                {
-                    "target": "t28",
-                    "expression": "H_y*d_3",
-                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>d_3</ci></apply>"
-                },
-                {
-                    "target": "t29",
                     "expression": "H_o*e_0",
                     "expression_mathml": "<apply><times/><ci>H_o</ci><ci>e_0</ci></apply>"
                 },
                 {
-                    "target": "t30",
+                    "target": "t28",
                     "expression": "H_y*e_1",
                     "expression_mathml": "<apply><times/><ci>H_y</ci><ci>e_1</ci></apply>"
                 },
                 {
-                    "target": "t31",
-                    "expression": "H_o*e_2",
-                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>e_2</ci></apply>"
+                    "target": "t29",
+                    "expression": "S_u_o*f_0",
+                    "expression_mathml": "<apply><times/><ci>S_u_o</ci><ci>f_0</ci></apply>"
                 },
                 {
-                    "target": "t32",
-                    "expression": "H_y*e_3",
-                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>e_3</ci></apply>"
-                },
-                {
-                    "target": "t33",
-                    "expression": "S_u_o*f",
-                    "expression_mathml": "<apply><times/><ci>S_u_o</ci><ci>f</ci></apply>"
-                },
-                {
-                    "target": "t34",
-                    "expression": "S_u_y*f",
-                    "expression_mathml": "<apply><times/><ci>S_u_y</ci><ci>f</ci></apply>"
+                    "target": "t30",
+                    "expression": "S_u_y*f_1",
+                    "expression_mathml": "<apply><times/><ci>S_u_y</ci><ci>f_1</ci></apply>"
                 }
             ],
             "initials": [
@@ -965,14 +897,6 @@
                     "value": 1.0
                 },
                 {
-                    "id": "d_2",
-                    "value": 1.0
-                },
-                {
-                    "id": "d_3",
-                    "value": 1.0
-                },
-                {
                     "id": "e_0",
                     "value": 1.0
                 },
@@ -981,11 +905,11 @@
                     "value": 1.0
                 },
                 {
-                    "id": "e_2",
+                    "id": "f_0",
                     "value": 1.0
                 },
                 {
-                    "id": "e_3",
+                    "id": "f_1",
                     "value": 1.0
                 }
             ],

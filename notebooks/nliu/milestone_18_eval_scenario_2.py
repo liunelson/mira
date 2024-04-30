@@ -25,6 +25,56 @@ from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
 PATH = "./data/milestone_18_hackathon/scenario_1"
 
+# %%
+def generate_summary_table(model):
+
+    data = {"name": [t.name for t in model.templates]}
+    for k in ("subject", "outcome", "controller"):
+        data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
+
+    data["controllers"] = [[c.name for c in getattr(t, k)] if hasattr(t, "controllers") else None for t in model.templates]
+    data["controller(s)"] = [i if j == None else j for i, j in zip(data["controller"], data["controllers"])]
+    __ = data.pop("controller")
+    __ = data.pop("controllers")
+
+    data["rate_law"] = [t.rate_law for t in model.templates]
+    data["interactor_rate_law"] = [t.get_interactor_rate_law() for t in model.templates]
+
+    df = pandas.DataFrame(data)
+
+    return df
+
+# %%
+def generate_odesys(model, latex_align: bool = False) -> list:
+
+    odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
+
+    for t in model.templates:
+        if hasattr(t, "subject"):
+            var = t.subject.name
+            odeterms[var] -= t.rate_law.args[0]
+        
+        if hasattr(t, "outcome"):
+            var = t.outcome.name
+            odeterms[var] += t.rate_law.args[0]
+
+
+    # Convert to LaTeX
+    if latex_align == True:
+        odesys = [
+            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} & = " + sympy.latex(terms)
+            for var, terms in odeterms.items()
+        ]
+        odesys = "\\begin{align*}\n" + "\n".join(["    " + expr + "\\\\" for expr in odesys]) + "\n\\end{align}"
+
+    else:
+        odesys = [
+            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} = " + sympy.latex(terms)
+            for var, terms in odeterms.items()
+        ]
+
+    return odesys
+
 # %%[markdown]
 # ## SIRHD Model
 
@@ -83,21 +133,6 @@ model = TemplateModel(
 GraphicalModel.for_jupyter(model)
 
 # %%
-# # Alphabet
-# alpha = list(map(chr, range(ord('a'), ord('z')+1)))
-
-# # Set mass action kinetics
-# for i, template in enumerate(model.templates):
-#     p = alpha[i]
-#     template.set_mass_action_rate_law(p)
-#     model.add_parameter(
-#         parameter_id = p,
-#         name = p,
-#         value = 1.0,
-#         description = f"Rate constant for {template.name}"
-#     )
-
-# %%
 # Customize the I-to-H rate law
 # vaxItoH, ageItoH = sympy.symbols('vaxItoH, ageItoH')
 for t in model.templates:
@@ -111,9 +146,11 @@ for t in model.templates:
 model.parameters = {p: Parameter(name = p, value = 1.0) for p in model.get_all_used_parameters()}
 
 # %%
+generate_summary_table(model)
+
+# %%
 with open("./scenario2.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model), f, indent = 4)
-
 
 # %%
 # Stratify by vaccination status
@@ -124,12 +161,10 @@ model_vax = stratify(
     cartesian_control = True, 
     structure = [],
     concepts_to_stratify = ["S", "C"],
+    # concepts_to_preserve = ["H", "R", "D"],
     params_to_stratify = ["a", "vaxCtoH"]
 )
 model_vax.annotations.name = "SCRHD Vax"
-
-# %%
-GraphicalModel.for_jupyter(model_vax)
 
 # %%
 # Add vaccination dynamics
@@ -141,34 +176,18 @@ model_vax = model_vax.add_template(
     ).with_mass_action_rate_law("f")
 )
 
-model.parameters["f"] = Parameter(name = "f", value = 1.0)
+model_vax.parameters["f"] = Parameter(name = "f", value = 1.0)
 
 # %%
 GraphicalModel.for_jupyter(model_vax)
 
 # %%
-def generate_summary_table(model):
-
-    data = {"name": [t.name for t in model.templates]}
-    for k in ("subject", "outcome", "controller"):
-        data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
-
-    data["controllers"] = [[c.name for c in getattr(t, k)] if hasattr(t, "controllers") else None for t in model.templates]
-    data["controller(s)"] = [i if j == None else j for i, j in zip(data["controller"], data["controllers"])]
-    __ = data.pop("controller")
-    __ = data.pop("controllers")
-
-    data["rate_law"] = [t.rate_law for t in model.templates]
-    data["interactor_rate_law"] = [t.get_interactor_rate_law() for t in model.templates]
-
-    df = pandas.DataFrame(data)
-
-    return df
+generate_summary_table(model_vax)
 
 # %%
-generate_summary_table(model)
-
-# %%
+# Need to remove two redundant templates
+# H -> R, H -> D
+model_vax.templates = model_vax.templates[:9] + model_vax.templates[11:]
 generate_summary_table(model_vax)
 
 # %%
@@ -201,36 +220,16 @@ with open("./scenario2_vax_age.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model_vax_age), f, indent = 4)
 
 # %%
-def generate_odesys(model, latex_align: bool = False) -> list:
-
-    odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
-
-    for t in model.templates:
-        if hasattr(t, "subject"):
-            var = t.subject.name
-            odeterms[var] -= t.rate_law.args[0]
-        
-        if hasattr(t, "outcome"):
-            var = t.outcome.name
-            odeterms[var] += t.rate_law.args[0]
+# Review the `vaxCtoH_*` and `ageCtoH_*` parameters
+# 
+# vaxCtoH_* <- ['vaxCtoH_0', 'vaxCtoH_1']
+# ageCtoH_*` <- ['ageCtoH_0', 'ageCtoH_1', 'ageCtoH_2', 'ageCtoH_3']
 
 
-    # Convert to LaTeX
-    if latex_align == True:
-        odesys = [
-            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} & = " + sympy.latex(terms)
-            for var, terms in odeterms.items()
-        ]
-        odesys = "\\begin{align*}\n" + "\n".join(["    " + expr + "\\\\" for expr in odesys]) + "\n\\end{align}"
+# %%
+# ## Investigate Collapsible Equation Generation
 
-    else:
-        odesys = [
-            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} = " + sympy.latex(terms)
-            for var, terms in odeterms.items()
-        ]
-
-    return odesys
-
+# %%
 odesys = generate_odesys(model, latex_align = True)
 print(odesys)
 
