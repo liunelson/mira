@@ -1,0 +1,112 @@
+{
+  "id": "d44a1564-4a4f-40dd-81e7-a482aea1030c",
+  "createdOn": "2024-02-26T17:57:38.423+00:00",
+  "updatedOn": "2024-02-26T17:58:02.428+00:00",
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "TestSIR",
+    "description": "This is a model from equations",
+    "schema": "https://github.com/DARPA-ASKEM/Model-Representations/blob/main/petrinet/petrinet_schema.json",
+    "schema_name": "PetriNet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "I",
+        "name": "I"
+      },
+      {
+        "id": "R",
+        "name": "R"
+      },
+      {
+        "id": "S",
+        "name": "S"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t0",
+        "input": [
+          "I",
+          "S"
+        ],
+        "output": [
+          "I",
+          "I"
+        ]
+      },
+      {
+        "id": "t1",
+        "input": [
+          "I"
+        ],
+        "output": [
+          "R"
+        ]
+      }
+    ]
+  },
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t0",
+          "expression": "β*I*S",
+          "expression_mathml": "<apply><times/><ci>I</ci><ci>β</ci><ci>S</ci></apply>"
+        },
+        {
+          "target": "t1",
+          "expression": "γ*I",
+          "expression_mathml": "<apply><times/><ci>γ</ci><ci>I</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "expression_mathml": "<cn>1.0</cn>",
+          "expression": "1.0",
+          "target": "S"
+        },
+        {
+          "expression_mathml": "<cn>0.0002</cn>",
+          "expression": "0.0002",
+          "target": "I"
+        },
+        {
+          "expression_mathml": "<cn>0.0</cn>",
+          "expression": "0.0",
+          "target": "R"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "β",
+          "id": "β",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "maximum": 0.8,
+              "minimum": 0.4
+            }
+          },
+          "value": 0.6
+        },
+        {
+          "name": "γ",
+          "id": "γ",
+          "distribution": {
+            "type": "StandardUniform1",
+            "parameters": {
+              "maximum": 0.3,
+              "minimum": 0.1
+            }
+          },
+          "value": 0.2
+        }
+      ]
+    }
+  },
+  "metadata": {}
+}

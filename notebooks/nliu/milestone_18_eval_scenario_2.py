@@ -20,6 +20,7 @@ from mira.modeling.viz import GraphicalModel
 from mira.metamodel import *
 from mira.modeling import Model
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
+from mira.sources.amr.petrinet import template_model_from_amr_json
 
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
@@ -185,10 +186,12 @@ GraphicalModel.for_jupyter(model_vax)
 generate_summary_table(model_vax)
 
 # %%
-# Need to remove two redundant templates
-# H -> R, H -> D
-model_vax.templates = model_vax.templates[:9] + model_vax.templates[11:]
-generate_summary_table(model_vax)
+# # Need to remove two redundant templates
+# # H -> R, H -> D
+# model_vax.templates = model_vax.templates[:9] + model_vax.templates[11:]
+# generate_summary_table(model_vax)
+
+# Fixed
 
 # %%
 # Export to AMR
