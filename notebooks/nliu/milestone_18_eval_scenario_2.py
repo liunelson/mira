@@ -22,6 +22,10 @@ from mira.modeling import Model
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 from mira.sources.amr.petrinet import template_model_from_amr_json
 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+mpl.rcParams['text.usetex'] = True
+
 # %%
 MIRA_REST_URL = 'http://34.230.33.149:8771/api'
 PATH = "./data/milestone_18_hackathon/scenario_1"
@@ -163,7 +167,8 @@ model_vax = stratify(
     structure = [],
     concepts_to_stratify = ["S", "C"],
     # concepts_to_preserve = ["H", "R", "D"],
-    params_to_stratify = ["a", "vaxCtoH"]
+    params_to_stratify = ["a", "vaxCtoH"],
+    param_renaming_uses_strata_names = True
 )
 model_vax.annotations.name = "SCRHD Vax"
 
@@ -186,14 +191,6 @@ GraphicalModel.for_jupyter(model_vax)
 generate_summary_table(model_vax)
 
 # %%
-# # Need to remove two redundant templates
-# # H -> R, H -> D
-# model_vax.templates = model_vax.templates[:9] + model_vax.templates[11:]
-# generate_summary_table(model_vax)
-
-# Fixed
-
-# %%
 # Export to AMR
 with open("./scenario2_vax.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model_vax), f, indent = 4)
@@ -207,7 +204,8 @@ model_vax_age = stratify(
     cartesian_control = True, 
     structure = [], 
     params_to_preserve = ["b", "vaxCtoH_0", "vaxCtoH_1"],
-    concepts_to_stratify = None
+    concepts_to_stratify = None,
+    param_renaming_uses_strata_names = True
 )
 model_vax_age.annotations.name = "SCRHD Vax Age"
 
@@ -222,11 +220,32 @@ GraphicalModel.for_jupyter(model_vax_age)
 with open("./scenario2_vax_age.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model_vax_age), f, indent = 4)
 
-# %%
+# %%[markdown]
 # Review the `vaxCtoH_*` and `ageCtoH_*` parameters
 # 
+# Incorrect:
 # vaxCtoH_* <- ['vaxCtoH_0', 'vaxCtoH_1']
 # ageCtoH_*` <- ['ageCtoH_0', 'ageCtoH_1', 'ageCtoH_2', 'ageCtoH_3']
+#
+# Expected correct:
+# vaxCtoH_* <- ditto
+# ageCtoH_* <- ['ageCtoH_o', 'age_CtoH_y']
+#
+# Note: Ben Gyori reworked `mira.stratify` logic to 
+# achieve the expected result. 
+# See (here)[https://github.com/gyorilab/mira/pull/332/files]
+
+# %%
+df = generate_summary_table(model_vax_age)
+
+odesys = generate_odesys(model_vax_age, latex_align = True)
+print(odesys)
+
+from sympy.parsing.latex import parse_latex
+expr = parse_latex(odesys)
+
+with open("scenario2_vax_age.tex", "w") as f:
+    f.write(odesys)
 
 
 # %%

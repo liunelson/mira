@@ -10,24 +10,13 @@
     "model": {
         "states": [
             {
-                "id": "S_u_o",
+                "id": "S_u_y",
                 "name": "S",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
                         "vaxstatus": "u",
-                        "age": "o"
-                    }
-                }
-            },
-            {
-                "id": "C_u_o",
-                "name": "C",
-                "grounding": {
-                    "identifiers": {},
-                    "modifiers": {
-                        "vaxstatus": "u",
-                        "age": "o"
+                        "age": "y"
                     }
                 }
             },
@@ -43,23 +32,23 @@
                 }
             },
             {
-                "id": "S_u_y",
+                "id": "C_u_o",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vaxstatus": "u",
+                        "age": "o"
+                    }
+                }
+            },
+            {
+                "id": "S_u_o",
                 "name": "S",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
                         "vaxstatus": "u",
-                        "age": "y"
-                    }
-                }
-            },
-            {
-                "id": "C_v_o",
-                "name": "C",
-                "grounding": {
-                    "identifiers": {},
-                    "modifiers": {
-                        "vaxstatus": "v",
                         "age": "o"
                     }
                 }
@@ -76,8 +65,8 @@
                 }
             },
             {
-                "id": "S_v_o",
-                "name": "S",
+                "id": "C_v_o",
+                "name": "C",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
@@ -98,11 +87,12 @@
                 }
             },
             {
-                "id": "H_o",
-                "name": "H",
+                "id": "S_v_o",
+                "name": "S",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
+                        "vaxstatus": "v",
                         "age": "o"
                     }
                 }
@@ -118,8 +108,8 @@
                 }
             },
             {
-                "id": "R_o",
-                "name": "R",
+                "id": "H_o",
+                "name": "H",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
@@ -138,8 +128,8 @@
                 }
             },
             {
-                "id": "D_o",
-                "name": "D",
+                "id": "R_o",
+                "name": "R",
                 "grounding": {
                     "identifiers": {},
                     "modifiers": {
@@ -156,39 +146,21 @@
                         "age": "y"
                     }
                 }
+            },
+            {
+                "id": "D_o",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "age": "o"
+                    }
+                }
             }
         ],
         "transitions": [
             {
-                "id": "t1",
-                "input": [
-                    "C_u_o",
-                    "S_u_o"
-                ],
-                "output": [
-                    "C_u_o",
-                    "C_u_o"
-                ],
-                "properties": {
-                    "name": "t1"
-                }
-            },
-            {
-                "id": "t2",
-                "input": [
-                    "C_u_y",
-                    "S_u_o"
-                ],
-                "output": [
-                    "C_u_y",
-                    "C_u_o"
-                ],
-                "properties": {
-                    "name": "t2"
-                }
-            },
-            {
-                "id": "t3",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u_y",
                     "S_u_y"
@@ -198,11 +170,11 @@
                     "C_u_y"
                 ],
                 "properties": {
-                    "name": "t3"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t4",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u_o",
                     "S_u_y"
@@ -212,11 +184,81 @@
                     "C_u_y"
                 ],
                 "properties": {
-                    "name": "t4"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t5",
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_u_y",
+                    "S_u_o"
+                ],
+                "output": [
+                    "C_u_y",
+                    "C_u_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_u_o",
+                    "S_u_o"
+                ],
+                "output": [
+                    "C_u_o",
+                    "C_u_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_y",
+                    "S_u_y"
+                ],
+                "output": [
+                    "C_v_y",
+                    "C_u_y"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_o",
+                    "S_u_y"
+                ],
+                "output": [
+                    "C_v_o",
+                    "C_u_y"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_y",
+                    "S_u_o"
+                ],
+                "output": [
+                    "C_v_y",
+                    "C_u_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_v_o",
                     "S_u_o"
@@ -226,137 +268,11 @@
                     "C_u_o"
                 ],
                 "properties": {
-                    "name": "t5"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t6",
-                "input": [
-                    "C_v_y",
-                    "S_u_o"
-                ],
-                "output": [
-                    "C_v_y",
-                    "C_u_o"
-                ],
-                "properties": {
-                    "name": "t6"
-                }
-            },
-            {
-                "id": "t7",
-                "input": [
-                    "C_v_y",
-                    "S_u_y"
-                ],
-                "output": [
-                    "C_v_y",
-                    "C_u_y"
-                ],
-                "properties": {
-                    "name": "t7"
-                }
-            },
-            {
-                "id": "t8",
-                "input": [
-                    "C_v_o",
-                    "S_u_y"
-                ],
-                "output": [
-                    "C_v_o",
-                    "C_u_y"
-                ],
-                "properties": {
-                    "name": "t8"
-                }
-            },
-            {
-                "id": "t9",
-                "input": [
-                    "C_v_o",
-                    "S_v_o"
-                ],
-                "output": [
-                    "C_v_o",
-                    "C_v_o"
-                ],
-                "properties": {
-                    "name": "t9"
-                }
-            },
-            {
-                "id": "t10",
-                "input": [
-                    "C_v_y",
-                    "S_v_o"
-                ],
-                "output": [
-                    "C_v_y",
-                    "C_v_o"
-                ],
-                "properties": {
-                    "name": "t10"
-                }
-            },
-            {
-                "id": "t11",
-                "input": [
-                    "C_v_y",
-                    "S_v_y"
-                ],
-                "output": [
-                    "C_v_y",
-                    "C_v_y"
-                ],
-                "properties": {
-                    "name": "t11"
-                }
-            },
-            {
-                "id": "t12",
-                "input": [
-                    "C_v_o",
-                    "S_v_y"
-                ],
-                "output": [
-                    "C_v_o",
-                    "C_v_y"
-                ],
-                "properties": {
-                    "name": "t12"
-                }
-            },
-            {
-                "id": "t13",
-                "input": [
-                    "C_u_o",
-                    "S_v_o"
-                ],
-                "output": [
-                    "C_u_o",
-                    "C_v_o"
-                ],
-                "properties": {
-                    "name": "t13"
-                }
-            },
-            {
-                "id": "t14",
-                "input": [
-                    "C_u_y",
-                    "S_v_o"
-                ],
-                "output": [
-                    "C_u_y",
-                    "C_v_o"
-                ],
-                "properties": {
-                    "name": "t14"
-                }
-            },
-            {
-                "id": "t15",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u_y",
                     "S_v_y"
@@ -366,11 +282,11 @@
                     "C_v_y"
                 ],
                 "properties": {
-                    "name": "t15"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t16",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u_o",
                     "S_v_y"
@@ -380,23 +296,95 @@
                     "C_v_y"
                 ],
                 "properties": {
-                    "name": "t16"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t17",
+                "id": "S_to_C_via_C",
                 "input": [
-                    "C_u_o"
+                    "C_u_y",
+                    "S_v_o"
                 ],
                 "output": [
-                    "H_o"
+                    "C_u_y",
+                    "C_v_o"
                 ],
                 "properties": {
-                    "name": "t17"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t18",
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_u_o",
+                    "S_v_o"
+                ],
+                "output": [
+                    "C_u_o",
+                    "C_v_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_y",
+                    "S_v_y"
+                ],
+                "output": [
+                    "C_v_y",
+                    "C_v_y"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_o",
+                    "S_v_y"
+                ],
+                "output": [
+                    "C_v_o",
+                    "C_v_y"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_y",
+                    "S_v_o"
+                ],
+                "output": [
+                    "C_v_y",
+                    "C_v_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v_o",
+                    "S_v_o"
+                ],
+                "output": [
+                    "C_v_o",
+                    "C_v_o"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "C_to_H",
                 "input": [
                     "C_u_y"
                 ],
@@ -404,23 +392,23 @@
                     "H_y"
                 ],
                 "properties": {
-                    "name": "t18"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t19",
+                "id": "C_to_H",
                 "input": [
-                    "C_v_o"
+                    "C_u_o"
                 ],
                 "output": [
                     "H_o"
                 ],
                 "properties": {
-                    "name": "t19"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t20",
+                "id": "C_to_H",
                 "input": [
                     "C_v_y"
                 ],
@@ -428,23 +416,23 @@
                     "H_y"
                 ],
                 "properties": {
-                    "name": "t20"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t21",
+                "id": "C_to_H",
                 "input": [
-                    "C_u_o"
+                    "C_v_o"
                 ],
                 "output": [
-                    "R_o"
+                    "H_o"
                 ],
                 "properties": {
-                    "name": "t21"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t22",
+                "id": "C_to_R",
                 "input": [
                     "C_u_y"
                 ],
@@ -452,23 +440,23 @@
                     "R_y"
                 ],
                 "properties": {
-                    "name": "t22"
+                    "name": "C_to_R"
                 }
             },
             {
-                "id": "t23",
+                "id": "C_to_R",
                 "input": [
-                    "C_v_o"
+                    "C_u_o"
                 ],
                 "output": [
                     "R_o"
                 ],
                 "properties": {
-                    "name": "t23"
+                    "name": "C_to_R"
                 }
             },
             {
-                "id": "t24",
+                "id": "C_to_R",
                 "input": [
                     "C_v_y"
                 ],
@@ -476,23 +464,23 @@
                     "R_y"
                 ],
                 "properties": {
-                    "name": "t24"
+                    "name": "C_to_R"
                 }
             },
             {
-                "id": "t25",
+                "id": "C_to_R",
                 "input": [
-                    "H_o"
+                    "C_v_o"
                 ],
                 "output": [
                     "R_o"
                 ],
                 "properties": {
-                    "name": "t25"
+                    "name": "C_to_R"
                 }
             },
             {
-                "id": "t26",
+                "id": "H_to_R",
                 "input": [
                     "H_y"
                 ],
@@ -500,23 +488,23 @@
                     "R_y"
                 ],
                 "properties": {
-                    "name": "t26"
+                    "name": "H_to_R"
                 }
             },
             {
-                "id": "t27",
+                "id": "H_to_R",
                 "input": [
                     "H_o"
                 ],
                 "output": [
-                    "D_o"
+                    "R_o"
                 ],
                 "properties": {
-                    "name": "t27"
+                    "name": "H_to_R"
                 }
             },
             {
-                "id": "t28",
+                "id": "H_to_D",
                 "input": [
                     "H_y"
                 ],
@@ -524,23 +512,23 @@
                     "D_y"
                 ],
                 "properties": {
-                    "name": "t28"
+                    "name": "H_to_D"
                 }
             },
             {
-                "id": "t29",
+                "id": "H_to_D",
                 "input": [
-                    "S_u_o"
+                    "H_o"
                 ],
                 "output": [
-                    "S_v_o"
+                    "D_o"
                 ],
                 "properties": {
-                    "name": "t29"
+                    "name": "H_to_D"
                 }
             },
             {
-                "id": "t30",
+                "id": "vaccination",
                 "input": [
                     "S_u_y"
                 ],
@@ -548,7 +536,19 @@
                     "S_v_y"
                 ],
                 "properties": {
-                    "name": "t30"
+                    "name": "vaccination"
+                }
+            },
+            {
+                "id": "vaccination",
+                "input": [
+                    "S_u_o"
+                ],
+                "output": [
+                    "S_v_o"
+                ],
+                "properties": {
+                    "name": "vaccination"
                 }
             }
         ]
@@ -557,164 +557,159 @@
         "ode": {
             "rates": [
                 {
-                    "target": "t1",
-                    "expression": "C_u_o*S_u_o*a_0_0",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_u_o</ci><ci>a_0_0</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_y*S_u_y*a_u_u_y_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_u_y</ci><ci>a_u_u_y_y</ci></apply>"
                 },
                 {
-                    "target": "t2",
-                    "expression": "C_u_y*S_u_o*a_0_1",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_u_o</ci><ci>a_0_1</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_o*S_u_y*a_u_u_y_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_u_y</ci><ci>a_u_u_y_o</ci></apply>"
                 },
                 {
-                    "target": "t3",
-                    "expression": "C_u_y*S_u_y*a_0_2",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_u_y</ci><ci>a_0_2</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_y*S_u_o*a_u_u_o_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_u_o</ci><ci>a_u_u_o_y</ci></apply>"
                 },
                 {
-                    "target": "t4",
-                    "expression": "C_u_o*S_u_y*a_0_3",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_u_y</ci><ci>a_0_3</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_o*S_u_o*a_u_u_o_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_u_o</ci><ci>a_u_u_o_o</ci></apply>"
                 },
                 {
-                    "target": "t5",
-                    "expression": "C_v_o*S_u_o*a_1_0",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_u_o</ci><ci>a_1_0</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_y*S_u_y*a_u_v_y_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_u_y</ci><ci>a_u_v_y_y</ci></apply>"
                 },
                 {
-                    "target": "t6",
-                    "expression": "C_v_y*S_u_o*a_1_1",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_u_o</ci><ci>a_1_1</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_o*S_u_y*a_u_v_y_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_u_y</ci><ci>a_u_v_y_o</ci></apply>"
                 },
                 {
-                    "target": "t7",
-                    "expression": "C_v_y*S_u_y*a_1_2",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_u_y</ci><ci>a_1_2</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_y*S_u_o*a_u_v_o_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_u_o</ci><ci>a_u_v_o_y</ci></apply>"
                 },
                 {
-                    "target": "t8",
-                    "expression": "C_v_o*S_u_y*a_1_3",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_u_y</ci><ci>a_1_3</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_o*S_u_o*a_u_v_o_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_u_o</ci><ci>a_u_v_o_o</ci></apply>"
                 },
                 {
-                    "target": "t9",
-                    "expression": "C_v_o*S_v_o*a_2_0",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_v_o</ci><ci>a_2_0</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_y*S_v_y*a_v_u_y_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_v_y</ci><ci>a_v_u_y_y</ci></apply>"
                 },
                 {
-                    "target": "t10",
-                    "expression": "C_v_y*S_v_o*a_2_1",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_v_o</ci><ci>a_2_1</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_o*S_v_y*a_v_u_y_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_v_y</ci><ci>a_v_u_y_o</ci></apply>"
                 },
                 {
-                    "target": "t11",
-                    "expression": "C_v_y*S_v_y*a_2_2",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_v_y</ci><ci>a_2_2</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_y*S_v_o*a_v_u_o_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_v_o</ci><ci>a_v_u_o_y</ci></apply>"
                 },
                 {
-                    "target": "t12",
-                    "expression": "C_v_o*S_v_y*a_2_3",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_v_y</ci><ci>a_2_3</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u_o*S_v_o*a_v_u_o_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_v_o</ci><ci>a_v_u_o_o</ci></apply>"
                 },
                 {
-                    "target": "t13",
-                    "expression": "C_u_o*S_v_o*a_3_0",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_v_o</ci><ci>a_3_0</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_y*S_v_y*a_v_v_y_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_v_y</ci><ci>a_v_v_y_y</ci></apply>"
                 },
                 {
-                    "target": "t14",
-                    "expression": "C_u_y*S_v_o*a_3_1",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_v_o</ci><ci>a_3_1</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_o*S_v_y*a_v_v_y_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_v_y</ci><ci>a_v_v_y_o</ci></apply>"
                 },
                 {
-                    "target": "t15",
-                    "expression": "C_u_y*S_v_y*a_3_2",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>S_v_y</ci><ci>a_3_2</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_y*S_v_o*a_v_v_o_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>S_v_o</ci><ci>a_v_v_o_y</ci></apply>"
                 },
                 {
-                    "target": "t16",
-                    "expression": "C_u_o*S_v_y*a_3_3",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>S_v_y</ci><ci>a_3_3</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v_o*S_v_o*a_v_v_o_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>S_v_o</ci><ci>a_v_v_o_o</ci></apply>"
                 },
                 {
-                    "target": "t17",
-                    "expression": "C_u_o*ageCtoH_0*b*vaxCtoH_0",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>ageCtoH_0</ci><ci>b</ci><ci>vaxCtoH_0</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_u_y*ageCtoH_y*b*vaxCtoH_u_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>ageCtoH_y</ci><ci>b</ci><ci>vaxCtoH_u_y</ci></apply>"
                 },
                 {
-                    "target": "t18",
-                    "expression": "C_u_y*ageCtoH_1*b*vaxCtoH_0",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>ageCtoH_1</ci><ci>b</ci><ci>vaxCtoH_0</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_u_o*ageCtoH_o*b*vaxCtoH_u_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>ageCtoH_o</ci><ci>b</ci><ci>vaxCtoH_u_o</ci></apply>"
                 },
                 {
-                    "target": "t19",
-                    "expression": "C_v_o*ageCtoH_2*b*vaxCtoH_1",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>ageCtoH_2</ci><ci>b</ci><ci>vaxCtoH_1</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_v_y*ageCtoH_y*b*vaxCtoH_v_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>ageCtoH_y</ci><ci>b</ci><ci>vaxCtoH_v_y</ci></apply>"
                 },
                 {
-                    "target": "t20",
-                    "expression": "C_v_y*ageCtoH_3*b*vaxCtoH_1",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>ageCtoH_3</ci><ci>b</ci><ci>vaxCtoH_1</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_v_o*ageCtoH_o*b*vaxCtoH_v_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>ageCtoH_o</ci><ci>b</ci><ci>vaxCtoH_v_o</ci></apply>"
                 },
                 {
-                    "target": "t21",
-                    "expression": "C_u_o*c_0",
-                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>c_0</ci></apply>"
+                    "target": "C_to_R",
+                    "expression": "C_u_y*c_y",
+                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>c_y</ci></apply>"
                 },
                 {
-                    "target": "t22",
-                    "expression": "C_u_y*c_1",
-                    "expression_mathml": "<apply><times/><ci>C_u_y</ci><ci>c_1</ci></apply>"
+                    "target": "C_to_R",
+                    "expression": "C_u_o*c_o",
+                    "expression_mathml": "<apply><times/><ci>C_u_o</ci><ci>c_o</ci></apply>"
                 },
                 {
-                    "target": "t23",
-                    "expression": "C_v_o*c_2",
-                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>c_2</ci></apply>"
+                    "target": "C_to_R",
+                    "expression": "C_v_y*c_y",
+                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>c_y</ci></apply>"
                 },
                 {
-                    "target": "t24",
-                    "expression": "C_v_y*c_3",
-                    "expression_mathml": "<apply><times/><ci>C_v_y</ci><ci>c_3</ci></apply>"
+                    "target": "C_to_R",
+                    "expression": "C_v_o*c_o",
+                    "expression_mathml": "<apply><times/><ci>C_v_o</ci><ci>c_o</ci></apply>"
                 },
                 {
-                    "target": "t25",
-                    "expression": "H_o*d_0",
-                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>d_0</ci></apply>"
+                    "target": "H_to_R",
+                    "expression": "H_y*d_y",
+                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>d_y</ci></apply>"
                 },
                 {
-                    "target": "t26",
-                    "expression": "H_y*d_1",
-                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>d_1</ci></apply>"
+                    "target": "H_to_R",
+                    "expression": "H_o*d_o",
+                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>d_o</ci></apply>"
                 },
                 {
-                    "target": "t27",
-                    "expression": "H_o*e_0",
-                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>e_0</ci></apply>"
+                    "target": "H_to_D",
+                    "expression": "H_y*e_y",
+                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>e_y</ci></apply>"
                 },
                 {
-                    "target": "t28",
-                    "expression": "H_y*e_1",
-                    "expression_mathml": "<apply><times/><ci>H_y</ci><ci>e_1</ci></apply>"
+                    "target": "H_to_D",
+                    "expression": "H_o*e_o",
+                    "expression_mathml": "<apply><times/><ci>H_o</ci><ci>e_o</ci></apply>"
                 },
                 {
-                    "target": "t29",
-                    "expression": "S_u_o*f_0",
-                    "expression_mathml": "<apply><times/><ci>S_u_o</ci><ci>f_0</ci></apply>"
+                    "target": "vaccination",
+                    "expression": "S_u_y*f_y",
+                    "expression_mathml": "<apply><times/><ci>S_u_y</ci><ci>f_y</ci></apply>"
                 },
                 {
-                    "target": "t30",
-                    "expression": "S_u_y*f_1",
-                    "expression_mathml": "<apply><times/><ci>S_u_y</ci><ci>f_1</ci></apply>"
+                    "target": "vaccination",
+                    "expression": "S_u_o*f_o",
+                    "expression_mathml": "<apply><times/><ci>S_u_o</ci><ci>f_o</ci></apply>"
                 }
             ],
             "initials": [
                 {
-                    "target": "S_u_o",
-                    "expression": "0",
-                    "expression_mathml": "<cn>0</cn>"
-                },
-                {
-                    "target": "C_u_o",
+                    "target": "S_u_y",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -724,12 +719,12 @@
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "S_u_y",
+                    "target": "C_u_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "C_v_o",
+                    "target": "S_u_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -739,7 +734,7 @@
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "S_v_o",
+                    "target": "C_v_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -749,7 +744,7 @@
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "H_o",
+                    "target": "S_v_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -759,7 +754,7 @@
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "R_o",
+                    "target": "H_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -769,7 +764,7 @@
                     "expression_mathml": "<cn>0</cn>"
                 },
                 {
-                    "target": "D_o",
+                    "target": "R_o",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
                 },
@@ -777,75 +772,80 @@
                     "target": "D_y",
                     "expression": "0",
                     "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_o",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
                 }
             ],
             "parameters": [
                 {
-                    "id": "a_0_0",
+                    "id": "a_u_u_y_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_0_1",
+                    "id": "a_u_u_y_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_0_2",
+                    "id": "a_u_u_o_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_0_3",
+                    "id": "a_u_u_o_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_1_0",
+                    "id": "a_u_v_y_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_1_1",
+                    "id": "a_u_v_y_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_1_2",
+                    "id": "a_u_v_o_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_1_3",
+                    "id": "a_u_v_o_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_2_0",
+                    "id": "a_v_u_y_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_2_1",
+                    "id": "a_v_u_y_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_2_2",
+                    "id": "a_v_u_o_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_2_3",
+                    "id": "a_v_u_o_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_3_0",
+                    "id": "a_v_v_y_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_3_1",
+                    "id": "a_v_v_y_o",
                     "value": 1.0
                 },
                 {
-                    "id": "a_3_2",
+                    "id": "a_v_v_o_y",
                     "value": 1.0
                 },
                 {
-                    "id": "a_3_3",
+                    "id": "a_v_v_o_o",
                     "value": 1.0
                 },
                 {
-                    "id": "ageCtoH_0",
+                    "id": "ageCtoH_y",
                     "value": 1.0
                 },
                 {
@@ -853,63 +853,55 @@
                     "value": 1.0
                 },
                 {
-                    "id": "vaxCtoH_0",
+                    "id": "vaxCtoH_u_y",
                     "value": 1.0
                 },
                 {
-                    "id": "ageCtoH_1",
+                    "id": "ageCtoH_o",
                     "value": 1.0
                 },
                 {
-                    "id": "ageCtoH_2",
+                    "id": "vaxCtoH_u_o",
                     "value": 1.0
                 },
                 {
-                    "id": "vaxCtoH_1",
+                    "id": "vaxCtoH_v_y",
                     "value": 1.0
                 },
                 {
-                    "id": "ageCtoH_3",
+                    "id": "vaxCtoH_v_o",
                     "value": 1.0
                 },
                 {
-                    "id": "c_0",
+                    "id": "c_y",
                     "value": 1.0
                 },
                 {
-                    "id": "c_1",
+                    "id": "c_o",
                     "value": 1.0
                 },
                 {
-                    "id": "c_2",
+                    "id": "d_y",
                     "value": 1.0
                 },
                 {
-                    "id": "c_3",
+                    "id": "d_o",
                     "value": 1.0
                 },
                 {
-                    "id": "d_0",
+                    "id": "e_y",
                     "value": 1.0
                 },
                 {
-                    "id": "d_1",
+                    "id": "e_o",
                     "value": 1.0
                 },
                 {
-                    "id": "e_0",
+                    "id": "f_y",
                     "value": 1.0
                 },
                 {
-                    "id": "e_1",
-                    "value": 1.0
-                },
-                {
-                    "id": "f_0",
-                    "value": 1.0
-                },
-                {
-                    "id": "f_1",
+                    "id": "f_o",
                     "value": 1.0
                 }
             ],

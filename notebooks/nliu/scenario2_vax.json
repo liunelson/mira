@@ -76,7 +76,7 @@
         ],
         "transitions": [
             {
-                "id": "t1",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u",
                     "S_u"
@@ -86,11 +86,11 @@
                     "C_u"
                 ],
                 "properties": {
-                    "name": "t1"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t2",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_v",
                     "S_u"
@@ -100,25 +100,11 @@
                     "C_u"
                 ],
                 "properties": {
-                    "name": "t2"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t3",
-                "input": [
-                    "C_v",
-                    "S_v"
-                ],
-                "output": [
-                    "C_v",
-                    "C_v"
-                ],
-                "properties": {
-                    "name": "t3"
-                }
-            },
-            {
-                "id": "t4",
+                "id": "S_to_C_via_C",
                 "input": [
                     "C_u",
                     "S_v"
@@ -128,11 +114,25 @@
                     "C_v"
                 ],
                 "properties": {
-                    "name": "t4"
+                    "name": "S_to_C_via_C"
                 }
             },
             {
-                "id": "t5",
+                "id": "S_to_C_via_C",
+                "input": [
+                    "C_v",
+                    "S_v"
+                ],
+                "output": [
+                    "C_v",
+                    "C_v"
+                ],
+                "properties": {
+                    "name": "S_to_C_via_C"
+                }
+            },
+            {
+                "id": "C_to_H",
                 "input": [
                     "C_u"
                 ],
@@ -140,11 +140,11 @@
                     "H"
                 ],
                 "properties": {
-                    "name": "t5"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t6",
+                "id": "C_to_H",
                 "input": [
                     "C_v"
                 ],
@@ -152,11 +152,11 @@
                     "H"
                 ],
                 "properties": {
-                    "name": "t6"
+                    "name": "C_to_H"
                 }
             },
             {
-                "id": "t7",
+                "id": "C_to_R",
                 "input": [
                     "C_u"
                 ],
@@ -164,11 +164,11 @@
                     "R"
                 ],
                 "properties": {
-                    "name": "t7"
+                    "name": "C_to_R"
                 }
             },
             {
-                "id": "t8",
+                "id": "C_to_R",
                 "input": [
                     "C_v"
                 ],
@@ -176,7 +176,7 @@
                     "R"
                 ],
                 "properties": {
-                    "name": "t8"
+                    "name": "C_to_R"
                 }
             },
             {
@@ -221,42 +221,42 @@
         "ode": {
             "rates": [
                 {
-                    "target": "t1",
-                    "expression": "C_u*S_u*a_0",
-                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_u</ci><ci>a_0</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u*S_u*a_u_u",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_u</ci><ci>a_u_u</ci></apply>"
                 },
                 {
-                    "target": "t2",
-                    "expression": "C_v*S_u*a_1",
-                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_u</ci><ci>a_1</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v*S_u*a_u_v",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_u</ci><ci>a_u_v</ci></apply>"
                 },
                 {
-                    "target": "t3",
-                    "expression": "C_v*S_v*a_2",
-                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_v</ci><ci>a_2</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_u*S_v*a_v_u",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_v</ci><ci>a_v_u</ci></apply>"
                 },
                 {
-                    "target": "t4",
-                    "expression": "C_u*S_v*a_3",
-                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>S_v</ci><ci>a_3</ci></apply>"
+                    "target": "S_to_C_via_C",
+                    "expression": "C_v*S_v*a_v_v",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>S_v</ci><ci>a_v_v</ci></apply>"
                 },
                 {
-                    "target": "t5",
-                    "expression": "C_u*ageCtoH*b*vaxCtoH_0",
-                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_0</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_u*ageCtoH*b*vaxCtoH_u",
+                    "expression_mathml": "<apply><times/><ci>C_u</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_u</ci></apply>"
                 },
                 {
-                    "target": "t6",
-                    "expression": "C_v*ageCtoH*b*vaxCtoH_1",
-                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_1</ci></apply>"
+                    "target": "C_to_H",
+                    "expression": "C_v*ageCtoH*b*vaxCtoH_v",
+                    "expression_mathml": "<apply><times/><ci>C_v</ci><ci>ageCtoH</ci><ci>b</ci><ci>vaxCtoH_v</ci></apply>"
                 },
                 {
-                    "target": "t7",
+                    "target": "C_to_R",
                     "expression": "C_u*c",
                     "expression_mathml": "<apply><times/><ci>C_u</ci><ci>c</ci></apply>"
                 },
                 {
-                    "target": "t8",
+                    "target": "C_to_R",
                     "expression": "C_v*c",
                     "expression_mathml": "<apply><times/><ci>C_v</ci><ci>c</ci></apply>"
                 },
@@ -315,19 +315,19 @@
             ],
             "parameters": [
                 {
-                    "id": "a_0",
+                    "id": "a_u_u",
                     "value": 1.0
                 },
                 {
-                    "id": "a_1",
+                    "id": "a_u_v",
                     "value": 1.0
                 },
                 {
-                    "id": "a_2",
+                    "id": "a_v_u",
                     "value": 1.0
                 },
                 {
-                    "id": "a_3",
+                    "id": "a_v_v",
                     "value": 1.0
                 },
                 {
@@ -339,11 +339,11 @@
                     "value": 1.0
                 },
                 {
-                    "id": "vaxCtoH_0",
+                    "id": "vaxCtoH_u",
                     "value": 1.0
                 },
                 {
-                    "id": "vaxCtoH_1",
+                    "id": "vaxCtoH_v",
                     "value": 1.0
                 },
                 {
