@@ -1,0 +1,230 @@
+{
+    "header": {
+        "name": "SVCRHD",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SVCRHD",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "C",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "H",
+                "name": "H",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "D",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "V",
+                "name": "V",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "StoCviaC",
+                "input": [
+                    "C",
+                    "S"
+                ],
+                "output": [
+                    "C",
+                    "C"
+                ],
+                "properties": {
+                    "name": "StoCviaC"
+                }
+            },
+            {
+                "id": "CtoH",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "CtoH"
+                }
+            },
+            {
+                "id": "CtoR",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "CtoR"
+                }
+            },
+            {
+                "id": "HtoR",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "HtoR"
+                }
+            },
+            {
+                "id": "HtoD",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "HtoD"
+                }
+            },
+            {
+                "id": "StoV",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "V"
+                ],
+                "properties": {
+                    "name": "StoV"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "StoCviaC",
+                    "expression": "C*S*a",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>S</ci><ci>a</ci></apply>"
+                },
+                {
+                    "target": "CtoH",
+                    "expression": "C*b",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>b</ci></apply>"
+                },
+                {
+                    "target": "CtoR",
+                    "expression": "C*c",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>c</ci></apply>"
+                },
+                {
+                    "target": "HtoR",
+                    "expression": "H*d",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
+                },
+                {
+                    "target": "HtoD",
+                    "expression": "H*e",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>e</ci></apply>"
+                },
+                {
+                    "target": "StoV",
+                    "expression": "S*f",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>f</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "C",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "H",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "D",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "V",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
