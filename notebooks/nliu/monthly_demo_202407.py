@@ -87,4 +87,5 @@ GraphicalModel.for_jupyter(model)
 # %%
 with open("./monthlydemo202407Q1.json", "w") as f:
     json.dump(template_model_to_petrinet_json(model), f, indent = 4)
+    
 # %%
