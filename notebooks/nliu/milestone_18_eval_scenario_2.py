@@ -67,14 +67,14 @@ def generate_odesys(model, latex_align: bool = False) -> list:
     # Convert to LaTeX
     if latex_align == True:
         odesys = [
-            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} & = " + sympy.latex(terms)
+            "\\frac{d " + f"{var}" + "}{d t}" + " &= " + sympy.latex(terms)
             for var, terms in odeterms.items()
         ]
         odesys = "\\begin{align*}\n" + "\n".join(["    " + expr + "\\\\" for expr in odesys]) + "\n\\end{align}"
 
     else:
         odesys = [
-            "\\frac{\\mathrm{d}}{\\mathrm{d} t}" + f"{var} = " + sympy.latex(terms)
+            "\\frac{d " + f"{var}" + "}{d t}" + " = " + sympy.latex(terms)
             for var, terms in odeterms.items()
         ]
 
@@ -252,8 +252,42 @@ with open("scenario2_vax_age.tex", "w") as f:
 # ## Investigate Collapsible Equation Generation
 
 # %%
-odesys = generate_odesys(model, latex_align = True)
-print(odesys)
+
+
+# %%
+M = stratify(
+    model, 
+    key = "vax",
+    strata = ["0", "1"],
+    cartesian_control = True, 
+    structure = [], 
+    params_to_preserve = ["b"],
+    concepts_to_stratify = None,
+    modify_names = True,
+    param_renaming_uses_strata_names = False
+)
+print(generate_odesys(M, latex_align = False))
+
+M2 = stratify(
+    M, 
+    key = "age",
+    strata = ["0", "1"],
+    cartesian_control = True, 
+    structure = [], 
+    params_to_preserve = [],
+    concepts_to_stratify = None,
+    modify_names = True,
+    param_renaming_uses_strata_names = False
+)
+print(generate_odesys(M2, latex_align = False))
+
+# %%
+A = sympy.MatrixSymbol("A", 10, 10)
+i, j, m, n = sympy.symbols("i j m n", integer = True)
+
+expr = sympy.summation(A[i, j] * i * j, (i, 0, m), (j, 0, n))
+print(expr)
+
 
 # %%
 m, a, i, n = sympy.symbols('m a i n')
