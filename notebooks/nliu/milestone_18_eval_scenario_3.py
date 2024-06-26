@@ -158,7 +158,9 @@ model = TemplateModel(
         hosts = ["ncbitaxon:9606"],
         diseases = ["doid:0080600"],
         pathogens = ["ncbitaxon:2697049"],
-        model_types = ["mamo:0000028", "mamo:0000046"]
+        model_types = ["mamo:0000028", "mamo:0000046"],
+        # time_start = "2020-03-01T00:00:00",
+        # time_end = "2020-08-01T00:00:00"
     )
 )
 
