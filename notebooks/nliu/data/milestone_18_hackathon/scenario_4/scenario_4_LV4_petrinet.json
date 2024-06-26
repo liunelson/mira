@@ -1,0 +1,709 @@
+{
+   "header": {
+      "name": "LotkeVolterraModelWith4Species",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+      "schema_name": "petrinet",
+      "description": "LotkeVolterraModelWith4Species",
+      "model_version": "0.1"
+   },
+   "properties": {},
+   "model": {
+      "states": [
+         {
+            "id": "X_1",
+            "name": "X_1",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         },
+         {
+            "id": "X_2",
+            "name": "X_2",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         },
+         {
+            "id": "X_3",
+            "name": "X_3",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         },
+         {
+            "id": "X_4",
+            "name": "X_4",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         }
+      ],
+      "transitions": [
+         {
+            "id": "ProductionOfX_1ControlledByX_1",
+            "input": [
+               "X_1"
+            ],
+            "output": [
+               "X_1",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_1",
+            "input": [
+               "X_1",
+               "X_1"
+            ],
+            "output": [
+               "X_1",
+               "X_1",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_2",
+            "input": [
+               "X_1",
+               "X_2"
+            ],
+            "output": [
+               "X_1",
+               "X_2",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_3",
+            "input": [
+               "X_1",
+               "X_3"
+            ],
+            "output": [
+               "X_1",
+               "X_3",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_3"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_4",
+            "input": [
+               "X_1",
+               "X_4"
+            ],
+            "output": [
+               "X_1",
+               "X_4",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_4"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2",
+            "input": [
+               "X_2"
+            ],
+            "output": [
+               "X_2",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_1",
+            "input": [
+               "X_2",
+               "X_1"
+            ],
+            "output": [
+               "X_2",
+               "X_1",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_2",
+            "input": [
+               "X_2",
+               "X_2"
+            ],
+            "output": [
+               "X_2",
+               "X_2",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_3",
+            "input": [
+               "X_2",
+               "X_3"
+            ],
+            "output": [
+               "X_2",
+               "X_3",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_3"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_4",
+            "input": [
+               "X_2",
+               "X_4"
+            ],
+            "output": [
+               "X_2",
+               "X_4",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_4"
+            }
+         },
+         {
+            "id": "ProductionOfX_3ControlledByX_3",
+            "input": [
+               "X_3"
+            ],
+            "output": [
+               "X_3",
+               "X_3"
+            ],
+            "properties": {
+               "name": "ProductionOfX_3ControlledByX_3"
+            }
+         },
+         {
+            "id": "ProductionOfX_3ControlledByX_3AndX_1",
+            "input": [
+               "X_3",
+               "X_1"
+            ],
+            "output": [
+               "X_3",
+               "X_1",
+               "X_3"
+            ],
+            "properties": {
+               "name": "ProductionOfX_3ControlledByX_3AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_3ControlledByX_3AndX_2",
+            "input": [
+               "X_3",
+               "X_2"
+            ],
+            "output": [
+               "X_3",
+               "X_2",
+               "X_3"
+            ],
+            "properties": {
+               "name": "ProductionOfX_3ControlledByX_3AndX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_3ControlledByX_3AndX_3",
+            "input": [
+               "X_3",
+               "X_3"
+            ],
+            "output": [
+               "X_3",
+               "X_3",
+               "X_3"
+            ],
+            "properties": {
+               "name": "ProductionOfX_3ControlledByX_3AndX_3"
+            }
+         },
+         {
+            "id": "ProductionOfX_3ControlledByX_3AndX_4",
+            "input": [
+               "X_3",
+               "X_4"
+            ],
+            "output": [
+               "X_3",
+               "X_4",
+               "X_3"
+            ],
+            "properties": {
+               "name": "ProductionOfX_3ControlledByX_3AndX_4"
+            }
+         },
+         {
+            "id": "ProductionOfX_4ControlledByX_4",
+            "input": [
+               "X_4"
+            ],
+            "output": [
+               "X_4",
+               "X_4"
+            ],
+            "properties": {
+               "name": "ProductionOfX_4ControlledByX_4"
+            }
+         },
+         {
+            "id": "ProductionOfX_4ControlledByX_4AndX_1",
+            "input": [
+               "X_4",
+               "X_1"
+            ],
+            "output": [
+               "X_4",
+               "X_1",
+               "X_4"
+            ],
+            "properties": {
+               "name": "ProductionOfX_4ControlledByX_4AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_4ControlledByX_4AndX_2",
+            "input": [
+               "X_4",
+               "X_2"
+            ],
+            "output": [
+               "X_4",
+               "X_2",
+               "X_4"
+            ],
+            "properties": {
+               "name": "ProductionOfX_4ControlledByX_4AndX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_4ControlledByX_4AndX_3",
+            "input": [
+               "X_4",
+               "X_3"
+            ],
+            "output": [
+               "X_4",
+               "X_3",
+               "X_4"
+            ],
+            "properties": {
+               "name": "ProductionOfX_4ControlledByX_4AndX_3"
+            }
+         },
+         {
+            "id": "ProductionOfX_4ControlledByX_4AndX_4",
+            "input": [
+               "X_4",
+               "X_4"
+            ],
+            "output": [
+               "X_4",
+               "X_4",
+               "X_4"
+            ],
+            "properties": {
+               "name": "ProductionOfX_4ControlledByX_4AndX_4"
+            }
+         }
+      ]
+   },
+   "semantics": {
+      "ode": {
+         "rates": [
+            {
+               "target": "ProductionOfX_1ControlledByX_1",
+               "expression": "X_1*r_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>r_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_1",
+               "expression": "X_1**2*a_1_1",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_1</ci><cn>2</cn></apply><ci>a_1_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_2",
+               "expression": "X_1*X_2*a_1_2",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_2</ci><ci>a_1_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_3",
+               "expression": "X_1*X_3*a_1_3",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_3</ci><ci>a_1_3</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_4",
+               "expression": "X_1*X_4*a_1_4",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_4</ci><ci>a_1_4</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2",
+               "expression": "X_2*r_2",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>r_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_1",
+               "expression": "X_1*X_2*a_2_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_2</ci><ci>a_2_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_2",
+               "expression": "X_2**2*a_2_2",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_2</ci><cn>2</cn></apply><ci>a_2_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_3",
+               "expression": "X_2*X_3*a_2_3",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>X_3</ci><ci>a_2_3</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_4",
+               "expression": "X_2*X_4*a_2_4",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>X_4</ci><ci>a_2_4</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_3ControlledByX_3",
+               "expression": "X_3*r_3",
+               "expression_mathml": "<apply><times/><ci>X_3</ci><ci>r_3</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_3ControlledByX_3AndX_1",
+               "expression": "X_1*X_3*a_3_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_3</ci><ci>a_3_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_3ControlledByX_3AndX_2",
+               "expression": "X_2*X_3*a_3_2",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>X_3</ci><ci>a_3_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_3ControlledByX_3AndX_3",
+               "expression": "X_3**2*a_3_3",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_3</ci><cn>2</cn></apply><ci>a_3_3</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_3ControlledByX_3AndX_4",
+               "expression": "X_3*X_4*a_3_4",
+               "expression_mathml": "<apply><times/><ci>X_3</ci><ci>X_4</ci><ci>a_3_4</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_4ControlledByX_4",
+               "expression": "X_4*r_4",
+               "expression_mathml": "<apply><times/><ci>X_4</ci><ci>r_4</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_4ControlledByX_4AndX_1",
+               "expression": "X_1*X_4*a_4_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_4</ci><ci>a_4_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_4ControlledByX_4AndX_2",
+               "expression": "X_2*X_4*a_4_2",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>X_4</ci><ci>a_4_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_4ControlledByX_4AndX_3",
+               "expression": "X_3*X_4*a_4_3",
+               "expression_mathml": "<apply><times/><ci>X_3</ci><ci>X_4</ci><ci>a_4_3</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_4ControlledByX_4AndX_4",
+               "expression": "X_4**2*a_4_4",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_4</ci><cn>2</cn></apply><ci>a_4_4</ci></apply>"
+            }
+         ],
+         "initials": [
+            {
+               "target": "X_1",
+               "expression": "0.510000000000000",
+               "expression_mathml": "<cn>0.51000000000000001</cn>"
+            },
+            {
+               "target": "X_2",
+               "expression": "0.390000000000000",
+               "expression_mathml": "<cn>0.39000000000000001</cn>"
+            },
+            {
+               "target": "X_3",
+               "expression": "0.880000000000000",
+               "expression_mathml": "<cn>0.88</cn>"
+            },
+            {
+               "target": "X_4",
+               "expression": "0.400000000000000",
+               "expression_mathml": "<cn>0.40000000000000002</cn>"
+            }
+         ],
+         "parameters": [
+            {
+               "id": "r_1",
+               "name": "r_1",
+               "description": "Growth rate of species 1 (CFU/day)",
+               "value": 0.53,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_1",
+               "name": "a_1_1",
+               "description": "Interaction matrix coefficient between species 1 and 1 (CFU/day)",
+               "value": -0.5,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_2",
+               "name": "a_1_2",
+               "description": "Interaction matrix coefficient between species 1 and 2 (CFU/day)",
+               "value": -0.01,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_3",
+               "name": "a_1_3",
+               "description": "Interaction matrix coefficient between species 1 and 3 (CFU/day)",
+               "value": 0.002,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_4",
+               "name": "a_1_4",
+               "description": "Interaction matrix coefficient between species 1 and 4 (CFU/day)",
+               "value": -0.009,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "r_2",
+               "name": "r_2",
+               "description": "Growth rate of species 2 (CFU/day)",
+               "value": 0.42,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_1",
+               "name": "a_2_1",
+               "description": "Interaction matrix coefficient between species 2 and 1 (CFU/day)",
+               "value": 0.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_2",
+               "name": "a_2_2",
+               "description": "Interaction matrix coefficient between species 2 and 2 (CFU/day)",
+               "value": -0.5,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_3",
+               "name": "a_2_3",
+               "description": "Interaction matrix coefficient between species 2 and 3 (CFU/day)",
+               "value": 0.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_4",
+               "name": "a_2_4",
+               "description": "Interaction matrix coefficient between species 2 and 4 (CFU/day)",
+               "value": -0.169,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "r_3",
+               "name": "r_3",
+               "description": "Growth rate of species 3 (CFU/day)",
+               "value": 0.49,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_3_1",
+               "name": "a_3_1",
+               "description": "Interaction matrix coefficient between species 3 and 1 (CFU/day)",
+               "value": -0.002,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_3_2",
+               "name": "a_3_2",
+               "description": "Interaction matrix coefficient between species 3 and 2 (CFU/day)",
+               "value": -0.003,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_3_3",
+               "name": "a_3_3",
+               "description": "Interaction matrix coefficient between species 3 and 3 (CFU/day)",
+               "value": -0.5,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_3_4",
+               "name": "a_3_4",
+               "description": "Interaction matrix coefficient between species 3 and 4 (CFU/day)",
+               "value": 0.02,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "r_4",
+               "name": "r_4",
+               "description": "Growth rate of species 4 (CFU/day)",
+               "value": 0.33,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_4_1",
+               "name": "a_4_1",
+               "description": "Interaction matrix coefficient between species 4 and 1 (CFU/day)",
+               "value": 0.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_4_2",
+               "name": "a_4_2",
+               "description": "Interaction matrix coefficient between species 4 and 2 (CFU/day)",
+               "value": -0.226,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_4_3",
+               "name": "a_4_3",
+               "description": "Interaction matrix coefficient between species 4 and 3 (CFU/day)",
+               "value": -0.04,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_4_4",
+               "name": "a_4_4",
+               "description": "Interaction matrix coefficient between species 4 and 4 (CFU/day)",
+               "value": -0.5,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            }
+         ],
+         "observables": [],
+         "time": {
+            "id": "t",
+            "units": {
+               "expression": "day",
+               "expression_mathml": "<ci>day</ci>"
+            }
+         }
+      }
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}

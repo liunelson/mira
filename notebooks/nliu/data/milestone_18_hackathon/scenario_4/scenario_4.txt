@@ -1,0 +1,10 @@
+Consider a simple system of 4 microbial species with a variety of competitive and mutualistic interactions amongst each other. Given a set of initial microbial populations, a set of inferred growth rates for each species, and an interaction matrix representing the negative (competitive or inhibitory) or positive (mutualistic or beneficial) effects that the presence of one species has on another in the microbial ecosystem… construct a model of the system utilizing the generalized Lotka-Volterra equation below:
+
+d X_i / d t = X_i r_i + \sum_j a_ij X_j
+
+This system represents a community of n species, where X_i is the population of species i, 
+r_i is the intrinsic growth rate of species i, and a_ij represents the interaction coefficient between species i and j.
+
+Simulate the interactions between each species for a 30-day period, with time steps of 1 day. Plot the population size of each species over the 30-day time period. Use the following parameter and initial conditions data to configure the model.
+
+Update the model to reflect a six species model, using the parameter and initial conditions data below.

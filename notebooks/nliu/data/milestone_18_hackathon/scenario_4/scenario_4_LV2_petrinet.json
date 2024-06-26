@@ -1,0 +1,259 @@
+{
+   "header": {
+      "name": "LotkeVolterraModelWith2Species",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+      "schema_name": "petrinet",
+      "description": "LotkeVolterraModelWith2Species",
+      "model_version": "0.1"
+   },
+   "properties": {},
+   "model": {
+      "states": [
+         {
+            "id": "X_1",
+            "name": "X_1",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         },
+         {
+            "id": "X_2",
+            "name": "X_2",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         }
+      ],
+      "transitions": [
+         {
+            "id": "ProductionOfX_1ControlledByX_1",
+            "input": [
+               "X_1"
+            ],
+            "output": [
+               "X_1",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_1",
+            "input": [
+               "X_1",
+               "X_1"
+            ],
+            "output": [
+               "X_1",
+               "X_1",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_1ControlledByX_1AndX_2",
+            "input": [
+               "X_1",
+               "X_2"
+            ],
+            "output": [
+               "X_1",
+               "X_2",
+               "X_1"
+            ],
+            "properties": {
+               "name": "ProductionOfX_1ControlledByX_1AndX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2",
+            "input": [
+               "X_2"
+            ],
+            "output": [
+               "X_2",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_1",
+            "input": [
+               "X_2",
+               "X_1"
+            ],
+            "output": [
+               "X_2",
+               "X_1",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_1"
+            }
+         },
+         {
+            "id": "ProductionOfX_2ControlledByX_2AndX_2",
+            "input": [
+               "X_2",
+               "X_2"
+            ],
+            "output": [
+               "X_2",
+               "X_2",
+               "X_2"
+            ],
+            "properties": {
+               "name": "ProductionOfX_2ControlledByX_2AndX_2"
+            }
+         }
+      ]
+   },
+   "semantics": {
+      "ode": {
+         "rates": [
+            {
+               "target": "ProductionOfX_1ControlledByX_1",
+               "expression": "X_1*r_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>r_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_1",
+               "expression": "X_1**2*a_1_1",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_1</ci><cn>2</cn></apply><ci>a_1_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_1ControlledByX_1AndX_2",
+               "expression": "X_1*X_2*a_1_2",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_2</ci><ci>a_1_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2",
+               "expression": "X_2*r_2",
+               "expression_mathml": "<apply><times/><ci>X_2</ci><ci>r_2</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_1",
+               "expression": "X_1*X_2*a_2_1",
+               "expression_mathml": "<apply><times/><ci>X_1</ci><ci>X_2</ci><ci>a_2_1</ci></apply>"
+            },
+            {
+               "target": "ProductionOfX_2ControlledByX_2AndX_2",
+               "expression": "X_2**2*a_2_2",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X_2</ci><cn>2</cn></apply><ci>a_2_2</ci></apply>"
+            }
+         ],
+         "initials": [
+            {
+               "target": "X_1",
+               "expression": "0.5",
+               "expression_mathml": "<cn>0.5</cn>"
+            },
+            {
+               "target": "X_2",
+               "expression": "0.5",
+               "expression_mathml": "<cn>0.5</cn>"
+            }
+         ],
+         "parameters": [
+            {
+               "id": "r_1",
+               "name": "r_1",
+               "description": "Growth rate of species 1 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_1",
+               "name": "a_1_1",
+               "description": "Interaction matrix coefficient between species 1 and 1 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_1_2",
+               "name": "a_1_2",
+               "description": "Interaction matrix coefficient between species 1 and 2 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "r_2",
+               "name": "r_2",
+               "description": "Growth rate of species 2 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_1",
+               "name": "a_2_1",
+               "description": "Interaction matrix coefficient between species 2 and 1 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a_2_2",
+               "name": "a_2_2",
+               "description": "Interaction matrix coefficient between species 2 and 2 (CFU/day)",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            }
+         ],
+         "observables": [],
+         "time": {
+            "id": "t",
+            "units": {
+               "expression": "day",
+               "expression_mathml": "<ci>day</ci>"
+            }
+         }
+      }
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}

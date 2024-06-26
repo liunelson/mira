@@ -1,0 +1,116 @@
+{
+   "header": {
+      "name": "LotkeVolterraModelWith2Species",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/regnet_v0.2/regnet/regnet_schema.json",
+      "schema_name": "regnet",
+      "description": "LotkeVolterraModelWith2Species",
+      "model_version": "0.1"
+   },
+   "model": {
+      "vertices": [
+         {
+            "id": "X_1",
+            "name": "X_1",
+            "grounding": {
+               "identifiers": {},
+               "context": {}
+            },
+            "rate_constant": "r_1",
+            "sign": true
+         },
+         {
+            "id": "X_2",
+            "name": "X_2",
+            "grounding": {
+               "identifiers": {},
+               "context": {}
+            },
+            "rate_constant": "r_2",
+            "sign": true
+         }
+      ],
+      "edges": [
+         {
+            "id": "t2",
+            "source": "X_1",
+            "target": "X_1",
+            "sign": true,
+            "properties": {
+               "name": "t2",
+               "rate_constant": "a_1_1"
+            }
+         },
+         {
+            "id": "t3",
+            "source": "X_2",
+            "target": "X_1",
+            "sign": true,
+            "properties": {
+               "name": "t3",
+               "rate_constant": "a_1_2"
+            }
+         },
+         {
+            "id": "t5",
+            "source": "X_1",
+            "target": "X_2",
+            "sign": true,
+            "properties": {
+               "name": "t5",
+               "rate_constant": "a_2_1"
+            }
+         },
+         {
+            "id": "t6",
+            "source": "X_2",
+            "target": "X_2",
+            "sign": true,
+            "properties": {
+               "name": "t6",
+               "rate_constant": "a_2_2"
+            }
+         }
+      ],
+      "parameters": [
+         {
+            "id": "r_1",
+            "value": 1.0
+         },
+         {
+            "id": "a_1_1",
+            "value": 1.0
+         },
+         {
+            "id": "a_1_2",
+            "value": 1.0
+         },
+         {
+            "id": "r_2",
+            "value": 1.0
+         },
+         {
+            "id": "a_2_1",
+            "value": 1.0
+         },
+         {
+            "id": "a_2_2",
+            "value": 1.0
+         }
+      ]
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}

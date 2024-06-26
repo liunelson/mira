@@ -1,0 +1,292 @@
+{
+    "header": {
+        "name": "SEIIRD",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SEIIRD",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "M",
+                "name": "M",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "E",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "C",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "D",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "S_to_E_via_M",
+                "input": [
+                    "M",
+                    "S"
+                ],
+                "output": [
+                    "M",
+                    "E"
+                ],
+                "properties": {
+                    "name": "S_to_E_via_M"
+                }
+            },
+            {
+                "id": "S_to_E_via_C",
+                "input": [
+                    "C",
+                    "S"
+                ],
+                "output": [
+                    "C",
+                    "E"
+                ],
+                "properties": {
+                    "name": "S_to_E_via_C"
+                }
+            },
+            {
+                "id": "E_to_M",
+                "input": [
+                    "E"
+                ],
+                "output": [
+                    "M"
+                ],
+                "properties": {
+                    "name": "E_to_M"
+                }
+            },
+            {
+                "id": "E_to_C",
+                "input": [
+                    "E"
+                ],
+                "output": [
+                    "C"
+                ],
+                "properties": {
+                    "name": "E_to_C"
+                }
+            },
+            {
+                "id": "M_to_R",
+                "input": [
+                    "M"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "M_to_R"
+                }
+            },
+            {
+                "id": "C_to_R",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "C_to_R"
+                }
+            },
+            {
+                "id": "C_to_D",
+                "input": [
+                    "C"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "C_to_D"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "S_to_E_via_M",
+                    "expression": "M*S*a_0",
+                    "expression_mathml": "<apply><times/><ci>M</ci><ci>S</ci><ci>a_0</ci></apply>"
+                },
+                {
+                    "target": "S_to_E_via_C",
+                    "expression": "C*S*a_1",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>S</ci><ci>a_1</ci></apply>"
+                },
+                {
+                    "target": "E_to_M",
+                    "expression": "E*a_2",
+                    "expression_mathml": "<apply><times/><ci>E</ci><ci>a_2</ci></apply>"
+                },
+                {
+                    "target": "E_to_C",
+                    "expression": "E*a_3",
+                    "expression_mathml": "<apply><times/><ci>E</ci><ci>a_3</ci></apply>"
+                },
+                {
+                    "target": "M_to_R",
+                    "expression": "M*a_4",
+                    "expression_mathml": "<apply><times/><ci>M</ci><ci>a_4</ci></apply>"
+                },
+                {
+                    "target": "C_to_R",
+                    "expression": "C*a_5",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>a_5</ci></apply>"
+                },
+                {
+                    "target": "C_to_D",
+                    "expression": "C*a_6",
+                    "expression_mathml": "<apply><times/><ci>C</ci><ci>a_6</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "M",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "E",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "C",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "D",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "a_0",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_2",
+                    "name": "a_2",
+                    "description": "Rate constant for E_to_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_3",
+                    "name": "a_3",
+                    "description": "Rate constant for E_to_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_4",
+                    "name": "a_4",
+                    "description": "Rate constant for M_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_5",
+                    "name": "a_5",
+                    "description": "Rate constant for C_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_6",
+                    "name": "a_6",
+                    "description": "Rate constant for C_to_D",
+                    "value": 1.0
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

@@ -1,0 +1,113 @@
+{
+   "header": {
+      "name": "BaseLotkeVolterraModelWith1Species",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+      "schema_name": "petrinet",
+      "description": "BaseLotkeVolterraModelWith1Species",
+      "model_version": "0.1"
+   },
+   "properties": {},
+   "model": {
+      "states": [
+         {
+            "id": "X",
+            "name": "X",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "CFU",
+               "expression_mathml": "<ci>CFU</ci>"
+            }
+         }
+      ],
+      "transitions": [
+         {
+            "id": "IntrinsicGrowth",
+            "input": [],
+            "output": [
+               "X"
+            ],
+            "properties": {
+               "name": "IntrinsicGrowth"
+            }
+         },
+         {
+            "id": "InteractionWithX",
+            "input": [
+               "X"
+            ],
+            "output": [
+               "X",
+               "X"
+            ],
+            "properties": {
+               "name": "InteractionWithX"
+            }
+         }
+      ]
+   },
+   "semantics": {
+      "ode": {
+         "rates": [
+            {
+               "target": "IntrinsicGrowth",
+               "expression": "X*r",
+               "expression_mathml": "<apply><times/><ci>X</ci><ci>r</ci></apply>"
+            },
+            {
+               "target": "InteractionWithX",
+               "expression": "X**2*a",
+               "expression_mathml": "<apply><times/><apply><power/><ci>X</ci><cn>2</cn></apply><ci>a</ci></apply>"
+            }
+         ],
+         "initials": [
+            {
+               "target": "X",
+               "expression": "1.0",
+               "expression_mathml": "<cn>1.0</cn>"
+            }
+         ],
+         "parameters": [
+            {
+               "id": "r",
+               "description": "Intrinsic growth rate in units of CFU/day",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            },
+            {
+               "id": "a",
+               "description": "Interaction coefficient between species in units of CFU/day",
+               "value": 1.0,
+               "units": {
+                  "expression": "CFU/day",
+                  "expression_mathml": "<apply><divide/><ci>CFU</ci><ci>day</ci></apply>"
+               }
+            }
+         ],
+         "observables": [],
+         "time": {
+            "id": "t"
+         }
+      }
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}

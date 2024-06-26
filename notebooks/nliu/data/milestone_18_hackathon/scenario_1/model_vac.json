@@ -1,0 +1,1326 @@
+{
+    "header": {
+        "name": "SEIIRD_Vac3",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SEIIRD_Vac3",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S_0",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "M_0",
+                "name": "M",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "E_0",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "M_1",
+                "name": "M",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "M_2",
+                "name": "M",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            },
+            {
+                "id": "S_1",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "E_1",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "S_2",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            },
+            {
+                "id": "E_2",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            },
+            {
+                "id": "C_0",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "C_1",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "C_2",
+                "name": "C",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            },
+            {
+                "id": "R_0",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "R_1",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "R_2",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            },
+            {
+                "id": "D_0",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "0"
+                    }
+                }
+            },
+            {
+                "id": "D_1",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "1"
+                    }
+                }
+            },
+            {
+                "id": "D_2",
+                "name": "D",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "vac": "2"
+                    }
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "M_0",
+                    "S_0"
+                ],
+                "output": [
+                    "M_0",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [
+                    "M_1",
+                    "S_0"
+                ],
+                "output": [
+                    "M_1",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "M_2",
+                    "S_0"
+                ],
+                "output": [
+                    "M_2",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
+                    "M_1",
+                    "S_1"
+                ],
+                "output": [
+                    "M_1",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t4"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "M_0",
+                    "S_1"
+                ],
+                "output": [
+                    "M_0",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "M_2",
+                    "S_1"
+                ],
+                "output": [
+                    "M_2",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t6"
+                }
+            },
+            {
+                "id": "t7",
+                "input": [
+                    "M_2",
+                    "S_2"
+                ],
+                "output": [
+                    "M_2",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t7"
+                }
+            },
+            {
+                "id": "t8",
+                "input": [
+                    "M_0",
+                    "S_2"
+                ],
+                "output": [
+                    "M_0",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t8"
+                }
+            },
+            {
+                "id": "t9",
+                "input": [
+                    "M_1",
+                    "S_2"
+                ],
+                "output": [
+                    "M_1",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t9"
+                }
+            },
+            {
+                "id": "t10",
+                "input": [
+                    "C_0",
+                    "S_0"
+                ],
+                "output": [
+                    "C_0",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t10"
+                }
+            },
+            {
+                "id": "t11",
+                "input": [
+                    "C_1",
+                    "S_0"
+                ],
+                "output": [
+                    "C_1",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t11"
+                }
+            },
+            {
+                "id": "t12",
+                "input": [
+                    "C_2",
+                    "S_0"
+                ],
+                "output": [
+                    "C_2",
+                    "E_0"
+                ],
+                "properties": {
+                    "name": "t12"
+                }
+            },
+            {
+                "id": "t13",
+                "input": [
+                    "C_1",
+                    "S_1"
+                ],
+                "output": [
+                    "C_1",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t13"
+                }
+            },
+            {
+                "id": "t14",
+                "input": [
+                    "C_0",
+                    "S_1"
+                ],
+                "output": [
+                    "C_0",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t14"
+                }
+            },
+            {
+                "id": "t15",
+                "input": [
+                    "C_2",
+                    "S_1"
+                ],
+                "output": [
+                    "C_2",
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t15"
+                }
+            },
+            {
+                "id": "t16",
+                "input": [
+                    "C_2",
+                    "S_2"
+                ],
+                "output": [
+                    "C_2",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t16"
+                }
+            },
+            {
+                "id": "t17",
+                "input": [
+                    "C_0",
+                    "S_2"
+                ],
+                "output": [
+                    "C_0",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t17"
+                }
+            },
+            {
+                "id": "t18",
+                "input": [
+                    "C_1",
+                    "S_2"
+                ],
+                "output": [
+                    "C_1",
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t18"
+                }
+            },
+            {
+                "id": "t19",
+                "input": [
+                    "E_0"
+                ],
+                "output": [
+                    "M_0"
+                ],
+                "properties": {
+                    "name": "t19"
+                }
+            },
+            {
+                "id": "t20",
+                "input": [
+                    "E_1"
+                ],
+                "output": [
+                    "M_1"
+                ],
+                "properties": {
+                    "name": "t20"
+                }
+            },
+            {
+                "id": "t21",
+                "input": [
+                    "E_2"
+                ],
+                "output": [
+                    "M_2"
+                ],
+                "properties": {
+                    "name": "t21"
+                }
+            },
+            {
+                "id": "t22",
+                "input": [
+                    "E_0"
+                ],
+                "output": [
+                    "C_0"
+                ],
+                "properties": {
+                    "name": "t22"
+                }
+            },
+            {
+                "id": "t23",
+                "input": [
+                    "E_1"
+                ],
+                "output": [
+                    "C_1"
+                ],
+                "properties": {
+                    "name": "t23"
+                }
+            },
+            {
+                "id": "t24",
+                "input": [
+                    "E_2"
+                ],
+                "output": [
+                    "C_2"
+                ],
+                "properties": {
+                    "name": "t24"
+                }
+            },
+            {
+                "id": "t25",
+                "input": [
+                    "M_0"
+                ],
+                "output": [
+                    "R_0"
+                ],
+                "properties": {
+                    "name": "t25"
+                }
+            },
+            {
+                "id": "t26",
+                "input": [
+                    "M_1"
+                ],
+                "output": [
+                    "R_1"
+                ],
+                "properties": {
+                    "name": "t26"
+                }
+            },
+            {
+                "id": "t27",
+                "input": [
+                    "M_2"
+                ],
+                "output": [
+                    "R_2"
+                ],
+                "properties": {
+                    "name": "t27"
+                }
+            },
+            {
+                "id": "t28",
+                "input": [
+                    "C_0"
+                ],
+                "output": [
+                    "R_0"
+                ],
+                "properties": {
+                    "name": "t28"
+                }
+            },
+            {
+                "id": "t29",
+                "input": [
+                    "C_1"
+                ],
+                "output": [
+                    "R_1"
+                ],
+                "properties": {
+                    "name": "t29"
+                }
+            },
+            {
+                "id": "t30",
+                "input": [
+                    "C_2"
+                ],
+                "output": [
+                    "R_2"
+                ],
+                "properties": {
+                    "name": "t30"
+                }
+            },
+            {
+                "id": "t31",
+                "input": [
+                    "C_0"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t31"
+                }
+            },
+            {
+                "id": "t32",
+                "input": [
+                    "C_1"
+                ],
+                "output": [
+                    "D_1"
+                ],
+                "properties": {
+                    "name": "t32"
+                }
+            },
+            {
+                "id": "t33",
+                "input": [
+                    "C_2"
+                ],
+                "output": [
+                    "D_2"
+                ],
+                "properties": {
+                    "name": "t33"
+                }
+            },
+            {
+                "id": "t34",
+                "input": [
+                    "S_0"
+                ],
+                "output": [
+                    "S_1"
+                ],
+                "properties": {
+                    "name": "t34"
+                }
+            },
+            {
+                "id": "t35",
+                "input": [
+                    "E_0"
+                ],
+                "output": [
+                    "E_1"
+                ],
+                "properties": {
+                    "name": "t35"
+                }
+            },
+            {
+                "id": "t36",
+                "input": [
+                    "M_0"
+                ],
+                "output": [
+                    "M_1"
+                ],
+                "properties": {
+                    "name": "t36"
+                }
+            },
+            {
+                "id": "t37",
+                "input": [
+                    "C_0"
+                ],
+                "output": [
+                    "C_1"
+                ],
+                "properties": {
+                    "name": "t37"
+                }
+            },
+            {
+                "id": "t38",
+                "input": [
+                    "R_0"
+                ],
+                "output": [
+                    "R_1"
+                ],
+                "properties": {
+                    "name": "t38"
+                }
+            },
+            {
+                "id": "t39",
+                "input": [
+                    "D_0"
+                ],
+                "output": [
+                    "D_1"
+                ],
+                "properties": {
+                    "name": "t39"
+                }
+            },
+            {
+                "id": "t40",
+                "input": [
+                    "S_1"
+                ],
+                "output": [
+                    "S_2"
+                ],
+                "properties": {
+                    "name": "t40"
+                }
+            },
+            {
+                "id": "t41",
+                "input": [
+                    "E_1"
+                ],
+                "output": [
+                    "E_2"
+                ],
+                "properties": {
+                    "name": "t41"
+                }
+            },
+            {
+                "id": "t42",
+                "input": [
+                    "M_1"
+                ],
+                "output": [
+                    "M_2"
+                ],
+                "properties": {
+                    "name": "t42"
+                }
+            },
+            {
+                "id": "t43",
+                "input": [
+                    "C_1"
+                ],
+                "output": [
+                    "C_2"
+                ],
+                "properties": {
+                    "name": "t43"
+                }
+            },
+            {
+                "id": "t44",
+                "input": [
+                    "R_1"
+                ],
+                "output": [
+                    "R_2"
+                ],
+                "properties": {
+                    "name": "t44"
+                }
+            },
+            {
+                "id": "t45",
+                "input": [
+                    "D_1"
+                ],
+                "output": [
+                    "D_2"
+                ],
+                "properties": {
+                    "name": "t45"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "M_0*S_0*a_0_0",
+                    "expression_mathml": "<apply><times/><ci>M_0</ci><ci>S_0</ci><ci>a_0_0</ci></apply>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "M_1*S_0*a_0_1",
+                    "expression_mathml": "<apply><times/><ci>M_1</ci><ci>S_0</ci><ci>a_0_1</ci></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "M_2*S_0*a_0_2",
+                    "expression_mathml": "<apply><times/><ci>M_2</ci><ci>S_0</ci><ci>a_0_2</ci></apply>"
+                },
+                {
+                    "target": "t4",
+                    "expression": "M_1*S_1*a_0_3",
+                    "expression_mathml": "<apply><times/><ci>M_1</ci><ci>S_1</ci><ci>a_0_3</ci></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "M_0*S_1*a_0_4",
+                    "expression_mathml": "<apply><times/><ci>M_0</ci><ci>S_1</ci><ci>a_0_4</ci></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "M_2*S_1*a_0_5",
+                    "expression_mathml": "<apply><times/><ci>M_2</ci><ci>S_1</ci><ci>a_0_5</ci></apply>"
+                },
+                {
+                    "target": "t7",
+                    "expression": "M_2*S_2*a_0_6",
+                    "expression_mathml": "<apply><times/><ci>M_2</ci><ci>S_2</ci><ci>a_0_6</ci></apply>"
+                },
+                {
+                    "target": "t8",
+                    "expression": "M_0*S_2*a_0_7",
+                    "expression_mathml": "<apply><times/><ci>M_0</ci><ci>S_2</ci><ci>a_0_7</ci></apply>"
+                },
+                {
+                    "target": "t9",
+                    "expression": "M_1*S_2*a_0_8",
+                    "expression_mathml": "<apply><times/><ci>M_1</ci><ci>S_2</ci><ci>a_0_8</ci></apply>"
+                },
+                {
+                    "target": "t10",
+                    "expression": "C_0*S_0*a_1_0",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>S_0</ci><ci>a_1_0</ci></apply>"
+                },
+                {
+                    "target": "t11",
+                    "expression": "C_1*S_0*a_1_1",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>S_0</ci><ci>a_1_1</ci></apply>"
+                },
+                {
+                    "target": "t12",
+                    "expression": "C_2*S_0*a_1_2",
+                    "expression_mathml": "<apply><times/><ci>C_2</ci><ci>S_0</ci><ci>a_1_2</ci></apply>"
+                },
+                {
+                    "target": "t13",
+                    "expression": "C_1*S_1*a_1_3",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>S_1</ci><ci>a_1_3</ci></apply>"
+                },
+                {
+                    "target": "t14",
+                    "expression": "C_0*S_1*a_1_4",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>S_1</ci><ci>a_1_4</ci></apply>"
+                },
+                {
+                    "target": "t15",
+                    "expression": "C_2*S_1*a_1_5",
+                    "expression_mathml": "<apply><times/><ci>C_2</ci><ci>S_1</ci><ci>a_1_5</ci></apply>"
+                },
+                {
+                    "target": "t16",
+                    "expression": "C_2*S_2*a_1_6",
+                    "expression_mathml": "<apply><times/><ci>C_2</ci><ci>S_2</ci><ci>a_1_6</ci></apply>"
+                },
+                {
+                    "target": "t17",
+                    "expression": "C_0*S_2*a_1_7",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>S_2</ci><ci>a_1_7</ci></apply>"
+                },
+                {
+                    "target": "t18",
+                    "expression": "C_1*S_2*a_1_8",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>S_2</ci><ci>a_1_8</ci></apply>"
+                },
+                {
+                    "target": "t19",
+                    "expression": "E_0*a_2_0",
+                    "expression_mathml": "<apply><times/><ci>E_0</ci><ci>a_2_0</ci></apply>"
+                },
+                {
+                    "target": "t20",
+                    "expression": "E_1*a_2_1",
+                    "expression_mathml": "<apply><times/><ci>E_1</ci><ci>a_2_1</ci></apply>"
+                },
+                {
+                    "target": "t21",
+                    "expression": "E_2*a_2_2",
+                    "expression_mathml": "<apply><times/><ci>E_2</ci><ci>a_2_2</ci></apply>"
+                },
+                {
+                    "target": "t22",
+                    "expression": "E_0*a_3_0",
+                    "expression_mathml": "<apply><times/><ci>E_0</ci><ci>a_3_0</ci></apply>"
+                },
+                {
+                    "target": "t23",
+                    "expression": "E_1*a_3_1",
+                    "expression_mathml": "<apply><times/><ci>E_1</ci><ci>a_3_1</ci></apply>"
+                },
+                {
+                    "target": "t24",
+                    "expression": "E_2*a_3_2",
+                    "expression_mathml": "<apply><times/><ci>E_2</ci><ci>a_3_2</ci></apply>"
+                },
+                {
+                    "target": "t25",
+                    "expression": "M_0*a_4_0",
+                    "expression_mathml": "<apply><times/><ci>M_0</ci><ci>a_4_0</ci></apply>"
+                },
+                {
+                    "target": "t26",
+                    "expression": "M_1*a_4_1",
+                    "expression_mathml": "<apply><times/><ci>M_1</ci><ci>a_4_1</ci></apply>"
+                },
+                {
+                    "target": "t27",
+                    "expression": "M_2*a_4_2",
+                    "expression_mathml": "<apply><times/><ci>M_2</ci><ci>a_4_2</ci></apply>"
+                },
+                {
+                    "target": "t28",
+                    "expression": "C_0*a_5_0",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>a_5_0</ci></apply>"
+                },
+                {
+                    "target": "t29",
+                    "expression": "C_1*a_5_1",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>a_5_1</ci></apply>"
+                },
+                {
+                    "target": "t30",
+                    "expression": "C_2*a_5_2",
+                    "expression_mathml": "<apply><times/><ci>C_2</ci><ci>a_5_2</ci></apply>"
+                },
+                {
+                    "target": "t31",
+                    "expression": "C_0*a_6_0",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>a_6_0</ci></apply>"
+                },
+                {
+                    "target": "t32",
+                    "expression": "C_1*a_6_1",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>a_6_1</ci></apply>"
+                },
+                {
+                    "target": "t33",
+                    "expression": "C_2*a_6_2",
+                    "expression_mathml": "<apply><times/><ci>C_2</ci><ci>a_6_2</ci></apply>"
+                },
+                {
+                    "target": "t34",
+                    "expression": "S_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>S_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t35",
+                    "expression": "E_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>E_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t36",
+                    "expression": "M_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>M_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t37",
+                    "expression": "C_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>C_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t38",
+                    "expression": "R_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>R_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t39",
+                    "expression": "D_0*p_0_1",
+                    "expression_mathml": "<apply><times/><ci>D_0</ci><ci>p_0_1</ci></apply>"
+                },
+                {
+                    "target": "t40",
+                    "expression": "S_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>S_1</ci><ci>p_1_2</ci></apply>"
+                },
+                {
+                    "target": "t41",
+                    "expression": "E_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>E_1</ci><ci>p_1_2</ci></apply>"
+                },
+                {
+                    "target": "t42",
+                    "expression": "M_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>M_1</ci><ci>p_1_2</ci></apply>"
+                },
+                {
+                    "target": "t43",
+                    "expression": "C_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>C_1</ci><ci>p_1_2</ci></apply>"
+                },
+                {
+                    "target": "t44",
+                    "expression": "R_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>R_1</ci><ci>p_1_2</ci></apply>"
+                },
+                {
+                    "target": "t45",
+                    "expression": "D_1*p_1_2",
+                    "expression_mathml": "<apply><times/><ci>D_1</ci><ci>p_1_2</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "M_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "E_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "M_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "M_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "E_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "E_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "C_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "C_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "C_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_1",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_2",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "a_0_0",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_1",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_2",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_3",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_4",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_5",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_6",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_7",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_0_8",
+                    "name": "a_0",
+                    "description": "Rate constant for S_to_E_via_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_0",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_1",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_2",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_3",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_4",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_5",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_6",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_7",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_1_8",
+                    "name": "a_1",
+                    "description": "Rate constant for S_to_E_via_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_2_0",
+                    "name": "a_2",
+                    "description": "Rate constant for E_to_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_2_1",
+                    "name": "a_2",
+                    "description": "Rate constant for E_to_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_2_2",
+                    "name": "a_2",
+                    "description": "Rate constant for E_to_M",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_3_0",
+                    "name": "a_3",
+                    "description": "Rate constant for E_to_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_3_1",
+                    "name": "a_3",
+                    "description": "Rate constant for E_to_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_3_2",
+                    "name": "a_3",
+                    "description": "Rate constant for E_to_C",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_4_0",
+                    "name": "a_4",
+                    "description": "Rate constant for M_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_4_1",
+                    "name": "a_4",
+                    "description": "Rate constant for M_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_4_2",
+                    "name": "a_4",
+                    "description": "Rate constant for M_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_5_0",
+                    "name": "a_5",
+                    "description": "Rate constant for C_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_5_1",
+                    "name": "a_5",
+                    "description": "Rate constant for C_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_5_2",
+                    "name": "a_5",
+                    "description": "Rate constant for C_to_R",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_6_0",
+                    "name": "a_6",
+                    "description": "Rate constant for C_to_D",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_6_1",
+                    "name": "a_6",
+                    "description": "Rate constant for C_to_D",
+                    "value": 1.0
+                },
+                {
+                    "id": "a_6_2",
+                    "name": "a_6",
+                    "description": "Rate constant for C_to_D",
+                    "value": 1.0
+                },
+                {
+                    "id": "p_0_1",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_1_2",
+                    "value": 0.1
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

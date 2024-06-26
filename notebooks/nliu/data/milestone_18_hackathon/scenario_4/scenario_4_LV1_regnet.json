@@ -1,0 +1,61 @@
+{
+   "header": {
+      "name": "BaseLotkeVolterraModelWith1Species",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/regnet_v0.2/regnet/regnet_schema.json",
+      "schema_name": "regnet",
+      "description": "BaseLotkeVolterraModelWith1Species",
+      "model_version": "0.1"
+   },
+   "model": {
+      "vertices": [
+         {
+            "id": "X",
+            "name": "X",
+            "grounding": {
+               "identifiers": {},
+               "context": {}
+            },
+            "initial": "1.0",
+            "rate_constant": "r",
+            "sign": true
+         }
+      ],
+      "edges": [
+         {
+            "id": "t1",
+            "source": "X",
+            "target": "X",
+            "sign": true,
+            "properties": {
+               "name": "t1",
+               "rate_constant": "a"
+            }
+         }
+      ],
+      "parameters": [
+         {
+            "id": "r",
+            "value": 1.0
+         },
+         {
+            "id": "a",
+            "value": 1.0
+         }
+      ]
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}

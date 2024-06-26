@@ -141,4 +141,4 @@ docker/epi.sh
 # VS Code
 .vscode/
 
-notebooks/nliu/data
+notebooks/nliu/_data

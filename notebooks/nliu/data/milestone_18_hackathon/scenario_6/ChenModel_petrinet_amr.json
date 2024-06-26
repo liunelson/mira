@@ -1,0 +1,487 @@
+{
+   "header": {
+      "name": "ChenModelWith3Types",
+      "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+      "schema_name": "petrinet",
+      "description": "ChenModelWith3Types",
+      "model_version": "0.1"
+   },
+   "properties": {},
+   "model": {
+      "states": [
+         {
+            "id": "p_1",
+            "name": "p_1",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         },
+         {
+            "id": "r_1",
+            "name": "r_1",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         },
+         {
+            "id": "r_2",
+            "name": "r_2",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         },
+         {
+            "id": "p_2",
+            "name": "p_2",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         },
+         {
+            "id": "r_3",
+            "name": "r_3",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         },
+         {
+            "id": "p_3",
+            "name": "p_3",
+            "grounding": {
+               "identifiers": {},
+               "modifiers": {}
+            },
+            "units": {
+               "expression": "nM",
+               "expression_mathml": "<ci>nM</ci>"
+            }
+         }
+      ],
+      "transitions": [
+         {
+            "id": "TranscriptionOfr_1ControlledByp_1",
+            "input": [
+               "p_1"
+            ],
+            "output": [
+               "p_1",
+               "r_1"
+            ],
+            "properties": {
+               "name": "TranscriptionOfr_1ControlledByp_1"
+            }
+         },
+         {
+            "id": "DegradationOfr_1",
+            "input": [
+               "r_1",
+               "r_1"
+            ],
+            "output": [
+               "r_1"
+            ],
+            "properties": {
+               "name": "DegradationOfr_1"
+            }
+         },
+         {
+            "id": "TranslationOfp_1ControlledByr_1",
+            "input": [
+               "r_1"
+            ],
+            "output": [
+               "r_1",
+               "p_1"
+            ],
+            "properties": {
+               "name": "TranslationOfp_1ControlledByr_1"
+            }
+         },
+         {
+            "id": "DegradationOfp_1",
+            "input": [
+               "p_1",
+               "p_1"
+            ],
+            "output": [
+               "p_1"
+            ],
+            "properties": {
+               "name": "DegradationOfp_1"
+            }
+         },
+         {
+            "id": "TranscriptionOfr_2ControlledByp_1",
+            "input": [
+               "p_1"
+            ],
+            "output": [
+               "p_1",
+               "r_2"
+            ],
+            "properties": {
+               "name": "TranscriptionOfr_2ControlledByp_1"
+            }
+         },
+         {
+            "id": "DegradationOfr_2",
+            "input": [
+               "r_2",
+               "r_2"
+            ],
+            "output": [
+               "r_2"
+            ],
+            "properties": {
+               "name": "DegradationOfr_2"
+            }
+         },
+         {
+            "id": "TranslationOfp_2ControlledByr_2",
+            "input": [
+               "r_2"
+            ],
+            "output": [
+               "r_2",
+               "p_2"
+            ],
+            "properties": {
+               "name": "TranslationOfp_2ControlledByr_2"
+            }
+         },
+         {
+            "id": "DegradationOfp_2",
+            "input": [
+               "p_2",
+               "p_2"
+            ],
+            "output": [
+               "p_2"
+            ],
+            "properties": {
+               "name": "DegradationOfp_2"
+            }
+         },
+         {
+            "id": "TranscriptionOfr_3ControlledByp_1",
+            "input": [
+               "p_1"
+            ],
+            "output": [
+               "p_1",
+               "r_3"
+            ],
+            "properties": {
+               "name": "TranscriptionOfr_3ControlledByp_1"
+            }
+         },
+         {
+            "id": "DegradationOfr_3",
+            "input": [
+               "r_3",
+               "r_3"
+            ],
+            "output": [
+               "r_3"
+            ],
+            "properties": {
+               "name": "DegradationOfr_3"
+            }
+         },
+         {
+            "id": "TranslationOfp_3ControlledByr_3",
+            "input": [
+               "r_3"
+            ],
+            "output": [
+               "r_3",
+               "p_3"
+            ],
+            "properties": {
+               "name": "TranslationOfp_3ControlledByr_3"
+            }
+         },
+         {
+            "id": "DegradationOfp_3",
+            "input": [
+               "p_3",
+               "p_3"
+            ],
+            "output": [
+               "p_3"
+            ],
+            "properties": {
+               "name": "DegradationOfp_3"
+            }
+         }
+      ]
+   },
+   "semantics": {
+      "ode": {
+         "rates": [
+            {
+               "target": "TranscriptionOfr_1ControlledByp_1",
+               "expression": "C_1*p_1",
+               "expression_mathml": "<apply><times/><ci>C_1</ci><ci>p_1</ci></apply>"
+            },
+            {
+               "target": "DegradationOfr_1",
+               "expression": "V_1*r_1",
+               "expression_mathml": "<apply><times/><ci>V_1</ci><ci>r_1</ci></apply>"
+            },
+            {
+               "target": "TranslationOfp_1ControlledByr_1",
+               "expression": "L_1*r_1",
+               "expression_mathml": "<apply><times/><ci>L_1</ci><ci>r_1</ci></apply>"
+            },
+            {
+               "target": "DegradationOfp_1",
+               "expression": "U_1*p_1",
+               "expression_mathml": "<apply><times/><ci>U_1</ci><ci>p_1</ci></apply>"
+            },
+            {
+               "target": "TranscriptionOfr_2ControlledByp_1",
+               "expression": "C_2*p_1",
+               "expression_mathml": "<apply><times/><ci>C_2</ci><ci>p_1</ci></apply>"
+            },
+            {
+               "target": "DegradationOfr_2",
+               "expression": "V_2*r_2",
+               "expression_mathml": "<apply><times/><ci>V_2</ci><ci>r_2</ci></apply>"
+            },
+            {
+               "target": "TranslationOfp_2ControlledByr_2",
+               "expression": "L_2*r_2",
+               "expression_mathml": "<apply><times/><ci>L_2</ci><ci>r_2</ci></apply>"
+            },
+            {
+               "target": "DegradationOfp_2",
+               "expression": "U_2*p_2",
+               "expression_mathml": "<apply><times/><ci>U_2</ci><ci>p_2</ci></apply>"
+            },
+            {
+               "target": "TranscriptionOfr_3ControlledByp_1",
+               "expression": "C_3*p_1",
+               "expression_mathml": "<apply><times/><ci>C_3</ci><ci>p_1</ci></apply>"
+            },
+            {
+               "target": "DegradationOfr_3",
+               "expression": "V_3*r_3",
+               "expression_mathml": "<apply><times/><ci>V_3</ci><ci>r_3</ci></apply>"
+            },
+            {
+               "target": "TranslationOfp_3ControlledByr_3",
+               "expression": "L_3*r_3",
+               "expression_mathml": "<apply><times/><ci>L_3</ci><ci>r_3</ci></apply>"
+            },
+            {
+               "target": "DegradationOfp_3",
+               "expression": "U_3*p_3",
+               "expression_mathml": "<apply><times/><ci>U_3</ci><ci>p_3</ci></apply>"
+            }
+         ],
+         "initials": [
+            {
+               "target": "p_1",
+               "expression": "100.000000000000",
+               "expression_mathml": "<cn>100.0</cn>"
+            },
+            {
+               "target": "r_1",
+               "expression": "3.00000000000000",
+               "expression_mathml": "<cn>3.0</cn>"
+            },
+            {
+               "target": "r_2",
+               "expression": "6.00000000000000",
+               "expression_mathml": "<cn>6.0</cn>"
+            },
+            {
+               "target": "p_2",
+               "expression": "500.000000000000",
+               "expression_mathml": "<cn>500.0</cn>"
+            },
+            {
+               "target": "r_3",
+               "expression": "5.00000000000000",
+               "expression_mathml": "<cn>5.0</cn>"
+            },
+            {
+               "target": "p_3",
+               "expression": "1.00000000000000",
+               "expression_mathml": "<cn>1.0</cn>"
+            }
+         ],
+         "parameters": [
+            {
+               "id": "C_1",
+               "name": "C_1",
+               "description": "Transcription rate for type-1 proteins",
+               "value": 0.03,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "V_1",
+               "name": "V_1",
+               "description": "Degradation rate for type-1 proteins",
+               "value": 0.03,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "L_1",
+               "name": "L_1",
+               "description": "Translation rate for type-1 proteins",
+               "value": 2,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "U_1",
+               "name": "U_1",
+               "description": "Degradation rate for type-1 proteins",
+               "value": 0.15,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "C_2",
+               "name": "C_2",
+               "description": "Transcription rate for type-2 proteins",
+               "value": 0.03,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "V_2",
+               "name": "V_2",
+               "description": "Degradation rate for type-2 proteins",
+               "value": 0.03,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "L_2",
+               "name": "L_2",
+               "description": "Translation rate for type-2 proteins",
+               "value": 2,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "U_2",
+               "name": "U_2",
+               "description": "Degradation rate for type-2 proteins",
+               "value": 0.15,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "C_3",
+               "name": "C_3",
+               "description": "Transcription rate for type-3 proteins",
+               "value": 0.024,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "V_3",
+               "name": "V_3",
+               "description": "Degradation rate for type-3 proteins",
+               "value": 0.03,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "L_3",
+               "name": "L_3",
+               "description": "Translation rate for type-3 proteins",
+               "value": 2,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            },
+            {
+               "id": "U_3",
+               "name": "U_3",
+               "description": "Degradation rate for type-3 proteins",
+               "value": 0.015,
+               "units": {
+                  "expression": "1/min",
+                  "expression_mathml": "<apply><power/><ci>min</ci><cn>-1</cn></apply>"
+               }
+            }
+         ],
+         "observables": [],
+         "time": {
+            "id": "t",
+            "units": {
+               "expression": "min",
+               "expression_mathml": "<ci>min</ci>"
+            }
+         }
+      }
+   },
+   "metadata": {
+      "annotations": {
+         "license": null,
+         "authors": [],
+         "references": [],
+         "time_scale": null,
+         "time_start": null,
+         "time_end": null,
+         "locations": [],
+         "pathogens": [],
+         "diseases": [],
+         "hosts": [],
+         "model_types": []
+      }
+   }
+}
