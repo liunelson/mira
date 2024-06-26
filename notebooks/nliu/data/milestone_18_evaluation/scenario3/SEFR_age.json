@@ -642,7 +642,32 @@
                     }
                 }
             ],
-            "observables": [],
+            "observables": [
+                {
+                    "id": "Stotal",
+                    "name": "Stotal",
+                    "expression": "S_1 + S_2 + S_3",
+                    "expression_mathml": "<apply><plus/><ci>S_1</ci><ci>S_2</ci><ci>S_3</ci></apply>"
+                },
+                {
+                    "id": "Etotal",
+                    "name": "Etotal",
+                    "expression": "E_1 + E_2 + E_3",
+                    "expression_mathml": "<apply><plus/><ci>E_1</ci><ci>E_2</ci><ci>E_3</ci></apply>"
+                },
+                {
+                    "id": "Ftotal",
+                    "name": "Ftotal",
+                    "expression": "F_1 + F_2 + F_3",
+                    "expression_mathml": "<apply><plus/><ci>F_1</ci><ci>F_2</ci><ci>F_3</ci></apply>"
+                },
+                {
+                    "id": "Rtotal",
+                    "name": "Rtotal",
+                    "expression": "R_1 + R_2 + R_3",
+                    "expression_mathml": "<apply><plus/><ci>R_1</ci><ci>R_2</ci><ci>R_3</ci></apply>"
+                }
+            ],
             "time": {
                 "id": "t",
                 "units": {

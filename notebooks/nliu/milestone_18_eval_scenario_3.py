@@ -226,6 +226,18 @@ for i in range(3):
         model_age.parameters[name].value = df_ContactMatrix.iloc[i, j]
         model_age.parameters[name].description = f"Contact rate (between Age Group {i + 1} and {j + 1})"
 
+# %%
+# Add observables
+
+S_1, S_2, S_3, E_1, E_2, E_3, F_1, F_2, F_3, R_1, R_2, R_3 = sympy.symbols("S_1 S_2 S_3 E_1 E_2 E_3 F_1 F_2 F_3 R_1 R_2 R_3")
+
+model_age.observables = {
+    "S": Observable(name = "Stotal", expression = S_1 + S_2 + S_3),
+    "E": Observable(name = "Etotal", expression = E_1 + E_2 + E_3),
+    "F": Observable(name = "Ftotal", expression = F_1 + F_2 + F_3),
+    "R": Observable(name = "Rtotal", expression = R_1 + R_2 + R_3),
+}
+
 
 # %%
 GraphicalModel.for_jupyter(model_age)
