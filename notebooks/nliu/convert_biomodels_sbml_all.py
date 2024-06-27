@@ -24,7 +24,7 @@ from mira.modeling.amr.petrinet import AMRPetriNetModel
 from mira.sources.sbml import template_model_from_sbml_file
 
 # %%
-PATH = "data/biomodels/biomodels_sbml_all"
+PATH = "_data/biomodels/biomodels_sbml_all"
 URL_OA = "https://api.openaccessbutton.org"
 
 # %%
