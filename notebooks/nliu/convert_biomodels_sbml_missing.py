@@ -62,6 +62,7 @@ for id in tqdm(models.keys()):
 # %%
 with open(os.path.join(PATH, "model_data.json"), "w") as f:
     json.dump(models, f, indent = 4)
+    
 
 # %%
 # Pull model files from previous cache
