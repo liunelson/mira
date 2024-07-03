@@ -56,7 +56,7 @@ initials = {
 
 # Parameters
 parameters = {
-    p: Parameter(name = p, value = 0.0, units = per_day_units())
+    p: Parameter(name = p, display_name = p, value = 0.0, units = per_day_units())
     for p in ("a", "b", "c", "d", "f", "g")
 }
 parameters["a"].description = "Infection rate"

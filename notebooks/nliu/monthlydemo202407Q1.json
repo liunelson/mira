@@ -240,6 +240,7 @@
             "parameters": [
                 {
                     "id": "a",
+                    "name": "a",
                     "description": "Infection rate",
                     "value": 0.0,
                     "units": {
@@ -249,6 +250,7 @@
                 },
                 {
                     "id": "b",
+                    "name": "b",
                     "description": "Hospitalization rate",
                     "value": 0.0,
                     "units": {
@@ -258,6 +260,7 @@
                 },
                 {
                     "id": "c",
+                    "name": "c",
                     "description": "Recovery rate",
                     "value": 0.0,
                     "units": {
@@ -267,6 +270,7 @@
                 },
                 {
                     "id": "d",
+                    "name": "d",
                     "description": "Hospitalized recovery rate",
                     "value": 0.0,
                     "units": {
@@ -276,6 +280,7 @@
                 },
                 {
                     "id": "f",
+                    "name": "f",
                     "description": "Hospitalized death rate",
                     "value": 0.0,
                     "units": {
@@ -285,6 +290,7 @@
                 },
                 {
                     "id": "g",
+                    "name": "g",
                     "description": "Vaccination rate",
                     "value": 0.0,
                     "units": {
