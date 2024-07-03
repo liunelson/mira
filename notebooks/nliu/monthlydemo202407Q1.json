@@ -1,9 +1,9 @@
 {
     "header": {
-        "name": "SVCRHD",
+        "name": "SVCRDH",
         "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
         "schema_name": "petrinet",
-        "description": "SVCRHD",
+        "description": "Compartmental model with vaccination and hospitalization for 6-month Milestone Epi Eval Scenario 2.",
         "model_version": "0.1"
     },
     "properties": {},
@@ -13,54 +13,90 @@
                 "id": "S",
                 "name": "S",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             },
             {
                 "id": "C",
                 "name": "C",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             },
             {
                 "id": "H",
                 "name": "H",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "ncit": "C25179"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             },
             {
                 "id": "R",
                 "name": "R",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             },
             {
                 "id": "D",
                 "name": "D",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "ncit": "C28554"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             },
             {
                 "id": "V",
                 "name": "V",
                 "grounding": {
-                    "identifiers": {},
+                    "identifiers": {
+                        "vo": "0001376"
+                    },
                     "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
                 }
             }
         ],
         "transitions": [
             {
-                "id": "StoCviaC",
+                "id": "Infection",
                 "input": [
                     "C",
                     "S"
@@ -70,11 +106,11 @@
                     "C"
                 ],
                 "properties": {
-                    "name": "StoCviaC"
+                    "name": "Infection"
                 }
             },
             {
-                "id": "CtoH",
+                "id": "Hospitalization",
                 "input": [
                     "C"
                 ],
@@ -82,11 +118,11 @@
                     "H"
                 ],
                 "properties": {
-                    "name": "CtoH"
+                    "name": "Hospitalization"
                 }
             },
             {
-                "id": "CtoR",
+                "id": "Recovery",
                 "input": [
                     "C"
                 ],
@@ -94,11 +130,11 @@
                     "R"
                 ],
                 "properties": {
-                    "name": "CtoR"
+                    "name": "Recovery"
                 }
             },
             {
-                "id": "HtoR",
+                "id": "HospitalRecovery",
                 "input": [
                     "H"
                 ],
@@ -106,11 +142,11 @@
                     "R"
                 ],
                 "properties": {
-                    "name": "HtoR"
+                    "name": "HospitalRecovery"
                 }
             },
             {
-                "id": "HtoD",
+                "id": "HospitalDeath",
                 "input": [
                     "H"
                 ],
@@ -118,11 +154,11 @@
                     "D"
                 ],
                 "properties": {
-                    "name": "HtoD"
+                    "name": "HospitalDeath"
                 }
             },
             {
-                "id": "StoV",
+                "id": "Vaccination",
                 "input": [
                     "S"
                 ],
@@ -130,7 +166,7 @@
                     "V"
                 ],
                 "properties": {
-                    "name": "StoV"
+                    "name": "Vaccination"
                 }
             }
         ]
@@ -139,34 +175,34 @@
         "ode": {
             "rates": [
                 {
-                    "target": "StoCviaC",
+                    "target": "Infection",
                     "expression": "C*S*a",
                     "expression_mathml": "<apply><times/><ci>C</ci><ci>S</ci><ci>a</ci></apply>"
                 },
                 {
-                    "target": "CtoH",
+                    "target": "Hospitalization",
                     "expression": "C*b",
                     "expression_mathml": "<apply><times/><ci>C</ci><ci>b</ci></apply>"
                 },
                 {
-                    "target": "CtoR",
+                    "target": "Recovery",
                     "expression": "C*c",
                     "expression_mathml": "<apply><times/><ci>C</ci><ci>c</ci></apply>"
                 },
                 {
-                    "target": "HtoR",
+                    "target": "HospitalRecovery",
                     "expression": "H*d",
                     "expression_mathml": "<apply><times/><ci>H</ci><ci>d</ci></apply>"
                 },
                 {
-                    "target": "HtoD",
-                    "expression": "H*e",
-                    "expression_mathml": "<apply><times/><ci>H</ci><ci>e</ci></apply>"
+                    "target": "HospitalDeath",
+                    "expression": "H*f",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>f</ci></apply>"
                 },
                 {
-                    "target": "StoV",
-                    "expression": "S*f",
-                    "expression_mathml": "<apply><times/><ci>S</ci><ci>f</ci></apply>"
+                    "target": "Vaccination",
+                    "expression": "S*g",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>g</ci></apply>"
                 }
             ],
             "initials": [
@@ -201,8 +237,76 @@
                     "expression_mathml": "<cn>0.0</cn>"
                 }
             ],
-            "parameters": [],
-            "observables": [],
+            "parameters": [
+                {
+                    "id": "a",
+                    "description": "Infection rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "b",
+                    "description": "Hospitalization rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "c",
+                    "description": "Recovery rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "d",
+                    "description": "Hospitalized recovery rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "f",
+                    "description": "Hospitalized death rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "g",
+                    "description": "Vaccination rate",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                }
+            ],
+            "observables": [
+                {
+                    "id": "TotalPop",
+                    "name": "TotalPop",
+                    "expression": "C + D + H + R + S + V",
+                    "expression_mathml": "<apply><plus/><ci>C</ci><ci>D</ci><ci>H</ci><ci>R</ci><ci>S</ci><ci>V</ci></apply>"
+                },
+                {
+                    "id": "NonInfectable",
+                    "name": "NonInfectable",
+                    "expression": "D + R + V",
+                    "expression_mathml": "<apply><plus/><ci>D</ci><ci>R</ci><ci>V</ci></apply>"
+                }
+            ],
             "time": {
                 "id": "t",
                 "units": {
@@ -220,11 +324,22 @@
             "time_scale": null,
             "time_start": null,
             "time_end": null,
-            "locations": [],
-            "pathogens": [],
-            "diseases": [],
-            "hosts": [],
-            "model_types": []
+            "locations": [
+                "geonames:5368381"
+            ],
+            "pathogens": [
+                "ncbitaxon:2697049"
+            ],
+            "diseases": [
+                "doid:0080600"
+            ],
+            "hosts": [
+                "ncbitaxon:9606"
+            ],
+            "model_types": [
+                "mamo:0000028",
+                "mamo:0000046"
+            ]
         }
     }
 }

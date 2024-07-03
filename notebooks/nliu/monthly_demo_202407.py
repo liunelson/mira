@@ -26,17 +26,52 @@ from mira.sources.amr.petrinet import template_model_from_amr_json
 # Define a model with vaccination by assuming vaccinated pop do not get infected
 
 # %%
-day_units = lambda: Unit(expression = sympy.Symbol("day"))
-per_day_units = lambda: Unit(expression = 1 / sympy.Symbol("day"))
+person_units = lambda: Unit(expression = sympy.Symbol('person'))
+day_units = lambda: Unit(expression = sympy.Symbol('day'))
+per_day_units = lambda: Unit(expression = 1/sympy.Symbol('day'))
+dimensionless_units = lambda: Unit(expression = sympy.Integer('1'))
+per_day_per_person_units = lambda: Unit(expression = 1/(sympy.Symbol('day')*sympy.Symbol('person')))
+
+# Symbols
+s = lambda x: sympy.Symbol(x)
 
 # Basic components
 concepts = {
-    c: Concept(name = c, display_name = c, description = f"Population of {d} agents")
+    c: Concept(name = c, display_name = c, description = f"Population of {d} agents", units = person_units())
     for c, d in zip(["S", "V", "C", "R", "D", "H"], ["susceptible", "vaccinated", "infected", "recovered", "deceased", "hospitalized"])
 }
 
+# Groundings
+concepts["S"].identifiers = {'ido': '0000514'}
+concepts["V"].identifiers = {'vo': '0001376'}
+concepts["C"].identifiers = {'ido': '0000511'}
+concepts["R"].identifiers = {'ido': '0000592'}
+concepts["D"].identifiers = {'ncit': 'C28554'}
+concepts["H"].identifiers = {'ncit': 'C25179'}
+
+# Initial conditions
 initials = {
     c: Initial(concept = concepts[c], expression = sympy.Float(0.0)) for c in concepts.keys()
+}
+
+# Parameters
+parameters = {
+    p: Parameter(name = p, value = 0.0, units = per_day_units())
+    for p in ("a", "b", "c", "d", "f", "g")
+}
+parameters["a"].description = "Infection rate"
+parameters["b"].description = "Hospitalization rate"
+parameters["c"].description = "Recovery rate"
+parameters["d"].description = "Hospitalized recovery rate"
+parameters["f"].description = "Hospitalized death rate"
+parameters["g"].description = "Vaccination rate"
+
+
+# Observables
+observables = {
+    "TotalPop": Observable(name = "TotalPop", expression = s("S") + s("V") + s("C") + s("R") + s("D") + s("H")),
+    "NonInfectable": Observable(name = "NonInfectable", expression = s("V") + s("R") + s("D"))
+
 }
 
 # %%
@@ -46,38 +81,47 @@ model = TemplateModel(
             subject = concepts["S"],
             outcome = concepts["C"],
             controller = concepts["C"],
-            name = "StoCviaC",
+            name = "Infection",
         ).with_mass_action_rate_law("a"),
         NaturalConversion(
             subject = concepts["C"],
             outcome = concepts["H"],
-            name = "CtoH",
+            name = "Hospitalization",
         ).with_mass_action_rate_law("b"),
         NaturalConversion(
             subject = concepts["C"],
             outcome = concepts["R"],
-            name = "CtoR"
+            name = "Recovery"
         ).with_mass_action_rate_law("c"),
         NaturalConversion(
             subject = concepts["H"],
             outcome = concepts["R"],
-            name = "HtoR"
+            name = "HospitalRecovery"
         ).with_mass_action_rate_law("d"),
         NaturalConversion(
             subject = concepts["H"],
             outcome = concepts["D"],
-            name = "HtoD"
-        ).with_mass_action_rate_law("e"),
+            name = "HospitalDeath"
+        ).with_mass_action_rate_law("f"),
         NaturalConversion(
             subject = concepts["S"],
             outcome = concepts["V"],
-            name = "StoV",
-        ).with_mass_action_rate_law("f"),
+            name = "Vaccination",
+        ).with_mass_action_rate_law("g"),
     ],
     initials = initials,
-    observables = {},
+    parameters = parameters,
+    observables = observables,
     time = Time(name = "t", units = day_units()),
-    annotations = Annotations(name = f"SVCRHD")
+    annotations = Annotations(
+        name = "SVCRDH", 
+        description = "Compartmental model with vaccination and hospitalization for 6-month Milestone Epi Eval Scenario 2.",
+        locations = ["geonames:5368381"],
+        diseases = ["doid:0080600"],
+        hosts = ["ncbitaxon:9606"],
+        pathogens = ["ncbitaxon:2697049"],
+        model_types = ["mamo:0000028", "mamo:0000046"]
+    )
 )
 
 # %%
