@@ -1,6 +1,7 @@
 """API endpoints."""
 
 import itertools as itt
+import os
 from typing import Any, List, Mapping, Optional, Union
 
 import pydantic
@@ -10,8 +11,9 @@ from pydantic import BaseModel, Field
 from scipy.spatial import distance
 from typing_extensions import Literal
 
-from mira.dkg.client import AskemEntity, Entity
+from mira.dkg.client import AskemEntity, Entity, Relation
 from mira.dkg.utils import DKG_REFINER_RELS
+from mira.dkg.construct import add_resource_to_dkg
 
 __all__ = [
     "api_blueprint",
@@ -327,6 +329,67 @@ def get_relations(
         ]
     else:
         return [RelationResponse(subject=s, predicate=p, object=o) for s, p, o in records]
+
+
+active_add_relation_endpoint = os.getenv('MIRA_ADD_RELATION_ENDPOINT')
+
+if active_add_relation_endpoint:
+    @api_blueprint.post(
+        "/add_nodes",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_nodes(
+        request: Request,
+        node_list: List[Union[AskemEntity, Entity]]
+    ):
+        """Add a list of nodes to the DKG"""
+        for entity in node_list:
+            request.app.state.client.add_node(entity)
+
+    @api_blueprint.post(
+        "/add_relations",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_relations(
+        request: Request,
+        relation_list: List[Relation]
+    ):
+        """Add a list of relations to the DKG"""
+        for relation in relation_list:
+            request.app.state.client.add_relation(relation)
+
+
+    @api_blueprint.post(
+        "/add_resources",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_resources(
+        request: Request,
+        resource_prefix_list: List[str] = Body(
+            ...,
+            description="A of resources to add to the DKG",
+            title="Resource Prefixes",
+            example=["probonto", "wikidata", "eiffel", "geonames", "ncit",
+                     "nbcbitaxon"],
+        )
+    ):
+        """From a list of resource prefixes, add a list of nodes and edges
+        extract from each resource to the DKG"""
+        for resource_prefix in resource_prefix_list:
+            # nodes and edges will be a list of dicts
+            nodes, edges = add_resource_to_dkg(resource_prefix.lower())
+            # node_info and edge_info are dictionaries that will be
+            # unpacked when creating instances of entities and relations
+            entities = [Entity(**node_info) for node_info in nodes]
+            relations = [Relation(**edge_info) for edge_info in edges]
+
+            for entity in entities:
+                request.app.state.client.add_node(entity)
+            for relation in relations:
+                request.app.state.client.add_relation(relation)
 
 
 class IsOntChildResult(BaseModel):

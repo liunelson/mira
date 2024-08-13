@@ -41,6 +41,34 @@ Node: TypeAlias = Mapping[str, Any]
 TxResult: TypeAlias = Optional[List[List[Any]]]
 
 
+class Relation(BaseModel):
+    """A relationship between two entities in the DKG"""
+    source_curie: str = Field(
+        description="The curie of the source node", example="probonto:k0000000"
+    )
+    target_curie: str = Field(
+        description="The curie of the target node", example="probonto:k0000007"
+    )
+    type: str = Field(
+        description="The type of the relation", example="has_parameter"
+    )
+    pred: str = Field(
+        description="The curie of the relation type",
+        example="probonto:c0000062"
+    )
+    source: str = Field(
+        description="The prefix of the relation curie", example="probonto"
+    )
+    graph: str = Field(
+        description="The URI of the relation",
+        example="https://raw.githubusercontent.com/probonto"
+                "/ontology/master/probonto4ols.owl"
+    )
+    version: str = Field(
+        description="The version number", example="2.5"
+    )
+
+
 class Entity(BaseModel):
     """An entity in the domain knowledge graph."""
 
@@ -142,6 +170,7 @@ class Entity(BaseModel):
         -------
         A MIRA entity
         """
+
         if isinstance(data, neo4j.graph.Node):
             data = dict(data.items())
         properties = defaultdict(list)
@@ -157,6 +186,8 @@ class Entity(BaseModel):
         ):
             synonyms.append(Synonym(value=value, type=type))
         xrefs = []
+
+
         for curie, type in zip(
             data.pop("xrefs", []),
             data.pop("xref_types", []),
@@ -306,6 +337,107 @@ class Neo4jClient:
             return session.write_transaction(do_cypher_tx,
                                              query,
                                              **query_params)
+
+    def add_node(self, entity):
+        """Add a node to the DKG
+
+        Parameters
+        ----------
+        entity:
+            The node object that will be added to the DKG
+        """
+        xrefs, xref_types = [], []
+        synonyms, synonym_types = [], []
+        property_predicates, property_values = [], []
+        for xref in entity.xrefs:
+            xrefs.append(xref.id)
+            xref_types.append(xref.type)
+        for synonym in entity.synonyms:
+            synonyms.append(synonym.value)
+            synonym_types.append(synonym.type)
+        for property_predicate, property_value_list in entity.properties.items():
+            property_predicates.append(property_predicate)
+            property_values.extend(property_value_list)
+
+        _id = entity.id
+        name = entity.name
+        type = entity.type
+        obsolete = entity.obsolete
+        description = entity.description
+        alts = entity.alts
+        labels = entity.labels
+
+        create_source_node_query = (
+            "MERGE (n {id: $id, "
+            "type: $type, "
+            "obsolete: $obsolete"
+        )
+
+        if name:
+            create_source_node_query += ", name: $name"
+        if description:
+            create_source_node_query += ", description: $description"
+        if alts:
+            create_source_node_query += ", alts: $alts"
+        if labels:
+            create_source_node_query += ", labels: $labels"
+        if xrefs:
+            create_source_node_query += ", xrefs: $xrefs"
+            create_source_node_query += ", xref_types: $xref_types"
+        if synonyms:
+            create_source_node_query += ", synonyms: $synonyms"
+            create_source_node_query += ", synonym_types: $synonym_types"
+        if property_predicates:
+            create_source_node_query += ", property_predicates: $property_predicates"
+            create_source_node_query += ", property_values: $property_values"
+
+        create_source_node_query += "})"
+
+        query_parameters = {
+            "id": _id,
+            "name": name,
+            "type": type,
+            "obsolete": obsolete,
+            "description": description,
+            "synonyms": synonyms,
+            "synonym_types": synonym_types,
+            "alts": alts,
+            "xrefs": xrefs,
+            "xref_types": xref_types,
+            "labels": labels,
+            "property_predicates": property_predicates,
+            "property_values": property_values
+        }
+
+        self.create_tx(create_source_node_query, **query_parameters)
+
+    def add_relation(self, relation):
+        """Add a relation to the DKG
+
+        Parameters
+        ----------
+        relation:
+            The relation object that will be added to the DKG
+        """
+        source_curie = relation.source_curie
+        target_curie = relation.target_curie
+        type = relation.type
+        pred = relation.pred
+        source = relation.source
+        version = relation.version
+        graph = relation.graph
+
+        create_relation_query = (
+            f"MATCH (source_node {{id: '{source_curie}'}}), "
+            f"(target_node {{id: '{target_curie}'}}) "
+            f"MERGE (source_node)-[rel:{type}]->(target_node)"
+            f"SET rel.pred = '{pred}'"
+            f"SET rel.source = '{source}'"
+            f"SET rel.version = '{version}'"
+            f"SET rel.graph = '{graph}'"
+        )
+        
+        self.create_tx(create_relation_query)
 
     def create_single_property_node_index(
         self,
