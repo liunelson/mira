@@ -2393,78 +2393,78 @@
                 },
                 {
                     "target": "t5_0to9",
-                    "expression": "E_0to9*rEI_0to9",
-                    "expression_mathml": "<apply><times/><ci>E_0to9</ci><ci>rEI_0to9</ci></apply>"
+                    "expression": "E_0to9*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_0to9</ci><ci>rEI</ci></apply>"
                 },
                 {
                     "target": "t5_10to19",
-                    "expression": "E_10to19*rEI_10to19",
-                    "expression_mathml": "<apply><times/><ci>E_10to19</ci><ci>rEI_10to19</ci></apply>"
+                    "expression": "E_10to19*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_10to19</ci><ci>rEI</ci></apply>"
                 },
                 {
                     "target": "t5_20above",
-                    "expression": "E_20above*rEI_20above",
-                    "expression_mathml": "<apply><times/><ci>E_20above</ci><ci>rEI_20above</ci></apply>"
+                    "expression": "E_20above*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_20above</ci><ci>rEI</ci></apply>"
                 },
                 {
                     "target": "t9_0to9",
-                    "expression": "I_0to9*pIR_0to9*rIR_0to9",
-                    "expression_mathml": "<apply><times/><ci>I_0to9</ci><ci>pIR_0to9</ci><ci>rIR_0to9</ci></apply>"
+                    "expression": "I_0to9*pIR_0to9*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_0to9</ci><ci>pIR_0to9</ci><ci>rIR</ci></apply>"
                 },
                 {
                     "target": "t9_10to19",
-                    "expression": "I_10to19*pIR_10to19*rIR_10to19",
-                    "expression_mathml": "<apply><times/><ci>I_10to19</ci><ci>pIR_10to19</ci><ci>rIR_10to19</ci></apply>"
+                    "expression": "I_10to19*pIR_10to19*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_10to19</ci><ci>pIR_10to19</ci><ci>rIR</ci></apply>"
                 },
                 {
                     "target": "t9_20above",
-                    "expression": "I_20above*pIR_20above*rIR_20above",
-                    "expression_mathml": "<apply><times/><ci>I_20above</ci><ci>pIR_20above</ci><ci>rIR_20above</ci></apply>"
+                    "expression": "I_20above*pIR_20above*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_20above</ci><ci>pIR_20above</ci><ci>rIR</ci></apply>"
                 },
                 {
                     "target": "t15_0to9",
-                    "expression": "H_0to9*pHD_0to9*rHD_0to9",
-                    "expression_mathml": "<apply><times/><ci>H_0to9</ci><ci>pHD_0to9</ci><ci>rHD_0to9</ci></apply>"
+                    "expression": "H_0to9*pHD_0to9*rHD",
+                    "expression_mathml": "<apply><times/><ci>H_0to9</ci><ci>pHD_0to9</ci><ci>rHD</ci></apply>"
                 },
                 {
                     "target": "t15_10to19",
-                    "expression": "H_10to19*pHD_10to19*rHD_10to19",
-                    "expression_mathml": "<apply><times/><ci>H_10to19</ci><ci>pHD_10to19</ci><ci>rHD_10to19</ci></apply>"
+                    "expression": "H_10to19*pHD_10to19*rHD",
+                    "expression_mathml": "<apply><times/><ci>H_10to19</ci><ci>pHD_10to19</ci><ci>rHD</ci></apply>"
                 },
                 {
                     "target": "t15_20above",
-                    "expression": "H_20above*pHD_20above*rHD_20above",
-                    "expression_mathml": "<apply><times/><ci>H_20above</ci><ci>pHD_20above</ci><ci>rHD_20above</ci></apply>"
+                    "expression": "H_20above*pHD_20above*rHD",
+                    "expression_mathml": "<apply><times/><ci>H_20above</ci><ci>pHD_20above</ci><ci>rHD</ci></apply>"
                 },
                 {
                     "target": "t16_0to9",
-                    "expression": "H_0to9*pHR_0to9*rHR_0to9",
-                    "expression_mathml": "<apply><times/><ci>H_0to9</ci><ci>pHR_0to9</ci><ci>rHR_0to9</ci></apply>"
+                    "expression": "H_0to9*pHR_0to9*rHR",
+                    "expression_mathml": "<apply><times/><ci>H_0to9</ci><ci>pHR_0to9</ci><ci>rHR</ci></apply>"
                 },
                 {
                     "target": "t16_10to19",
-                    "expression": "H_10to19*pHR_10to19*rHR_10to19",
-                    "expression_mathml": "<apply><times/><ci>H_10to19</ci><ci>pHR_10to19</ci><ci>rHR_10to19</ci></apply>"
+                    "expression": "H_10to19*pHR_10to19*rHR",
+                    "expression_mathml": "<apply><times/><ci>H_10to19</ci><ci>pHR_10to19</ci><ci>rHR</ci></apply>"
                 },
                 {
                     "target": "t16_20above",
-                    "expression": "H_20above*pHR_20above*rHR_20above",
-                    "expression_mathml": "<apply><times/><ci>H_20above</ci><ci>pHR_20above</ci><ci>rHR_20above</ci></apply>"
+                    "expression": "H_20above*pHR_20above*rHR",
+                    "expression_mathml": "<apply><times/><ci>H_20above</ci><ci>pHR_20above</ci><ci>rHR</ci></apply>"
                 },
                 {
                     "target": "t17_0to9",
-                    "expression": "I_0to9*pIH_0to9*rIH_0to9",
-                    "expression_mathml": "<apply><times/><ci>I_0to9</ci><ci>pIH_0to9</ci><ci>rIH_0to9</ci></apply>"
+                    "expression": "I_0to9*pIH_0to9*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_0to9</ci><ci>pIH_0to9</ci><ci>rIH</ci></apply>"
                 },
                 {
                     "target": "t17_10to19",
-                    "expression": "I_10to19*pIH_10to19*rIH_10to19",
-                    "expression_mathml": "<apply><times/><ci>I_10to19</ci><ci>pIH_10to19</ci><ci>rIH_10to19</ci></apply>"
+                    "expression": "I_10to19*pIH_10to19*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_10to19</ci><ci>pIH_10to19</ci><ci>rIH</ci></apply>"
                 },
                 {
                     "target": "t17_20above",
-                    "expression": "I_20above*pIH_20above*rIH_20above",
-                    "expression_mathml": "<apply><times/><ci>I_20above</ci><ci>pIH_20above</ci><ci>rIH_20above</ci></apply>"
+                    "expression": "I_20above*pIH_20above*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_20above</ci><ci>pIH_20above</ci><ci>rIH</ci></apply>"
                 },
                 {
                     "target": "t_conv_0_unvaccinated_vaccinated_pfizer_one_10to19",
@@ -2960,41 +2960,7 @@
                     "value": 1.0
                 },
                 {
-                    "id": "rEI_0to9",
-                    "name": "epsilon",
-                    "description": "epsilon",
-                    "value": 0.2,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.198,
-                            "maximum": 0.202
-                        }
-                    },
-                    "units": {
-                        "expression": "1/day",
-                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
-                    }
-                },
-                {
-                    "id": "rEI_10to19",
-                    "name": "epsilon",
-                    "description": "epsilon",
-                    "value": 0.2,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.198,
-                            "maximum": 0.202
-                        }
-                    },
-                    "units": {
-                        "expression": "1/day",
-                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
-                    }
-                },
-                {
-                    "id": "rEI_20above",
+                    "id": "rEI",
                     "name": "epsilon",
                     "description": "epsilon",
                     "value": 0.2,
@@ -3023,7 +2989,7 @@
                     }
                 },
                 {
-                    "id": "rIR_0to9",
+                    "id": "rIR",
                     "name": "rIR",
                     "value": 0.07,
                     "distribution": {
@@ -3047,18 +3013,6 @@
                     }
                 },
                 {
-                    "id": "rIR_10to19",
-                    "name": "rIR",
-                    "value": 0.07,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.0693,
-                            "maximum": 0.07070000000000001
-                        }
-                    }
-                },
-                {
                     "id": "pIR_20above",
                     "name": "pIR",
                     "value": 0.8,
@@ -3067,18 +3021,6 @@
                         "parameters": {
                             "minimum": 0.792,
                             "maximum": 0.808
-                        }
-                    }
-                },
-                {
-                    "id": "rIR_20above",
-                    "name": "rIR",
-                    "value": 0.07,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.0693,
-                            "maximum": 0.07070000000000001
                         }
                     }
                 },
@@ -3095,7 +3037,7 @@
                     }
                 },
                 {
-                    "id": "rHD_0to9",
+                    "id": "rHD",
                     "name": "rHD",
                     "value": 0.1,
                     "distribution": {
@@ -3119,18 +3061,6 @@
                     }
                 },
                 {
-                    "id": "rHD_10to19",
-                    "name": "rHD",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
-                        }
-                    }
-                },
-                {
                     "id": "pHD_20above",
                     "name": "pHD",
                     "value": 0.12,
@@ -3139,18 +3069,6 @@
                         "parameters": {
                             "minimum": 0.11879999999999999,
                             "maximum": 0.1212
-                        }
-                    }
-                },
-                {
-                    "id": "rHD_20above",
-                    "name": "rHD",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
                         }
                     }
                 },
@@ -3167,7 +3085,7 @@
                     }
                 },
                 {
-                    "id": "rHR_0to9",
+                    "id": "rHR",
                     "name": "rHR",
                     "value": 0.1,
                     "distribution": {
@@ -3191,18 +3109,6 @@
                     }
                 },
                 {
-                    "id": "rHR_10to19",
-                    "name": "rHR",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
-                        }
-                    }
-                },
-                {
                     "id": "pHR_20above",
                     "name": "pHR",
                     "value": 0.88,
@@ -3211,18 +3117,6 @@
                         "parameters": {
                             "minimum": 0.8712,
                             "maximum": 0.8888
-                        }
-                    }
-                },
-                {
-                    "id": "rHR_20above",
-                    "name": "rHR",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
                         }
                     }
                 },
@@ -3239,7 +3133,7 @@
                     }
                 },
                 {
-                    "id": "rIH_0to9",
+                    "id": "rIH",
                     "name": "rIH",
                     "value": 0.1,
                     "distribution": {
@@ -3263,18 +3157,6 @@
                     }
                 },
                 {
-                    "id": "rIH_10to19",
-                    "name": "rIH",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
-                        }
-                    }
-                },
-                {
                     "id": "pIH_20above",
                     "name": "pIH",
                     "value": 0.2,
@@ -3283,18 +3165,6 @@
                         "parameters": {
                             "minimum": 0.198,
                             "maximum": 0.202
-                        }
-                    }
-                },
-                {
-                    "id": "rIH_20above",
-                    "name": "rIH",
-                    "value": 0.1,
-                    "distribution": {
-                        "type": "StandardUniform1",
-                        "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
                         }
                     }
                 },
