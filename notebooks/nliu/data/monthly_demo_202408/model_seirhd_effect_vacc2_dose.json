@@ -1,0 +1,976 @@
+{
+    "header": {
+        "name": "SEIRHD model with effects (vaccination, vaccine brands, doses)",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Edit of the SEIRHD model with effect parameters on the exposure process",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S_unvaccinated",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "unvaccinated"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_pfizer_one",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "pfizer",
+                        "dose": "one"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_pfizer_two",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "pfizer",
+                        "dose": "two"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_pfizer_diff",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "pfizer",
+                        "dose": "diff"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_moderna_one",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "moderna",
+                        "dose": "one"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_moderna_two",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "moderna",
+                        "dose": "two"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_moderna_diff",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "moderna",
+                        "dose": "diff"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_jj",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "jj"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R",
+                "name": "Recovered",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "H",
+                "name": "Hospitalized",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "disease_severity": "ncit:C25467"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D",
+                "name": "Deceased",
+                "grounding": {
+                    "identifiers": {
+                        "ncit": "C28554"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1_unvaccinated",
+                "input": [
+                    "I",
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_unvaccinated"
+                }
+            },
+            {
+                "id": "t1_vaccinated_pfizer_one",
+                "input": [
+                    "I",
+                    "S_vaccinated_pfizer_one"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_pfizer_one"
+                }
+            },
+            {
+                "id": "t1_vaccinated_pfizer_two",
+                "input": [
+                    "I",
+                    "S_vaccinated_pfizer_two"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_pfizer_two"
+                }
+            },
+            {
+                "id": "t1_vaccinated_pfizer_diff",
+                "input": [
+                    "I",
+                    "S_vaccinated_pfizer_diff"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_pfizer_diff"
+                }
+            },
+            {
+                "id": "t1_vaccinated_moderna_one",
+                "input": [
+                    "I",
+                    "S_vaccinated_moderna_one"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_moderna_one"
+                }
+            },
+            {
+                "id": "t1_vaccinated_moderna_two",
+                "input": [
+                    "I",
+                    "S_vaccinated_moderna_two"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_moderna_two"
+                }
+            },
+            {
+                "id": "t1_vaccinated_moderna_diff",
+                "input": [
+                    "I",
+                    "S_vaccinated_moderna_diff"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_moderna_diff"
+                }
+            },
+            {
+                "id": "t1_vaccinated_jj",
+                "input": [
+                    "I",
+                    "S_vaccinated_jj"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_jj"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "E"
+                ],
+                "output": [
+                    "I"
+                ],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t9",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9"
+                }
+            },
+            {
+                "id": "t15",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "t15"
+                }
+            },
+            {
+                "id": "t16",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t16"
+                }
+            },
+            {
+                "id": "t17",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17"
+                }
+            },
+            {
+                "id": "t_conv_0_unvaccinated_vaccinated_pfizer_one",
+                "input": [
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "S_vaccinated_pfizer_one"
+                ],
+                "properties": {
+                    "name": "t_conv_0_unvaccinated_vaccinated_pfizer_one"
+                }
+            },
+            {
+                "id": "t_conv_0_unvaccinated_vaccinated_moderna_one",
+                "input": [
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "S_vaccinated_moderna_one"
+                ],
+                "properties": {
+                    "name": "t_conv_0_unvaccinated_vaccinated_moderna_one"
+                }
+            },
+            {
+                "id": "t_conv_0_unvaccinated_vaccinated_jj",
+                "input": [
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "S_vaccinated_jj"
+                ],
+                "properties": {
+                    "name": "t_conv_0_unvaccinated_vaccinated_jj"
+                }
+            },
+            {
+                "id": "t_conv_3_one_two",
+                "input": [
+                    "S_vaccinated_pfizer_one"
+                ],
+                "output": [
+                    "S_vaccinated_pfizer_two"
+                ],
+                "properties": {
+                    "name": "t_conv_3_one_two"
+                }
+            },
+            {
+                "id": "t_conv_4_one_two",
+                "input": [
+                    "S_vaccinated_moderna_one"
+                ],
+                "output": [
+                    "S_vaccinated_moderna_two"
+                ],
+                "properties": {
+                    "name": "t_conv_4_one_two"
+                }
+            },
+            {
+                "id": "t_conv_12_one_diff",
+                "input": [
+                    "S_vaccinated_pfizer_one"
+                ],
+                "output": [
+                    "S_vaccinated_pfizer_diff"
+                ],
+                "properties": {
+                    "name": "t_conv_12_one_diff"
+                }
+            },
+            {
+                "id": "t_conv_13_one_diff",
+                "input": [
+                    "S_vaccinated_moderna_one"
+                ],
+                "output": [
+                    "S_vaccinated_moderna_diff"
+                ],
+                "properties": {
+                    "name": "t_conv_13_one_diff"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1_unvaccinated",
+                    "expression": "I*S_unvaccinated*b*c*invN*v_unvaccinated*(1 - m_unvaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_unvaccinated</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_unvaccinated</ci><apply><minus/><cn>1</cn><ci>m_unvaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_pfizer_one",
+                    "expression": "I*S_vaccinated_pfizer_one*b*c*invN*v_vaccinated_pfizer_one*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_pfizer_one</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_pfizer_one</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_pfizer_two",
+                    "expression": "I*S_vaccinated_pfizer_two*b*c*invN*v_vaccinated_pfizer_two*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_pfizer_two</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_pfizer_two</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_pfizer_diff",
+                    "expression": "I*S_vaccinated_pfizer_diff*b*c*invN*v_vaccinated_pfizer_diff*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_pfizer_diff</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_pfizer_diff</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_moderna_one",
+                    "expression": "I*S_vaccinated_moderna_one*b*c*invN*v_vaccinated_moderna_one*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_moderna_one</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_moderna_one</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_moderna_two",
+                    "expression": "I*S_vaccinated_moderna_two*b*c*invN*v_vaccinated_moderna_two*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_moderna_two</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_moderna_two</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_moderna_diff",
+                    "expression": "I*S_vaccinated_moderna_diff*b*c*invN*v_vaccinated_moderna_diff*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_moderna_diff</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_moderna_diff</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_jj",
+                    "expression": "I*S_vaccinated_jj*b*c*invN*v_vaccinated_jj*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_jj</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_jj</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "E*rEI",
+                    "expression_mathml": "<apply><times/><ci>E</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t9",
+                    "expression": "I*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t15",
+                    "expression": "H*pHD*rHD",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>pHD</ci><ci>rHD</ci></apply>"
+                },
+                {
+                    "target": "t16",
+                    "expression": "H*pHR*rHR",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>pHR</ci><ci>rHR</ci></apply>"
+                },
+                {
+                    "target": "t17",
+                    "expression": "I*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_unvaccinated_vaccinated_pfizer_one",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_pfizer",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_pfizer</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_unvaccinated_vaccinated_moderna_one",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_moderna",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_moderna</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_unvaccinated_vaccinated_jj",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_jj",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_jj</ci></apply>"
+                },
+                {
+                    "target": "t_conv_3_one_two",
+                    "expression": "S_vaccinated_pfizer_one*p_one_two",
+                    "expression_mathml": "<apply><times/><ci>S_vaccinated_pfizer_one</ci><ci>p_one_two</ci></apply>"
+                },
+                {
+                    "target": "t_conv_4_one_two",
+                    "expression": "S_vaccinated_moderna_one*p_one_two",
+                    "expression_mathml": "<apply><times/><ci>S_vaccinated_moderna_one</ci><ci>p_one_two</ci></apply>"
+                },
+                {
+                    "target": "t_conv_12_one_diff",
+                    "expression": "S_vaccinated_pfizer_one*p_one_diff",
+                    "expression_mathml": "<apply><times/><ci>S_vaccinated_pfizer_one</ci><ci>p_one_diff</ci></apply>"
+                },
+                {
+                    "target": "t_conv_13_one_diff",
+                    "expression": "S_vaccinated_moderna_one*p_one_diff",
+                    "expression_mathml": "<apply><times/><ci>S_vaccinated_moderna_one</ci><ci>p_one_diff</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S_unvaccinated",
+                    "expression": "S0/2",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>2</cn></apply>"
+                },
+                {
+                    "target": "I",
+                    "expression": "I0",
+                    "expression_mathml": "<ci>I0</ci>"
+                },
+                {
+                    "target": "E",
+                    "expression": "E0",
+                    "expression_mathml": "<ci>E0</ci>"
+                },
+                {
+                    "target": "S_vaccinated_pfizer_one",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_pfizer_two",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_pfizer_diff",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_moderna_one",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_moderna_two",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_moderna_diff",
+                    "expression": "S0/18",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>18</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_jj",
+                    "expression": "S0/6",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>6</cn></apply>"
+                },
+                {
+                    "target": "R",
+                    "expression": "R0",
+                    "expression_mathml": "<ci>R0</ci>"
+                },
+                {
+                    "target": "H",
+                    "expression": "H0",
+                    "expression_mathml": "<ci>H0</ci>"
+                },
+                {
+                    "target": "D",
+                    "expression": "D0",
+                    "expression_mathml": "<ci>D0</ci>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "b",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "c",
+                    "name": "c",
+                    "description": "Contact effect on the disease exposure process (0 = no contact, 1 = full contact)",
+                    "value": 1.0
+                },
+                {
+                    "id": "invN",
+                    "name": "invN",
+                    "value": 5.170630816959669e-08,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 5.118924508790072e-08,
+                            "maximum": 5.222337125129265e-08
+                        }
+                    }
+                },
+                {
+                    "id": "m_unvaccinated",
+                    "name": "m",
+                    "description": "Masking effect on the disease exposure process (0 = unmasked, 1 = fully masked)",
+                    "value": 0.0
+                },
+                {
+                    "id": "v_unvaccinated",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "m_vaccinated",
+                    "name": "m",
+                    "description": "Masking effect on the disease exposure process (0 = unmasked, 1 = fully masked)",
+                    "value": 0.0
+                },
+                {
+                    "id": "v_vaccinated_pfizer_one",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_pfizer_two",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_pfizer_diff",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_moderna_one",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_moderna_two",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_moderna_diff",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_jj",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "rEI",
+                    "name": "epsilon",
+                    "description": "epsilon",
+                    "value": 0.2,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.198,
+                            "maximum": 0.202
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "pIR",
+                    "name": "pIR",
+                    "value": 0.8,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.792,
+                            "maximum": 0.808
+                        }
+                    }
+                },
+                {
+                    "id": "rIR",
+                    "name": "rIR",
+                    "value": 0.07,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.0693,
+                            "maximum": 0.07070000000000001
+                        }
+                    }
+                },
+                {
+                    "id": "pHD",
+                    "name": "pHD",
+                    "value": 0.12,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.11879999999999999,
+                            "maximum": 0.1212
+                        }
+                    }
+                },
+                {
+                    "id": "rHD",
+                    "name": "rHD",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "pHR",
+                    "name": "pHR",
+                    "value": 0.88,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.8712,
+                            "maximum": 0.8888
+                        }
+                    }
+                },
+                {
+                    "id": "rHR",
+                    "name": "rHR",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "pIH",
+                    "name": "pIH",
+                    "value": 0.2,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.198,
+                            "maximum": 0.202
+                        }
+                    }
+                },
+                {
+                    "id": "rIH",
+                    "name": "rIH",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "p_unvaccinated_vaccinated_pfizer",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_unvaccinated_vaccinated_moderna",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_unvaccinated_vaccinated_jj",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_one_two",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_one_diff",
+                    "value": 0.1
+                },
+                {
+                    "id": "S0",
+                    "name": "S0",
+                    "value": 19114075.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 18922934.25,
+                            "maximum": 19305215.75
+                        }
+                    }
+                },
+                {
+                    "id": "E0",
+                    "name": "E0",
+                    "value": 21955.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 21735.45,
+                            "maximum": 22174.55
+                        }
+                    }
+                },
+                {
+                    "id": "I0",
+                    "name": "I0",
+                    "value": 87820.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 86941.8,
+                            "maximum": 88698.2
+                        }
+                    }
+                },
+                {
+                    "id": "R0",
+                    "name": "R0",
+                    "value": 99821.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 98822.79,
+                            "maximum": 100819.21
+                        }
+                    }
+                },
+                {
+                    "id": "H0",
+                    "name": "H0",
+                    "value": 12637.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 12510.63,
+                            "maximum": 12763.37
+                        }
+                    }
+                },
+                {
+                    "id": "D0",
+                    "name": "D0",
+                    "value": 3692.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3655.08,
+                            "maximum": 3728.92
+                        }
+                    }
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
