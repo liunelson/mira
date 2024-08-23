@@ -1,6 +1,6 @@
 {
     "header": {
-        "name": "SEIRHD model with effects (vaccination)",
+        "name": "SEIRHD model with effects (vaccination, vaccine brands)",
         "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
         "schema_name": "petrinet",
         "description": "Edit of the SEIRHD model with effect parameters on the exposure process",
@@ -56,14 +56,49 @@
                 }
             },
             {
-                "id": "S_vaccinated",
+                "id": "S_vaccinated_pfizer",
                 "name": "Susceptible",
                 "grounding": {
                     "identifiers": {
                         "ido": "0000514"
                     },
                     "modifiers": {
-                        "vaccination": "vaccinated"
+                        "vaccination": "vaccinated",
+                        "vaccine": "pfizer"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_moderna",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "moderna"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_vaccinated_jj",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "vaccination": "vaccinated",
+                        "vaccine": "jj"
                     }
                 },
                 "units": {
@@ -132,17 +167,45 @@
                 }
             },
             {
-                "id": "t1_vaccinated",
+                "id": "t1_vaccinated_pfizer",
                 "input": [
                     "I",
-                    "S_vaccinated"
+                    "S_vaccinated_pfizer"
                 ],
                 "output": [
                     "I",
                     "E"
                 ],
                 "properties": {
-                    "name": "t1_vaccinated"
+                    "name": "t1_vaccinated_pfizer"
+                }
+            },
+            {
+                "id": "t1_vaccinated_moderna",
+                "input": [
+                    "I",
+                    "S_vaccinated_moderna"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_moderna"
+                }
+            },
+            {
+                "id": "t1_vaccinated_jj",
+                "input": [
+                    "I",
+                    "S_vaccinated_jj"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1_vaccinated_jj"
                 }
             },
             {
@@ -206,15 +269,39 @@
                 }
             },
             {
-                "id": "t_conv_0_unvaccinated_vaccinated",
+                "id": "t_conv_0_unvaccinated_vaccinated_pfizer",
                 "input": [
                     "S_unvaccinated"
                 ],
                 "output": [
-                    "S_vaccinated"
+                    "S_vaccinated_pfizer"
                 ],
                 "properties": {
-                    "name": "t_conv_0_unvaccinated_vaccinated"
+                    "name": "t_conv_0_unvaccinated_vaccinated_pfizer"
+                }
+            },
+            {
+                "id": "t_conv_0_unvaccinated_vaccinated_moderna",
+                "input": [
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "S_vaccinated_moderna"
+                ],
+                "properties": {
+                    "name": "t_conv_0_unvaccinated_vaccinated_moderna"
+                }
+            },
+            {
+                "id": "t_conv_0_unvaccinated_vaccinated_jj",
+                "input": [
+                    "S_unvaccinated"
+                ],
+                "output": [
+                    "S_vaccinated_jj"
+                ],
+                "properties": {
+                    "name": "t_conv_0_unvaccinated_vaccinated_jj"
                 }
             }
         ]
@@ -228,9 +315,19 @@
                     "expression_mathml": "<apply><times/><ci>I</ci><ci>S_unvaccinated</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_unvaccinated</ci><apply><minus/><cn>1</cn><ci>m_unvaccinated</ci></apply></apply>"
                 },
                 {
-                    "target": "t1_vaccinated",
-                    "expression": "I*S_vaccinated*b*c*invN*v_vaccinated*(1 - m_vaccinated)",
-                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                    "target": "t1_vaccinated_pfizer",
+                    "expression": "I*S_vaccinated_pfizer*b*c*invN*v_vaccinated_pfizer*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_pfizer</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_pfizer</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_moderna",
+                    "expression": "I*S_vaccinated_moderna*b*c*invN*v_vaccinated_moderna*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_moderna</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_moderna</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
+                },
+                {
+                    "target": "t1_vaccinated_jj",
+                    "expression": "I*S_vaccinated_jj*b*c*invN*v_vaccinated_jj*(1 - m_vaccinated)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S_vaccinated_jj</ci><ci>b</ci><ci>c</ci><ci>invN</ci><ci>v_vaccinated_jj</ci><apply><minus/><cn>1</cn><ci>m_vaccinated</ci></apply></apply>"
                 },
                 {
                     "target": "t5",
@@ -258,9 +355,19 @@
                     "expression_mathml": "<apply><times/><ci>I</ci><ci>pIH</ci><ci>rIH</ci></apply>"
                 },
                 {
-                    "target": "t_conv_0_unvaccinated_vaccinated",
-                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated",
-                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated</ci></apply>"
+                    "target": "t_conv_0_unvaccinated_vaccinated_pfizer",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_pfizer",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_pfizer</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_unvaccinated_vaccinated_moderna",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_moderna",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_moderna</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_unvaccinated_vaccinated_jj",
+                    "expression": "S_unvaccinated*p_unvaccinated_vaccinated_jj",
+                    "expression_mathml": "<apply><times/><ci>S_unvaccinated</ci><ci>p_unvaccinated_vaccinated_jj</ci></apply>"
                 }
             ],
             "initials": [
@@ -280,9 +387,19 @@
                     "expression_mathml": "<ci>E0</ci>"
                 },
                 {
-                    "target": "S_vaccinated",
-                    "expression": "S0/2",
-                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>2</cn></apply>"
+                    "target": "S_vaccinated_pfizer",
+                    "expression": "S0/6",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>6</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_moderna",
+                    "expression": "S0/6",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>6</cn></apply>"
+                },
+                {
+                    "target": "S_vaccinated_jj",
+                    "expression": "S0/6",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>6</cn></apply>"
                 },
                 {
                     "target": "R",
@@ -350,7 +467,19 @@
                     "value": 0.0
                 },
                 {
-                    "id": "v_vaccinated",
+                    "id": "v_vaccinated_pfizer",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_moderna",
+                    "name": "v",
+                    "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
+                    "value": 1.0
+                },
+                {
+                    "id": "v_vaccinated_jj",
                     "name": "v",
                     "description": "Vaccine efficacy effect on the disease exposure process (0 = complete efficacy, 1 = no efficacy)",
                     "value": 1.0
@@ -469,7 +598,15 @@
                     }
                 },
                 {
-                    "id": "p_unvaccinated_vaccinated",
+                    "id": "p_unvaccinated_vaccinated_pfizer",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_unvaccinated_vaccinated_moderna",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_unvaccinated_vaccinated_jj",
                     "value": 0.1
                 },
                 {

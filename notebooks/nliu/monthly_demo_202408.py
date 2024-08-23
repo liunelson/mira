@@ -203,7 +203,7 @@ model_seirhd_effect_vacc2.annotations.description = "Edit of the SEIRHD model wi
 
 # Save
 with open("./data/monthly_demo_202408/model_seirhd_effect_vacc2.json", "w") as f:
-    json.dump(template_model_to_petrinet_json(model_seirhd_effect_vacc), f, indent = 4)
+    json.dump(template_model_to_petrinet_json(model_seirhd_effect_vacc2), f, indent = 4)
 
 # %%
 # Stratify by the number of vaccine doses
