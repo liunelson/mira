@@ -292,14 +292,14 @@ with open("./data/monthly_demo_202408/model_seirhd_effect_vacc2_dose.json", "w")
 # 
 # 1. Start from the final SEIRHD model from above
 # 2. Stratify all states (except `D`) by three age groups ("0to9", "10to19", "20above")
-# 3. Preserve the `v`, `invN` parameters
+# 3. Preserve the `v`, `invN`, `r**` parameters
 # 4. Remove all vaccination processes and vaccinated states associated with the age group "0to9"
 
 # %%
 params_to_preserve = {
     p 
     for p in model_seirhd_effect_vacc2_dose.parameters.keys()
-    if (p in ("b", "invN")) or p.startswith("v_")
+    if (p in ("b", "invN")) or p.startswith("v_") or p.startswith("r")
 }
 
 model_seirhd_effect_vacc2_dose_age = mira.metamodel.stratify(
