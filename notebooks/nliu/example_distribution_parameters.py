@@ -166,7 +166,6 @@ GraphicalModel.for_jupyter(model_vax_vaccine_age)
 # add_observable_pattern(
 #     model_vax_vaccine_age,
 #     'TotalunvaccinatedChildren',
-#     identifiers = {'ido': '0000514'},
 #     context = {
 #         'vaccination_status': 'unvaccinated',
 #         'age': 'children'
