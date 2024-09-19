@@ -268,8 +268,8 @@
                 },
                 {
                     "id": "rEI",
-                    "name": "epsilon",
-                    "description": "epsilon",
+                    "name": "rEI",
+                    "description": "rEI",
                     "value": 0.2,
                     "distribution": {
                         "type": "StandardUniform1",
