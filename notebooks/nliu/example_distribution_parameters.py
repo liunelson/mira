@@ -47,8 +47,8 @@ new_parameters = {
         distribution = Distribution(
             type = 'Beta1', 
             parameters = {
-                'alpha': sympy.Integer(1),
-                'beta': sympy.Integer(10)
+                'alpha': SympyExprStr(sympy.Integer(1)),
+                'beta': SympyExprStr(sympy.Integer(10))
             }
         )
     ),
@@ -72,19 +72,19 @@ model.parameters['b'] = Parameter(
     distribution = Distribution(
         type = 'InverseGamma1',
         parameters = {
-            'shape': sympy.Symbol('b_shape') ** sympy.Float(1.5),
+            'shape': SympyExprStr(sympy.Symbol('b_shape') ** sympy.Float(1.5)),
             'scale': 0.01
         }
     )
 )
 
-# for p in model.parameters.keys():
-#     if p[0] == "r":
-#         v = model.parameters[p].value
-#         model.parameters[p].distribution.parameters = {
-#             'minimum': sympy.Float(v) - sympy.Symbol('u'),
-#             'maximum': sympy.Float(v) + sympy.Symbol('u')
-#         }
+for p in model.parameters.keys():
+    if p[0] == "r":
+        v = model.parameters[p].value
+        model.parameters[p].distribution.parameters = {
+            'minimum': SympyExprStr(sympy.Float(v) - sympy.Symbol('u')),
+            'maximum': SympyExprStr(sympy.Float(v) + sympy.Symbol('u'))
+        }
 
 # %%
 with open('./data/example_models/seirhd_dist_params.json', 'w') as f:
@@ -139,40 +139,37 @@ model_vax_vaccine_age = stratify(
 
 GraphicalModel.for_jupyter(model_vax_vaccine_age)
 
-# %%[markdown]
-# ### Example 1:
+# %%
+# Example 1:
 # Add an observable named TotalSusceptibleVaccinatedModernaChildren to the model that is the total number of (1) susceptible (2) vaccinated (3) with Moderna (4) children
-# 
-# ```python
-# add_observable_pattern(
-#     model_vax_vaccine_age,
-#     'TotalSusceptibleVaccinatedModernaChildren',
-#     identifiers = {'ido': '0000514'},
-#     context = {
-#         'vaccination_status': 'vaccinated', # stratification_key: strata_name
-#         'vaccine': 'moderna',
-#         'age': 'children'
-#     }
-# )
-# ```
-# 
+
+add_observable_pattern(
+    model_vax_vaccine_age,
+    'TotalSusceptibleVaccinatedModernaChildren',
+    identifiers = {'ido': '0000514'},
+    context = {
+        'vaccination_status': 'vaccinated', # stratification_key: strata_name
+        'vaccine': 'moderna',
+        'age': 'children'
+    }
+)
+
 # There'd be a new observable added to the model
 # `TotalSusceptibleVaccinatedModernaChildren = S_vaccinated_moderna_child`
-# 
-# ### Example 2:
+
+# %%
+# Example 2:
 # Add an observable named TotalUnvaccinatedChildren that is the total number of (1) unvaccinated (2) children
-# 
-# ```python
-# add_observable_pattern(
-#     model_vax_vaccine_age,
-#     'TotalunvaccinatedChildren',
-#     context = {
-#         'vaccination_status': 'unvaccinated',
-#         'age': 'children'
-#     }
-# )
-# ```
-# 
+ 
+add_observable_pattern(
+    model_vax_vaccine_age,
+    'TotalunvaccinatedChildren',
+    context = {
+        'vaccination_status': 'unvaccinated',
+        'age': 'children'
+    }
+)
+
 # There'd be a new observable added to the model
 # `TotalUnvaccinatedhildren = S_unvaccinated_children + I_unvaccinated_children + R_unvaccinated_children`
 

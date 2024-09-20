@@ -274,8 +274,8 @@
                     "distribution": {
                         "type": "StandardUniform1",
                         "parameters": {
-                            "minimum": 0.198,
-                            "maximum": 0.202
+                            "minimum": "0.2 - u",
+                            "maximum": "u + 0.2"
                         }
                     },
                     "units": {
@@ -302,8 +302,8 @@
                     "distribution": {
                         "type": "StandardUniform1",
                         "parameters": {
-                            "minimum": 0.0693,
-                            "maximum": 0.07070000000000001
+                            "minimum": "0.07 - u",
+                            "maximum": "u + 0.07"
                         }
                     }
                 },
@@ -326,8 +326,8 @@
                     "distribution": {
                         "type": "StandardUniform1",
                         "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
+                            "minimum": "0.1 - u",
+                            "maximum": "u + 0.1"
                         }
                     }
                 },
@@ -350,8 +350,8 @@
                     "distribution": {
                         "type": "StandardUniform1",
                         "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
+                            "minimum": "0.1 - u",
+                            "maximum": "u + 0.1"
                         }
                     }
                 },
@@ -374,8 +374,8 @@
                     "distribution": {
                         "type": "StandardUniform1",
                         "parameters": {
-                            "minimum": 0.099,
-                            "maximum": 0.101
+                            "minimum": "0.1 - u",
+                            "maximum": "u + 0.1"
                         }
                     }
                 },
@@ -464,8 +464,8 @@
                     "distribution": {
                         "type": "Beta1",
                         "parameters": {
-                            "alpha": 1.0,
-                            "beta": 10.0
+                            "alpha": "1",
+                            "beta": "10"
                         }
                     }
                 },
