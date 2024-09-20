@@ -4,7 +4,7 @@
 # Email: [nliu@uncharted.software](mailto:nliu@uncharted.software)
 
 # %%[markdown]
-# # 
+# # Test new MIRA features
 # 
 # 1. [Support Expressions in Parameters of Distributions](https://github.com/gyorilab/mira/pull/358)
 # 2. [Implement adding observables by pattern](https://github.com/gyorilab/mira/pull/364)
