@@ -130,14 +130,45 @@ for name in tqdm(state_fips['stateName']):
         else:
             print(f'{name} - {r.json()["results"]}')
             y.append('')
+
     else:
         print(f'{r.status_code}\t{name}')
-    
 
+state_fips['stateCurie'] = y
 
+# %%
+# Missing states in Epi DKG
+for name, curie in (('Delaware', 'geonames:4142224'), ('Vermont', 'geonames:5242283'), ('Maine', 'geonames:4971068'), ('Wyoming', 'geonames:5843591'), ('West Virginia', 'geonames:4826850')):
+    i = pandas.Index(state_fips['stateName']).get_loc(name)
+    state_fips.loc[i, 'stateCurie'] = curie
 
 # %%
 # Load a SEIRHD model
+with open("./data/monthly_demo_202408/model_seirhd.json", "r") as f:
+    model = template_model_from_amr_json(json.load(f))
 
+GraphicalModel.for_jupyter(model)
+
+# %%
+# Stratify the model by the entities in `state_fips`
+
+model_travel = stratify(
+    model,
+    key = 'location',
+    strata = list(state_fips['stateCurie'].values),
+    cartesian_control = True,
+    directed = False,
+    structure = None,
+    concepts_to_stratify = ['S', 'E', 'I'],
+    params_to_stratify =['b'],
+    param_renaming_uses_strata_names = True
+)
+
+# %%
+# GraphicalModel.for_jupyter(model_travel)
+
+# %%
+with open("./data/example_models/model_seirhd_travel.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_travel), f, indent = 4)
 
 # %%

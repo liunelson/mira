@@ -1,0 +1,2785 @@
+{
+    "header": {
+        "name": "SEIRHD model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Edit of the SIDARTHE model from Giodano 2020.",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S_geonames_4829764",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "location": "geonames:4829764"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_geonames_4829764",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220",
+                        "location": "geonames:4829764"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_geonames_4829764",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "location": "geonames:4829764"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_geonames_5879092",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220",
+                        "location": "geonames:5879092"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_geonames_5551752",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220",
+                        "location": "geonames:5551752"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_geonames_4099753",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220",
+                        "location": "geonames:4099753"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_geonames_5332921",
+                "name": "Infected",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "diagnosis": "ncit:C15220",
+                        "location": "geonames:5332921"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_geonames_5879092",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5879092"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_geonames_5879092",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5879092"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_geonames_5551752",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5551752"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_geonames_5551752",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5551752"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_geonames_4099753",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "location": "geonames:4099753"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_geonames_4099753",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "location": "geonames:4099753"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_geonames_5332921",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5332921"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_geonames_5332921",
+                "name": "Exposed",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "location": "geonames:5332921"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R",
+                "name": "Recovered",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "H",
+                "name": "Hospitalized",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "disease_severity": "ncit:C25467"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D",
+                "name": "Deceased",
+                "grounding": {
+                    "identifiers": {
+                        "ncit": "C28554"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1_geonames:4829764_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764",
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_4829764",
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4829764_geonames:4829764"
+                }
+            },
+            {
+                "id": "t1_geonames:4829764_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092",
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5879092",
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4829764_geonames:5879092"
+                }
+            },
+            {
+                "id": "t1_geonames:4829764_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752",
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5551752",
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4829764_geonames:5551752"
+                }
+            },
+            {
+                "id": "t1_geonames:4829764_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753",
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_4099753",
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4829764_geonames:4099753"
+                }
+            },
+            {
+                "id": "t1_geonames:4829764_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921",
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5332921",
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4829764_geonames:5332921"
+                }
+            },
+            {
+                "id": "t1_geonames:5879092_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764",
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_4829764",
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5879092_geonames:4829764"
+                }
+            },
+            {
+                "id": "t1_geonames:5879092_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092",
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5879092",
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5879092_geonames:5879092"
+                }
+            },
+            {
+                "id": "t1_geonames:5879092_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752",
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5551752",
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5879092_geonames:5551752"
+                }
+            },
+            {
+                "id": "t1_geonames:5879092_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753",
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_4099753",
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5879092_geonames:4099753"
+                }
+            },
+            {
+                "id": "t1_geonames:5879092_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921",
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5332921",
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5879092_geonames:5332921"
+                }
+            },
+            {
+                "id": "t1_geonames:5551752_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764",
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_4829764",
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5551752_geonames:4829764"
+                }
+            },
+            {
+                "id": "t1_geonames:5551752_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092",
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5879092",
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5551752_geonames:5879092"
+                }
+            },
+            {
+                "id": "t1_geonames:5551752_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752",
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5551752",
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5551752_geonames:5551752"
+                }
+            },
+            {
+                "id": "t1_geonames:5551752_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753",
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_4099753",
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5551752_geonames:4099753"
+                }
+            },
+            {
+                "id": "t1_geonames:5551752_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921",
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5332921",
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5551752_geonames:5332921"
+                }
+            },
+            {
+                "id": "t1_geonames:4099753_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764",
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_4829764",
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4099753_geonames:4829764"
+                }
+            },
+            {
+                "id": "t1_geonames:4099753_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092",
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5879092",
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4099753_geonames:5879092"
+                }
+            },
+            {
+                "id": "t1_geonames:4099753_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752",
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5551752",
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4099753_geonames:5551752"
+                }
+            },
+            {
+                "id": "t1_geonames:4099753_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753",
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_4099753",
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4099753_geonames:4099753"
+                }
+            },
+            {
+                "id": "t1_geonames:4099753_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921",
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5332921",
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t1_geonames:4099753_geonames:5332921"
+                }
+            },
+            {
+                "id": "t1_geonames:5332921_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764",
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_4829764",
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5332921_geonames:4829764"
+                }
+            },
+            {
+                "id": "t1_geonames:5332921_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092",
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5879092",
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5332921_geonames:5879092"
+                }
+            },
+            {
+                "id": "t1_geonames:5332921_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752",
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5551752",
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5332921_geonames:5551752"
+                }
+            },
+            {
+                "id": "t1_geonames:5332921_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753",
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_4099753",
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5332921_geonames:4099753"
+                }
+            },
+            {
+                "id": "t1_geonames:5332921_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921",
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5332921",
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t1_geonames:5332921_geonames:5332921"
+                }
+            },
+            {
+                "id": "t5_geonames:4829764",
+                "input": [
+                    "E_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t5_geonames:4829764"
+                }
+            },
+            {
+                "id": "t5_geonames:5879092",
+                "input": [
+                    "E_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t5_geonames:5879092"
+                }
+            },
+            {
+                "id": "t5_geonames:5551752",
+                "input": [
+                    "E_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t5_geonames:5551752"
+                }
+            },
+            {
+                "id": "t5_geonames:4099753",
+                "input": [
+                    "E_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t5_geonames:4099753"
+                }
+            },
+            {
+                "id": "t5_geonames:5332921",
+                "input": [
+                    "E_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t5_geonames:5332921"
+                }
+            },
+            {
+                "id": "t9_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9_geonames:4829764"
+                }
+            },
+            {
+                "id": "t9_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9_geonames:5879092"
+                }
+            },
+            {
+                "id": "t9_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9_geonames:5551752"
+                }
+            },
+            {
+                "id": "t9_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9_geonames:4099753"
+                }
+            },
+            {
+                "id": "t9_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t9_geonames:5332921"
+                }
+            },
+            {
+                "id": "t15",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "D"
+                ],
+                "properties": {
+                    "name": "t15"
+                }
+            },
+            {
+                "id": "t16",
+                "input": [
+                    "H"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t16"
+                }
+            },
+            {
+                "id": "t17_geonames:4829764",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17_geonames:4829764"
+                }
+            },
+            {
+                "id": "t17_geonames:5879092",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17_geonames:5879092"
+                }
+            },
+            {
+                "id": "t17_geonames:5551752",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17_geonames:5551752"
+                }
+            },
+            {
+                "id": "t17_geonames:4099753",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17_geonames:4099753"
+                }
+            },
+            {
+                "id": "t17_geonames:5332921",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "H"
+                ],
+                "properties": {
+                    "name": "t17_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_0_geonames:4829764_geonames:5879092",
+                "input": [
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "S_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_0_geonames:4829764_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_0_geonames:5879092_geonames:4829764",
+                "input": [
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "S_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_0_geonames:5879092_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_1_geonames:4829764_geonames:5879092",
+                "input": [
+                    "E_geonames_4829764"
+                ],
+                "output": [
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_1_geonames:4829764_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_1_geonames:5879092_geonames:4829764",
+                "input": [
+                    "E_geonames_5879092"
+                ],
+                "output": [
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_1_geonames:5879092_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_2_geonames:4829764_geonames:5879092",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_2_geonames:4829764_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_2_geonames:5879092_geonames:4829764",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_2_geonames:5879092_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_6_geonames:4829764_geonames:5551752",
+                "input": [
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "S_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_6_geonames:4829764_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_6_geonames:5551752_geonames:4829764",
+                "input": [
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "S_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_6_geonames:5551752_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_7_geonames:4829764_geonames:5551752",
+                "input": [
+                    "E_geonames_4829764"
+                ],
+                "output": [
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_7_geonames:4829764_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_7_geonames:5551752_geonames:4829764",
+                "input": [
+                    "E_geonames_5551752"
+                ],
+                "output": [
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_7_geonames:5551752_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_8_geonames:4829764_geonames:5551752",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_8_geonames:4829764_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_8_geonames:5551752_geonames:4829764",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_8_geonames:5551752_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_12_geonames:4829764_geonames:4099753",
+                "input": [
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "S_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_12_geonames:4829764_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_12_geonames:4099753_geonames:4829764",
+                "input": [
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "S_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_12_geonames:4099753_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_13_geonames:4829764_geonames:4099753",
+                "input": [
+                    "E_geonames_4829764"
+                ],
+                "output": [
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_13_geonames:4829764_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_13_geonames:4099753_geonames:4829764",
+                "input": [
+                    "E_geonames_4099753"
+                ],
+                "output": [
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_13_geonames:4099753_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_14_geonames:4829764_geonames:4099753",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_14_geonames:4829764_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_14_geonames:4099753_geonames:4829764",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_14_geonames:4099753_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_18_geonames:4829764_geonames:5332921",
+                "input": [
+                    "S_geonames_4829764"
+                ],
+                "output": [
+                    "S_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_18_geonames:4829764_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_18_geonames:5332921_geonames:4829764",
+                "input": [
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "S_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_18_geonames:5332921_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_19_geonames:4829764_geonames:5332921",
+                "input": [
+                    "E_geonames_4829764"
+                ],
+                "output": [
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_19_geonames:4829764_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_19_geonames:5332921_geonames:4829764",
+                "input": [
+                    "E_geonames_5332921"
+                ],
+                "output": [
+                    "E_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_19_geonames:5332921_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_20_geonames:4829764_geonames:5332921",
+                "input": [
+                    "I_geonames_4829764"
+                ],
+                "output": [
+                    "I_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_20_geonames:4829764_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_20_geonames:5332921_geonames:4829764",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_4829764"
+                ],
+                "properties": {
+                    "name": "t_conv_20_geonames:5332921_geonames:4829764"
+                }
+            },
+            {
+                "id": "t_conv_24_geonames:5879092_geonames:5551752",
+                "input": [
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "S_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_24_geonames:5879092_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_24_geonames:5551752_geonames:5879092",
+                "input": [
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "S_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_24_geonames:5551752_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_25_geonames:5879092_geonames:5551752",
+                "input": [
+                    "E_geonames_5879092"
+                ],
+                "output": [
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_25_geonames:5879092_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_25_geonames:5551752_geonames:5879092",
+                "input": [
+                    "E_geonames_5551752"
+                ],
+                "output": [
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_25_geonames:5551752_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_26_geonames:5879092_geonames:5551752",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_26_geonames:5879092_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_26_geonames:5551752_geonames:5879092",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_26_geonames:5551752_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_30_geonames:5879092_geonames:4099753",
+                "input": [
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "S_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_30_geonames:5879092_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_30_geonames:4099753_geonames:5879092",
+                "input": [
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "S_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_30_geonames:4099753_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_31_geonames:5879092_geonames:4099753",
+                "input": [
+                    "E_geonames_5879092"
+                ],
+                "output": [
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_31_geonames:5879092_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_31_geonames:4099753_geonames:5879092",
+                "input": [
+                    "E_geonames_4099753"
+                ],
+                "output": [
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_31_geonames:4099753_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_32_geonames:5879092_geonames:4099753",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_32_geonames:5879092_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_32_geonames:4099753_geonames:5879092",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_32_geonames:4099753_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_36_geonames:5879092_geonames:5332921",
+                "input": [
+                    "S_geonames_5879092"
+                ],
+                "output": [
+                    "S_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_36_geonames:5879092_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_36_geonames:5332921_geonames:5879092",
+                "input": [
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "S_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_36_geonames:5332921_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_37_geonames:5879092_geonames:5332921",
+                "input": [
+                    "E_geonames_5879092"
+                ],
+                "output": [
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_37_geonames:5879092_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_37_geonames:5332921_geonames:5879092",
+                "input": [
+                    "E_geonames_5332921"
+                ],
+                "output": [
+                    "E_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_37_geonames:5332921_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_38_geonames:5879092_geonames:5332921",
+                "input": [
+                    "I_geonames_5879092"
+                ],
+                "output": [
+                    "I_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_38_geonames:5879092_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_38_geonames:5332921_geonames:5879092",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5879092"
+                ],
+                "properties": {
+                    "name": "t_conv_38_geonames:5332921_geonames:5879092"
+                }
+            },
+            {
+                "id": "t_conv_42_geonames:5551752_geonames:4099753",
+                "input": [
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "S_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_42_geonames:5551752_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_42_geonames:4099753_geonames:5551752",
+                "input": [
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "S_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_42_geonames:4099753_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_43_geonames:5551752_geonames:4099753",
+                "input": [
+                    "E_geonames_5551752"
+                ],
+                "output": [
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_43_geonames:5551752_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_43_geonames:4099753_geonames:5551752",
+                "input": [
+                    "E_geonames_4099753"
+                ],
+                "output": [
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_43_geonames:4099753_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_44_geonames:5551752_geonames:4099753",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_44_geonames:5551752_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_44_geonames:4099753_geonames:5551752",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_44_geonames:4099753_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_48_geonames:5551752_geonames:5332921",
+                "input": [
+                    "S_geonames_5551752"
+                ],
+                "output": [
+                    "S_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_48_geonames:5551752_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_48_geonames:5332921_geonames:5551752",
+                "input": [
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "S_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_48_geonames:5332921_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_49_geonames:5551752_geonames:5332921",
+                "input": [
+                    "E_geonames_5551752"
+                ],
+                "output": [
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_49_geonames:5551752_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_49_geonames:5332921_geonames:5551752",
+                "input": [
+                    "E_geonames_5332921"
+                ],
+                "output": [
+                    "E_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_49_geonames:5332921_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_50_geonames:5551752_geonames:5332921",
+                "input": [
+                    "I_geonames_5551752"
+                ],
+                "output": [
+                    "I_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_50_geonames:5551752_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_50_geonames:5332921_geonames:5551752",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_5551752"
+                ],
+                "properties": {
+                    "name": "t_conv_50_geonames:5332921_geonames:5551752"
+                }
+            },
+            {
+                "id": "t_conv_54_geonames:4099753_geonames:5332921",
+                "input": [
+                    "S_geonames_4099753"
+                ],
+                "output": [
+                    "S_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_54_geonames:4099753_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_54_geonames:5332921_geonames:4099753",
+                "input": [
+                    "S_geonames_5332921"
+                ],
+                "output": [
+                    "S_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_54_geonames:5332921_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_55_geonames:4099753_geonames:5332921",
+                "input": [
+                    "E_geonames_4099753"
+                ],
+                "output": [
+                    "E_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_55_geonames:4099753_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_55_geonames:5332921_geonames:4099753",
+                "input": [
+                    "E_geonames_5332921"
+                ],
+                "output": [
+                    "E_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_55_geonames:5332921_geonames:4099753"
+                }
+            },
+            {
+                "id": "t_conv_56_geonames:4099753_geonames:5332921",
+                "input": [
+                    "I_geonames_4099753"
+                ],
+                "output": [
+                    "I_geonames_5332921"
+                ],
+                "properties": {
+                    "name": "t_conv_56_geonames:4099753_geonames:5332921"
+                }
+            },
+            {
+                "id": "t_conv_56_geonames:5332921_geonames:4099753",
+                "input": [
+                    "I_geonames_5332921"
+                ],
+                "output": [
+                    "I_geonames_4099753"
+                ],
+                "properties": {
+                    "name": "t_conv_56_geonames:5332921_geonames:4099753"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1_geonames:4829764_geonames:4829764",
+                    "expression": "I_geonames_4829764*S_geonames_4829764*b_geonames:4829764_geonames:4829764*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>S_geonames_4829764</ci><ci>b_geonames:4829764_geonames:4829764</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4829764_geonames:5879092",
+                    "expression": "I_geonames_5879092*S_geonames_4829764*b_geonames:4829764_geonames:5879092*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>S_geonames_4829764</ci><ci>b_geonames:4829764_geonames:5879092</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4829764_geonames:5551752",
+                    "expression": "I_geonames_5551752*S_geonames_4829764*b_geonames:4829764_geonames:5551752*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>S_geonames_4829764</ci><ci>b_geonames:4829764_geonames:5551752</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4829764_geonames:4099753",
+                    "expression": "I_geonames_4099753*S_geonames_4829764*b_geonames:4829764_geonames:4099753*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>S_geonames_4829764</ci><ci>b_geonames:4829764_geonames:4099753</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4829764_geonames:5332921",
+                    "expression": "I_geonames_5332921*S_geonames_4829764*b_geonames:4829764_geonames:5332921*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>S_geonames_4829764</ci><ci>b_geonames:4829764_geonames:5332921</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5879092_geonames:4829764",
+                    "expression": "I_geonames_4829764*S_geonames_5879092*b_geonames:5879092_geonames:4829764*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>S_geonames_5879092</ci><ci>b_geonames:5879092_geonames:4829764</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5879092_geonames:5879092",
+                    "expression": "I_geonames_5879092*S_geonames_5879092*b_geonames:5879092_geonames:5879092*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>S_geonames_5879092</ci><ci>b_geonames:5879092_geonames:5879092</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5879092_geonames:5551752",
+                    "expression": "I_geonames_5551752*S_geonames_5879092*b_geonames:5879092_geonames:5551752*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>S_geonames_5879092</ci><ci>b_geonames:5879092_geonames:5551752</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5879092_geonames:4099753",
+                    "expression": "I_geonames_4099753*S_geonames_5879092*b_geonames:5879092_geonames:4099753*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>S_geonames_5879092</ci><ci>b_geonames:5879092_geonames:4099753</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5879092_geonames:5332921",
+                    "expression": "I_geonames_5332921*S_geonames_5879092*b_geonames:5879092_geonames:5332921*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>S_geonames_5879092</ci><ci>b_geonames:5879092_geonames:5332921</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5551752_geonames:4829764",
+                    "expression": "I_geonames_4829764*S_geonames_5551752*b_geonames:5551752_geonames:4829764*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>S_geonames_5551752</ci><ci>b_geonames:5551752_geonames:4829764</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5551752_geonames:5879092",
+                    "expression": "I_geonames_5879092*S_geonames_5551752*b_geonames:5551752_geonames:5879092*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>S_geonames_5551752</ci><ci>b_geonames:5551752_geonames:5879092</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5551752_geonames:5551752",
+                    "expression": "I_geonames_5551752*S_geonames_5551752*b_geonames:5551752_geonames:5551752*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>S_geonames_5551752</ci><ci>b_geonames:5551752_geonames:5551752</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5551752_geonames:4099753",
+                    "expression": "I_geonames_4099753*S_geonames_5551752*b_geonames:5551752_geonames:4099753*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>S_geonames_5551752</ci><ci>b_geonames:5551752_geonames:4099753</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5551752_geonames:5332921",
+                    "expression": "I_geonames_5332921*S_geonames_5551752*b_geonames:5551752_geonames:5332921*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>S_geonames_5551752</ci><ci>b_geonames:5551752_geonames:5332921</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4099753_geonames:4829764",
+                    "expression": "I_geonames_4829764*S_geonames_4099753*b_geonames:4099753_geonames:4829764*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>S_geonames_4099753</ci><ci>b_geonames:4099753_geonames:4829764</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4099753_geonames:5879092",
+                    "expression": "I_geonames_5879092*S_geonames_4099753*b_geonames:4099753_geonames:5879092*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>S_geonames_4099753</ci><ci>b_geonames:4099753_geonames:5879092</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4099753_geonames:5551752",
+                    "expression": "I_geonames_5551752*S_geonames_4099753*b_geonames:4099753_geonames:5551752*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>S_geonames_4099753</ci><ci>b_geonames:4099753_geonames:5551752</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4099753_geonames:4099753",
+                    "expression": "I_geonames_4099753*S_geonames_4099753*b_geonames:4099753_geonames:4099753*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>S_geonames_4099753</ci><ci>b_geonames:4099753_geonames:4099753</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:4099753_geonames:5332921",
+                    "expression": "I_geonames_5332921*S_geonames_4099753*b_geonames:4099753_geonames:5332921*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>S_geonames_4099753</ci><ci>b_geonames:4099753_geonames:5332921</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5332921_geonames:4829764",
+                    "expression": "I_geonames_4829764*S_geonames_5332921*b_geonames:5332921_geonames:4829764*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>S_geonames_5332921</ci><ci>b_geonames:5332921_geonames:4829764</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5332921_geonames:5879092",
+                    "expression": "I_geonames_5879092*S_geonames_5332921*b_geonames:5332921_geonames:5879092*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>S_geonames_5332921</ci><ci>b_geonames:5332921_geonames:5879092</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5332921_geonames:5551752",
+                    "expression": "I_geonames_5551752*S_geonames_5332921*b_geonames:5332921_geonames:5551752*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>S_geonames_5332921</ci><ci>b_geonames:5332921_geonames:5551752</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5332921_geonames:4099753",
+                    "expression": "I_geonames_4099753*S_geonames_5332921*b_geonames:5332921_geonames:4099753*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>S_geonames_5332921</ci><ci>b_geonames:5332921_geonames:4099753</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t1_geonames:5332921_geonames:5332921",
+                    "expression": "I_geonames_5332921*S_geonames_5332921*b_geonames:5332921_geonames:5332921*invN",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>S_geonames_5332921</ci><ci>b_geonames:5332921_geonames:5332921</ci><ci>invN</ci></apply>"
+                },
+                {
+                    "target": "t5_geonames:4829764",
+                    "expression": "E_geonames_4829764*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4829764</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t5_geonames:5879092",
+                    "expression": "E_geonames_5879092*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5879092</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t5_geonames:5551752",
+                    "expression": "E_geonames_5551752*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5551752</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t5_geonames:4099753",
+                    "expression": "E_geonames_4099753*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4099753</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t5_geonames:5332921",
+                    "expression": "E_geonames_5332921*rEI",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5332921</ci><ci>rEI</ci></apply>"
+                },
+                {
+                    "target": "t9_geonames:4829764",
+                    "expression": "I_geonames_4829764*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t9_geonames:5879092",
+                    "expression": "I_geonames_5879092*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t9_geonames:5551752",
+                    "expression": "I_geonames_5551752*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t9_geonames:4099753",
+                    "expression": "I_geonames_4099753*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t9_geonames:5332921",
+                    "expression": "I_geonames_5332921*pIR*rIR",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>pIR</ci><ci>rIR</ci></apply>"
+                },
+                {
+                    "target": "t15",
+                    "expression": "H*pHD*rHD",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>pHD</ci><ci>rHD</ci></apply>"
+                },
+                {
+                    "target": "t16",
+                    "expression": "H*pHR*rHR",
+                    "expression_mathml": "<apply><times/><ci>H</ci><ci>pHR</ci><ci>rHR</ci></apply>"
+                },
+                {
+                    "target": "t17_geonames:4829764",
+                    "expression": "I_geonames_4829764*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t17_geonames:5879092",
+                    "expression": "I_geonames_5879092*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t17_geonames:5551752",
+                    "expression": "I_geonames_5551752*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t17_geonames:4099753",
+                    "expression": "I_geonames_4099753*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t17_geonames:5332921",
+                    "expression": "I_geonames_5332921*pIH*rIH",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>pIH</ci><ci>rIH</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_geonames:4829764_geonames:5879092",
+                    "expression": "S_geonames_4829764*p_geonames:4829764_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_0_geonames:5879092_geonames:4829764",
+                    "expression": "S_geonames_5879092*p_geonames:5879092_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_1_geonames:4829764_geonames:5879092",
+                    "expression": "E_geonames_4829764*p_geonames:4829764_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_1_geonames:5879092_geonames:4829764",
+                    "expression": "E_geonames_5879092*p_geonames:5879092_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_2_geonames:4829764_geonames:5879092",
+                    "expression": "I_geonames_4829764*p_geonames:4829764_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_2_geonames:5879092_geonames:4829764",
+                    "expression": "I_geonames_5879092*p_geonames:5879092_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_6_geonames:4829764_geonames:5551752",
+                    "expression": "S_geonames_4829764*p_geonames:4829764_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_6_geonames:5551752_geonames:4829764",
+                    "expression": "S_geonames_5551752*p_geonames:5551752_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_7_geonames:4829764_geonames:5551752",
+                    "expression": "E_geonames_4829764*p_geonames:4829764_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_7_geonames:5551752_geonames:4829764",
+                    "expression": "E_geonames_5551752*p_geonames:5551752_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_8_geonames:4829764_geonames:5551752",
+                    "expression": "I_geonames_4829764*p_geonames:4829764_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_8_geonames:5551752_geonames:4829764",
+                    "expression": "I_geonames_5551752*p_geonames:5551752_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_12_geonames:4829764_geonames:4099753",
+                    "expression": "S_geonames_4829764*p_geonames:4829764_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4829764</ci><ci>p_geonames:4829764_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_12_geonames:4099753_geonames:4829764",
+                    "expression": "S_geonames_4099753*p_geonames:4099753_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4099753</ci><ci>p_geonames:4099753_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_13_geonames:4829764_geonames:4099753",
+                    "expression": "E_geonames_4829764*p_geonames:4829764_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4829764</ci><ci>p_geonames:4829764_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_13_geonames:4099753_geonames:4829764",
+                    "expression": "E_geonames_4099753*p_geonames:4099753_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4099753</ci><ci>p_geonames:4099753_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_14_geonames:4829764_geonames:4099753",
+                    "expression": "I_geonames_4829764*p_geonames:4829764_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>p_geonames:4829764_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_14_geonames:4099753_geonames:4829764",
+                    "expression": "I_geonames_4099753*p_geonames:4099753_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>p_geonames:4099753_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_18_geonames:4829764_geonames:5332921",
+                    "expression": "S_geonames_4829764*p_geonames:4829764_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_18_geonames:5332921_geonames:4829764",
+                    "expression": "S_geonames_5332921*p_geonames:5332921_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_19_geonames:4829764_geonames:5332921",
+                    "expression": "E_geonames_4829764*p_geonames:4829764_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_19_geonames:5332921_geonames:4829764",
+                    "expression": "E_geonames_5332921*p_geonames:5332921_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_20_geonames:4829764_geonames:5332921",
+                    "expression": "I_geonames_4829764*p_geonames:4829764_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4829764</ci><ci>p_geonames:4829764_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_20_geonames:5332921_geonames:4829764",
+                    "expression": "I_geonames_5332921*p_geonames:5332921_geonames:4829764",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4829764</ci></apply>"
+                },
+                {
+                    "target": "t_conv_24_geonames:5879092_geonames:5551752",
+                    "expression": "S_geonames_5879092*p_geonames:5879092_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_24_geonames:5551752_geonames:5879092",
+                    "expression": "S_geonames_5551752*p_geonames:5551752_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_25_geonames:5879092_geonames:5551752",
+                    "expression": "E_geonames_5879092*p_geonames:5879092_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_25_geonames:5551752_geonames:5879092",
+                    "expression": "E_geonames_5551752*p_geonames:5551752_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_26_geonames:5879092_geonames:5551752",
+                    "expression": "I_geonames_5879092*p_geonames:5879092_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_26_geonames:5551752_geonames:5879092",
+                    "expression": "I_geonames_5551752*p_geonames:5551752_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_30_geonames:5879092_geonames:4099753",
+                    "expression": "S_geonames_5879092*p_geonames:5879092_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_30_geonames:4099753_geonames:5879092",
+                    "expression": "S_geonames_4099753*p_geonames:4099753_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_31_geonames:5879092_geonames:4099753",
+                    "expression": "E_geonames_5879092*p_geonames:5879092_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_31_geonames:4099753_geonames:5879092",
+                    "expression": "E_geonames_4099753*p_geonames:4099753_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_32_geonames:5879092_geonames:4099753",
+                    "expression": "I_geonames_5879092*p_geonames:5879092_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>p_geonames:5879092_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_32_geonames:4099753_geonames:5879092",
+                    "expression": "I_geonames_4099753*p_geonames:4099753_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_36_geonames:5879092_geonames:5332921",
+                    "expression": "S_geonames_5879092*p_geonames:5879092_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_36_geonames:5332921_geonames:5879092",
+                    "expression": "S_geonames_5332921*p_geonames:5332921_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_37_geonames:5879092_geonames:5332921",
+                    "expression": "E_geonames_5879092*p_geonames:5879092_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_37_geonames:5332921_geonames:5879092",
+                    "expression": "E_geonames_5332921*p_geonames:5332921_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_38_geonames:5879092_geonames:5332921",
+                    "expression": "I_geonames_5879092*p_geonames:5879092_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5879092</ci><ci>p_geonames:5879092_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_38_geonames:5332921_geonames:5879092",
+                    "expression": "I_geonames_5332921*p_geonames:5332921_geonames:5879092",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5879092</ci></apply>"
+                },
+                {
+                    "target": "t_conv_42_geonames:5551752_geonames:4099753",
+                    "expression": "S_geonames_5551752*p_geonames:5551752_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_42_geonames:4099753_geonames:5551752",
+                    "expression": "S_geonames_4099753*p_geonames:4099753_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_43_geonames:5551752_geonames:4099753",
+                    "expression": "E_geonames_5551752*p_geonames:5551752_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_43_geonames:4099753_geonames:5551752",
+                    "expression": "E_geonames_4099753*p_geonames:4099753_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_44_geonames:5551752_geonames:4099753",
+                    "expression": "I_geonames_5551752*p_geonames:5551752_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>p_geonames:5551752_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_44_geonames:4099753_geonames:5551752",
+                    "expression": "I_geonames_4099753*p_geonames:4099753_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_48_geonames:5551752_geonames:5332921",
+                    "expression": "S_geonames_5551752*p_geonames:5551752_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_48_geonames:5332921_geonames:5551752",
+                    "expression": "S_geonames_5332921*p_geonames:5332921_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_49_geonames:5551752_geonames:5332921",
+                    "expression": "E_geonames_5551752*p_geonames:5551752_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_49_geonames:5332921_geonames:5551752",
+                    "expression": "E_geonames_5332921*p_geonames:5332921_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_50_geonames:5551752_geonames:5332921",
+                    "expression": "I_geonames_5551752*p_geonames:5551752_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5551752</ci><ci>p_geonames:5551752_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_50_geonames:5332921_geonames:5551752",
+                    "expression": "I_geonames_5332921*p_geonames:5332921_geonames:5551752",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>p_geonames:5332921_geonames:5551752</ci></apply>"
+                },
+                {
+                    "target": "t_conv_54_geonames:4099753_geonames:5332921",
+                    "expression": "S_geonames_4099753*p_geonames:4099753_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_54_geonames:5332921_geonames:4099753",
+                    "expression": "S_geonames_5332921*p_geonames:5332921_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>S_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_55_geonames:4099753_geonames:5332921",
+                    "expression": "E_geonames_4099753*p_geonames:4099753_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_55_geonames:5332921_geonames:4099753",
+                    "expression": "E_geonames_5332921*p_geonames:5332921_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>E_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4099753</ci></apply>"
+                },
+                {
+                    "target": "t_conv_56_geonames:4099753_geonames:5332921",
+                    "expression": "I_geonames_4099753*p_geonames:4099753_geonames:5332921",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_4099753</ci><ci>p_geonames:4099753_geonames:5332921</ci></apply>"
+                },
+                {
+                    "target": "t_conv_56_geonames:5332921_geonames:4099753",
+                    "expression": "I_geonames_5332921*p_geonames:5332921_geonames:4099753",
+                    "expression_mathml": "<apply><times/><ci>I_geonames_5332921</ci><ci>p_geonames:5332921_geonames:4099753</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S_geonames_4829764",
+                    "expression": "S0/5",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "I_geonames_4829764",
+                    "expression": "I0/5",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "E_geonames_4829764",
+                    "expression": "E0/5",
+                    "expression_mathml": "<apply><divide/><ci>E0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "I_geonames_5879092",
+                    "expression": "I0/5",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "I_geonames_5551752",
+                    "expression": "I0/5",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "I_geonames_4099753",
+                    "expression": "I0/5",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "I_geonames_5332921",
+                    "expression": "I0/5",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "S_geonames_5879092",
+                    "expression": "S0/5",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "E_geonames_5879092",
+                    "expression": "E0/5",
+                    "expression_mathml": "<apply><divide/><ci>E0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "S_geonames_5551752",
+                    "expression": "S0/5",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "E_geonames_5551752",
+                    "expression": "E0/5",
+                    "expression_mathml": "<apply><divide/><ci>E0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "S_geonames_4099753",
+                    "expression": "S0/5",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "E_geonames_4099753",
+                    "expression": "E0/5",
+                    "expression_mathml": "<apply><divide/><ci>E0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "S_geonames_5332921",
+                    "expression": "S0/5",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "E_geonames_5332921",
+                    "expression": "E0/5",
+                    "expression_mathml": "<apply><divide/><ci>E0</ci><cn>5</cn></apply>"
+                },
+                {
+                    "target": "R",
+                    "expression": "R0",
+                    "expression_mathml": "<ci>R0</ci>"
+                },
+                {
+                    "target": "H",
+                    "expression": "H0",
+                    "expression_mathml": "<ci>H0</ci>"
+                },
+                {
+                    "target": "D",
+                    "expression": "D0",
+                    "expression_mathml": "<ci>D0</ci>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "b_geonames:4829764_geonames:4829764",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "invN",
+                    "name": "invN",
+                    "value": 5.170630816959669e-08,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 5.118924508790072e-08,
+                            "maximum": 5.222337125129265e-08
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4829764_geonames:5879092",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4829764_geonames:5551752",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4829764_geonames:4099753",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4829764_geonames:5332921",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5879092_geonames:4829764",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5879092_geonames:5879092",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5879092_geonames:5551752",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5879092_geonames:4099753",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5879092_geonames:5332921",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5551752_geonames:4829764",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5551752_geonames:5879092",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5551752_geonames:5551752",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5551752_geonames:4099753",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5551752_geonames:5332921",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4099753_geonames:4829764",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4099753_geonames:5879092",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4099753_geonames:5551752",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4099753_geonames:4099753",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:4099753_geonames:5332921",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5332921_geonames:4829764",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5332921_geonames:5879092",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5332921_geonames:5551752",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5332921_geonames:4099753",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "b_geonames:5332921_geonames:5332921",
+                    "name": "b",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.396,
+                            "maximum": 0.404
+                        }
+                    }
+                },
+                {
+                    "id": "rEI",
+                    "name": "rEI",
+                    "description": "rEI",
+                    "value": 0.2,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.198,
+                            "maximum": 0.202
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "pIR",
+                    "name": "pIR",
+                    "value": 0.8,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.792,
+                            "maximum": 0.808
+                        }
+                    }
+                },
+                {
+                    "id": "rIR",
+                    "name": "rIR",
+                    "value": 0.07,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.0693,
+                            "maximum": 0.07070000000000001
+                        }
+                    }
+                },
+                {
+                    "id": "pHD",
+                    "name": "pHD",
+                    "value": 0.12,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.11879999999999999,
+                            "maximum": 0.1212
+                        }
+                    }
+                },
+                {
+                    "id": "rHD",
+                    "name": "rHD",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "pHR",
+                    "name": "pHR",
+                    "value": 0.88,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.8712,
+                            "maximum": 0.8888
+                        }
+                    }
+                },
+                {
+                    "id": "rHR",
+                    "name": "rHR",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "pIH",
+                    "name": "pIH",
+                    "value": 0.2,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.198,
+                            "maximum": 0.202
+                        }
+                    }
+                },
+                {
+                    "id": "rIH",
+                    "name": "rIH",
+                    "value": 0.1,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.099,
+                            "maximum": 0.101
+                        }
+                    }
+                },
+                {
+                    "id": "p_geonames:4829764_geonames:5879092",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5879092_geonames:4829764",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4829764_geonames:5551752",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5551752_geonames:4829764",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4829764_geonames:4099753",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4099753_geonames:4829764",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4829764_geonames:5332921",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5332921_geonames:4829764",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5879092_geonames:5551752",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5551752_geonames:5879092",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5879092_geonames:4099753",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4099753_geonames:5879092",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5879092_geonames:5332921",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5332921_geonames:5879092",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5551752_geonames:4099753",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4099753_geonames:5551752",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5551752_geonames:5332921",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5332921_geonames:5551752",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:4099753_geonames:5332921",
+                    "value": 0.1
+                },
+                {
+                    "id": "p_geonames:5332921_geonames:4099753",
+                    "value": 0.1
+                },
+                {
+                    "id": "S0",
+                    "name": "S0",
+                    "value": 19114075.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 18922934.25,
+                            "maximum": 19305215.75
+                        }
+                    }
+                },
+                {
+                    "id": "E0",
+                    "name": "E0",
+                    "value": 21955.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 21735.45,
+                            "maximum": 22174.55
+                        }
+                    }
+                },
+                {
+                    "id": "I0",
+                    "name": "I0",
+                    "value": 87820.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 86941.8,
+                            "maximum": 88698.2
+                        }
+                    }
+                },
+                {
+                    "id": "R0",
+                    "name": "R0",
+                    "value": 99821.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 98822.79,
+                            "maximum": 100819.21
+                        }
+                    }
+                },
+                {
+                    "id": "H0",
+                    "name": "H0",
+                    "value": 12637.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 12510.63,
+                            "maximum": 12763.37
+                        }
+                    }
+                },
+                {
+                    "id": "D0",
+                    "name": "D0",
+                    "value": 3692.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3655.08,
+                            "maximum": 3728.92
+                        }
+                    }
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
