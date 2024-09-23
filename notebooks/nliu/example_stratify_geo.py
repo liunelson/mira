@@ -17,6 +17,7 @@ import sympy
 from tqdm import tqdm
 from datetime import date
 import requests
+import copy
 
 from mira.modeling.viz import GraphicalModel
 from mira.metamodel import *
@@ -143,6 +144,15 @@ for name, curie in (('Delaware', 'geonames:4142224'), ('Vermont', 'geonames:5242
     state_fips.loc[i, 'stateCurie'] = curie
 
 # %%
+state_fips.to_csv('./data/example_models/state_fips.csv')
+
+df = pandas.DataFrame(adj_state, index = state_fips['stateCurie'].values, columns = state_fips['stateCurie'].values)
+df.to_csv('./data/example_models/adj_state.csv')
+
+df = pandas.DataFrame(adj_state_flight, index = state_fips['stateCurie'].values, columns = state_fips['stateCurie'].values)
+df.to_csv('./data/example_models/adj_state_flight.csv')
+
+# %%
 # Load a SEIRHD model
 with open("./data/monthly_demo_202408/model_seirhd.json", "r") as f:
     model = template_model_from_amr_json(json.load(f))
@@ -150,12 +160,28 @@ with open("./data/monthly_demo_202408/model_seirhd.json", "r") as f:
 GraphicalModel.for_jupyter(model)
 
 # %%
+model.annotations = Annotations(
+    name = 'SEIRHD model',
+    description = 'Edit of SIDARTHE model from Giordano 2020, stratified by U.S. states and territories to consider geographical adjacency and Jan-Jul 2020 flight network',
+    authors = [{'name': 'Nelson Liu'}],
+    references = ['10.1038/s41591-020-0883-7', '10.1109/LCSYS.2021.3050954'],
+    time_scale = 'day',
+    time_start = '2020-01-01T00:00:00',
+    time_end = '2020-07-01T00:00:00',
+    locations = [],
+    pathogens = ["ncbitaxon:2697049"],
+    diseases = ["doid:0080600"],
+    hosts = ["ncbitaxon:9606"],
+    model_types = ["mamo:0000028", "mamo:0000046"]
+)
+
+# %%
 # Stratify the model by the entities in `state_fips`
 
-model_travel = stratify(
+model_travel_stateName = stratify(
     model,
-    key = 'location',
-    strata = list(state_fips['stateCurie'].values),
+    key = 'state',
+    strata = [name.replace(' ', '').replace('.', '') for name in state_fips['stateName'].values],
     cartesian_control = True,
     directed = False,
     structure = None,
@@ -165,10 +191,71 @@ model_travel = stratify(
 )
 
 # %%
+# Reset the initial expressions
+for k, v in model_travel_stateName.initials.items():
+    if len(k.split('_')) == 2:
+        x, name = k.split('_')
+        v.expression = sympy.Symbol(f'{x}0_{name}')
+
+        # Add parameters
+        model_travel_stateName.parameters = model_travel_stateName.parameters | {
+            f'{x}0_{name}': Parameter(
+                name = f'{x}0_{name}', 
+                display_name = f'{x}0_{name}', 
+                description = f'Initial {x} pop in {name}', 
+                identifiers = v.concept.identifiers, 
+                context = v.concept.context, 
+                units = v.concept.units, 
+                value = 1.0, 
+            )
+        }
+    
+# %%
+# With Geonames curies
+model_travel_stateCurie = copy.deepcopy(model_travel_stateName)
+
+# %%
+# Update annotations.locations
+model_travel_stateCurie.annotations.locations = ['geonames:6252001'] + list(state_fips['stateCurie'].values),
+
+# %%
+m = {s['stateName'].replace(' ', '').replace('.', ''): s['stateCurie'] for __, s in state_fips.iterrows()}
+
+# Change concept context from name to curie
+for k, v in model_travel_stateCurie.get_concepts_name_map().items():
+    if len(k) > 1:
+        x, name = k.split('_')
+        curie = m[name]
+        v.context['location'] = curie
+
+        # update initials concept
+        model_travel_stateCurie.initials[k].concept.context['location'] = curie
+
+# %%
+# Update the initial parameters
+for k, v in model_travel_stateCurie.initials.items():
+    if len(k.split('_')) == 2:
+        x, name = k.split('_')
+        p = f'{x}0_{name}'
+        curie = m[name]
+        model_travel_stateCurie.parameters[p].context['location'] = curie
+        
+# %%
+# Add curie to other parameteres
+for k, p in model_travel_stateCurie.parameters.items():
+    if k[:2] == 'b_':
+        __, name_0, name_1 = k.split('_')
+        p.context['location_0'] = m[name_0]
+        p.context['location_1'] = m[name_1]
+
+# %%
 # GraphicalModel.for_jupyter(model_travel)
 
 # %%
-with open("./data/example_models/model_seirhd_travel.json", "w") as f:
-    json.dump(template_model_to_petrinet_json(model_travel), f, indent = 4)
+with open("./data/example_models/model_seirhd_travel_stateName.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_travel_stateName), f, indent = 4)
+
+with open("./data/example_models/model_seirhd_travel_stateCurie.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_travel_stateCurie), f, indent = 4)
 
 # %%

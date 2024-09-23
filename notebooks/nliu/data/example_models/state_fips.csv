@@ -1,0 +1,57 @@
+,stateAbbr,stateFIPS,stateName,stateCurie
+0,AL,01,Alabama,geonames:4829764
+1,AK,02,Alaska,geonames:5879092
+2,AZ,04,Arizona,geonames:5551752
+3,AR,05,Arkansas,geonames:4099753
+4,CA,06,California,geonames:5332921
+5,CO,08,Colorado,geonames:5417618
+6,CT,09,Connecticut,geonames:4831725
+7,DE,10,Delaware,geonames:4142224
+8,DC,11,District of Columbia,geonames:4140963
+9,FL,12,Florida,geonames:4155751
+10,GA,13,Georgia,geonames:4197000
+11,HI,15,Hawaii,geonames:5855797
+12,ID,16,Idaho,geonames:5596512
+13,IL,17,Illinois,geonames:4896861
+14,IN,18,Indiana,geonames:4921868
+15,IA,19,Iowa,geonames:4862182
+16,KS,20,Kansas,geonames:4273857
+17,KY,21,Kentucky,geonames:6254925
+18,LA,22,Louisiana,geonames:4331987
+19,ME,23,Maine,geonames:4971068
+20,MD,24,Maryland,geonames:4361885
+21,MA,25,Massachusetts,geonames:6254926
+22,MI,26,Michigan,geonames:5001836
+23,MN,27,Minnesota,geonames:5037779
+24,MS,28,Mississippi,geonames:4436296
+25,MO,29,Missouri,geonames:4398678
+26,MT,30,Montana,geonames:5667009
+27,NE,31,Nebraska,geonames:5073708
+28,NV,32,Nevada,geonames:5509151
+29,NH,33,New Hampshire,geonames:5090174
+30,NJ,34,New Jersey,geonames:5101760
+31,NM,35,New Mexico,geonames:5481136
+32,NY,36,New York,geonames:5128638
+33,NC,37,North Carolina,geonames:4482348
+34,ND,38,North Dakota,geonames:5690763
+35,OH,39,Ohio,geonames:5165418
+36,OK,40,Oklahoma,geonames:4544379
+37,OR,41,Oregon,geonames:5744337
+38,PA,42,Pennsylvania,geonames:6254927
+39,RI,44,Rhode Island,geonames:5224323
+40,SC,45,South Carolina,geonames:4597040
+41,SD,46,South Dakota,geonames:5769223
+42,TN,47,Tennessee,geonames:4662168
+43,TX,48,Texas,geonames:4736286
+44,UT,49,Utah,geonames:5549030
+45,VT,50,Vermont,geonames:5242283
+46,VA,51,Virginia,geonames:6254928
+47,WA,53,Washington,geonames:4140963
+48,WV,54,West Virginia,geonames:4826850
+49,WI,55,Wisconsin,geonames:5279468
+50,WY,56,Wyoming,geonames:5843591
+51,AS,60,American Samoa,geonames:5880801
+52,GU,66,Guam,geonames:4043988
+53,MP,69,Northern Mariana Islands,geonames:4041468
+54,PR,72,Puerto Rico,geonames:4566966
+55,VI,78,U.S. Virgin Islands,geonames:4796775

@@ -170,6 +170,7 @@ add_observable_pattern(
     }
 )
 
+
 # There'd be a new observable added to the model
 # `TotalUnvaccinatedhildren = S_unvaccinated_children + I_unvaccinated_children + R_unvaccinated_children`
 
