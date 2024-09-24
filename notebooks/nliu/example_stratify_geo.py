@@ -180,7 +180,7 @@ model.annotations = Annotations(
 
 model_travel_stateName = stratify(
     model,
-    key = 'state',
+    key = 'location',
     strata = [name.replace(' ', '').replace('.', '') for name in state_fips['stateName'].values],
     cartesian_control = True,
     directed = False,
@@ -195,7 +195,7 @@ model_travel_stateName = stratify(
 for k, v in model_travel_stateName.initials.items():
     if len(k.split('_')) == 2:
         x, name = k.split('_')
-        v.expression = sympy.Symbol(f'{x}0_{name}')
+        v.expression = SympyExprStr(sympy.Symbol(f'{x}0_{name}'))
 
         # Add parameters
         model_travel_stateName.parameters = model_travel_stateName.parameters | {
@@ -211,6 +211,10 @@ for k, v in model_travel_stateName.initials.items():
         }
     
 # %%
+with open("./data/example_models/model_seirhd_travel_stateName.json", "w") as f:
+    json.dump(template_model_to_petrinet_json(model_travel_stateName), f, indent = 4)
+
+# %%
 # With Geonames curies
 model_travel_stateCurie = copy.deepcopy(model_travel_stateName)
 
@@ -219,43 +223,34 @@ model_travel_stateCurie = copy.deepcopy(model_travel_stateName)
 model_travel_stateCurie.annotations.locations = ['geonames:6252001'] + list(state_fips['stateCurie'].values),
 
 # %%
+# Map from state name to state geonames curie
 m = {s['stateName'].replace(' ', '').replace('.', ''): s['stateCurie'] for __, s in state_fips.iterrows()}
 
-# Change concept context from name to curie
-for k, v in model_travel_stateCurie.get_concepts_name_map().items():
-    if len(k) > 1:
-        x, name = k.split('_')
-        curie = m[name]
-        v.context['location'] = curie
-
-        # update initials concept
-        model_travel_stateCurie.initials[k].concept.context['location'] = curie
+# %%
+# Convert to JSON since it is very tedious to update all the curies with MIRA
+j = template_model_to_petrinet_json(model_travel_stateCurie)
 
 # %%
-# Update the initial parameters
-for k, v in model_travel_stateCurie.initials.items():
-    if len(k.split('_')) == 2:
-        x, name = k.split('_')
-        p = f'{x}0_{name}'
-        curie = m[name]
-        model_travel_stateCurie.parameters[p].context['location'] = curie
-        
-# %%
-# Add curie to other parameteres
-for k, p in model_travel_stateCurie.parameters.items():
-    if k[:2] == 'b_':
-        __, name_0, name_1 = k.split('_')
-        p.context['location_0'] = m[name_0]
-        p.context['location_1'] = m[name_1]
+# Replace state names with state geonames curie
+for state in j['model']['states']:
+    if 'location' in state['grounding']['modifiers'].keys():
+        state['grounding']['modifiers']['location'] = m[state['grounding']['modifiers']['location']]
 
 # %%
-# GraphicalModel.for_jupyter(model_travel)
+# Add location modifiers to parameters
+for param in j['semantics']['ode']['parameters']:
+    if param['id'][:2] == 'b_':
+        __, name0, name1 = param['id'].split('_')
+        param['grounding'] = {
+            'identifiers': {},
+            'modifiers': {
+                'location_0': m[name0],
+                'location_1': m[name1]
+            }
+        }
 
 # %%
-with open("./data/example_models/model_seirhd_travel_stateName.json", "w") as f:
-    json.dump(template_model_to_petrinet_json(model_travel_stateName), f, indent = 4)
-
 with open("./data/example_models/model_seirhd_travel_stateCurie.json", "w") as f:
-    json.dump(template_model_to_petrinet_json(model_travel_stateCurie), f, indent = 4)
+    json.dump(j, f, indent = 4)
 
 # %%
