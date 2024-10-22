@@ -1,6 +1,9 @@
+from pydantic import Field, ConfigDict
+from typing_extensions import Annotated
+
 __all__ = ["ModelComparisonGraphdata", "TemplateModelComparison",
            "TemplateModelDelta", "RefinementClosure",
-           "get_dkg_refinement_closure"]
+           "get_dkg_refinement_closure", "default_dkg_refinement_closure"]
 
 from collections import defaultdict
 from itertools import combinations, count, product
@@ -9,7 +12,7 @@ from typing import Literal, Optional, Mapping, List, Tuple, Dict, Callable, \
 
 import networkx as nx
 import sympy
-from pydantic import BaseModel, conint, Field
+from pydantic import BaseModel, Field
 from tqdm import tqdm
 
 from .templates import Provenance, Concept, Template, SympyExprStr, IS_EQUAL, \
@@ -27,13 +30,15 @@ MERGE_COLOR = "orange"
 class DataNode(BaseModel):
     """A node in a ModelComparisonGraphdata"""
 
+    model_config = ConfigDict(protected_namespaces=())
     node_type: Literal["template", "concept"]
-    model_id: conint(ge=0, strict=True)
+    model_id: Annotated[int, Field(ge=0, strict=True)]
 
 
 class TemplateNode(DataNode):
     """A node in a ModelComparisonGraphdata representing a Template"""
 
+    model_config = ConfigDict(protected_namespaces=())
     type: str
     rate_law: Optional[SympyExprStr] = \
         Field(default=None, description="The rate law of this template")
@@ -69,15 +74,8 @@ class IntraModelEdge(DataEdge):
 
 class ModelComparisonGraphdata(BaseModel):
     """A data structure holding a graph representation of TemplateModel delta"""
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {
-            SympyExprStr: lambda e: safe_parse_expr(e),
-            Template: lambda t: Template.from_json(data=t),
-        }
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     template_models: Dict[int, TemplateModel] = Field(
         ..., description="A mapping of template model keys to template models"
@@ -790,6 +788,28 @@ class RefinementClosure:
         return (child_curie, parent_curie) in self.transitive_closure
 
 
+class DefaultDkgRefinementClosure(RefinementClosure):
+    def __init__(self, transitive_closure: Set[Tuple[str, str]] = None):
+        self.transitive_closure = transitive_closure
+        if self.transitive_closure:
+            self.initialized = True
+        else:
+            self.initialized = False
+
+    def initialize(self):
+        from mira.dkg.web_client import get_transitive_closure_web
+        self.transitive_closure = get_transitive_closure_web()
+        self.initialized = True
+
+    def is_ontological_child(self, child_curie: str, parent_curie: str) -> bool:
+        if not self.initialized:
+            self.initialize()
+        return (child_curie, parent_curie) in self.transitive_closure
+
+
+default_dkg_refinement_closure = DefaultDkgRefinementClosure()
+
+
 def get_dkg_refinement_closure() -> RefinementClosure:
     """Return a refinement closure from the DKG
 
@@ -798,7 +818,4 @@ def get_dkg_refinement_closure() -> RefinementClosure:
     :
         The refinement closure
     """
-    # Import here to avoid dependency upon module import
-    from mira.dkg.web_client import get_transitive_closure_web
-    rc = RefinementClosure(get_transitive_closure_web())
-    return rc
+    return default_dkg_refinement_closure
