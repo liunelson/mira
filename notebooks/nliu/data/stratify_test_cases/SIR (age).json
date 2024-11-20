@@ -1,0 +1,439 @@
+{
+  "id": "6cba41a9-45e2-473d-bdc8-75e6862048fc",
+  "createdOn": "2024-11-19T03:12:53.678+00:00",
+  "updatedOn": "2024-11-19T03:13:05.023+00:00",
+  "name": "SIR (age)",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "SIR (age)",
+    "description": "This is a model from equations",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "S_0to18",
+        "name": "S",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "0to18"
+          }
+        }
+      },
+      {
+        "id": "I_0to18",
+        "name": "I",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "0to18"
+          }
+        }
+      },
+      {
+        "id": "I_19to64",
+        "name": "I",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "19to64"
+          }
+        }
+      },
+      {
+        "id": "I_65above",
+        "name": "I",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "65above"
+          }
+        }
+      },
+      {
+        "id": "S_19to64",
+        "name": "S",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "19to64"
+          }
+        }
+      },
+      {
+        "id": "S_65above",
+        "name": "S",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {
+            "age": "65above"
+          }
+        }
+      },
+      {
+        "id": "R",
+        "name": "R",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t0_0to18_0to18",
+        "input": [
+          "I_0to18",
+          "S_0to18"
+        ],
+        "output": [
+          "I_0to18",
+          "I_0to18"
+        ],
+        "properties": {
+          "name": "t0_0to18_0to18"
+        }
+      },
+      {
+        "id": "t0_0to18_19to64",
+        "input": [
+          "I_19to64",
+          "S_0to18"
+        ],
+        "output": [
+          "I_19to64",
+          "I_0to18"
+        ],
+        "properties": {
+          "name": "t0_0to18_19to64"
+        }
+      },
+      {
+        "id": "t0_0to18_65above",
+        "input": [
+          "I_65above",
+          "S_0to18"
+        ],
+        "output": [
+          "I_65above",
+          "I_0to18"
+        ],
+        "properties": {
+          "name": "t0_0to18_65above"
+        }
+      },
+      {
+        "id": "t0_19to64_0to18",
+        "input": [
+          "I_0to18",
+          "S_19to64"
+        ],
+        "output": [
+          "I_0to18",
+          "I_19to64"
+        ],
+        "properties": {
+          "name": "t0_19to64_0to18"
+        }
+      },
+      {
+        "id": "t0_19to64_19to64",
+        "input": [
+          "I_19to64",
+          "S_19to64"
+        ],
+        "output": [
+          "I_19to64",
+          "I_19to64"
+        ],
+        "properties": {
+          "name": "t0_19to64_19to64"
+        }
+      },
+      {
+        "id": "t0_19to64_65above",
+        "input": [
+          "I_65above",
+          "S_19to64"
+        ],
+        "output": [
+          "I_65above",
+          "I_19to64"
+        ],
+        "properties": {
+          "name": "t0_19to64_65above"
+        }
+      },
+      {
+        "id": "t0_65above_0to18",
+        "input": [
+          "I_0to18",
+          "S_65above"
+        ],
+        "output": [
+          "I_0to18",
+          "I_65above"
+        ],
+        "properties": {
+          "name": "t0_65above_0to18"
+        }
+      },
+      {
+        "id": "t0_65above_19to64",
+        "input": [
+          "I_19to64",
+          "S_65above"
+        ],
+        "output": [
+          "I_19to64",
+          "I_65above"
+        ],
+        "properties": {
+          "name": "t0_65above_19to64"
+        }
+      },
+      {
+        "id": "t0_65above_65above",
+        "input": [
+          "I_65above",
+          "S_65above"
+        ],
+        "output": [
+          "I_65above",
+          "I_65above"
+        ],
+        "properties": {
+          "name": "t0_65above_65above"
+        }
+      },
+      {
+        "id": "t1_0to18",
+        "input": [
+          "I_0to18"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t1_0to18"
+        }
+      },
+      {
+        "id": "t1_19to64",
+        "input": [
+          "I_19to64"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t1_19to64"
+        }
+      },
+      {
+        "id": "t1_65above",
+        "input": [
+          "I_65above"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t1_65above"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t0_0to18_0to18",
+          "expression": "I_0to18*S_0to18*β_0to18_0to18",
+          "expression_mathml": "<apply><times/><ci>I_0to18</ci><ci>S_0to18</ci><ci>|&#946;QQQ0to18QQQ0to18|</ci></apply>"
+        },
+        {
+          "target": "t0_0to18_19to64",
+          "expression": "I_19to64*S_0to18*β_0to18_19to64",
+          "expression_mathml": "<apply><times/><ci>I_19to64</ci><ci>S_0to18</ci><ci>|&#946;QQQ0to18QQQ19to64|</ci></apply>"
+        },
+        {
+          "target": "t0_0to18_65above",
+          "expression": "I_65above*S_0to18*β_0to18_65above",
+          "expression_mathml": "<apply><times/><ci>I_65above</ci><ci>S_0to18</ci><ci>|&#946;QQQ0to18QQQ65above|</ci></apply>"
+        },
+        {
+          "target": "t0_19to64_0to18",
+          "expression": "I_0to18*S_19to64*β_19to64_0to18",
+          "expression_mathml": "<apply><times/><ci>I_0to18</ci><ci>S_19to64</ci><ci>|&#946;QQQ19to64QQQ0to18|</ci></apply>"
+        },
+        {
+          "target": "t0_19to64_19to64",
+          "expression": "I_19to64*S_19to64*β_19to64_19to64",
+          "expression_mathml": "<apply><times/><ci>I_19to64</ci><ci>S_19to64</ci><ci>|&#946;QQQ19to64QQQ19to64|</ci></apply>"
+        },
+        {
+          "target": "t0_19to64_65above",
+          "expression": "I_65above*S_19to64*β_19to64_65above",
+          "expression_mathml": "<apply><times/><ci>I_65above</ci><ci>S_19to64</ci><ci>|&#946;QQQ19to64QQQ65above|</ci></apply>"
+        },
+        {
+          "target": "t0_65above_0to18",
+          "expression": "I_0to18*S_65above*β_65above_0to18",
+          "expression_mathml": "<apply><times/><ci>I_0to18</ci><ci>S_65above</ci><ci>|&#946;QQQ65aboveQQQ0to18|</ci></apply>"
+        },
+        {
+          "target": "t0_65above_19to64",
+          "expression": "I_19to64*S_65above*β_65above_19to64",
+          "expression_mathml": "<apply><times/><ci>I_19to64</ci><ci>S_65above</ci><ci>|&#946;QQQ65aboveQQQ19to64|</ci></apply>"
+        },
+        {
+          "target": "t0_65above_65above",
+          "expression": "I_65above*S_65above*β_65above_65above",
+          "expression_mathml": "<apply><times/><ci>I_65above</ci><ci>S_65above</ci><ci>|&#946;QQQ65aboveQQQ65above|</ci></apply>"
+        },
+        {
+          "target": "t1_0to18",
+          "expression": "I_0to18*γ_0to18",
+          "expression_mathml": "<apply><times/><ci>I_0to18</ci><ci>|&#947;QQQ0to18|</ci></apply>"
+        },
+        {
+          "target": "t1_19to64",
+          "expression": "I_19to64*γ_19to64",
+          "expression_mathml": "<apply><times/><ci>I_19to64</ci><ci>|&#947;QQQ19to64|</ci></apply>"
+        },
+        {
+          "target": "t1_65above",
+          "expression": "I_65above*γ_65above",
+          "expression_mathml": "<apply><times/><ci>I_65above</ci><ci>|&#947;QQQ65above|</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "S_0to18",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "I_0to18",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "I_19to64",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "I_65above",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "S_19to64",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "S_65above",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        },
+        {
+          "target": "R",
+          "expression": "0",
+          "expression_mathml": "<cn>0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "β_0to18_0to18",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_0to18_19to64",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_0to18_65above",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_19to64_0to18",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_19to64_19to64",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_19to64_65above",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_65above_0to18",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_65above_19to64",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "β_65above_65above",
+          "name": "β",
+          "value": 1
+        },
+        {
+          "id": "γ_0to18",
+          "name": "γ",
+          "value": 1
+        },
+        {
+          "id": "γ_19to64",
+          "name": "γ",
+          "value": 1
+        },
+        {
+          "id": "γ_65above",
+          "name": "γ",
+          "value": 1
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t"
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "gollmCard": null,
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

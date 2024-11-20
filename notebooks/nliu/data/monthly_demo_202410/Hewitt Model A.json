@@ -1,0 +1,211 @@
+{
+  "id": "324a6ee7-e468-48ca-92f9-3dd25c9e1cfe",
+  "createdOn": "2024-09-25T23:28:46.592+00:00",
+  "updatedOn": "2024-11-20T16:17:59.152+00:00",
+  "name": "Hewitt Model A",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Hewitt Model A",
+    "description": "This is a model extracted from the equations of Hewitt et al. 2024.",
+    "schema": "https://github.com/DARPA-ASKEM/Model-Representations/blob/main/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "i",
+        "name": "i",
+        "description": "proportion of infected individuals"
+      },
+      {
+        "id": "r",
+        "name": "r",
+        "description": "proportion of recovered individuals"
+      },
+      {
+        "id": "s",
+        "name": "s",
+        "description": "proportion of susceptible individuals"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "Infection",
+        "input": [
+          "i",
+          "s"
+        ],
+        "output": [
+          "i",
+          "i"
+        ]
+      },
+      {
+        "id": "Recovery",
+        "input": [
+          "i"
+        ],
+        "output": [
+          "r"
+        ]
+      }
+    ]
+  },
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t0",
+          "expression": "s*y*R*i",
+          "expression_mathml": "<apply><times/><ci>s</ci><ci>y</ci><ci>R</ci><ci>i</ci></apply>"
+        },
+        {
+          "target": "t1",
+          "expression": "y*i",
+          "expression_mathml": "<apply><times/><ci>y</ci><ci>i</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "s",
+          "expression": "0.0",
+          "expression_mathml": "<math></math>"
+        },
+        {
+          "target": "i",
+          "expression": "0.0",
+          "expression_mathml": "<math></math>"
+        },
+        {
+          "target": "r",
+          "expression": "0.0",
+          "expression_mathml": "<math></math>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "R",
+          "name": "R",
+          "description": "Effective reproduction ratio",
+          "value": 1
+        },
+        {
+          "id": "y",
+          "name": "y",
+          "description": "Recovery rate",
+          "value": 1
+        }
+      ],
+      "observables": [
+        {
+          "id": "b",
+          "name": "b",
+          "description": "Deer-to-deer contact rate",
+          "expression": "R*y"
+        }
+      ],
+      "time": null
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgxPlN1bW1hcnk8L2gxPgo8aDI+TW9kZWxTdW1tYXJ5PC9oMj4KPHA+VGhpcyBtb2RlbCByZXByZXNlbnRzIHRoZSBlcGlkZW1pb2xvZ2ljYWwgZHluYW1pY3Mgb2YgU0FSUy1Db1YtMiBpbiB3aGl0ZS10YWlsZWQgZGVlciB1c2luZyBhIHNwYXRpYWxseSB2YXJ5aW5nIFNJUiBtb2RlbC48L3A+CjxoMT5EZXRhaWxzPC9oMT4KPGgyPk1vZGVsRGVzY3JpcHRpb248L2gyPgo8cD5UaGUgbW9kZWwgaXMgc3RydWN0dXJlZCBhcyBhIFN1c2NlcHRpYmxlLUluZmVjdGVkLVJlY292ZXJlZCAoU0lSKSBjb21wYXJ0bWVudGFsIG1vZGVsIHdpdGggc3BhdGlhbCBhbmQgdGVtcG9yYWwgY29ycmVsYXRpb25zLiBJdCBpbmNsdWRlcyBwbGFjZXMgZm9yIHN1c2NlcHRpYmxlIChzKSwgaW5mZWN0ZWQgKGkpLCBhbmQgcmVjb3ZlcmVkIChyKSBzdGF0ZXMsIGFuZCB0cmFuc2l0aW9ucyBmb3IgaW5mZWN0aW9uIGFuZCByZWNvdmVyeS4gVGhpcyBzdHJ1Y3R1cmUgY2FuIGJlIHJlcHJlc2VudGVkIGluIGEgUGV0cmkgbmV0IGZvcm1hdC48L3A+CjxoMj5GdW5kZWRCeTwvaDI+CjxwPlVTREEgQW1lcmljYW4gUmVzY3VlIFBsYW4sIENlbnRlcnMgb2YgRXhjZWxsZW5jZSBmb3IgSW5mbHVlbnphIFJlc2VhcmNoIGFuZCBSZXNwb25zZSwgTmF0aW9uYWwgSW5zdGl0dXRlIG9mIEFsbGVyZ3kgYW5kIEluZmVjdGlvdXMgRGlzZWFzZXMsIE5hdGlvbmFsIEluc3RpdHV0ZXMgb2YgSGVhbHRoIChOSUgpPC9wPgo8aDI+TW9kZWxUeXBlPC9oMj4KPHA+TWF0aGVtYXRpY2FsIE1vZGVsPC9wPgo8aDE+VXNlczwvaDE+CjxoMj5EaXJlY3RVc2U8L2gyPgo8cD5UaGUgbW9kZWwgY2FuIGJlIHVzZWQgdG8gc2ltdWxhdGUgdGhlIHNwcmVhZCBvZiBTQVJTLUNvVi0yIGluIHdoaXRlLXRhaWxlZCBkZWVyIHBvcHVsYXRpb25zIGFuZCBhc3Nlc3MgdGhlIGltcGFjdCBvZiBodW1hbiBpbmZlY3Rpb24gcHJlc3N1cmUgb24gZGVlci48L3A+CjxoMj5PdXRPZlNjb3BlVXNlPC9oMj4KPHA+VXNpbmcgdGhlIG1vZGVsIHRvIHByZWRpY3QgU0FSUy1Db1YtMiBkeW5hbWljcyBpbiBzcGVjaWVzIG90aGVyIHRoYW4gd2hpdGUtdGFpbGVkIGRlZXIgb3IgaW4gZ2VvZ3JhcGhpYyByZWdpb25zIG5vdCBjb3ZlcmVkIGJ5IHRoZSBzdHVkeS48L3A+CjxoMT5CaWFzUmlza3NMaW1pdGF0aW9uczwvaDE+CjxoMj5Nb2RlbEJpYXNSaXNrc0xpbWl0YXRpb25zPC9oMj4KPHA+VGhlIG1vZGVsIG1heSBoYXZlIGJpYXNlcyBkdWUgdG8gdGhlIG9wcG9ydHVuaXN0aWMgc2FtcGxpbmcgZGVzaWduIGFuZCB0aGUgYXNzdW1wdGlvbiBvZiB3ZWxsLW1peGVkIHBvcHVsYXRpb25zIHdpdGhpbiBjb3VudGllcy4gSXQgbWF5IG5vdCBhY2N1cmF0ZWx5IGNhcHR1cmUgZHluYW1pY3MgaW4gYXJlYXMgd2l0aCBzcGFyc2UgZGF0YS48L3A+CjxoMT5UZXN0aW5nPC9oMT4KPGgyPlRlc3RpbmdEYXRhRmFjdG9yc01ldHJpY3M8L2gyPgo8cD5UaGUgbW9kZWwgd2FzIHZhbGlkYXRlZCB1c2luZyBuYXRpb25hbCBzdXJ2ZWlsbGFuY2UgZGF0YSwgY29tcGFyaW5nIHByZWRpY3RlZCBwcmV2YWxlbmNlIHdpdGggb2JzZXJ2ZWQgZGF0YSwgYW5kIGFzc2Vzc2luZyBtb2RlbCBmaXQgdGhyb3VnaCBjYWxpYnJhdGlvbiBjdXJ2ZXMuPC9wPgo8aDE+U3BlY3M8L2gxPgo8aDI+TW9kZWxTcGVjczwvaDI+CjxwPlRoZSBtb2RlbCBpbmNsdWRlcyAzIHBsYWNlcyAocywgaSwgciksIDIgdHJhbnNpdGlvbnMgKGluZmVjdGlvbiwgcmVjb3ZlcnkpLCBhbmQgcGFyYW1ldGVycyBzdWNoIGFzIHRoZSBsb2NhbCBlZmZlY3RpdmUgcmVwcm9kdWN0aW9uIHJhdGlvIChSKSBhbmQgcmVjb3ZlcnkgcmF0ZSAoeSkuPC9wPgo8aDE+R2xvc3Nhcnk8L2gxPgo8dWw+CjxsaT5TSVIgTW9kZWw6IEEgdHlwZSBvZiBjb21wYXJ0bWVudGFsIG1vZGVsIHVzZWQgaW4gZXBpZGVtaW9sb2d5IHRvIHNpbXVsYXRlIHRoZSBzcHJlYWQgb2YgYSBkaXNlYXNlIHRocm91Z2ggcG9wdWxhdGlvbnMuPC9saT4KPGxpPlBldHJpIE5ldDogQSBtYXRoZW1hdGljYWwgcmVwcmVzZW50YXRpb24gb2YgYSBkaXN0cmlidXRlZCBzeXN0ZW0sIG9mdGVuIHVzZWQgdG8gbW9kZWwgcHJvY2Vzc2VzIHdpdGggY29uY3VycmVudCwgYXN5bmNocm9ub3VzLCBwYXJhbGxlbCwgbm9uLWRldGVybWluaXN0aWMsIG9yIHN0b2NoYXN0aWMgYWN0aXZpdGllcy48L2xpPgo8L3VsPgo8aDE+QXV0aG9yczwvaDE+Cjx1bD4KPGxpPkpvc2h1YSBIZXdpdHQ8L2xpPgo8bGk+R3JldGUgV2lsc29uLUhlbmp1bTwvbGk+CjxsaT5EZXJlayBULiBDb2xsaW5zPC9saT4KPGxpPlRpbW90aHkgSi4gTGluZGVyPC9saT4KPGxpPkp1bGlhbm5hIEIuIExlbm9jaDwvbGk+CjxsaT5Kb25hdGhvbiBELiBIZWFsZTwvbGk+CjxsaT5DaHJpc3RvcGhlciBBLiBRdWludGFuYWw8L2xpPgo8bGk+Um9iZXJ0IFBsZXN6ZXdza2k8L2xpPgo8bGk+RGlsbG9uIFMuIE1jQnJpZGU8L2xpPgo8bGk+QW5kcmV3IFMuIEJvd21hbjwvbGk+CjxsaT5KZWZmcmV5IEMuIENoYW5kbGVyPC9saT4KPGxpPlN1c2FuIEEuIFNocmluZXI8L2xpPgo8bGk+U2FyYWggTi4gQmV2aW5zPC9saT4KPGxpPkRlbm5pcyBKLiBLb2hsZXI8L2xpPgo8bGk+UmljaGFyZCBCLiBDaGlwbWFuPC9saT4KPGxpPkFsbGVuIEwuIEdvc3NlcjwvbGk+CjxsaT5EYXZpZCBMLiBCZXJnbWFuPC9saT4KPGxpPlRob21hcyBKLiBEZUxpYmVydG88L2xpPgo8bGk+S2ltIE0uIFBlcGluPC9saT4KPC91bD4KPGgxPkdldHRpbmdTdGFydGVkPC9oMT4KPGgxPkNpdGF0aW9uczwvaDE+CjxoMj5SZWZlcmVuY2VzPC9oMj4KPHVsPgo8bGk+SGV3aXR0LCBKLiwgV2lsc29uLUhlbmp1bSwgRy4sIENvbGxpbnMsIEQuIFQuLCBldCBhbC4gKDIwMjQpLiBMYW5kc2NhcGUtU2NhbGUgRXBpZGVtaW9sb2dpY2FsIER5bmFtaWNzIG9mIFNBUlMtQ29WLTIgaW4gV2hpdGUtVGFpbGVkIERlZXIuIFRyYW5zYm91bmRhcnkgYW5kIEVtZXJnaW5nIERpc2Vhc2VzLiBodHRwczovL2RvaS5vcmcvMTAuMTE1NS8yMDI0Lzc1ODk1MDk8L2xpPgo8L3VsPgo8aDE+TW9yZUluZm9ybWF0aW9uPC9oMT4KPGgyPkxpbmtzPC9oMj4KPHVsPgo8bGk+aHR0cHM6Ly9kb2kub3JnLzEwLjExNTUvMjAyNC83NTg5NTA5PC9saT4KPC91bD4KPGgxPlN0cnVjdHVyYWxJbmZvcm1hdGlvbjwvaDE+CjxoMj5TY2hlbWFOYW1lPC9oMj4KPHA+cGV0cmluZXQ8L3A+CjxoMj5QYXJhbWV0ZXJOYW1lczwvaDI+Cjx1bD4KPGxpPlI8L2xpPgo8bGk+eTwvbGk+CjwvdWw+CjxoMj5Eb21haW48L2gyPgo8dWw+CjxsaT5FcGlkZW1pb2xvZ3k8L2xpPgo8bGk+V2lsZGxpZmUgRGlzZWFzZTwvbGk+CjwvdWw+CjxoMj5Nb2RlbFR5cGU8L2gyPgo8dWw+CjxsaT5TSVIgTW9kZWw8L2xpPgo8L3VsPgo8aDI+TW9kZWxTdHJ1Y3R1cmU8L2gyPgo8dWw+CjxsaT5Db21wYXJ0bWVudGFsPC9saT4KPGxpPlNwYXRpYWxseSBWYXJ5aW5nPC9saT4KPC91bD4KPGgyPk1vZGVsUGFyYW1ldGVyczwvaDI+Cjx1bD4KPGxpPkxvY2FsIGVmZmVjdGl2ZSByZXByb2R1Y3Rpb24gcmF0aW8gKFIpPC9saT4KPGxpPlJlY292ZXJ5IHJhdGUgKHkpPC9saT4KPC91bD4K",
+    "gollmCard": {
+      "summary": {
+        "modelSummary": "This model represents the epidemiological dynamics of SARS-CoV-2 in white-tailed deer using a spatially varying SIR model."
+      },
+      "details": {
+        "modelDescription": "The model is structured as a Susceptible-Infected-Recovered (SIR) compartmental model with spatial and temporal correlations. It includes places for susceptible (s), infected (i), and recovered (r) states, and transitions for infection and recovery. This structure can be represented in a Petri net format.",
+        "fundedBy": "USDA American Rescue Plan, Centers of Excellence for Influenza Research and Response, National Institute of Allergy and Infectious Diseases, National Institutes of Health (NIH)",
+        "modelType": "Mathematical Model"
+      },
+      "uses": {
+        "directUse": "The model can be used to simulate the spread of SARS-CoV-2 in white-tailed deer populations and assess the impact of human infection pressure on deer.",
+        "outOfScopeUse": "Using the model to predict SARS-CoV-2 dynamics in species other than white-tailed deer or in geographic regions not covered by the study."
+      },
+      "biasRisksLimitations": {
+        "modelBiasRisksLimitations": "The model may have biases due to the opportunistic sampling design and the assumption of well-mixed populations within counties. It may not accurately capture dynamics in areas with sparse data."
+      },
+      "testing": {
+        "testingDataFactorsMetrics": "The model was validated using national surveillance data, comparing predicted prevalence with observed data, and assessing model fit through calibration curves."
+      },
+      "specs": {
+        "modelSpecs": "The model includes 3 places (s, i, r), 2 transitions (infection, recovery), and parameters such as the local effective reproduction ratio (R) and recovery rate (y)."
+      },
+      "glossary": [
+        "SIR Model: A type of compartmental model used in epidemiology to simulate the spread of a disease through populations.",
+        "Petri Net: A mathematical representation of a distributed system, often used to model processes with concurrent, asynchronous, parallel, non-deterministic, or stochastic activities."
+      ],
+      "authors": [
+        "Joshua Hewitt",
+        "Grete Wilson-Henjum",
+        "Derek T. Collins",
+        "Timothy J. Linder",
+        "Julianna B. Lenoch",
+        "Jonathon D. Heale",
+        "Christopher A. Quintanal",
+        "Robert Pleszewski",
+        "Dillon S. McBride",
+        "Andrew S. Bowman",
+        "Jeffrey C. Chandler",
+        "Susan A. Shriner",
+        "Sarah N. Bevins",
+        "Dennis J. Kohler",
+        "Richard B. Chipman",
+        "Allen L. Gosser",
+        "David L. Bergman",
+        "Thomas J. DeLiberto",
+        "Kim M. Pepin"
+      ],
+      "gettingStarted": {},
+      "citations": {
+        "references": [
+          "Hewitt, J., Wilson-Henjum, G., Collins, D. T., et al. (2024). Landscape-Scale Epidemiological Dynamics of SARS-CoV-2 in White-Tailed Deer. Transboundary and Emerging Diseases. https://doi.org/10.1155/2024/7589509"
+        ]
+      },
+      "moreInformation": {
+        "links": [
+          "https://doi.org/10.1155/2024/7589509"
+        ]
+      },
+      "structuralInformation": {
+        "schemaName": "petrinet",
+        "parameterNames": [
+          "R",
+          "y"
+        ],
+        "domain": [
+          "Epidemiology",
+          "Wildlife Disease"
+        ],
+        "modelType": [
+          "SIR Model"
+        ],
+        "modelStructure": [
+          "Compartmental",
+          "Spatially Varying"
+        ],
+        "modelParameters": [
+          "Local effective reproduction ratio (R)",
+          "Recovery rate (y)"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

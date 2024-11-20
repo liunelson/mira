@@ -1,0 +1,128 @@
+{
+    "header": {
+        "name": "Hewitt Model A",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "This is a model extracted from the equations of Hewitt et al. 2024.",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "s",
+                "name": "s",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "i",
+                "name": "i",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "r",
+                "name": "r",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "Infection",
+                "input": [
+                    "i",
+                    "s"
+                ],
+                "output": [
+                    "i",
+                    "i"
+                ],
+                "properties": {
+                    "name": "Infection"
+                }
+            },
+            {
+                "id": "Recovery",
+                "input": [
+                    "i"
+                ],
+                "output": [
+                    "r"
+                ],
+                "properties": {
+                    "name": "Recovery"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [],
+            "initials": [
+                {
+                    "target": "s",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "i",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "r",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "R",
+                    "name": "R",
+                    "description": "Effective reproduction ratio",
+                    "value": 1.0
+                },
+                {
+                    "id": "y",
+                    "name": "y",
+                    "description": "Recovery rate",
+                    "value": 1.0
+                }
+            ],
+            "observables": [
+                {
+                    "id": "b",
+                    "name": "b",
+                    "expression": "R*y",
+                    "expression_mathml": "<apply><times/><ci>R</ci><ci>y</ci></apply>"
+                }
+            ],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
