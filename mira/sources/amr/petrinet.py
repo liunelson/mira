@@ -178,6 +178,10 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
         transition_id = transition['id']  # required, str
         inputs = deepcopy(transition.get('input', []))  # required, Array[str]
         outputs = deepcopy(transition.get('output', []))  # required, Array[str]
+        if inputs is None:
+            inputs = []
+        if outputs is None:
+            outputs = []
         used_states |= (set(inputs) | set(outputs))
         transition_grounding = transition.get('grounding', {})  # optional, Object
         transition_properties = transition.get('properties', {})  # optional, Object
@@ -257,6 +261,7 @@ def state_to_concept(state):
     # names
     name = state['id']
     display_name = state.get('name')
+    description = state.get("description")
     grounding = state.get('grounding', {})
     identifiers = grounding.get('identifiers', {})
     context = grounding.get('modifiers', {})
@@ -265,6 +270,7 @@ def state_to_concept(state):
     units_obj = Unit(expression=units_expr) if units_expr else None
     return Concept(name=name,
                    display_name=display_name,
+                   description=description,
                    identifiers=identifiers,
                    context=context,
                    units=units_obj)

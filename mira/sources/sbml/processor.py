@@ -7,6 +7,7 @@ Alternate XPath queries for COPASI data:
 
 import copy
 import math
+import libsbml
 from typing import Dict, Iterable, List, Mapping, Tuple
 
 from mira.sources.sbml.utils import *
@@ -63,7 +64,7 @@ class SbmlProcessor:
                 and "cumulative" not in species_id
             ]
 
-        # Iterate thorugh all reactions and piecewise convert to templates
+        # Iterate through all reactions and piecewise convert to templates
         templates: List[Template] = []
         # see docs on reactions
         # https://sbml.org/software/libsbml/5.18.0/docs/formatted/python-api/
@@ -75,6 +76,7 @@ class SbmlProcessor:
                 "value": parameter.value,
                 "description": parameter.name,
                 "units": self.get_object_units(parameter),
+                "distribution": get_distribution(parameter),
             }
             for parameter in self.sbml_model.parameters
         }
@@ -171,10 +173,12 @@ class SbmlProcessor:
             # Some rate laws define parameters locally and so we need to
             # extract them and add them to the global parameter list
             for parameter in rate_law.parameters:
+                param_dist = get_distribution(parameter)
                 all_parameters[parameter.id] = {
                     "value": parameter.value,
                     "description": parameter.name if parameter.name else None,
                     "units": self.get_object_units(parameter),
+                    "distribution": param_dist,
                 }
                 parameter_symbols[parameter.id] = sympy.Symbol(parameter.id)
 
@@ -355,10 +359,30 @@ class SbmlProcessor:
                 init_value = species.initial_concentration
             else:
                 init_value = 0.0
-            initials[key] = Initial(
-                concept=concepts[key],
-                expression=SympyExprStr(sympy.Float(init_value)),
-            )
+            initial_distr = get_distribution(species)
+            # If we have an initial distribution, do the following
+            #   - introduce a new parameter with the concept name + _init
+            #   - set the initial expression to this parameter as a symbol
+            #   - add the distribution to the parameter
+            if initial_distr:
+                init_param_name = f"{key}_init"
+                all_parameters[init_param_name] = {
+                    "value": init_value,
+                    "description": f"Initial value for {key}",
+                    "units": self.get_object_units(species),
+                    "distribution": initial_distr,
+                }
+                parameter_symbols[init_param_name] = sympy.Symbol(init_param_name)
+                initial_expr = sympy.Symbol(init_param_name)
+                initials[key] = Initial(
+                    concept=concepts[key],
+                    expression=initial_expr,
+                )
+            else:
+                initials[key] = Initial(
+                    concept=concepts[key],
+                    expression=SympyExprStr(sympy.Float(init_value)),
+                )
 
         param_objs = {
             k: Parameter(
@@ -366,6 +390,7 @@ class SbmlProcessor:
                 value=v["value"],
                 description=v["description"],
                 units=v["units"],
+                distribution=v.get("distribution"),
             )
             for k, v in all_parameters.items()
         }
@@ -777,3 +802,51 @@ def _extract_all_copasi_attrib(
                 assert value != "{}"
                 resources.append((key, value))
     return resources
+
+
+def get_distribution(obj):
+    """Return a Distribution oextracted from an SBML object if available."""
+    distr_tag = obj.getPlugin("distrib")
+    if distr_tag:
+        # We import only if needed
+        from sbmlmath import SBMLMathMLParser
+        for uncertainty in distr_tag.getListOfUncertainties():
+            for param_uncertainty in uncertainty.getListOfUncertParameters():
+                # Here we have to process the MathML into a sympy expression
+                mathml_str = libsbml.writeMathMLToString(param_uncertainty.getMath())
+                expr = SBMLMathMLParser().parse_str(mathml_str)
+
+                # Check if the distribution function exists in the map
+                if expr.func.name in distribution_map:
+                    # We apply the mapping to ProbOnto here
+                    original_params, (probonto_type, probonto_params) = \
+                        distribution_map[expr.func.name]
+                    # We collect the parameters from the expression
+                    mapped_params = {}
+                    for idx, (orig_param, probonto_param) in \
+                            enumerate(zip(original_params, probonto_params)):
+                        mapped_params[probonto_param] = expr.args[idx]
+                    # Finally, construct the Distribution
+                    distr = Distribution(type=probonto_type,
+                                         parameters=mapped_params)
+                    return distr
+    return None
+
+
+# Maps SBML distributions with the original names of their parameters
+# to ProbOnto distribution types and their corresponding parameter names.
+distribution_map = {
+    'normal': (['mean', 'stdev'], ('Normal1', ['mean', 'stdev'])),
+    'uniform': (['min', 'max'], ('Uniform1', ['minimum', 'maximum'])),
+    'bernoulli': (['prob'], ('Bernoulli1', ['probability'])),
+    'binomial': (['nTrials', 'probabilityOfSuccess'],
+                 ('Binomial1', ['numberOfTrials', 'probability'])),
+    'cauchy': (['location', 'scale'], ('Cauchy1', ['location', 'scale'])),
+    'chisquare': (['degreesOfFreedom'], ('ChiSquare1', ['degreesOfFreedom'])),
+    'exponential': (['rate'], ('Exponential1', ['rate'])),
+    'gamma': (['shape', 'scale'], ('Gamma1', ['shape', 'scale'])),
+    'laplace': (['location', 'scale'], ('Laplace1', ['location', 'scale'])),
+    'lognormal': (['mean', 'stdev'], ('LogNormal1', ['meanLog', 'stdevLog'])),
+    'poisson': (['rate'], ('Poisson1', ['rate'])),
+    'rayleigh': (['scale'], ('Rayleigh1', ['scale'])),
+}
