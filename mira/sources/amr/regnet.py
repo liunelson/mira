@@ -10,7 +10,7 @@ import sympy
 import requests
 
 from mira.metamodel import *
-from mira.sources.util import get_sympy
+from mira.sources.util import get_sympy, parameter_to_mira
 
 
 def model_from_url(url: str) -> TemplateModel:
@@ -83,10 +83,13 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
     # Next, we capture all symbols in the model, including states and
     # parameters. We also extract parameters at this point.
     symbols = {state_id: sympy.Symbol(state_id) for state_id in concepts}
+    for parameter in model.get('parameters', []):
+        symbols[parameter['id']] = sympy.Symbol(parameter['id'])
+
     mira_parameters = {}
     for parameter in model.get('parameters', []):
-        mira_parameters[parameter['id']] = parameter_to_mira(parameter)
-        symbols[parameter['id']] = sympy.Symbol(parameter['id'])
+        mira_parameters[parameter['id']] = \
+            parameter_to_mira(parameter, param_symbols=symbols)
 
     # Next we process any intrinsic positive/negative growth
     # at the vertex level into templates
@@ -173,7 +176,16 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
     # Finally, we gather some model-level annotations
     name = model_json.get('header', {}).get('name')
     description = model_json.get('header', {}).get('description')
-    anns = Annotations(name=name, description=description)
+
+    annotations = model_json.get('metadata', {}).get('annotations', {})
+    annotation_attributes = {"name": name, "description": description}
+    for key, val in annotations.items():
+        # convert list of author names to list of author objects
+        if key == "authors":
+            val = [Author(name=author_dict["name"]) for author_dict in val]
+        annotation_attributes[key] = val
+
+    anns = Annotations(**annotation_attributes)
     return TemplateModel(templates=templates,
                          parameters=mira_parameters,
                          initials=initials,
@@ -204,12 +216,3 @@ def vertex_to_template(vertex, concept):
         template = NaturalDegradation(subject=concept)
     template.set_mass_action_rate_law(rate_constant)
     return template
-
-
-def parameter_to_mira(parameter):
-    """Return a MIRA parameter from a parameter"""
-    distr = Distribution(**parameter['distribution']) \
-        if parameter.get('distribution') else None
-    return Parameter(name=parameter['id'],
-                     value=parameter.get('value'),
-                     distribution=distr)

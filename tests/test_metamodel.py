@@ -235,8 +235,8 @@ def test_from_askenet_petri_mathml():
     tm = template_model_from_amr_json(model_json)
 
     # Check equality
-    mathml_str = sorted_json_str(mathml_tm.dict())
-    org_str = sorted_json_str(tm.dict())
+    mathml_str = sorted_json_str(mathml_tm.model_dump())
+    org_str = sorted_json_str(tm.model_dump())
     assert mathml_str == org_str
 
 
@@ -263,3 +263,17 @@ def test_initial_expression_float():
     init = Initial(concept=Concept(name='x'), expression=1)
     assert isinstance(init.expression, SympyExprStr)
     assert isinstance(init.expression.args[0], sympy.Expr)
+
+
+def test_reversible_flux():
+    from mira.modeling import Model
+    from mira.modeling.amr.petrinet import template_model_to_petrinet_json
+    t = ReversibleFlux(
+        left=[Concept(name='x')],
+        right=[Concept(name='y')],
+    )
+    # Make sure we can export to AMR
+    tm = TemplateModel(templates=[t])
+    model = Model(tm)
+    amr = template_model_to_petrinet_json(tm)
+

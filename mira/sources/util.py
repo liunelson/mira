@@ -161,7 +161,7 @@ def transition_to_templates(
             )
 
 
-def parameter_to_mira(parameter) -> Parameter:
+def parameter_to_mira(parameter, param_symbols=None) -> Parameter:
     """
     Return a MIRA parameter from a mapping of MIRA Parameter attributes to
     values.
@@ -170,17 +170,36 @@ def parameter_to_mira(parameter) -> Parameter:
     ----------
     parameter : Dict[str,Any]
         A mapping containing MIRA Parameter attributes to values.
+    param_symbols : Optional[Dict]
+        An optional dict of all parameter symbols that are needed if expressions
+        are used in parameter distributions so that these can be
+        recognized as symbols.
 
     Returns
     -------
     :
         The corresponding MIRA Parameter.
     """
-    distr = (
-        Distribution(**parameter["distribution"])
-        if parameter.get("distribution")
-        else None
-    )
+    distr_json = parameter.get("distribution")
+    if distr_json:
+        distr_type = distr_json.get("type") if distr_json else None
+        # We need to check for symbolic expressions in parameters
+        processed_distr_parameters = {}
+        for param_key, param_value in distr_json.get("parameters", {}).items():
+            if isinstance(param_value, float) or isinstance(param_value, int):
+                processed_distr_parameters[param_key] = float(param_value)
+            elif isinstance(param_value, str):
+                processed_distr_parameters[param_key] = \
+                    safe_parse_expr(param_value, local_dict=param_symbols)
+            else:
+                raise ValueError(f"Parameter {param_key} is neither a float, "
+                                 f"int, or str")
+        distr = Distribution(
+            type=distr_type,
+            parameters=processed_distr_parameters,
+        )
+    else:
+        distr = None
     data = {
         "name": parameter["id"],
         "display_name": parameter.get("name"),

@@ -1,6 +1,7 @@
 """API endpoints."""
 
 import itertools as itt
+import os
 from typing import Any, List, Mapping, Optional, Union
 
 import pydantic
@@ -10,8 +11,9 @@ from pydantic import BaseModel, Field
 from scipy.spatial import distance
 from typing_extensions import Literal
 
-from mira.dkg.client import AskemEntity, Entity
+from mira.dkg.client import AskemEntity, Entity, Relation
 from mira.dkg.utils import DKG_REFINER_RELS
+from mira.dkg.construct import add_resource_to_dkg, extract_ontology_subtree
 
 __all__ = [
     "api_blueprint",
@@ -23,18 +25,18 @@ api_blueprint = APIRouter()
 class RelationQuery(BaseModel):
     """A query for relations in the domain knowledge graph."""
 
-    source_type: Optional[str] = Field(description="The source type (i.e., prefix)", example="vo")
+    source_type: Optional[str] = Field(None, description="The source type (i.e., prefix)", examples=["vo"])
     source_curie: Optional[str] = Field(
-        description="The source compact URI (CURIE)", example="doid:946"
+        None, description="The source compact URI (CURIE)", examples=["doid:946"]
     )
     target_type: Optional[str] = Field(
-        description="The target type (i.e., prefix)", example="ncbitaxon"
+        None, description="The target type (i.e., prefix)", examples=["ncbitaxon"]
     )
     target_curie: Optional[str] = Field(
-        description="The target compact URI (CURIE)", example="ncbitaxon:10090"
+        None, description="The target compact URI (CURIE)", examples=["ncbitaxon:10090"]
     )
     relations: Union[None, str, List[str]] = Field(
-        description="A relation string or list of relation strings", example="vo:0001243"
+        None, description="A relation string or list of relation strings", examples=["vo:0001243"]
     )
     relation_direction: Literal["right", "left", "both"] = Field(
         "right", description="The direction of the relationship"
@@ -48,7 +50,7 @@ class RelationQuery(BaseModel):
         ge=0,
     )
     limit: Optional[int] = Field(
-        description="A limit on the number of records returned", example=50, ge=0
+        None, description="A limit on the number of records returned", examples=[50], ge=0
     )
     full: bool = Field(
         False,
@@ -176,12 +178,12 @@ def get_transitive_closure(
 class RelationResponse(BaseModel):
     """A triple (or multi-predicate triple) with abbreviated data."""
 
-    subject: str = Field(description="The CURIE of the subject of the triple", example="doid:96")
+    subject: str = Field(description="The CURIE of the subject of the triple", examples=["doid:96"])
     predicate: Union[str, List[str]] = Field(
         description="A predicate or list of predicates as CURIEs",
-        example="ro:0002452",
+        examples=["ro:0002452"],
     )
-    object: str = Field(description="The CURIE of the object of the triple", example="symp:0000001")
+    object: str = Field(description="The CURIE of the object of the triple", examples=["symp:0000001"])
 
 
 class FullRelationResponse(BaseModel):
@@ -201,7 +203,7 @@ def get_relations(
     request: Request,
     relation_query: RelationQuery = Body(
         ...,
-        examples={
+        examples=[{
             "source type query": {
                 "summary": "Query relations with a given source node type",
                 "value": {
@@ -283,7 +285,7 @@ def get_relations(
                     "full": True,
                 },
             },
-        },
+        }],
     ),
 ):
     """Get relations based on the query sent.
@@ -329,14 +331,97 @@ def get_relations(
         return [RelationResponse(subject=s, predicate=p, object=o) for s, p, o in records]
 
 
+active_add_relation_endpoint = os.getenv('MIRA_ADD_RELATION_ENDPOINT')
+
+if active_add_relation_endpoint:
+    @api_blueprint.post(
+        "/add_nodes",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_nodes(
+        request: Request,
+        node_list: List[Union[AskemEntity, Entity]]
+    ):
+        """Add a list of nodes to the DKG"""
+        for entity in node_list:
+            request.app.state.client.add_node(entity)
+
+    @api_blueprint.post(
+        "/add_relations",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_relations(
+        request: Request,
+        relation_list: List[Relation]
+    ):
+        """Add a list of relations to the DKG"""
+        for relation in relation_list:
+            request.app.state.client.add_relation(relation)
+
+    @api_blueprint.post(
+        "/add_ontology_subtree",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_ontology_subtree(
+        request: Request,
+        curie: str = Query(..., example="ncbitaxon:9871"),
+        add_subtree: bool = False
+    ):
+        """Given a curie, add the entry it corresponds to from its respective
+        ontology as a node to the DKG.
+        Can enable the `add_subtree` flag to add all subtree entries."""
+        curie = curie.lower()
+        nodes, edges = extract_ontology_subtree(curie, add_subtree)
+        entities = [Entity(**node_info) for node_info in nodes]
+        relations = [Relation(**edge_info) for edge_info in edges]
+        for entity in entities:
+            request.app.state.client.add_node(entity)
+        for relation in relations:
+            request.app.state.client.add_relation(relation)
+
+
+    @api_blueprint.post(
+        "/add_resources",
+        response_model=None,
+        tags=["relations"],
+    )
+    def add_resources(
+        request: Request,
+        resource_prefix_list: List[str] = Body(
+            ...,
+            description="A list of resources to add to the DKG",
+            title="Resource Prefixes",
+            examples=[["probonto", "wikidata", "eiffel", "geonames", "ncit",
+                     "nbcbitaxon"]],
+        )
+    ):
+        """From a list of resource prefixes, add a list of nodes and edges
+        extract from each resource to the DKG"""
+        for resource_prefix in resource_prefix_list:
+            # nodes and edges will be a list of dicts
+            nodes, edges = add_resource_to_dkg(resource_prefix.lower())
+            # node_info and edge_info are dictionaries that will be
+            # unpacked when creating instances of entities and relations
+            entities = [Entity(**node_info) for node_info in nodes]
+            relations = [Relation(**edge_info) for edge_info in edges]
+
+            for entity in entities:
+                request.app.state.client.add_node(entity)
+            for relation in relations:
+                request.app.state.client.add_relation(relation)
+
+
 class IsOntChildResult(BaseModel):
     """Result of a query to /is_ontological_child"""
 
     child_curie: str = Field(...,
-                             example="vo:0001113",
+                             examples=["vo:0001113"],
                              description="The child CURIE")
     parent_curie: str = Field(...,
-                              example="obi:0000047",
+                              examples=["obi:0000047"],
                               description="The parent CURIE")
     is_child: bool = Field(
         ...,
@@ -361,7 +446,7 @@ def is_ontological_child(
     request: Request,
     query: IsOntChildQuery = Body(
         ...,
-        example={"child_curie": "vo:0001113", "parent_curie": "obi:0000047"},
+        examples=[{"child_curie": "vo:0001113", "parent_curie": "obi:0000047"}],
     )
 ):
     """Check if one CURIE is an ontological child of another CURIE"""
@@ -405,7 +490,7 @@ def search(
     labels: Optional[str] = Query(
         default=None,
         description="A comma-separated list of labels",
-        examples={
+        examples=[{
             "no label filter": {
                 "summary": "Don't filter by label",
                 "value": None,
@@ -414,7 +499,7 @@ def search(
                 "summary": "Search for units, which are labeled as `unit`",
                 "value": "unit",
             },
-        },
+        }],
     ),
     wikidata_fallback: bool = Query(
         default=False,
@@ -445,7 +530,7 @@ class ParentQuery(BaseModel):
 def common_parent(
     request: Request,
     query: ParentQuery = Body(
-        ..., example={"curie1": "ido:0000566", "curie2": "ido:0000567"}
+        ..., examples=[{"curie1": "ido:0000566", "curie2": "ido:0000567"}]
     ),
 ):
     """Get the common parent of two CURIEs"""

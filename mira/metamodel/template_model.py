@@ -1,3 +1,7 @@
+import copy
+
+from pydantic import ConfigDict
+
 __all__ = [
     "Annotations",
     "TemplateModel",
@@ -8,6 +12,7 @@ __all__ = [
     "Time",
     "model_has_grounding",
     "Concept",
+    "Author"
 ]
 
 import datetime
@@ -17,7 +22,7 @@ from typing import List, Dict, Set, Optional, Mapping, Tuple, Any, Union
 import networkx as nx
 import sympy
 import mira.metamodel.io
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 from .templates import *
 from .units import Unit
 from .utils import safe_parse_expr, SympyExprStr
@@ -34,12 +39,7 @@ class Initial(BaseModel):
         description="The expression for the initial."
     )
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {SympyExprStr: lambda e: sympy.parse_expr(e)}
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     @classmethod
     def from_json(cls, data: Dict[str, Any], locals_dict=None) -> "Initial":
@@ -66,6 +66,10 @@ class Initial(BaseModel):
         # with respect to a dict of local symbols
         expression = safe_parse_expr(expression_str, local_dict=locals_dict)
         return cls(concept=concept, expression=SympyExprStr(expression))
+
+    @field_serializer('expression')
+    def serialize_expression(self, expression):
+        return str(expression)
 
     def substitute_parameter(self, name, value):
         """
@@ -103,10 +107,14 @@ class Distribution(BaseModel):
     """A distribution of values for a parameter."""
 
     type: str = Field(
-        description="The type of distribution, e.g. 'uniform', 'normal', etc."
+        description="The type of distribution as provided by ProbOnto "
+                    "e.g. 'StandardUniform1', 'Beta1', etc."
     )
-    parameters: Dict[str, float] = Field(
-        description="The parameters of the distribution."
+    parameters: Dict[str, Union[float, SympyExprStr]] = Field(
+        description="The parameters of the distribution keyed by parameter names "
+                    "controlled by ProbOnto and values that are either floating "
+                    "point values or symbolic expressions over other "
+                    "parameters."
     )
 
 
@@ -114,11 +122,11 @@ class Parameter(Concept):
     """A Parameter is a special type of Concept that carries a value."""
 
     value: Optional[float] = Field(
-        default_factory=None, description="Value of the parameter."
+        default=None, description="Value of the parameter."
     )
 
     distribution: Optional[Distribution] = Field(
-        default_factory=None,
+        default=None,
         description="A distribution of values for the parameter.",
     )
 
@@ -131,16 +139,15 @@ class Observable(Concept):
     state variables.
     """
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {SympyExprStr: lambda e: safe_parse_expr(e)}
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     expression: SympyExprStr = Field(
         description="The expression for the observable."
     )
+
+    @field_serializer('expression')
+    def serialize_expression(self, expression):
+        return str(expression)
 
     def substitute_parameter(self, name, value):
         """
@@ -180,7 +187,7 @@ class Time(BaseModel):
     name: str = Field(
         default="t", description="The symbol of the time variable in the model."
     )
-    units: Optional[Unit] = Field(description="The units of the time variable.")
+    units: Optional[Unit] = Field(None, description="The units of the time variable.")
 
 
 class Author(BaseModel):
@@ -197,9 +204,11 @@ class Annotations(BaseModel):
     a well-annotated SIR model in the BioModels database.
     """
 
+    model_config = ConfigDict(protected_namespaces=())
+
     name: Optional[str] = Field(
-        description="A human-readable label for the model",
-        example="SIR model of scenarios of COVID-19 spread in CA and NY",
+        None, description="A human-readable label for the model",
+        examples=["SIR model of scenarios of COVID-19 spread in CA and NY"],
     )
     # identifiers: Dict[str, str] = Field(
     #     description="Structured identifiers corresponding to the model artifact "
@@ -212,8 +221,8 @@ class Annotations(BaseModel):
     #     },
     # )
     description: Optional[str] = Field(
-        description="A description of the model",
-        example="The coronavirus disease 2019 (COVID-19) pandemic has placed "
+        None, description="A description of the model",
+        examples=["The coronavirus disease 2019 (COVID-19) pandemic has placed "
         "epidemic modeling at the forefront of worldwide public policy making. "
         "Nonetheless, modeling and forecasting the spread of COVID-19 remains a "
         "challenge. Here, we detail three regional scale models for forecasting "
@@ -224,48 +233,48 @@ class Annotations(BaseModel):
         "time series data for a particular region. Capable of measuring and "
         "forecasting the impacts of social distancing, these models highlight the "
         "dangers of relaxing nonpharmaceutical public health interventions in the "
-        "absence of a vaccine or antiviral therapies.",
+        "absence of a vaccine or antiviral therapies."],
     )
     license: Optional[str] = Field(
-        description="Information about the licensing of the model artifact. "
+        None, description="Information about the licensing of the model artifact. "
         "Ideally, given as an SPDX identifier like CC0 or CC-BY-4.0. For example, "
         "models from the BioModels databases are all licensed under the CC0 "
         "public attribution license.",
-        example="CC0",
+        examples=["CC0"],
     )
     authors: List[Author] = Field(
         default_factory=list,
         description="A list of authors/creators of the model. This is not the same "
         "as the people who e.g., submitted the model to BioModels",
-        example=[
+        examples=[[
             Author(name="Andrea L Bertozzi"),
             Author(name="Elisa Franco"),
             Author(name="George Mohler"),
             Author(name="Martin B Short"),
             Author(name="Daniel Sledge"),
-        ],
+        ]],
     )
     references: List[str] = Field(
         default_factory=list,
         description="A list of CURIEs (i.e., <prefix>:<identifier>) corresponding "
         "to literature references that describe the model. Do **not** duplicate the "
         "same publication with different CURIEs (e.g., using pubmed, pmc, and doi)",
-        example=["pubmed:32616574"],
+        examples=[["pubmed:32616574"]],
     )
     # TODO agree on how we annotate this one, e.g. with a timedelta
     time_scale: Optional[str] = Field(
-        description="The granularity of the time element of the model, typically on "
+        None, description="The granularity of the time element of the model, typically on "
         "the scale of days, weeks, or months for epidemiology models",
-        example="day",
+        examples=["day"],
     )
     time_start: Optional[datetime.datetime] = Field(
-        description="The start time of the applicability of a model, given as a datetime. "
+        None, description="The start time of the applicability of a model, given as a datetime. "
         "When the time scale is not so granular, leave the less granular fields as default, "
         "i.e., if the time scale is on months, give dates like YYYY-MM-01 00:00",
         # example=datetime.datetime(year=2020, month=3, day=1),
     )
     time_end: Optional[datetime.datetime] = Field(
-        description="Similar to the start time of the applicability of a model, the end time "
+        None, description="Similar to the start time of the applicability of a model, the end time "
         "is given as a datetime. For example, the Bertozzi 2020 model is applicable between "
         "March and August 2020, so this field is annotated with August 1st, 2020.",
         # example=datetime.datetime(year=2020, month=8, day=1),
@@ -277,10 +286,10 @@ class Annotations(BaseModel):
         "has multiple levels of granularity including city/state/country level terms. For example,"
         "the Bertozzi 2020 model was for New York City (geonames:5128581) and California "
         "(geonames:5332921)",
-        example=[
+        examples=[[
             "geonames:5128581",
             "geonames:5332921",
-        ],
+        ]],
     )
     pathogens: List[str] = Field(
         default_factory=list,
@@ -289,9 +298,9 @@ class Annotations(BaseModel):
         "SARS-CoV-2, this is ncbitaxon:2697049. Do not confuse this field with terms for annotating "
         "the disease caused by the pathogen. Note that some models may have multiple pathogens, for "
         "simulating double pandemics such as the interaction with SARS-CoV-2 and the seasonal flu.",
-        example=[
+        examples=[[
             "ncbitaxon:2697049",
-        ],
+        ]],
     )
     diseases: List[str] = Field(
         default_factory=list,
@@ -299,9 +308,9 @@ class Annotations(BaseModel):
         "vocabulary for dieases, such as DOID, EFO, or MONDO. For example, the Bertozzi 2020 model "
         "is about SARS-CoV-2, which causes COVID-19. In the Human Disease Ontology (DOID), this "
         "is referenced by doid:0080600.",
-        example=[
+        examples=[[
             "doid:0080600",
-        ],
+        ]],
     )
     hosts: List[str] = Field(
         default_factory=list,
@@ -310,9 +319,9 @@ class Annotations(BaseModel):
         "human infection by SARS-CoV-2. Therefore, the appropriate annotation for this field "
         "would be ncbitaxon:9606. Note that some models have multiple hosts, such as Malaria "
         "models that consider humans and mosquitos.",
-        example=[
+        examples=[[
             "ncbitaxon:9606",
-        ],
+        ]],
     )
     model_types: List[str] = Field(
         default_factory=list,
@@ -321,10 +330,10 @@ class Annotations(BaseModel):
         " model', 'population model', etc. These should be annotated as CURIEs in the form "
         "of mamo:<local unique identifier>. For example, the Bertozzi 2020 model is a population "
         "model (mamo:0000028) and ordinary differential equation model (mamo:0000046)",
-        example=[
+        examples=[[
             "mamo:0000028",
             "mamo:0000046",
-        ],
+        ]],
     )
 
 
@@ -352,22 +361,16 @@ class TemplateModel(BaseModel):
     )
 
     annotations: Optional[Annotations] = Field(
-        default_factory=None,
+        default=None,
         description="A structure containing model-level annotations. "
         "Note that all annotations are optional.",
     )
 
     time: Optional[Time] = Field(
-        default_factory=None,
+        default=None,
         description="A structure containing time-related annotations. "
         "Note that all annotations are optional.",
     )
-
-    class Config:
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {SympyExprStr: lambda e: safe_parse_expr(e)}
 
     def get_parameters_from_rate_law(self, rate_law) -> Set[str]:
         """Given a rate law, find its elements that are model parameters.
@@ -472,6 +475,8 @@ class TemplateModel(BaseModel):
         :
             Returns the newly created template model.
         """
+        # Do a copy just to make sure we don't modify the original data
+        data = copy.deepcopy(data)
         local_symbols = {p: sympy.Symbol(p) for p in data.get("parameters", [])}
         for template_dict in data.get("templates", []):
             # We need to figure out the template class based on the type
@@ -1144,6 +1149,12 @@ def _iter_concepts(template_model: TemplateModel):
             yield from (template.subject, template.controller)
         elif isinstance(template, StaticConcept):
             yield template.subject
+        elif isinstance(template, MultiConversion):
+            yield from template.subjects
+            yield from template.outcomes
+        elif isinstance(template, ReversibleFlux):
+            yield from template.left
+            yield from template.right
         else:
             raise TypeError(f"could not handle template: {template}")
 

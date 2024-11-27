@@ -10,10 +10,10 @@ import logging
 from copy import deepcopy
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
-from mira.metamodel import expression_to_mathml, safe_parse_expr, \
-    TemplateModel
+from mira.metamodel import expression_to_mathml, TemplateModel, SympyExprStr
+from mira.sources.amr import sanity_check_amr
 
 from .. import Model
 from .utils import add_metadata_annotations
@@ -61,6 +61,7 @@ class AMRPetriNetModel:
             # on the key otherwise
             vmap[key] = name = var.concept.name or str(key)
             display_name = var.concept.display_name or name
+            description = var.concept.description
             # State structure
             # {
             #   'id': str,
@@ -69,14 +70,16 @@ class AMRPetriNetModel:
             # }
             states_dict = {
                 'id': name,
-                'name': display_name,
-                'grounding': {
+                'name': display_name
+            }
+            if description:
+                states_dict['description'] = description
+            states_dict['grounding'] =  {
                     'identifiers': {k: v for k, v in
                                     var.concept.identifiers.items()
                                     if k != 'biomodels.species'},
                     'modifiers': var.concept.context,
-                },
-            }
+                }
             if var.concept.units:
                 states_dict['units'] = {
                     'expression': str(var.concept.units.expression),
@@ -188,9 +191,16 @@ class AMRPetriNetModel:
             elif param.distribution.type is None:
                 logger.warning("can not add distribution without type: %s", param.distribution)
             else:
+                serialized_distr_parameters = {}
+                for param_key, param_value in param.distribution.parameters.items():
+                    if isinstance(param_value, SympyExprStr):
+                        serialized_distr_parameters[param_key] = \
+                            str(param_value.args[0])
+                    else:
+                        serialized_distr_parameters[param_key] = param_value
                 param_dict['distribution'] = {
                     'type': param.distribution.type,
-                    'parameters': param.distribution.parameters,
+                    'parameters': serialized_distr_parameters,
                 }
             if param.concept and param.concept.units:
                 param_dict['units'] = {
@@ -228,7 +238,7 @@ class AMRPetriNetModel:
         : JSON
             A JSON dict representing the Petri net model.
         """
-        return {
+        json_data = {
             'header': {
                 'name': name or self.model_name,
                 'schema': SCHEMA_URL,
@@ -250,6 +260,11 @@ class AMRPetriNetModel:
             }},
             'metadata': self.metadata,
         }
+        try:
+            sanity_check_amr(json_data)
+        except Exception as e:
+            logger.warning("Error in AMR sanity check: %s", str(e))
+        return json_data
 
     def to_pydantic(self, name=None, description=None, model_version=None) -> "ModelSpecification":
         """Return a Pydantic model representation of the Petri net model.
@@ -282,15 +297,15 @@ class AMRPetriNetModel:
             ),
             properties=self.properties,
             model=PetriModel(
-                states=[State.parse_obj(s) for s in self.states],
-                transitions=[Transition.parse_obj(t) for t in self.transitions],
+                states=[State.model_validate(s) for s in self.states],
+                transitions=[Transition.model_validate(t) for t in self.transitions],
             ),
             semantics=Ode(ode=OdeSemantics(
-                rates=[Rate.parse_obj(r) for r in self.rates],
-                initials=[Initial.parse_obj(i) for i in self.initials],
-                parameters=[Parameter.parse_obj(p) for p in self.parameters],
-                observables=[Observable.parse_obj(o) for o in self.observables],
-                time=Time.parse_obj(self.time) if self.time else Time(id='t')
+                rates=[Rate.model_validate(r) for r in self.rates],
+                initials=[Initial.model_validate(i) for i in self.initials],
+                parameters=[Parameter.model_validate(p) for p in self.parameters],
+                observables=[Observable.model_validate(o) for o in self.observables],
+                time=Time.model_validate(self.time) if self.time else Time(id='t')
             )),
             metadata=self.metadata,
         )
@@ -349,6 +364,19 @@ def template_model_to_petrinet_json(tm: TemplateModel):
     return AMRPetriNetModel(Model(tm)).to_json()
 
 
+def template_model_to_petrinet_json_file(tm: TemplateModel, fname):
+    """Convert a template model to a PetriNet JSON file.
+
+    Parameters
+    ----------
+    tm :
+        The template model to convert.
+    fname : str
+        The file name to write to.
+    """
+    AMRPetriNetModel(Model(tm)).to_json_file(fname)
+
+
 class Initial(BaseModel):
     target: str
     expression: str
@@ -356,8 +384,8 @@ class Initial(BaseModel):
 
 
 class TransitionProperties(BaseModel):
-    name: Optional[str]
-    grounding: Optional[Dict]
+    name: Optional[str] = None
+    grounding: Optional[Dict] = None
 
 
 class Rate(BaseModel):
@@ -379,7 +407,8 @@ class Units(BaseModel):
 class State(BaseModel):
     id: str
     name: Optional[str] = None
-    grounding: Optional[Dict]
+    description: Optional[str] = None
+    grounding: Optional[Dict] = None
     units: Optional[Units] = None
 
 
@@ -387,15 +416,15 @@ class Transition(BaseModel):
     id: str
     input: List[str]
     output: List[str]
-    grounding: Optional[Dict]
-    properties: Optional[TransitionProperties]
+    grounding: Optional[Dict] = None
+    properties: Optional[TransitionProperties] = None
 
 
 class Parameter(BaseModel):
     id: str
     description: Optional[str] = None
     value: Optional[float] = None
-    grounding: Optional[Dict]
+    grounding: Optional[Dict] = None
     distribution: Optional[Distribution] = None
     units: Optional[Units] = None
 
@@ -403,7 +432,7 @@ class Parameter(BaseModel):
     def from_dict(cls, d):
         d = deepcopy(d)
         d['id'] = str(d['id'])
-        return cls.parse_obj(d)
+        return cls.model_validate(d)
 
 
 class Time(BaseModel):
@@ -413,8 +442,8 @@ class Time(BaseModel):
 
 class Observable(BaseModel):
     id: str
-    name: Optional[str]
-    grounding: Optional[Dict]
+    name: Optional[str] = None
+    grounding: Optional[Dict] = None
     expression: str
     expression_mathml: str
 
@@ -428,15 +457,16 @@ class OdeSemantics(BaseModel):
     rates: List[Rate]
     initials: List[Initial]
     parameters: List[Parameter]
-    time: Optional[Time]
+    time: Optional[Time] = None
     observables: List[Observable]
 
 
 class Ode(BaseModel):
-    ode: Optional[OdeSemantics]
+    ode: Optional[OdeSemantics] = None
 
 
 class Header(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
     name: str
     schema_url: str = Field(..., alias='schema')
     schema_name: str
@@ -447,7 +477,7 @@ class Header(BaseModel):
 class ModelSpecification(BaseModel):
     """A Pydantic model corresponding to the PetriNet JSON schema."""
     header: Header
-    properties: Optional[Dict]
+    properties: Optional[Dict] = None
     model: PetriModel
-    semantics: Optional[Ode]
-    metadata: Optional[Dict]
+    semantics: Optional[Ode] = None
+    metadata: Optional[Dict] = None

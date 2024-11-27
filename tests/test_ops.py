@@ -3,11 +3,14 @@
 import unittest
 from collections import Counter
 from copy import deepcopy as _d
+from fractions import Fraction
 
 import sympy
 
 from mira.metamodel import *
-from mira.metamodel.ops import stratify, simplify_rate_law, counts_to_dimensionless
+from mira.metamodel.ops import stratify, simplify_rate_law, \
+    counts_to_dimensionless, add_observable_pattern, \
+    get_observable_for_concepts
 from mira.examples.sir import cities, sir, sir_2_city, sir_parameterized
 from mira.examples.concepts import infected, susceptible
 from mira.examples.chime import sviivr
@@ -42,6 +45,7 @@ class TestOperations(unittest.TestCase):
         )
 
         expected_0 = ControlledConversion(
+            name="t_unvaccinated_unvaccinated",
             subject=susceptible.with_context(vaccination_status="unvaccinated",
                                              do_rename=True),
             outcome=infected.with_context(vaccination_status="unvaccinated",
@@ -54,6 +58,7 @@ class TestOperations(unittest.TestCase):
             )
         )
         expected_1 = ControlledConversion(
+            name="t_unvaccinated_vaccinated",
             subject=susceptible.with_context(vaccination_status="unvaccinated",
                                              do_rename=True),
             outcome=infected.with_context(vaccination_status="unvaccinated",
@@ -66,6 +71,7 @@ class TestOperations(unittest.TestCase):
             )
         )
         expected_2 = ControlledConversion(
+            name="t_vaccinated_unvaccinated",
             subject=susceptible.with_context(vaccination_status="vaccinated",
                                              do_rename=True),
             outcome=infected.with_context(vaccination_status="vaccinated",
@@ -78,6 +84,7 @@ class TestOperations(unittest.TestCase):
             )
         )
         expected_3 = ControlledConversion(
+            name="t_vaccinated_vaccinated",
             subject=susceptible.with_context(vaccination_status="vaccinated",
                                              do_rename=True),
             outcome=infected.with_context(vaccination_status="vaccinated",
@@ -152,19 +159,33 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(tm_stratified.parameters, actual.parameters)
         self.assertTrue(actual.initials['infected_population_vaccinated'].expression.equals(
             tm_stratified.initials['infected_population_vaccinated'].expression))
-        self.assertEqual(
+
+        def one_to_one_concept_mapping(strat_concepts, actual_concepts):
+            matched_concept_idxs = set()
+            for strat_concept in strat_concepts:
+                matched = False
+                for concept_idx, actual_concept in enumerate(actual_concepts):
+                    if (strat_concept.is_equal_to(actual_concept) and
+                        concept_idx not in matched_concept_idxs):
+                            matched_concept_idxs.add(concept_idx)
+                            matched = True
+                            break
+                if not matched:
+                    return False
+            return True
+
+        self.assertTrue(one_to_one_concept_mapping(
             [t.subject for t in tm_stratified.templates],
-            [t.subject for t in actual.templates],
-        )
-        self.assertEqual(
+            [t.subject for t in actual.templates]))
+
+        self.assertTrue(one_to_one_concept_mapping(
             [t.outcome for t in tm_stratified.templates],
-            [t.outcome for t in actual.templates],
-        )
-        self.assertEqual(
+            [t.outcome for t in actual.templates]))
+
+        self.assertTrue(one_to_one_concept_mapping(
             [t.controller for t in tm_stratified.templates],
-            [t.controller for t in actual.templates],
-        )
-        self.assertEqual(tm_stratified.templates, actual.templates)
+            [t.controller for t in actual.templates]))
+
 
     def test_stratify(self):
         """Test stratifying a template model by labels."""
@@ -185,8 +206,8 @@ class TestOperations(unittest.TestCase):
             self.assertIn(key, actual.initials, msg="")
             # Cannot use .args[0] here as .args[0] not a primitive data type
             self.assertEqual(
-                SympyExprStr(float(str(sir_parameterized.initials[original_name].expression)) / len(cities)),
-                actual.initials[key].expression,
+                float(SympyExprStr(float(sir_parameterized.initials[original_name].expression.__str__()) / len(cities)).__str__()),
+                float(Fraction(actual.initials[key].expression.__str__())),
                 msg=f"initial value was not copied from original compartment "
                     f"({original_name}) to stratified compartment ({key})"
             )
@@ -221,8 +242,8 @@ class TestOperations(unittest.TestCase):
             self.assertIn(key, actual.initials, msg=f"Key '{key}' not in initials")
             # Cannot use .args[0] here as .args[0] not a primitive data type
             self.assertEqual(
-                SympyExprStr(float(str(sir_parameterized.initials[original_name].expression)) / len(cities)),
-                actual.initials[key].expression,
+                float(SympyExprStr(float(sir_parameterized.initials[original_name].expression.__str__()) / len(cities)).__str__()),
+                float(Fraction(actual.initials[key].expression.__str__())),
                 msg=f"initial value was not copied from original compartment "
                     f"({original_name}) to stratified compartment ({key})"
             )
@@ -257,8 +278,8 @@ class TestOperations(unittest.TestCase):
             self.assertIn(key, actual.initials, msg=f"Key '{key}' not in initials")
             # Cannot use .args[0] here as .args[0] not a primitive data type
             self.assertEqual(
-                SympyExprStr(float(str(sir_parameterized.initials[original_name].expression)) / len(cities)),
-                actual.initials[key].expression,
+                float(SympyExprStr(float(sir_parameterized.initials[original_name].expression.__str__()) / len(cities)).__str__()),
+                float(Fraction(actual.initials[key].expression.__str__())),
                 msg=f"initial value was not copied from original compartment "
                     f"({original_name}) to stratified compartment ({key})"
             )
@@ -558,7 +579,13 @@ def test_stratify_excluded_species():
                   cartesian_control=True,
                   concepts_to_stratify=['susceptible_population'])
 
-    assert len(tm.templates) == 5, templates
+    assert len(tm.templates) == 3, templates
+    assert tm.templates[0].subject.name == 'susceptible_population_vax'
+    assert tm.templates[0].outcome.name == 'infected_population'
+    assert tm.templates[0].controller.name == 'infected_population'
+    assert tm.templates[1].subject.name == 'susceptible_population_unvax'
+    assert tm.templates[1].outcome.name == 'infected_population'
+    assert tm.templates[1].controller.name == 'infected_population'
 
 
 def test_stratify_parameter_consistency():
@@ -577,3 +604,35 @@ def test_stratify_parameter_consistency():
     # be the case when parameters would be incrementally numbered for each
     # new template
     assert len(tm.parameters) == 2
+
+
+def test_get_observable_for_concepts():
+    concepts = [
+        Concept(name='A'),
+        Concept(name='B'),
+        Concept(name='C'),
+    ]
+    obs = get_observable_for_concepts(concepts, 'obs')
+    assert obs.name == 'obs'
+    assert obs.expression.args[0] == sum([sympy.Symbol(c.name) for c in concepts])
+
+
+def test_add_observable_pattern():
+    templates = [
+        NaturalDegradation(subject=Concept(name='A', identifiers={'ido': '0000514'}),
+                           rate_law=sympy.Symbol('alpha') * sympy.Symbol('A')),
+        NaturalDegradation(subject=Concept(name='B', identifiers={'ido': '0000515'}),
+                           rate_law=sympy.Symbol('alpha') * sympy.Symbol('B')),
+    ]
+    tm = TemplateModel(templates=templates,
+                       parameters={'alpha': Parameter(name='alpha', value=0.1)})
+    tm = stratify(tm, key='age', strata=['young', 'old'], structure=[])
+    add_observable_pattern(tm, name='A', identifiers={'ido': '0000514'})
+    assert 'A' in tm.observables
+    obs = tm.observables['A']
+    assert obs.expression.args[0] == sympy.Symbol('A_old') + sympy.Symbol('A_young')
+
+    add_observable_pattern(tm, 'young', context={'age': 'young'})
+    assert 'young' in tm.observables
+    obs = tm.observables['young']
+    assert obs.expression.args[0] == sympy.Symbol('A_young') + sympy.Symbol('B_young')

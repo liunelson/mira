@@ -4,10 +4,14 @@ https://github.com/DARPA-ASKEM/Model-Representations/tree/main/stockflow.
 
 __all__ = ["AMRStockFlowModel", "template_model_to_stockflow_json"]
 
+import logging
+
 import sympy
+
 from mira.modeling import Model
 from mira.metamodel import *
-import logging
+from .utils import add_metadata_annotations
+
 
 logger = logging.getLogger(__name__)
 
@@ -68,16 +72,19 @@ class AMRStockFlowModel:
         for key, var in model.variables.items():
             vmap[key] = name = var.concept.name or str(key)
             display_name = var.concept.display_name or name
+            description = var.concept.description
             stocks_dict = {
                 'id': name,
-                'name': display_name,
-                'grounding': {
+                'name': display_name
+            }
+            if description:
+                stocks_dict['description'] = description
+            stocks_dict['grounding'] = {
                     'identifiers': {k: v for k, v in
                                     var.concept.identifiers.items()
                                     if k != 'biomodels.species'},
-                    'modifiers': var.concept.context,
-                },
-            }
+                    'modifiers': var.concept.context
+                }
             if var.concept.units:
                 stocks_dict['units'] = {
                     'expression': str(var.concept.units.expression),
@@ -192,6 +199,8 @@ class AMRStockFlowModel:
                     link_dict['target'] = fid
                     link_id += 1
                     self.links.append(link_dict)
+
+        add_metadata_annotations(self.metadata, model)
 
     def to_json(self):
         """Return a JSON dict structure of the Stock and Flow model."""

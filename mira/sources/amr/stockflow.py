@@ -2,7 +2,7 @@
 https://github.com/DARPA-ASKEM/Model-Representations/tree/main/stockflow.
 """
 __all__ = ["template_model_from_amr_json",
-           "stock_to_concept"]
+           "stock_to_concept", "model_from_url"]
 
 import sympy
 import requests
@@ -42,12 +42,16 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
         all_stocks.add(stock['id'])
         symbols[stock['id']] = sympy.Symbol(stock['id'])
 
-    # Process parameters
+    # Process parameters, first to get all symbols, then
+    # processing the parameters to get the MIRA parameters
     ode_semantics = model_json.get("semantics", {}).get("ode", {})
+    for parameter in ode_semantics.get('parameters', []):
+        symbols[parameter['id']] = sympy.Symbol(parameter['id'])
+
     mira_parameters = {}
     for parameter in ode_semantics.get('parameters', []):
-        mira_parameters[parameter['id']] = parameter_to_mira(parameter)
-        symbols[parameter['id']] = sympy.Symbol(parameter['id'])
+        mira_parameters[parameter['id']] = \
+            parameter_to_mira(parameter, param_symbols=symbols)
 
     # Process auxiliaries
     aux_expressions = {}
@@ -63,7 +67,7 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
             continue
         try:
             initial = Initial(
-                concept=concepts[initial_state['target']].copy(deep=True),
+                concept=concepts[initial_state['target']].model_copy(deep=True),
                 expression=initial_expr
             )
             initials[initial.concept.name] = initial
@@ -110,9 +114,10 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
             and link['source'] in concepts
             and link['source'] not in aux_expressions)]
 
-        input_concepts = [concepts[input].copy(deep=True)] if input else []
-        output_concepts = [concepts[output].copy(deep=True)] if output else []
-        controller_concepts = [concepts[i].copy(deep=True) for i in controllers]
+        input_concepts = [concepts[input].model_copy(deep=True)] if input \
+            else []
+        output_concepts = [concepts[output].model_copy(deep=True)] if output else []
+        controller_concepts = [concepts[i].model_copy(deep=True) for i in controllers]
 
         if 'rate_expression' in flow:
             rate_expr = safe_parse_expr(flow['rate_expression'],
@@ -129,14 +134,22 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
 
     static_stocks = all_stocks - used_stocks
     for state in static_stocks:
-        concept = concepts[state].copy(deep=True)
+        concept = concepts[state].model_copy(deep=True)
         templates.append(StaticConcept(subject=concept))
 
         # Finally, we gather some model-level annotations
     name = model_json.get('header', {}).get('name')
     description = model_json.get('header', {}).get('description')
-    anns = Annotations(name=name, description=description)
 
+    annotations = model_json.get('metadata', {}).get('annotations', {})
+    annotation_attributes = {"name": name, "description": description}
+    for key, val in annotations.items():
+        # convert list of author names to list of author objects
+        if key == "authors":
+            val = [Author(name=author_dict["name"]) for author_dict in val]
+        annotation_attributes[key] = val
+
+    anns = Annotations(**annotation_attributes)
     return TemplateModel(templates=templates,
                          parameters=mira_parameters,
                          initials=initials,

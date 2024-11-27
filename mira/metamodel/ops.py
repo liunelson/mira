@@ -8,8 +8,9 @@ from typing import Callable, Collection, Iterable, List, Mapping, Optional, \
 
 import sympy
 
-from .template_model import TemplateModel, Initial, Parameter
+from .template_model import TemplateModel, Initial, Parameter, Observable
 from .templates import *
+from .comparison import get_dkg_refinement_closure
 from .units import Unit
 from .utils import SympyExprStr
 
@@ -19,7 +20,8 @@ __all__ = [
     "aggregate_parameters",
     "get_term_roles",
     "counts_to_dimensionless",
-    "deactivate_templates"
+    "deactivate_templates",
+    "add_observable_pattern",
 ]
 
 
@@ -167,7 +169,11 @@ def stratify(
             continue
 
         # Check if we will have any controllers in the template
-        ncontrollers = num_controllers(template)
+        controllers = template.get_controllers()
+        stratified_controllers = [c for c in controllers if c.name
+                                  not in exclude_concepts]
+        ncontrollers = len(stratified_controllers)
+
         # If we have controllers, and we want cartesian control then
         # we will stratify controllers separately
         stratify_controllers = (ncontrollers > 0) and cartesian_control
@@ -176,6 +182,8 @@ def stratify(
         for stratum, stratum_idx in stratum_index_map.items():
             template_strata = []
             new_template = deepcopy(template)
+            new_template.name = \
+                f"{template.name if template.name else 't'}_{stratum}"
             # We have to make sure that we only add the stratum to the
             # list of template strata if we stratified any of the non-controllers
             # in this first for loop
@@ -222,11 +230,17 @@ def stratify(
                 for c_strata_tuple in itt.product(strata, repeat=ncontrollers):
                     stratified_template = deepcopy(new_template)
                     stratified_controllers = stratified_template.get_controllers()
+                    # Filter to make sure we skip controllers that are excluded
+                    stratified_controllers = [c for c in stratified_controllers
+                                              if c.name not in exclude_concepts]
                     template_strata = [stratum if param_renaming_uses_strata_names
                                        else stratum_idx]
                     # We now apply the stratum assigned to each controller in this particular
                     # tuple to the controller
                     for controller, c_stratum in zip(stratified_controllers, c_strata_tuple):
+                        if controller.name in exclude_concepts:
+                            continue
+                        stratified_template.name += f"_{c_stratum}"
                         controller.with_context(do_rename=modify_names, inplace=True,
                                                 **{key: c_stratum})
                         template_strata.append(c_stratum if param_renaming_uses_strata_names
@@ -297,7 +311,8 @@ def stratify(
         observables[observable_key].expression = SympyExprStr(expr)
 
     # Generate a conversion between each concept of each strata based on the network structure
-    for (source_stratum, target_stratum), concept in itt.product(structure, concept_map.values()):
+    for idx, ((source_stratum, target_stratum), concept) in \
+            enumerate(itt.product(structure, concept_map.values())):
         if concept.name in exclude_concepts:
             continue
         # Get stratum names from map if provided, otherwise use the stratum
@@ -317,14 +332,16 @@ def stratify(
                                        curie_to_name_map=strata_curie_to_name,
                                        **{key: target_stratum})
         # todo will need to generalize for different kwargs for different conversions
-        template = conversion_cls(subject=subject, outcome=outcome)
+        template = conversion_cls(subject=subject, outcome=outcome,
+                                  name=f't_conv_{idx}_{source_stratum_name}_{target_stratum_name}')
         template.set_mass_action_rate_law(param_name)
         templates.append(template)
         if not directed:
             param_name = f"p_{target_stratum_name}_{source_stratum_name}"
             if param_name not in parameters:
                 parameters[param_name] = Parameter(name=param_name, value=0.1)
-            reverse_template = conversion_cls(subject=outcome, outcome=subject)
+            reverse_template = conversion_cls(subject=outcome, outcome=subject,
+                                              name=f't_conv_{idx}_{target_stratum_name}_{source_stratum_name}')
             reverse_template.set_mass_action_rate_law(param_name)
             templates.append(reverse_template)
 
@@ -715,7 +732,9 @@ def counts_to_dimensionless(tm: TemplateModel,
                     SympyExprStr(p.units.expression.args[0] /
                                  (counts_unit_symbol ** exponent))
                 p.value /= (norm_factor ** exponent)
-
+                # Previously was sympy.Float object, cannot be serialized in
+                # Pydantic2 type enforcement
+                p.value = float(p.value)
     return tm
 
 
@@ -735,3 +754,59 @@ def deactivate_templates(
     for template in template_model.templates:
         if condition(template):
             template.deactivate()
+
+
+def add_observable_pattern(
+    template_model: TemplateModel,
+    name: str,
+    identifiers: Mapping = None,
+    context: Mapping = None,
+):
+    """Add an observable for a pattern of concepts.
+
+    Parameters
+    ----------
+    template_model :
+        A template model.
+    name :
+        The name of the observable.
+    identifiers :
+        Identifiers serving as a pattern for concepts to observe.
+    context :
+        Context serving as a pattern for concepts to observe.
+    """
+    observable_concepts = []
+    identifiers = set(identifiers.items() if identifiers else {})
+    contexts = set(context.items() if context else {})
+    for key, concept in template_model.get_concepts_map().items():
+        if (not identifiers) or identifiers.issubset(
+                set(concept.identifiers.items())):
+            if (not contexts) or contexts.issubset(
+                    set(concept.context.items())):
+                observable_concepts.append(concept)
+    obs = get_observable_for_concepts(observable_concepts, name)
+    template_model.observables[name] = obs
+
+
+def get_observable_for_concepts(concepts: List[Concept], name: str):
+    """Return an observable expressing a sum of a set of concepts.
+
+    Parameters
+    ----------
+    concepts :
+        A list of concepts.
+    name :
+        The name of the observable.
+
+    Returns
+    -------
+    :
+        An observable that sums the given concepts.
+    """
+    expr = None
+    for concept in concepts:
+        if expr is None:
+            expr = sympy.Symbol(concept.name)
+        else:
+            expr += sympy.Symbol(concept.name)
+    return Observable(name=name, expression=SympyExprStr(expr))

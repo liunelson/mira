@@ -109,15 +109,16 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
     # }
     ode_semantics = model_json.get("semantics", {}).get("ode", {})
     symbols = {state_id: sympy.Symbol(state_id) for state_id in concepts}
-    mira_parameters = {}
+
+    # We first make symbols for all the parameters
     for parameter in ode_semantics.get('parameters', []):
-        mira_parameters[parameter['id']] = parameter_to_mira(parameter)
         symbols[parameter['id']] = sympy.Symbol(parameter['id'])
 
-    param_values = {
-        p['id']: p['value'] for p in ode_semantics.get('parameters', [])
-        if p.get('value') is not None
-    }
+    # We then process the parameters into MIRA Parameter objects
+    mira_parameters = {}
+    for parameter in ode_semantics.get('parameters', []):
+        mira_parameters[parameter['id']] = \
+            parameter_to_mira(parameter, param_symbols=symbols)
 
     # Next we process initial conditions
     initials = {}
@@ -127,7 +128,7 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
             continue
         try:
             initial = Initial(
-                concept=concepts[initial_state['target']].copy(deep=True),
+                concept=concepts[initial_state['target']].model_copy(deep=True),
                 expression=initial_expr
             )
             initials[initial.concept.name] = initial
@@ -177,6 +178,10 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
         transition_id = transition['id']  # required, str
         inputs = deepcopy(transition.get('input', []))  # required, Array[str]
         outputs = deepcopy(transition.get('output', []))  # required, Array[str]
+        if inputs is None:
+            inputs = []
+        if outputs is None:
+            outputs = []
         used_states |= (set(inputs) | set(outputs))
         transition_grounding = transition.get('grounding', {})  # optional, Object
         transition_properties = transition.get('properties', {})  # optional, Object
@@ -196,9 +201,10 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
             both = set(inputs) & set(outputs)
 
         # We can now get the appropriate concepts for each group
-        input_concepts = [concepts[i].copy(deep=True) for i in inputs]
-        output_concepts = [concepts[i].copy(deep=True) for i in outputs]
-        controller_concepts = [concepts[i].copy(deep=True) for i in controllers]
+        input_concepts = [concepts[i].model_copy(deep=True) for i in inputs]
+        output_concepts = [concepts[i].model_copy(deep=True) for i in outputs]
+        controller_concepts = [concepts[i].model_copy(deep=True) for i in
+                               controllers]
         transition_id = transition['id']
 
         rate_law = get_sympy(rate_obj, local_dict=symbols)
@@ -210,13 +216,22 @@ def template_model_from_amr_json(model_json) -> TemplateModel:
     # Handle static states
     static_states = all_states - used_states
     for state in static_states:
-        concept = concepts[state].copy(deep=True)
+        concept = concepts[state].model_copy(deep=True)
         templates.append(StaticConcept(subject=concept))
 
     # Finally, we gather some model-level annotations
     name = model_json.get('header', {}).get('name')
     description = model_json.get('header', {}).get('description')
-    anns = Annotations(name=name, description=description)
+
+    annotations = model_json.get('metadata', {}).get('annotations', {})
+    annotation_attributes = {"name": name, "description": description}
+    for key, val in annotations.items():
+        # convert list of author names to list of author objects
+        if key == "authors":
+            val = [Author(name=author_dict["name"]) for author_dict in val]
+        annotation_attributes[key] = val
+
+    anns = Annotations(**annotation_attributes)
     return TemplateModel(templates=templates,
                          parameters=mira_parameters,
                          initials=initials,
@@ -246,6 +261,7 @@ def state_to_concept(state):
     # names
     name = state['id']
     display_name = state.get('name')
+    description = state.get("description")
     grounding = state.get('grounding', {})
     identifiers = grounding.get('identifiers', {})
     context = grounding.get('modifiers', {})
@@ -254,6 +270,7 @@ def state_to_concept(state):
     units_obj = Unit(expression=units_expr) if units_expr else None
     return Concept(name=name,
                    display_name=display_name,
+                   description=description,
                    identifiers=identifiers,
                    context=context,
                    units=units_obj)

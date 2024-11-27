@@ -3,6 +3,11 @@ Data models for metamodel templates.
 
 Regenerate the JSON schema by running ``python -m mira.metamodel.schema``.
 """
+import copy
+
+from pydantic import ConfigDict
+from typing import Literal
+
 __all__ = [
     "Concept",
     "Template",
@@ -16,8 +21,10 @@ __all__ = [
     "GroupedControlledConversion",
     "GroupedControlledProduction",
     "GroupedControlledDegradation",
+    "MultiConversion",
     "NaturalReplication",
     "ControlledReplication",
+    "ReversibleFlux",
     "StaticConcept",
     "SpecifiedTemplate",
     "templates_equal",
@@ -27,6 +34,7 @@ __all__ = [
     "is_degradation",
     "is_conversion",
     "is_replication",
+    "is_reversible",
     "has_subject",
     "has_outcome",
     "has_controller",
@@ -56,7 +64,7 @@ from typing import (
 import networkx as nx
 import pydantic
 import sympy
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 
 try:
     from typing import Annotated  # py39+
@@ -106,7 +114,7 @@ class Concept(BaseModel):
     """
 
     name: str = Field(..., description="The name of the concept.")
-    display_name: str = \
+    display_name: Optional[str]= \
         Field(None, description="An optional display name for the concept. "
                                 "If not provided, the name can be used for "
                                 "display purposes.")
@@ -115,7 +123,7 @@ class Concept(BaseModel):
     identifiers: Mapping[str, str] = Field(
         default_factory=dict, description="A mapping of namespaces to identifiers."
     )
-    context: Mapping[str, str] = Field(
+    context: Mapping[str, Union[str,int]] = Field(
         default_factory=dict, description="A mapping of context keys to values."
     )
     units: Optional[Unit] = Field(
@@ -123,14 +131,7 @@ class Concept(BaseModel):
     )
     _base_name: str = pydantic.PrivateAttr(None)
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {
-            SympyExprStr: lambda e: sympy.parse_expr(e)
-        }
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def with_context(self, do_rename=False, curie_to_name_map=None,
                      inplace=False, **context) -> "Concept":
@@ -377,6 +378,8 @@ class Concept(BaseModel):
         if isinstance(data, Concept):
             return data
         elif data.get('units'):
+            # Copy so we don't update the input
+            data = copy.deepcopy(data)
             data['units'] = Unit.from_json(data['units'])
 
         return cls(**data)
@@ -385,14 +388,7 @@ class Concept(BaseModel):
 class Template(BaseModel):
     """The Template is a parent class for model processes"""
 
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            SympyExprStr: lambda e: str(e),
-        }
-        json_decoders = {
-            SympyExprStr: lambda e: safe_parse_expr(e)
-        }
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     rate_law: Optional[SympyExprStr] = Field(
         default=None, description="The rate law for the template."
@@ -421,6 +417,8 @@ class Template(BaseModel):
         :
             A Template object
         """
+        # Make a copy to make sure we don't update the input
+        data = copy.deepcopy(data)
         # We make sure to use data such that it's not modified in place,
         # e.g., we don't use pop or overwrite items, otherwise this function
         # would have unintended side effects.
@@ -452,6 +450,10 @@ class Template(BaseModel):
         return stmt_cls(**{k: v for k, v in data.items()
                            if k not in {'rate_law', 'type'}},
                         rate_law=rate)
+
+    @field_serializer('rate_law', when_used="unless-none")
+    def serialize_expression(self, rate_law):
+        return str(rate_law)
 
     def is_equal_to(self, other: "Template", with_context: bool = False,
                     config: Config = None) -> bool:
@@ -766,7 +768,7 @@ class Template(BaseModel):
         :
             A copy of this template with the mass action rate law.
         """
-        template = self.copy(deep=True)
+        template = self.model_copy(deep=True)
         template.set_mass_action_rate_law(parameter, independent=independent)
         return template
 
@@ -790,7 +792,7 @@ class Template(BaseModel):
 
     def with_rate_law(self, rate_law: Union[str, sympy.Expr, SympyExprStr],
                       local_dict=None) -> "Template":
-        template = self.copy(deep=True)
+        template = self.model_copy(deep=True)
         template.set_rate_law(rate_law, local_dict=local_dict)
         return template
 
@@ -887,7 +889,7 @@ class ControlledConversion(Template):
     """Specifies a process of controlled conversion from subject to outcome,
     controlled by the controller."""
 
-    type: Literal["ControlledConversion"] = Field("ControlledConversion", const=True)
+    type: Literal["ControlledConversion"] = "ControlledConversion"
     controller: Concept = Field(..., description="The controller of the conversion.")
     subject: Concept = Field(..., description="The subject of the conversion.")
     outcome: Concept = Field(..., description="The outcome of the conversion.")
@@ -973,7 +975,7 @@ class ControlledConversion(Template):
 
 
 class GroupedControlledConversion(Template):
-    type: Literal["GroupedControlledConversion"] = Field("GroupedControlledConversion", const=True)
+    type: Literal["GroupedControlledConversion"] = "GroupedControlledConversion"
     controllers: List[Concept] = Field(..., description="The controllers of the conversion.")
     subject: Concept = Field(..., description="The subject of the conversion.")
     outcome: Concept = Field(..., description="The outcome of the conversion.")
@@ -1063,7 +1065,7 @@ class GroupedControlledConversion(Template):
 class GroupedControlledProduction(Template):
     """Specifies a process of production controlled by several controllers"""
 
-    type: Literal["GroupedControlledProduction"] = Field("GroupedControlledProduction", const=True)
+    type: Literal["GroupedControlledProduction"] = "GroupedControlledProduction"
     controllers: List[Concept] = Field(..., description="The controllers of the production.")
     outcome: Concept = Field(..., description="The outcome of the production.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the production.")
@@ -1149,9 +1151,7 @@ class GroupedControlledProduction(Template):
 class ControlledProduction(Template):
     """Specifies a process of production controlled by one controller"""
 
-    type: Literal["ControlledProduction"] = Field(
-        "ControlledProduction", const=True
-    )
+    type: Literal["ControlledProduction"] = "ControlledProduction"
     controller: Concept = Field(
         ..., description="The controller of the production."
     )
@@ -1237,7 +1237,7 @@ class ControlledProduction(Template):
 class NaturalConversion(Template):
     """Specifies a process of natural conversion from subject to outcome"""
 
-    type: Literal["NaturalConversion"] = Field("NaturalConversion", const=True)
+    type: Literal["NaturalConversion"] = "NaturalConversion"
     subject: Concept = Field(..., description="The subject of the conversion.")
     outcome: Concept = Field(..., description="The outcome of the conversion.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the conversion.")
@@ -1272,10 +1272,104 @@ class NaturalConversion(Template):
         )
 
 
+class MultiConversion(Template):
+    """Specifies a conversion process of multiple subjects and outcomes."""
+
+    type: Literal["MultiConversion"] = "MultiConversion"
+    subjects: List[Concept] = Field(..., description="The subjects of the conversion.")
+    outcomes: List[Concept] = Field(..., description="The outcomes of the conversion.")
+    provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the conversion.")
+
+    concept_keys: ClassVar[List[str]] = ["subjects", "outcomes"]
+
+    def get_key(self, config: Optional[Config] = None):
+        return (
+            self.type,
+            *tuple(
+                c.get_key(config=config)
+                for c in sorted(self.subjects, key=lambda c: c.get_key(config=config))
+            ),
+            *tuple(
+                c.get_key(config=config)
+                for c in sorted(self.outcomes, key=lambda c: c.get_key(config=config))
+            ),
+        )
+
+    def get_concepts(self):
+        return self.subjects + self.outcomes
+
+    def with_context(
+            self,
+            do_rename=False,
+            exclude_concepts=None,
+            curie_to_name_map=None,
+            **context
+    ) -> "MultiConversion":
+        exclude_concepts = exclude_concepts or set()
+        return self.__class__(
+            type=self.type,
+            subjects=[c.with_context(do_rename, curie_to_name_map=curie_to_name_map, **context)
+                      if c.name not in exclude_concepts else c
+                      for c in self.subjects],
+            outcomes=[c.with_context(do_rename, curie_to_name_map=curie_to_name_map, **context)
+                      if c.name not in exclude_concepts else c
+                      for c in self.outcomes],
+            provenance=self.provenance,
+            rate_law=self.rate_law,
+        )
+
+
+class ReversibleFlux(Template):
+    """Specifies a reversible flux between a left and right side."""
+
+    type: Literal["ReversibleFlux"] = "ReversibleFlux"
+    left: List[Concept] = Field(..., description="The left hand side of the flux.")
+    right: List[Concept] = Field(..., description="The right hand side of the flux.")
+    provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the flux.")
+
+    concept_keys: ClassVar[List[str]] = ["left", "right"]
+
+    def get_concepts(self):
+        return self.left + self.right
+
+    def get_key(self, config: Optional[Config] = None):
+        return (
+            self.type,
+            *tuple(
+                c.get_key(config=config)
+                for c in sorted(self.left, key=lambda c: c.get_key(config=config))
+            ),
+            *tuple(
+                c.get_key(config=config)
+                for c in sorted(self.right, key=lambda c: c.get_key(config=config))
+            ),
+        )
+
+    def with_context(
+            self,
+            do_rename=False,
+            exclude_concepts=None,
+            curie_to_name_map=None,
+            **context
+    ) -> "ReversibleFlux":
+        exclude_concepts = exclude_concepts or set()
+        return self.__class__(
+            type=self.type,
+            subjects=[c.with_context(do_rename, curie_to_name_map=curie_to_name_map, **context)
+                      if c.name not in exclude_concepts else c
+                      for c in self.left],
+            outcomes=[c.with_context(do_rename, curie_to_name_map=curie_to_name_map, **context)
+                      if c.name not in exclude_concepts else c
+                      for c in self.right],
+            provenance=self.provenance,
+            rate_law=self.rate_law,
+        )
+
+
 class NaturalProduction(Template):
     """A template for the production of a species at a constant rate."""
 
-    type: Literal["NaturalProduction"] = Field("NaturalProduction", const=True)
+    type: Literal["NaturalProduction"] = "NaturalProduction"
     outcome: Concept = Field(..., description="The outcome of the production.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the production.")
 
@@ -1309,7 +1403,7 @@ class NaturalProduction(Template):
 class NaturalDegradation(Template):
     """A template for the degradataion of a species at a proportional rate to its amount."""
 
-    type: Literal["NaturalDegradation"] = Field("NaturalDegradation", const=True)
+    type: Literal["NaturalDegradation"] = "NaturalDegradation"
     subject: Concept = Field(..., description="The subject of the degradation.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the degradation.")
 
@@ -1342,7 +1436,7 @@ class NaturalDegradation(Template):
 class ControlledDegradation(Template):
     """Specifies a process of degradation controlled by one controller"""
 
-    type: Literal["ControlledDegradation"] = Field("ControlledDegradation", const=True)
+    type: Literal["ControlledDegradation"] = "ControlledDegradation"
     controller: Concept = Field(..., description="The controller of the degradation.")
     subject: Concept = Field(..., description="The subject of the degradation.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the degradation.")
@@ -1421,7 +1515,7 @@ class ControlledDegradation(Template):
 class GroupedControlledDegradation(Template):
     """Specifies a process of degradation controlled by several controllers"""
 
-    type: Literal["GroupedControlledDegradation"] = Field("GroupedControlledDegradation", const=True)
+    type: Literal["GroupedControlledDegradation"] = "GroupedControlledDegradation"
     controllers: List[Concept] = Field(..., description="The controllers of the degradation.")
     subject: Concept = Field(..., description="The subject of the degradation.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the degradation.")
@@ -1505,7 +1599,7 @@ class GroupedControlledDegradation(Template):
 class NaturalReplication(Template):
     """Specifies a process of natural replication of a subject."""
 
-    type: Literal["NaturalReplication"] = Field("NaturalReplication", const=True)
+    type: Literal["NaturalReplication"] = "NaturalReplication"
     subject: Concept = Field(..., description="The subject of the replication.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the template.")
 
@@ -1538,7 +1632,7 @@ class NaturalReplication(Template):
 class ControlledReplication(Template):
     """Specifies a process of replication controlled by one controller"""
 
-    type: Literal["ControlledReplication"] = Field("ControlledReplication", const=True)
+    type: Literal["ControlledReplication"] = "ControlledReplication"
     controller: Concept = Field(..., description="The controller of the replication.")
     subject: Concept = Field(..., description="The subject of the replication.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance of the replication.")
@@ -1598,7 +1692,7 @@ class ControlledReplication(Template):
 class StaticConcept(Template):
     """Specifies a standalone Concept that is not part of a process."""
 
-    type: Literal["StaticConcept"] = Field("StaticConcept", const=True)
+    type: Literal["StaticConcept"] = "StaticConcept"
     subject: Concept = Field(..., description="The subject.")
     provenance: List[Provenance] = Field(default_factory=list, description="The provenance.")
     concept_keys: ClassVar[List[str]] = ["subject"]
@@ -1767,6 +1861,7 @@ def context_refinement(refined_context, other_context) -> bool:
 SpecifiedTemplate = Annotated[
     Union[
         NaturalConversion,
+        MultiConversion,
         ControlledConversion,
         NaturalDegradation,
         ControlledDegradation,
@@ -1778,6 +1873,7 @@ SpecifiedTemplate = Annotated[
         NaturalReplication,
         ControlledReplication,
         StaticConcept,
+        ReversibleFlux,
     ],
     Field(description="Any child class of a Template", discriminator="type"),
 ]
@@ -1855,7 +1951,7 @@ def is_replication(template):
 def is_conversion(template):
     """Return True if the template is a form of conversion."""
     return isinstance(template, (NaturalConversion, ControlledConversion,
-                                 GroupedControlledConversion))
+                                 GroupedControlledConversion, MultiConversion))
 
 
 def has_outcome(template):
@@ -1867,6 +1963,11 @@ def has_subject(template):
     """Return True if the template has a subject."""
     return (is_conversion(template) or is_degradation(template)
             or is_replication(template))
+
+
+def is_reversible(template):
+    """Return True if the template is a reversible process."""
+    return isinstance(template, ReversibleFlux)
 
 
 def num_controllers(template):
@@ -1906,6 +2007,7 @@ def get_binding_templates(a, b, c, kf, kr):
 
 
 def conversion_to_deg_prod(conv_template):
+    # TODO: Handle multiconversion
     """Given a conversion template, compile into degradation/production templates."""
     if not is_conversion(conv_template):
         return [conv_template]
