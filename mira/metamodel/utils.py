@@ -3,21 +3,32 @@ __all__ = ['get_parseable_expression', 'revert_parseable_expression',
 
 import sympy
 import re
+import os
 import unicodedata
+from typing import Any, Optional
+from functools import lru_cache
 
-from typing import Any
+import requests
+
 from pydantic import GetCoreSchemaHandler
 from pydantic_core import core_schema
 
 
+# Pre-compile the regular expression for performance
+re_dots = re.compile(r'\.(?=\D)')
+re_superscripts = re.compile(r"\^{(.*?)}")
+re_curly_braces = re.compile(r'[{}]')
+
+
+@lru_cache(maxsize=10000)
 def get_parseable_expression(s: str) -> str:
     """Return an expression that can be parsed using sympy."""
     # Handle lambda which cannot be parsed by sympy
     s = s.replace('lambda', 'XXlambdaXX')
     # Handle dots which also cannot be parsed
-    s = re.sub(r'\.(?=\D)', 'XX_XX', s)
+    s = re_dots.sub('XX_XX', s)
     # Handle superscripts which are not allowed in sympy
-    s = re.sub(r"\^{(.*?)}", r"XXCXX{_\1}", s)
+    s = re_superscripts.sub(r"XXCXX{\1}", s)
     # Handle curly braces which are not allowed in sympy
     s = s.replace('{', 'XXCBO').replace('}', 'XXCBC')
     s = unicodedata.normalize('NFKC', s)
@@ -94,3 +105,27 @@ def sanity_check_tm(tm):
     all_initial_names = {init.concept.name for init in tm.initials.values()}
     for concept in all_concept_names:
         assert concept in all_initial_names, f"missing initial condition for {concept}"
+
+
+def is_ontological_child(child_curie: str, parent_curie: str,
+                         api_url: Optional[str] = None):
+    if api_url:
+        base_url = api_url
+    elif os.environ.get("MIRA_REST_URL"):
+        base_url = os.environ.get("MIRA_REST_URL")
+    else:
+        try:
+            import pystow
+            base_url = pystow.get_config("mira", "rest_url")
+        except ImportError:
+            raise ValueError("api_url must be provided or MIRA_REST_URL must be set.")
+    base_url = base_url.rstrip("/") + "/api" \
+        if not base_url.endswith("/api") else base_url
+    endpoint_url = base_url + '/is_ontological_child'
+
+    res = requests.post(endpoint_url, json={"child_curie": child_curie,
+                                            "parent_curie": parent_curie})
+
+    res.raise_for_status()
+    res_json = res.json()
+    return res_json['is_child']
