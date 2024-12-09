@@ -1,0 +1,275 @@
+{
+    "header": {
+        "name": "Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "I",
+                "name": "I",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "E",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "V",
+                "name": "V",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "M",
+                "name": "M",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "Infection",
+                "input": [
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "Infection"
+                }
+            },
+            {
+                "id": "Incubation",
+                "input": [
+                    "E"
+                ],
+                "output": [
+                    "I"
+                ],
+                "properties": {
+                    "name": "Incubation"
+                }
+            },
+            {
+                "id": "Recovery",
+                "input": [
+                    "I"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "Recovery"
+                }
+            },
+            {
+                "id": "Viral production",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "I",
+                    "V"
+                ],
+                "properties": {
+                    "name": "Viral production"
+                }
+            },
+            {
+                "id": "Natural birth",
+                "input": [],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "Natural birth"
+                }
+            },
+            {
+                "id": "Mask supply",
+                "input": [
+                    "S",
+                    "E",
+                    "I",
+                    "M"
+                ],
+                "output": [
+                    "S",
+                    "E",
+                    "I"
+                ],
+                "properties": {
+                    "name": "Mask supply"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "Infection",
+                    "expression": "I*S*l",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>l</ci></apply>"
+                },
+                {
+                    "target": "Incubation",
+                    "expression": "E*k",
+                    "expression_mathml": "<apply><times/><ci>E</ci><ci>k</ci></apply>"
+                },
+                {
+                    "target": "Recovery",
+                    "expression": "I*d",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>d</ci></apply>"
+                },
+                {
+                    "target": "Viral production",
+                    "expression": "I*a*b*(1 - g)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>a</ci><ci>b</ci><apply><minus/><cn>1</cn><ci>g</ci></apply></apply>"
+                },
+                {
+                    "target": "Natural birth",
+                    "expression": "S*b",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>b</ci></apply>"
+                },
+                {
+                    "target": "Mask supply",
+                    "expression": "m*(E + I + S)",
+                    "expression_mathml": "<apply><times/><ci>m</ci><apply><plus/><ci>E</ci><ci>I</ci><ci>S</ci></apply></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "S0",
+                    "expression_mathml": "<ci>S0</ci>"
+                },
+                {
+                    "target": "I",
+                    "expression": "I0",
+                    "expression_mathml": "<ci>I0</ci>"
+                },
+                {
+                    "target": "E",
+                    "expression": "E0",
+                    "expression_mathml": "<ci>E0</ci>"
+                },
+                {
+                    "target": "V",
+                    "expression": "V0",
+                    "expression_mathml": "<ci>V0</ci>"
+                },
+                {
+                    "target": "M",
+                    "expression": "M0",
+                    "expression_mathml": "<ci>M0</ci>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "l",
+                    "name": "l",
+                    "value": 1.0
+                },
+                {
+                    "id": "k",
+                    "name": "k",
+                    "value": 1.0
+                },
+                {
+                    "id": "d",
+                    "name": "d",
+                    "value": 1.0
+                },
+                {
+                    "id": "a",
+                    "name": "a",
+                    "value": 1.0
+                },
+                {
+                    "id": "b",
+                    "name": "b",
+                    "value": 1.0
+                },
+                {
+                    "id": "g",
+                    "name": "g",
+                    "value": 1.0
+                },
+                {
+                    "id": "m",
+                    "name": "m",
+                    "value": 1.0
+                },
+                {
+                    "id": "S0",
+                    "name": "S0",
+                    "value": 1.0
+                },
+                {
+                    "id": "E0",
+                    "name": "E0",
+                    "value": 1.0
+                },
+                {
+                    "id": "I0",
+                    "name": "I0",
+                    "value": 1.0
+                },
+                {
+                    "id": "V0",
+                    "name": "V0",
+                    "value": 1.0
+                },
+                {
+                    "id": "M0",
+                    "name": "M0",
+                    "value": 1.0
+                }
+            ],
+            "observables": [
+                {
+                    "id": "N",
+                    "name": "N",
+                    "expression": "E + I + S",
+                    "expression_mathml": "<apply><plus/><ci>E</ci><ci>I</ci><ci>S</ci></apply>"
+                }
+            ],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {}
+    }
+}
