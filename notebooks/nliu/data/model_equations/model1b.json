@@ -1,0 +1,151 @@
+{
+    "header": {
+        "name": "Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "I",
+                "name": "I",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "E",
+                "name": "E",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "V",
+                "name": "V",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "I",
+                    "E"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [
+                    "E"
+                ],
+                "output": [
+                    "I"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "I"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "I",
+                    "V"
+                ],
+                "properties": {
+                    "name": "t4"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "I*S*l",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>l</ci></apply>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "E*k",
+                    "expression_mathml": "<apply><times/><ci>E</ci><ci>k</ci></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "I*d",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>d</ci></apply>"
+                },
+                {
+                    "target": "t4",
+                    "expression": "I*a*b*(1 - g)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>a</ci><ci>b</ci><apply><minus/><cn>1</cn><ci>g</ci></apply></apply>"
+                }
+            ],
+            "initials": [],
+            "parameters": [
+                {
+                    "id": "l"
+                },
+                {
+                    "id": "k"
+                },
+                {
+                    "id": "d"
+                },
+                {
+                    "id": "a"
+                },
+                {
+                    "id": "b"
+                },
+                {
+                    "id": "g"
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {}
+    }
+}

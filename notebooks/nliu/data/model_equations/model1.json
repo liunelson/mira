@@ -1,0 +1,176 @@
+{
+    "header": {
+        "name": "SIR with births and deaths",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "SIR with births and deaths",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "I",
+                "name": "I",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "I",
+                    "I"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "S"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t4"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "I"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "R"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t6"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "I*S*b",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "l",
+                    "expression_mathml": "<ci>l</ci>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "S*m",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>m</ci></apply>"
+                },
+                {
+                    "target": "t4",
+                    "expression": "I*g",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "I*m",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>m</ci></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "R*m",
+                    "expression_mathml": "<apply><times/><ci>R</ci><ci>m</ci></apply>"
+                }
+            ],
+            "initials": [],
+            "parameters": [
+                {
+                    "id": "b"
+                },
+                {
+                    "id": "l"
+                },
+                {
+                    "id": "m"
+                },
+                {
+                    "id": "g"
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}
