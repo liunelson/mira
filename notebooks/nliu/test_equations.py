@@ -205,6 +205,9 @@ __ = [print(ode) for ode in odes_sympy]
 model = template_model_from_sympy_odes(odes_sympy)
 generate_summary_table(model)
 
+with open('./data/model_equations/model.json', 'w') as fp:
+    json.dump(template_model_to_petrinet_json(model), fp, indent = 4)
+
 # %%
 # Variation:
 # All death processes depend on 'S'
