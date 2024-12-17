@@ -186,6 +186,7 @@ with open('./data/model_equations/model1.json', 'w') as fp:
     json.dump(template_model_to_petrinet_json(model1), fp, indent = 4)
 
 generate_summary_table(model1)
+
 # %%
 model1.draw_jupyter()
 

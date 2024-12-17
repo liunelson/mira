@@ -1,0 +1,241 @@
+{
+  "header": {
+    "name": "Model C",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "description": "Model C, created from equations extracted from Rabiu 2024.",
+    "model_version": "0.1"
+  },
+  "properties": {},
+  "model": {
+    "states": [
+      {
+        "id": "S_m",
+        "name": "S_m",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "I_m",
+        "name": "I_m",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "E_m",
+        "name": "E_m",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "R_m",
+        "name": "R_m",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "S_w",
+        "name": "S_w",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "E_w",
+        "name": "E_w",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "I_w",
+        "name": "I_w",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      },
+      {
+        "id": "R_w",
+        "name": "R_w",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t1",
+        "input": [
+          "I_m",
+          "S_m"
+        ],
+        "output": [
+          "I_m",
+          "E_m"
+        ],
+        "properties": {
+          "name": "t1"
+        }
+      },
+      {
+        "id": "t2",
+        "input": [
+          "I_m"
+        ],
+        "output": [
+          "R_m"
+        ],
+        "properties": {
+          "name": "t2"
+        }
+      },
+      {
+        "id": "t3",
+        "input": [
+          "I_m",
+          "S_w"
+        ],
+        "output": [
+          "I_m",
+          "E_w"
+        ],
+        "properties": {
+          "name": "t3"
+        }
+      },
+      {
+        "id": "t4",
+        "input": [
+          "I_w"
+        ],
+        "output": [
+          "R_w"
+        ],
+        "properties": {
+          "name": "t4"
+        }
+      },
+      {
+        "id": "t5",
+        "input": [
+          "E_m"
+        ],
+        "output": [
+          "I_m"
+        ],
+        "properties": {
+          "name": "t5"
+        }
+      },
+      {
+        "id": "t6",
+        "input": [
+          "E_w"
+        ],
+        "output": [
+          "I_w"
+        ],
+        "properties": {
+          "name": "t6"
+        }
+      }
+    ]
+  },
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t1",
+          "expression": "I_m*S_m*beta_mm/N_m",
+          "expression_mathml": "I_mS_mbeta_mmN_m"
+        },
+        {
+          "target": "t2",
+          "expression": "I_m*tau_m",
+          "expression_mathml": "I_mtau_m"
+        },
+        {
+          "target": "t3",
+          "expression": "I_m*S_w*alpha_2*beta_mw/N_w",
+          "expression_mathml": "I_mS_walpha_2beta_mwN_w"
+        },
+        {
+          "target": "t4",
+          "expression": "I_w*tau_w",
+          "expression_mathml": "I_wtau_w"
+        },
+        {
+          "target": "t5",
+          "expression": "E_m*alpha_m",
+          "expression_mathml": "E_malpha_m"
+        },
+        {
+          "target": "t6",
+          "expression": "E_w*alpha_w",
+          "expression_mathml": "E_walpha_w"
+        }
+      ],
+      "initials": [],
+      "parameters": [
+        {
+          "id": "N_m"
+        },
+        {
+          "id": "beta_mm"
+        },
+        {
+          "id": "tau_m"
+        },
+        {
+          "id": "N_w"
+        },
+        {
+          "id": "alpha_2"
+        },
+        {
+          "id": "beta_mw"
+        },
+        {
+          "id": "tau_w"
+        },
+        {
+          "id": "alpha_m"
+        },
+        {
+          "id": "alpha_w"
+        },
+        {
+          "id": "alpha_1"
+        },
+        {
+          "id": "beta_wm"
+        },
+        {
+          "id": "alpha_3"
+        },
+        {
+          "id": "beta_ww"
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t"
+      }
+    }
+  },
+  "metadata": {
+    "annotations": {}
+  }
+}
