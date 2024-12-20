@@ -120,16 +120,64 @@
                     "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci><ci>k</ci></apply>"
                 }
             ],
-            "initials": [],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "S0",
+                    "expression_mathml": "<ci>S0</ci>"
+                },
+                {
+                    "target": "I",
+                    "expression": "I0",
+                    "expression_mathml": "<ci>I0</ci>"
+                },
+                {
+                    "target": "V",
+                    "expression": "V0",
+                    "expression_mathml": "<ci>V0</ci>"
+                },
+                {
+                    "target": "R",
+                    "expression": "R0",
+                    "expression_mathml": "<ci>R0</ci>"
+                }
+            ],
             "parameters": [
                 {
-                    "id": "b"
+                    "id": "b",
+                    "value": 0.0
                 },
                 {
-                    "id": "g"
+                    "id": "g",
+                    "value": 0.0
                 },
                 {
-                    "id": "k"
+                    "id": "k",
+                    "value": 0.0
+                },
+                {
+                    "id": "S0",
+                    "name": "S0",
+                    "description": "Initial condition of state variable S",
+                    "value": 0.0
+                },
+                {
+                    "id": "I0",
+                    "name": "I0",
+                    "description": "Initial condition of state variable I",
+                    "value": 0.0
+                },
+                {
+                    "id": "V0",
+                    "name": "V0",
+                    "description": "Initial condition of state variable V",
+                    "value": 0.0
+                },
+                {
+                    "id": "R0",
+                    "name": "R0",
+                    "description": "Initial condition of state variable R",
+                    "value": 0.0
                 }
             ],
             "observables": [],

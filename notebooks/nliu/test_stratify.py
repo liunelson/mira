@@ -60,13 +60,11 @@ def generate_summary_table(model):
 
     data = {"name": [t.name for t in model.templates]}
     data['type'] = [t.type for t in model.templates]
-    for k in ("subject", "outcome", "controller"):
-        data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
-
-    data["controllers"] = [[c.name for c in getattr(t, k)] if hasattr(t, "controllers") else None for t in model.templates]
-    data["controller(s)"] = [i if j == None else j for i, j in zip(data["controller"], data["controllers"])]
-    __ = data.pop("controller")
-    __ = data.pop("controllers")
+    for k in ("subject", "outcome", "controller", "controllers"):
+        if k != "controllers":
+            data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
+        else:
+            data[k] = [[c.name for c in t.controllers] if hasattr(t, k) else None for t in model.templates]
 
     data["rate_law"] = [t.rate_law for t in model.templates]
     data["interactor_rate_law"] = [t.get_interactor_rate_law() for t in model.templates]

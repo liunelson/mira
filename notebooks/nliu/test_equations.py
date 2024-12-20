@@ -8,6 +8,7 @@ import pandas
 
 from mira.metamodel import *
 from mira.modeling import Model
+from mira.sources.amr.petrinet import template_model_from_amr_json
 from mira.modeling.amr.petrinet import template_model_to_petrinet_json
 from mira.modeling.amr.regnet import template_model_to_regnet_json
 from mira.modeling.amr.regnet import AMRRegNetModel
@@ -60,13 +61,11 @@ def generate_summary_table(model):
 
     data = {"name": [t.name for t in model.templates]}
     data['type'] = [t.type for t in model.templates]
-    for k in ("subject", "outcome", "controller"):
-        data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
-
-    data["controllers"] = [[c.name for c in getattr(t, k)] if hasattr(t, "controllers") else None for t in model.templates]
-    data["controller(s)"] = [i if j == None else j for i, j in zip(data["controller"], data["controllers"])]
-    __ = data.pop("controller")
-    __ = data.pop("controllers")
+    for k in ("subject", "outcome", "controller", "controllers"):
+        if k != "controllers":
+            data[k] = [getattr(t, k).name if hasattr(t, k) else None for t in model.templates]
+        else:
+            data[k] = [[c.name for c in t.controllers] if hasattr(t, k) else None for t in model.templates]
 
     data["rate_law"] = [t.rate_law for t in model.templates]
     data["interactor_rate_law"] = [t.get_interactor_rate_law() for t in model.templates]
@@ -148,6 +147,7 @@ t = sympy.Symbol('t')
 S, E, I, R, V = sympy.symbols('S E I R V', cls = sympy.Function)
 l, k, d, a, b, g, m, b = sympy.symbols('l k d a b g m b')
 
+# %%
 odes = [
     sympy.Eq(S(t).diff(t), - b * S(t) * I(t)),
     sympy.Eq(I(t).diff(t), b * S(t) * I(t) - g * I(t)),
@@ -204,10 +204,11 @@ odes_sympy = [sympy.parsing.latex.parse_latex(ode) for ode in odes_latex]
 __ = [print(ode) for ode in odes_sympy]
 
 model = template_model_from_sympy_odes(odes_sympy)
-generate_summary_table(model)
 
 with open('./data/model_equations/model.json', 'w') as fp:
     json.dump(template_model_to_petrinet_json(model), fp, indent = 4)
+
+generate_summary_table(model)
 
 # %%
 # Variation:
@@ -226,6 +227,7 @@ print(generate_odesys(model1a, latex = True, latex_align = True))
 with open('./data/model_equations/model1a.json', 'w') as fp:
     json.dump(template_model_to_petrinet_json(model1a), fp, indent = 4)
 
+# %%
 generate_summary_table(model1a)
 
 # Note:
@@ -295,7 +297,7 @@ generate_summary_table(model2a)
 # Test with LaTeX-to-SymPy
 
 odes_latex = [
-    r"\frac{d S(t)}{d t} = -b S(t) I(t)",
+    r"\frac{d S(t)}{d t} = -b * S(t) * I(t)",
     r"\frac{d I(t)}{d t} = b * S(t) * I(t) - k * g * I(t) - (1 - k) * g * I(t)", 
     r"\frac{d R(t)}{d t} = k * g * I(t)",
     r"\frac{d V(t)}{d t} = (1 - k) * g * I(t)"

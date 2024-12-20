@@ -1,0 +1,2073 @@
+{
+  "id": "1a266920-f813-4332-a645-9ba178cdadcb",
+  "createdOn": "2024-12-19T02:46:05.386+00:00",
+  "updatedOn": "2024-12-19T02:47:50.768+00:00",
+  "name": "Model A (local, edited, strat)",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Model A (local, edited, strat)",
+    "description": "Model",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "Eh_eu",
+        "name": "Eh",
+        "description": "Exposed humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "P_eu",
+        "name": "P",
+        "description": "Populations of infectious humans in the prodromal stage",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000156"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Eh_af",
+        "name": "Eh",
+        "description": "Exposed humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "P_af",
+        "name": "P",
+        "description": "Populations of infectious humans in the prodromal stage",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000156"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I1_eu",
+        "name": "I1",
+        "description": "Symptomatically mild infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I1_af",
+        "name": "I1",
+        "description": "Symptomatically mild infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I2_eu",
+        "name": "I2",
+        "description": "Symptomatically severe infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I2_af",
+        "name": "I2",
+        "description": "Symptomatically severe infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "H_eu",
+        "name": "H",
+        "description": "Hospitalised humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "H_af",
+        "name": "H",
+        "description": "Hospitalised humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Rh_eu",
+        "name": "Rh",
+        "description": "Recovered humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Rh_af",
+        "name": "Rh",
+        "description": "Recovered humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Er_eu",
+        "name": "Er",
+        "description": "Exposed rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Er_af",
+        "name": "Er",
+        "description": "Exposed rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Ir_eu",
+        "name": "Ir",
+        "description": "Infectious rodents",
+        "grounding": {
+          "identifiers": {
+            "idomal": "0001267"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Ir_af",
+        "name": "Ir",
+        "description": "Infectious rodents",
+        "grounding": {
+          "identifiers": {
+            "idomal": "0001267"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Rr_eu",
+        "name": "Rr",
+        "description": "Recovered rodents",
+        "grounding": {
+          "identifiers": {
+            "vsmo": "0001595"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Rr_af",
+        "name": "Rr",
+        "description": "Recovered rodents",
+        "grounding": {
+          "identifiers": {
+            "vsmo": "0001595"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Sr_eu",
+        "name": "Sr",
+        "description": "Susceptible rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Sr_af",
+        "name": "Sr",
+        "description": "Susceptible rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Sl_eu",
+        "name": "Sl",
+        "description": "Population of susceptible humans at low-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000234"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Sl_af",
+        "name": "Sl",
+        "description": "Population of susceptible humans at low-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000234"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Sh_eu",
+        "name": "Sh",
+        "description": "Population of susceptible humans at high-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000087"
+          },
+          "modifiers": {
+            "location": "eu"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Sh_af",
+        "name": "Sh",
+        "description": "Population of susceptible humans at high-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000087"
+          },
+          "modifiers": {
+            "location": "af"
+          }
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t1_eu",
+        "input": [
+          "Eh_eu"
+        ],
+        "output": [
+          "Eh_eu",
+          "P_eu"
+        ],
+        "properties": {
+          "name": "t1_eu"
+        }
+      },
+      {
+        "id": "t1_af",
+        "input": [
+          "Eh_af"
+        ],
+        "output": [
+          "Eh_af",
+          "P_af"
+        ],
+        "properties": {
+          "name": "t1_af"
+        }
+      },
+      {
+        "id": "t2_eu",
+        "input": [
+          "P_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t2_eu"
+        }
+      },
+      {
+        "id": "t2_af",
+        "input": [
+          "P_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t2_af"
+        }
+      },
+      {
+        "id": "t3_eu",
+        "input": [
+          "P_eu"
+        ],
+        "output": [
+          "P_eu",
+          "I1_eu"
+        ],
+        "properties": {
+          "name": "t3_eu"
+        }
+      },
+      {
+        "id": "t3_af",
+        "input": [
+          "P_af"
+        ],
+        "output": [
+          "P_af",
+          "I1_af"
+        ],
+        "properties": {
+          "name": "t3_af"
+        }
+      },
+      {
+        "id": "t4_eu",
+        "input": [
+          "I1_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t4_eu"
+        }
+      },
+      {
+        "id": "t4_af",
+        "input": [
+          "I1_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t4_af"
+        }
+      },
+      {
+        "id": "t5_eu",
+        "input": [
+          "I2_eu"
+        ],
+        "output": [
+          "I2_eu",
+          "I2_eu"
+        ],
+        "properties": {
+          "name": "t5_eu"
+        }
+      },
+      {
+        "id": "t5_af",
+        "input": [
+          "I2_af"
+        ],
+        "output": [
+          "I2_af",
+          "I2_af"
+        ],
+        "properties": {
+          "name": "t5_af"
+        }
+      },
+      {
+        "id": "t6_eu",
+        "input": [
+          "I2_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t6_eu"
+        }
+      },
+      {
+        "id": "t6_af",
+        "input": [
+          "I2_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t6_af"
+        }
+      },
+      {
+        "id": "t7_eu",
+        "input": [
+          "H_eu"
+        ],
+        "output": [
+          "H_eu",
+          "H_eu"
+        ],
+        "properties": {
+          "name": "t7_eu"
+        }
+      },
+      {
+        "id": "t7_af",
+        "input": [
+          "H_af"
+        ],
+        "output": [
+          "H_af",
+          "H_af"
+        ],
+        "properties": {
+          "name": "t7_af"
+        }
+      },
+      {
+        "id": "t8_eu",
+        "input": [
+          "H_eu"
+        ],
+        "output": [
+          "H_eu",
+          "H_eu"
+        ],
+        "properties": {
+          "name": "t8_eu"
+        }
+      },
+      {
+        "id": "t8_af",
+        "input": [
+          "H_af"
+        ],
+        "output": [
+          "H_af",
+          "H_af"
+        ],
+        "properties": {
+          "name": "t8_af"
+        }
+      },
+      {
+        "id": "t9_eu",
+        "input": [
+          "H_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t9_eu"
+        }
+      },
+      {
+        "id": "t9_af",
+        "input": [
+          "H_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t9_af"
+        }
+      },
+      {
+        "id": "t10_eu",
+        "input": [
+          "Rh_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t10_eu"
+        }
+      },
+      {
+        "id": "t10_af",
+        "input": [
+          "Rh_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t10_af"
+        }
+      },
+      {
+        "id": "t11_eu",
+        "input": [
+          "I1_eu"
+        ],
+        "output": [
+          "I1_eu",
+          "Rh_eu"
+        ],
+        "properties": {
+          "name": "t11_eu"
+        }
+      },
+      {
+        "id": "t11_af",
+        "input": [
+          "I1_af"
+        ],
+        "output": [
+          "I1_af",
+          "Rh_af"
+        ],
+        "properties": {
+          "name": "t11_af"
+        }
+      },
+      {
+        "id": "t12_eu",
+        "input": [
+          "I2_eu"
+        ],
+        "output": [
+          "I2_eu",
+          "Rh_eu"
+        ],
+        "properties": {
+          "name": "t12_eu"
+        }
+      },
+      {
+        "id": "t12_af",
+        "input": [
+          "I2_af"
+        ],
+        "output": [
+          "I2_af",
+          "Rh_af"
+        ],
+        "properties": {
+          "name": "t12_af"
+        }
+      },
+      {
+        "id": "t13_eu",
+        "input": [
+          "H_eu"
+        ],
+        "output": [
+          "H_eu",
+          "Rh_eu"
+        ],
+        "properties": {
+          "name": "t13_eu"
+        }
+      },
+      {
+        "id": "t13_af",
+        "input": [
+          "H_af"
+        ],
+        "output": [
+          "H_af",
+          "Rh_af"
+        ],
+        "properties": {
+          "name": "t13_af"
+        }
+      },
+      {
+        "id": "t14_eu",
+        "input": [],
+        "output": [
+          "Er_eu"
+        ],
+        "properties": {
+          "name": "t14_eu"
+        }
+      },
+      {
+        "id": "t14_af",
+        "input": [],
+        "output": [
+          "Er_af"
+        ],
+        "properties": {
+          "name": "t14_af"
+        }
+      },
+      {
+        "id": "t15_eu",
+        "input": [
+          "Ir_eu",
+          "Er_eu"
+        ],
+        "output": [
+          "Ir_eu"
+        ],
+        "properties": {
+          "name": "t15_eu"
+        }
+      },
+      {
+        "id": "t15_af",
+        "input": [
+          "Ir_af",
+          "Er_af"
+        ],
+        "output": [
+          "Ir_af"
+        ],
+        "properties": {
+          "name": "t15_af"
+        }
+      },
+      {
+        "id": "t16_eu",
+        "input": [
+          "Rr_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t16_eu"
+        }
+      },
+      {
+        "id": "t16_af",
+        "input": [
+          "Rr_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t16_af"
+        }
+      },
+      {
+        "id": "t17_eu",
+        "input": [
+          "Ir_eu"
+        ],
+        "output": [
+          "Ir_eu",
+          "Rr_eu"
+        ],
+        "properties": {
+          "name": "t17_eu"
+        }
+      },
+      {
+        "id": "t17_af",
+        "input": [
+          "Ir_af"
+        ],
+        "output": [
+          "Ir_af",
+          "Rr_af"
+        ],
+        "properties": {
+          "name": "t17_af"
+        }
+      },
+      {
+        "id": "t18_eu",
+        "input": [
+          "Sr_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t18_eu"
+        }
+      },
+      {
+        "id": "t18_af",
+        "input": [
+          "Sr_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t18_af"
+        }
+      },
+      {
+        "id": "t19_eu",
+        "input": [],
+        "output": [
+          "Sr_eu"
+        ],
+        "properties": {
+          "name": "t19_eu"
+        }
+      },
+      {
+        "id": "t19_af",
+        "input": [],
+        "output": [
+          "Sr_af"
+        ],
+        "properties": {
+          "name": "t19_af"
+        }
+      },
+      {
+        "id": "t20_eu",
+        "input": [
+          "Ir_eu",
+          "Sr_eu"
+        ],
+        "output": [
+          "Ir_eu",
+          "Ir_eu"
+        ],
+        "properties": {
+          "name": "t20_eu"
+        }
+      },
+      {
+        "id": "t20_af",
+        "input": [
+          "Ir_af",
+          "Sr_af"
+        ],
+        "output": [
+          "Ir_af",
+          "Ir_af"
+        ],
+        "properties": {
+          "name": "t20_af"
+        }
+      },
+      {
+        "id": "t21_eu",
+        "input": [
+          "Er_eu",
+          "Ir_eu"
+        ],
+        "output": [
+          "Er_eu"
+        ],
+        "properties": {
+          "name": "t21_eu"
+        }
+      },
+      {
+        "id": "t21_af",
+        "input": [
+          "Er_af",
+          "Ir_af"
+        ],
+        "output": [
+          "Er_af"
+        ],
+        "properties": {
+          "name": "t21_af"
+        }
+      },
+      {
+        "id": "t22_eu",
+        "input": [
+          "Sl_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t22_eu"
+        }
+      },
+      {
+        "id": "t22_af",
+        "input": [
+          "Sl_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t22_af"
+        }
+      },
+      {
+        "id": "t23_eu",
+        "input": [],
+        "output": [
+          "Sl_eu"
+        ],
+        "properties": {
+          "name": "t23_eu"
+        }
+      },
+      {
+        "id": "t23_af",
+        "input": [],
+        "output": [
+          "Sl_af"
+        ],
+        "properties": {
+          "name": "t23_af"
+        }
+      },
+      {
+        "id": "t_eu",
+        "input": [
+          "Ir_eu",
+          "I2_eu",
+          "I1_eu",
+          "P_eu",
+          "Sl_eu"
+        ],
+        "output": [
+          "Ir_eu",
+          "I2_eu",
+          "I1_eu",
+          "P_eu",
+          "Eh_eu"
+        ],
+        "properties": {
+          "name": "t_eu"
+        }
+      },
+      {
+        "id": "t_af",
+        "input": [
+          "Ir_af",
+          "I2_af",
+          "I1_af",
+          "P_af",
+          "Sl_af"
+        ],
+        "output": [
+          "Ir_af",
+          "I2_af",
+          "I1_af",
+          "P_af",
+          "Eh_af"
+        ],
+        "properties": {
+          "name": "t_af"
+        }
+      },
+      {
+        "id": "t25_eu",
+        "input": [
+          "Sh_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t25_eu"
+        }
+      },
+      {
+        "id": "t25_af",
+        "input": [
+          "Sh_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t25_af"
+        }
+      },
+      {
+        "id": "t26_eu",
+        "input": [],
+        "output": [
+          "Sh_eu"
+        ],
+        "properties": {
+          "name": "t26_eu"
+        }
+      },
+      {
+        "id": "t26_af",
+        "input": [],
+        "output": [
+          "Sh_af"
+        ],
+        "properties": {
+          "name": "t26_af"
+        }
+      },
+      {
+        "id": "t_eu",
+        "input": [
+          "Ir_eu",
+          "I2_eu",
+          "I1_eu",
+          "P_eu",
+          "Sh_eu"
+        ],
+        "output": [
+          "Ir_eu",
+          "I2_eu",
+          "I1_eu",
+          "P_eu",
+          "Eh_eu"
+        ],
+        "properties": {
+          "name": "t_eu"
+        }
+      },
+      {
+        "id": "t_af",
+        "input": [
+          "Ir_af",
+          "I2_af",
+          "I1_af",
+          "P_af",
+          "Sh_af"
+        ],
+        "output": [
+          "Ir_af",
+          "I2_af",
+          "I1_af",
+          "P_af",
+          "Eh_af"
+        ],
+        "properties": {
+          "name": "t_af"
+        }
+      },
+      {
+        "id": "t28_eu",
+        "input": [
+          "Eh_eu"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t28_eu"
+        }
+      },
+      {
+        "id": "t28_af",
+        "input": [
+          "Eh_af"
+        ],
+        "output": [],
+        "properties": {
+          "name": "t28_af"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t1_eu",
+          "expression": "Eh_eu*sigma_h_eu",
+          "expression_mathml": "<apply><times/><ci>Eh_eu</ci><ci>sigma_h_eu</ci></apply>"
+        },
+        {
+          "target": "t1_af",
+          "expression": "Eh_af*sigma_h_af",
+          "expression_mathml": "<apply><times/><ci>Eh_af</ci><ci>sigma_h_af</ci></apply>"
+        },
+        {
+          "target": "t2_eu",
+          "expression": "P_eu*(mu_h_eu + omega_eu)",
+          "expression_mathml": "<apply><times/><ci>P_eu</ci><apply><plus/><ci>mu_h_eu</ci><ci>omega_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t2_af",
+          "expression": "P_af*(mu_h_af + omega_af)",
+          "expression_mathml": "<apply><times/><ci>P_af</ci><apply><plus/><ci>mu_h_af</ci><ci>omega_af</ci></apply></apply>"
+        },
+        {
+          "target": "t3_eu",
+          "expression": "P_eu*omega_eu",
+          "expression_mathml": "<apply><times/><ci>P_eu</ci><ci>omega_eu</ci></apply>"
+        },
+        {
+          "target": "t3_af",
+          "expression": "P_af*omega_af",
+          "expression_mathml": "<apply><times/><ci>P_af</ci><ci>omega_af</ci></apply>"
+        },
+        {
+          "target": "t4_eu",
+          "expression": "I1_eu*(k1_eu + mu_h_eu + tau1_eu + theta_eu)",
+          "expression_mathml": "<apply><times/><ci>I1_eu</ci><apply><plus/><ci>k1_eu</ci><ci>mu_h_eu</ci><ci>tau1_eu</ci><ci>theta_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t4_af",
+          "expression": "I1_af*(k1_af + mu_h_af + tau1_af + theta_af)",
+          "expression_mathml": "<apply><times/><ci>I1_af</ci><apply><plus/><ci>k1_af</ci><ci>mu_h_af</ci><ci>tau1_af</ci><ci>theta_af</ci></apply></apply>"
+        },
+        {
+          "target": "t5_eu",
+          "expression": "I1*theta_eu",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>theta_eu</ci></apply>"
+        },
+        {
+          "target": "t5_af",
+          "expression": "I1*theta_af",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>theta_af</ci></apply>"
+        },
+        {
+          "target": "t6_eu",
+          "expression": "I2_eu*(delta_i_eu + k2_eu + mu_h_eu + tau2_eu)",
+          "expression_mathml": "<apply><times/><ci>I2_eu</ci><apply><plus/><ci>delta_i_eu</ci><ci>k2_eu</ci><ci>mu_h_eu</ci><ci>tau2_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t6_af",
+          "expression": "I2_af*(delta_i_af + k2_af + mu_h_af + tau2_af)",
+          "expression_mathml": "<apply><times/><ci>I2_af</ci><apply><plus/><ci>delta_i_af</ci><ci>k2_af</ci><ci>mu_h_af</ci><ci>tau2_af</ci></apply></apply>"
+        },
+        {
+          "target": "t7_eu",
+          "expression": "I1*k1_eu",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>k1_eu</ci></apply>"
+        },
+        {
+          "target": "t7_af",
+          "expression": "I1*k1_af",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>k1_af</ci></apply>"
+        },
+        {
+          "target": "t8_eu",
+          "expression": "I2*k2_eu",
+          "expression_mathml": "<apply><times/><ci>I2</ci><ci>k2_eu</ci></apply>"
+        },
+        {
+          "target": "t8_af",
+          "expression": "I2*k2_af",
+          "expression_mathml": "<apply><times/><ci>I2</ci><ci>k2_af</ci></apply>"
+        },
+        {
+          "target": "t9_eu",
+          "expression": "H_eu*(delta_h_eu + mu_h_eu + tau3_eu)",
+          "expression_mathml": "<apply><times/><ci>H_eu</ci><apply><plus/><ci>delta_h_eu</ci><ci>mu_h_eu</ci><ci>tau3_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t9_af",
+          "expression": "H_af*(delta_h_af + mu_h_af + tau3_af)",
+          "expression_mathml": "<apply><times/><ci>H_af</ci><apply><plus/><ci>delta_h_af</ci><ci>mu_h_af</ci><ci>tau3_af</ci></apply></apply>"
+        },
+        {
+          "target": "t10_eu",
+          "expression": "Rh_eu*mu_h_eu",
+          "expression_mathml": "<apply><times/><ci>Rh_eu</ci><ci>mu_h_eu</ci></apply>"
+        },
+        {
+          "target": "t10_af",
+          "expression": "Rh_af*mu_h_af",
+          "expression_mathml": "<apply><times/><ci>Rh_af</ci><ci>mu_h_af</ci></apply>"
+        },
+        {
+          "target": "t11_eu",
+          "expression": "I1_eu*tau1_eu",
+          "expression_mathml": "<apply><times/><ci>I1_eu</ci><ci>tau1_eu</ci></apply>"
+        },
+        {
+          "target": "t11_af",
+          "expression": "I1_af*tau1_af",
+          "expression_mathml": "<apply><times/><ci>I1_af</ci><ci>tau1_af</ci></apply>"
+        },
+        {
+          "target": "t12_eu",
+          "expression": "I2_eu*tau2_eu",
+          "expression_mathml": "<apply><times/><ci>I2_eu</ci><ci>tau2_eu</ci></apply>"
+        },
+        {
+          "target": "t12_af",
+          "expression": "I2_af*tau2_af",
+          "expression_mathml": "<apply><times/><ci>I2_af</ci><ci>tau2_af</ci></apply>"
+        },
+        {
+          "target": "t13_eu",
+          "expression": "H_eu*tau3_eu",
+          "expression_mathml": "<apply><times/><ci>H_eu</ci><ci>tau3_eu</ci></apply>"
+        },
+        {
+          "target": "t13_af",
+          "expression": "H_af*tau3_af",
+          "expression_mathml": "<apply><times/><ci>H_af</ci><ci>tau3_af</ci></apply>"
+        },
+        {
+          "target": "t14_eu",
+          "expression": "Er_eu*sigma_r_eu",
+          "expression_mathml": "<apply><times/><ci>Er_eu</ci><ci>sigma_r_eu</ci></apply>"
+        },
+        {
+          "target": "t14_af",
+          "expression": "Er_af*sigma_r_af",
+          "expression_mathml": "<apply><times/><ci>Er_af</ci><ci>sigma_r_af</ci></apply>"
+        },
+        {
+          "target": "t15_eu",
+          "expression": "Ir_eu*(delta_r_eu + mu_r_eu + tau_r_eu)",
+          "expression_mathml": "<apply><times/><ci>Ir_eu</ci><apply><plus/><ci>delta_r_eu</ci><ci>mu_r_eu</ci><ci>tau_r_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t15_af",
+          "expression": "Ir_af*(delta_r_af + mu_r_af + tau_r_af)",
+          "expression_mathml": "<apply><times/><ci>Ir_af</ci><apply><plus/><ci>delta_r_af</ci><ci>mu_r_af</ci><ci>tau_r_af</ci></apply></apply>"
+        },
+        {
+          "target": "t16_eu",
+          "expression": "Rr_eu*mu_r_eu",
+          "expression_mathml": "<apply><times/><ci>Rr_eu</ci><ci>mu_r_eu</ci></apply>"
+        },
+        {
+          "target": "t16_af",
+          "expression": "Rr_af*mu_r_af",
+          "expression_mathml": "<apply><times/><ci>Rr_af</ci><ci>mu_r_af</ci></apply>"
+        },
+        {
+          "target": "t17_eu",
+          "expression": "Ir_eu*tau_r_eu",
+          "expression_mathml": "<apply><times/><ci>Ir_eu</ci><ci>tau_r_eu</ci></apply>"
+        },
+        {
+          "target": "t17_af",
+          "expression": "Ir_af*tau_r_af",
+          "expression_mathml": "<apply><times/><ci>Ir_af</ci><ci>tau_r_af</ci></apply>"
+        },
+        {
+          "target": "t18_eu",
+          "expression": "Sr_eu*mu_r_eu",
+          "expression_mathml": "<apply><times/><ci>Sr_eu</ci><ci>mu_r_eu</ci></apply>"
+        },
+        {
+          "target": "t18_af",
+          "expression": "Sr_af*mu_r_af",
+          "expression_mathml": "<apply><times/><ci>Sr_af</ci><ci>mu_r_af</ci></apply>"
+        },
+        {
+          "target": "t19_eu",
+          "expression": "pi_r_eu",
+          "expression_mathml": "<ci>pi_r_eu</ci>"
+        },
+        {
+          "target": "t19_af",
+          "expression": "pi_r_af",
+          "expression_mathml": "<ci>pi_r_af</ci>"
+        },
+        {
+          "target": "t20_eu",
+          "expression": "Ir_eu*Sr_eu*beta_rr_eu/Nr_eu",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>Ir_eu</ci><ci>Sr_eu</ci><ci>beta_rr_eu</ci></apply><ci>Nr_eu</ci></apply>"
+        },
+        {
+          "target": "t20_af",
+          "expression": "Ir_af*Sr_af*beta_rr_af/Nr_af",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>Ir_af</ci><ci>Sr_af</ci><ci>beta_rr_af</ci></apply><ci>Nr_af</ci></apply>"
+        },
+        {
+          "target": "t21_eu",
+          "expression": "Er_eu*(mu_r_eu + sigma_r_eu)",
+          "expression_mathml": "<apply><times/><ci>Er_eu</ci><apply><plus/><ci>mu_r_eu</ci><ci>sigma_r_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t21_af",
+          "expression": "Er_af*(mu_r_af + sigma_r_af)",
+          "expression_mathml": "<apply><times/><ci>Er_af</ci><apply><plus/><ci>mu_r_af</ci><ci>sigma_r_af</ci></apply></apply>"
+        },
+        {
+          "target": "t22_eu",
+          "expression": "Sl_eu*mu_h_eu",
+          "expression_mathml": "<apply><times/><ci>Sl_eu</ci><ci>mu_h_eu</ci></apply>"
+        },
+        {
+          "target": "t22_af",
+          "expression": "Sl_af*mu_h_af",
+          "expression_mathml": "<apply><times/><ci>Sl_af</ci><ci>mu_h_af</ci></apply>"
+        },
+        {
+          "target": "t23_eu",
+          "expression": "pi_h_eu*(1 - rho_eu)",
+          "expression_mathml": "<apply><times/><ci>pi_h_eu</ci><apply><minus/><cn>1</cn><ci>rho_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t23_af",
+          "expression": "pi_h_af*(1 - rho_af)",
+          "expression_mathml": "<apply><times/><ci>pi_h_af</ci><apply><minus/><cn>1</cn><ci>rho_af</ci></apply></apply>"
+        },
+        {
+          "target": "t_eu",
+          "expression": "Sl_eu*v_eu*(Ir_eu*beta_rh_eu/Nr_eu + beta_hh_eu*(I1_eu*eta_eu + I2_eu + P_eu*alpha_eu)/Nh_eu)",
+          "expression_mathml": "<apply><times/><ci>Sl_eu</ci><ci>v_eu</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir_eu</ci><ci>beta_rh_eu</ci></apply><ci>Nr_eu</ci></apply><apply><divide/><apply><times/><ci>beta_hh_eu</ci><apply><plus/><apply><times/><ci>I1_eu</ci><ci>eta_eu</ci></apply><ci>I2_eu</ci><apply><times/><ci>P_eu</ci><ci>alpha_eu</ci></apply></apply></apply><ci>Nh_eu</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t_af",
+          "expression": "Sl_af*v_af*(Ir_af*beta_rh_af/Nr_af + beta_hh_af*(I1_af*eta_af + I2_af + P_af*alpha_af)/Nh_af)",
+          "expression_mathml": "<apply><times/><ci>Sl_af</ci><ci>v_af</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir_af</ci><ci>beta_rh_af</ci></apply><ci>Nr_af</ci></apply><apply><divide/><apply><times/><ci>beta_hh_af</ci><apply><plus/><apply><times/><ci>I1_af</ci><ci>eta_af</ci></apply><ci>I2_af</ci><apply><times/><ci>P_af</ci><ci>alpha_af</ci></apply></apply></apply><ci>Nh_af</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t25_eu",
+          "expression": "Sh_eu*mu_h_eu",
+          "expression_mathml": "<apply><times/><ci>Sh_eu</ci><ci>mu_h_eu</ci></apply>"
+        },
+        {
+          "target": "t25_af",
+          "expression": "Sh_af*mu_h_af",
+          "expression_mathml": "<apply><times/><ci>Sh_af</ci><ci>mu_h_af</ci></apply>"
+        },
+        {
+          "target": "t26_eu",
+          "expression": "pi_h_eu*rho_eu",
+          "expression_mathml": "<apply><times/><ci>pi_h_eu</ci><ci>rho_eu</ci></apply>"
+        },
+        {
+          "target": "t26_af",
+          "expression": "pi_h_af*rho_af",
+          "expression_mathml": "<apply><times/><ci>pi_h_af</ci><ci>rho_af</ci></apply>"
+        },
+        {
+          "target": "t_eu",
+          "expression": "Sh_eu*(Ir_eu*beta_rh_eu/Nr_eu + beta_hh_eu*(I1_eu*eta_eu + I2_eu + P_eu*alpha_eu)/Nh_eu)",
+          "expression_mathml": "<apply><times/><ci>Sh_eu</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir_eu</ci><ci>beta_rh_eu</ci></apply><ci>Nr_eu</ci></apply><apply><divide/><apply><times/><ci>beta_hh_eu</ci><apply><plus/><apply><times/><ci>I1_eu</ci><ci>eta_eu</ci></apply><ci>I2_eu</ci><apply><times/><ci>P_eu</ci><ci>alpha_eu</ci></apply></apply></apply><ci>Nh_eu</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t_af",
+          "expression": "Sh_af*(Ir_af*beta_rh_af/Nr_af + beta_hh_af*(I1_af*eta_af + I2_af + P_af*alpha_af)/Nh_af)",
+          "expression_mathml": "<apply><times/><ci>Sh_af</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir_af</ci><ci>beta_rh_af</ci></apply><ci>Nr_af</ci></apply><apply><divide/><apply><times/><ci>beta_hh_af</ci><apply><plus/><apply><times/><ci>I1_af</ci><ci>eta_af</ci></apply><ci>I2_af</ci><apply><times/><ci>P_af</ci><ci>alpha_af</ci></apply></apply></apply><ci>Nh_af</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t28_eu",
+          "expression": "Eh_eu*(mu_h_eu + sigma_h_eu)",
+          "expression_mathml": "<apply><times/><ci>Eh_eu</ci><apply><plus/><ci>mu_h_eu</ci><ci>sigma_h_eu</ci></apply></apply>"
+        },
+        {
+          "target": "t28_af",
+          "expression": "Eh_af*(mu_h_af + sigma_h_af)",
+          "expression_mathml": "<apply><times/><ci>Eh_af</ci><apply><plus/><ci>mu_h_af</ci><ci>sigma_h_af</ci></apply></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "Eh_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "P_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Eh_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "P_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "I1_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "I1_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "I2_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "I2_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "H_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "H_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Rh_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Rh_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Er_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Er_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Ir_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Ir_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Rr_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Rr_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sr_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sr_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sl_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sl_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sh_eu",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        },
+        {
+          "target": "Sh_af",
+          "expression": "0.5",
+          "expression_mathml": "<cn>0.5</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "sigma_h_eu",
+          "description": "Progression rate from exposed to prodromal stage in humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "sigma_h_af",
+          "description": "Progression rate from exposed to prodromal stage in humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "mu_h_eu",
+          "description": "Human natural death rate",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "omega_eu",
+          "description": "Rate at which mpoxv progresses from P to I1",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "mu_h_af",
+          "description": "Human natural death rate",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "omega_af",
+          "description": "Rate at which mpoxv progresses from P to I1",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "k1_eu",
+          "description": "Hospitalisation rate for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau1_eu",
+          "description": "Recovery rate for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "theta_eu",
+          "description": "Progression rate from mild to severe disease",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "k1_af",
+          "description": "Hospitalisation rate for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau1_af",
+          "description": "Recovery rate for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "theta_af",
+          "description": "Progression rate from mild to severe disease",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_i_eu",
+          "description": "mpoxv-induced death rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "k2_eu",
+          "description": "Hospitalisation rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau2_eu",
+          "description": "Recovery rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_i_af",
+          "description": "mpoxv-induced death rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "k2_af",
+          "description": "Hospitalisation rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau2_af",
+          "description": "Recovery rate for severe infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_h_eu",
+          "description": "mpoxv-induced death rate for hospitalised humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau3_eu",
+          "description": "Recovery rate for hospitalised humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_h_af",
+          "description": "mpoxv-induced death rate for hospitalised humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau3_af",
+          "description": "Recovery rate for hospitalised humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "sigma_r_eu",
+          "description": "Progression rate from exposed to infectious stage in rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "sigma_r_af",
+          "description": "Progression rate from exposed to infectious stage in rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_r_eu",
+          "description": "mpoxv-induced death rate for infectious rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "mu_r_eu",
+          "description": "Rodent natural death rate",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau_r_eu",
+          "description": "Recovery rate for infectious rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "delta_r_af",
+          "description": "mpoxv-induced death rate for infectious rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "mu_r_af",
+          "description": "Rodent natural death rate",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "tau_r_af",
+          "description": "Recovery rate for infectious rodents",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "pi_r_eu",
+          "description": "Rodent recruitment rate",
+          "value": 1,
+          "units": {
+            "expression": "rodent/day",
+            "expression_mathml": "<apply><divide/><ci>rodent</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "pi_r_af",
+          "description": "Rodent recruitment rate",
+          "value": 1,
+          "units": {
+            "expression": "rodent/day",
+            "expression_mathml": "<apply><divide/><ci>rodent</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "Nr_eu",
+          "description": "Total rodent population",
+          "value": 1,
+          "units": {
+            "expression": "rodent",
+            "expression_mathml": "<ci>rodent</ci>"
+          }
+        },
+        {
+          "id": "beta_rr_eu",
+          "description": "Rodent-to-rodent transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*rodent)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>rodent</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "Nr_af",
+          "description": "Total rodent population",
+          "value": 1,
+          "units": {
+            "expression": "rodent",
+            "expression_mathml": "<ci>rodent</ci>"
+          }
+        },
+        {
+          "id": "beta_rr_af",
+          "description": "Rodent-to-rodent transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*rodent)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>rodent</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "pi_h_eu",
+          "description": "Human recruitment rate",
+          "value": 1,
+          "units": {
+            "expression": "person/day",
+            "expression_mathml": "<apply><divide/><ci>person</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "rho_eu",
+          "description": "Fraction of newly recruited humans moving to high-risk population",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "pi_h_af",
+          "description": "Human recruitment rate",
+          "value": 1,
+          "units": {
+            "expression": "person/day",
+            "expression_mathml": "<apply><divide/><ci>person</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "rho_af",
+          "description": "Fraction of newly recruited humans moving to high-risk population",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "Nh_eu",
+          "description": "Overall human population",
+          "value": 1,
+          "units": {
+            "expression": "person",
+            "expression_mathml": "<ci>person</ci>"
+          }
+        },
+        {
+          "id": "alpha_eu",
+          "description": "Modification parameter for human-to-human transmission",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "beta_hh_eu",
+          "description": "Human-to-human transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*person)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "beta_rh_eu",
+          "description": "Rodent-to-human transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*person)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "eta_eu",
+          "description": "Modification parameter for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "v_eu",
+          "description": "Rate of reduction in infectiousness from low-risk susceptible humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        },
+        {
+          "id": "Nh_af",
+          "description": "Overall human population",
+          "value": 1,
+          "units": {
+            "expression": "person",
+            "expression_mathml": "<ci>person</ci>"
+          }
+        },
+        {
+          "id": "alpha_af",
+          "description": "Modification parameter for human-to-human transmission",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "beta_hh_af",
+          "description": "Human-to-human transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*person)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "beta_rh_af",
+          "description": "Rodent-to-human transmission rate",
+          "value": 1,
+          "units": {
+            "expression": "1/(day*person)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "eta_af",
+          "description": "Modification parameter for mild infectious humans",
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "v_af",
+          "description": "Rate of reduction in infectiousness from low-risk susceptible humans",
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+          }
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t"
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgbW9kZWwgZGVzY3JpYmVkIGluIHRoZSBkb2N1bWVudCBpcyBhbiBTRUlSLWJhc2VkIGRldGVybWluaXN0aWMgbW9kZWwgZGVzaWduZWQgdG8gc3R1ZHkgdGhlIHRyYW5zbWlzc2lvbiBkeW5hbWljcyBvZiB0aGUgbW9ua2V5cG94IHZpcnVzIChtcG94dikuIEl0IGluY29ycG9yYXRlcyB2YXJpb3VzIHN0YWdlcyBvZiBpbmZlY3Rpb24sIGluY2x1ZGluZyBwcm9kcm9tYWwsIG1pbGQsIGFuZCBzZXZlcmUgc3RhZ2VzLCBhbmQgY29uc2lkZXJzIGJvdGggaHVtYW4tdG8taHVtYW4gYW5kIGFuaW1hbC10by1odW1hbiB0cmFuc21pc3Npb24gcm91dGVzLiBUaGUgbW9kZWwgaXMgdXNlZCB0byBjb21wdXRlIHRoZSBiYXNpYyByZXByb2R1Y3Rpb24gbnVtYmVyIChSMCkgYW5kIGFuYWx5emUgdGhlIHN0YWJpbGl0eSBvZiBlcXVpbGlicml1bSBzdGF0ZXMuIFNlbnNpdGl2aXR5IGFuYWx5c2lzIGlzIHBlcmZvcm1lZCB1c2luZyB0aGUgcGFydGlhbCByYW5rIGNvcnJlbGF0aW9uIGNvZWZmaWNpZW50IHRvIGlkZW50aWZ5IGtleSBwYXJhbWV0ZXJzIGFmZmVjdGluZyB0aGUgc3ByZWFkIG9mIG1wb3h2LiBUaGUgbW9kZWwgaXMgdmFsaWRhdGVkIHVzaW5nIHJlYWwtd29ybGQgZGF0YSBmcm9tIE5pZ2VyaWEgYW5kIGlzIHVzZWQgdG8gc2ltdWxhdGUgdGhlIGltcGFjdCBvZiBkaWZmZXJlbnQgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMuIFRoZSBtb2RlbCBjYW4gbGlrZWx5IGJlIHJlcHJlc2VudGVkIGluIFBldHJpIE5ldCBmb3JtYXQsIGFzIGl0IGluY2x1ZGVzIHN0YXRlcyBhbmQgdHJhbnNpdGlvbnMgdGhhdCBjYW4gYmUgbWFwcGVkIHRvIHBsYWNlcyBhbmQgdHJhbnNpdGlvbnMgaW4gYSBQZXRyaSBOZXQuPC9wPjxicj4KPGgyPlNwZWNzPC9oMj4KPGg0PkRvbWFpbjwvaDQ+Cjx1bD4KPGxpPkVwaWRlbWlvbG9neTwvbGk+CjxsaT5JbmZlY3Rpb3VzIERpc2Vhc2VzPC9saT4KPGxpPlB1YmxpYyBIZWFsdGg8L2xpPgo8L3VsPjxicj4KPGg0PlR5cGU8L2g0Pgo8cD5NYXRoZW1hdGljYWwgTW9kZWw8L3A+PGJyPgo8aDQ+U3BlY2lmaWNhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCBpbmNsdWRlcyBzdGF0ZXMgc3VjaCBhcyBzdXNjZXB0aWJsZSwgZXhwb3NlZCwgcHJvZHJvbWFsLCBtaWxkIGluZmVjdGlvdXMsIHNldmVyZSBpbmZlY3Rpb3VzLCBob3NwaXRhbGl6ZWQsIGFuZCByZWNvdmVyZWQgZm9yIGJvdGggaHVtYW5zIGFuZCByb2RlbnRzLiBJdCBoYXMgcGFyYW1ldGVycyBmb3IgdHJhbnNtaXNzaW9uIHJhdGVzLCBwcm9ncmVzc2lvbiByYXRlcywgYW5kIHJlY292ZXJ5IHJhdGVzLiBUaGUgbW9kZWwgaXMgY29tcGxleCwgd2l0aCBtdWx0aXBsZSBjb21wYXJ0bWVudHMgYW5kIGludGVyYWN0aW9ucyBiZXR3ZWVuIGh1bWFuIGFuZCByb2RlbnQgcG9wdWxhdGlvbnMuPC9wPjxicj4KPGg0PlN0YXRlczwvaDQ+Cjx1bD4KPGxpPlN1c2NlcHRpYmxlIChTaCwgU2wpOiBSZXByZXNlbnRzIGluZGl2aWR1YWxzIGF0IGhpZ2ggYW5kIGxvdyByaXNrIG9mIGluZmVjdGlvbi4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gZXhwb3NlZCBzdGF0ZSB1cG9uIGluZmVjdGlvbi48L2xpPgo8bGk+RXhwb3NlZCAoRWgpOiBJbmRpdmlkdWFscyB3aG8gaGF2ZSBiZWVuIGV4cG9zZWQgdG8gdGhlIHZpcnVzIGJ1dCBhcmUgbm90IHlldCBpbmZlY3Rpb3VzLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBUcmFuc2l0aW9ucyB0byBwcm9kcm9tYWwgc3RhdGUuPC9saT4KPGxpPlByb2Ryb21hbCAoUCk6IEFzeW1wdG9tYXRpYyBpbmRpdmlkdWFscyB3aG8gY2FuIHRyYW5zbWl0IHRoZSB2aXJ1cy4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gbWlsZCBpbmZlY3Rpb3VzIHN0YXRlLjwvbGk+CjxsaT5NaWxkIEluZmVjdGlvdXMgKEkxKTogSW5kaXZpZHVhbHMgd2l0aCBtaWxkIHN5bXB0b21zLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBDYW4gdHJhbnNpdGlvbiB0byBzZXZlcmUgaW5mZWN0aW91cyBvciBob3NwaXRhbGl6ZWQgc3RhdGUuPC9saT4KPGxpPlNldmVyZSBJbmZlY3Rpb3VzIChJMik6IEluZGl2aWR1YWxzIHdpdGggc2V2ZXJlIHN5bXB0b21zLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBDYW4gdHJhbnNpdGlvbiB0byBob3NwaXRhbGl6ZWQgc3RhdGUuPC9saT4KPGxpPkhvc3BpdGFsaXplZCAoSCk6IEluZGl2aWR1YWxzIHJlY2VpdmluZyB0cmVhdG1lbnQgaW4gYSBob3NwaXRhbC4gTWVhc3VyZWQgaW4gcGVyc29ucy4gQ2FuIHRyYW5zaXRpb24gdG8gcmVjb3ZlcmVkIHN0YXRlLjwvbGk+CjxsaT5SZWNvdmVyZWQgKFJoKTogSW5kaXZpZHVhbHMgd2hvIGhhdmUgcmVjb3ZlcmVkIGZyb20gdGhlIGluZmVjdGlvbi4gTWVhc3VyZWQgaW4gcGVyc29ucy4gTm8gZnVydGhlciB0cmFuc2l0aW9ucy48L2xpPgo8L3VsPjxicj4KPGg0PlBhcmFtZXRlcnM8L2g0Pgo8dWw+CjxsaT5UcmFuc21pc3Npb24gUmF0ZSAozrJoaCwgzrJyaCwgzrJycik6IFJhdGUgYXQgd2hpY2ggdGhlIHZpcnVzIGlzIHRyYW5zbWl0dGVkIGJldHdlZW4gaHVtYW5zLCBmcm9tIHJvZGVudHMgdG8gaHVtYW5zLCBhbmQgYmV0d2VlbiByb2RlbnRzLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5Qcm9ncmVzc2lvbiBSYXRlICjPg2gsIM+Dcik6IFJhdGUgYXQgd2hpY2ggZXhwb3NlZCBpbmRpdmlkdWFscyBwcm9ncmVzcyB0byB0aGUgcHJvZHJvbWFsIHN0YWdlLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5SZWNvdmVyeSBSYXRlICjPhDEsIM+EMiwgz4QzLCDPhHIpOiBSYXRlIGF0IHdoaWNoIGluZGl2aWR1YWxzIHJlY292ZXIgZnJvbSB0aGUgaW5mZWN0aW9uLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5Ib3NwaXRhbGl6YXRpb24gUmF0ZSAoazEsIGsyKTogUmF0ZSBhdCB3aGljaCBpbmRpdmlkdWFscyBhcmUgaG9zcGl0YWxpemVkLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5EZWF0aCBSYXRlICjOtGksIM60aCwgzrRyKTogUmF0ZSBhdCB3aGljaCBpbmRpdmlkdWFscyBkaWUgZnJvbSB0aGUgaW5mZWN0aW9uLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjwvdWw+PGJyPgo8aDI+VXNlczwvaDI+CjxoND5EaXJlY3QgVXNlPC9oND4KPHA+VGhlIG1vZGVsIGNhbiBiZSB1c2VkIHRvIHNpbXVsYXRlIHRoZSBzcHJlYWQgb2YgbW9ua2V5cG94IHZpcnVzIGluIGRpZmZlcmVudCBwb3B1bGF0aW9ucyBhbmQgZXZhbHVhdGUgdGhlIGVmZmVjdGl2ZW5lc3Mgb2YgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMgc3VjaCBhcyB2YWNjaW5hdGlvbiBhbmQgaXNvbGF0aW9uLjwvcD48YnI+CjxoND5PdXQgT2YgU2NvcGUgVXNlPC9oND4KPHA+VGhlIG1vZGVsIHNob3VsZCBub3QgYmUgdXNlZCB0byBwcmVkaWN0IGluZGl2aWR1YWwtbGV2ZWwgb3V0Y29tZXMgb3IgdG8gbWFrZSBjbGluaWNhbCBkZWNpc2lvbnMgZm9yIHNwZWNpZmljIHBhdGllbnRzLjwvcD48YnI+CjxoMj5CaWFzIFJpc2tzIExpbWl0YXRpb25zPC9oMj4KPGg0PkJpYXNlczwvaDQ+CjxwPlRoZSBtb2RlbCBhc3N1bWVzIGhvbW9nZW5lb3VzIG1peGluZyB3aXRoaW4gcG9wdWxhdGlvbnMsIHdoaWNoIG1heSBub3QgYWNjdXJhdGVseSByZWZsZWN0IHJlYWwtd29ybGQgY29udGFjdCBwYXR0ZXJucy48L3A+PGJyPgo8aDQ+Umlza3M8L2g0Pgo8cD5UaGUgbW9kZWwncyBwcmVkaWN0aW9ucyBhcmUgc2Vuc2l0aXZlIHRvIHBhcmFtZXRlciBlc3RpbWF0ZXMsIHdoaWNoIG1heSB2YXJ5IGJhc2VkIG9uIGRhdGEgcXVhbGl0eSBhbmQgYXZhaWxhYmlsaXR5LjwvcD48YnI+CjxoND5MaW1pdGF0aW9uczwvaDQ+CjxwPlRoZSBtb2RlbCBkb2VzIG5vdCBhY2NvdW50IGZvciBwb3RlbnRpYWwgY2hhbmdlcyBpbiB2aXJ1cyB0cmFuc21pc3NpYmlsaXR5IG9yIHZpcnVsZW5jZSBvdmVyIHRpbWUuPC9wPjxicj4KPGgyPlRlc3Rpbmc8L2gyPgo8aDQ+VmFsaWRhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCB3YXMgdmFsaWRhdGVkIHVzaW5nIGVwaWRlbWlvbG9naWNhbCBkYXRhIGZyb20gTmlnZXJpYSwgY29tcGFyaW5nIG1vZGVsIHByZWRpY3Rpb25zIHdpdGggb2JzZXJ2ZWQgY2FzZSBjb3VudHMuPC9wPjxicj4KPGg0Pk1ldHJpY3M8L2g0Pgo8cD5NZXRyaWNzIHVzZWQgaW5jbHVkZSB0aGUgYmFzaWMgcmVwcm9kdWN0aW9uIG51bWJlciAoUjApIGFuZCB0aGUgZml0IG9mIG1vZGVsIHByZWRpY3Rpb25zIHRvIG9ic2VydmVkIGRhdGEuPC9wPjxicj4KPGgyPkdldHRpbmcgU3RhcnRlZDwvaDI+CjxoND5TdGVwczwvaDQ+Cjx1bD4KPGxpPlJldmlldyB0aGUgbW9kZWwgc3RydWN0dXJlIGFuZCBwYXJhbWV0ZXJzIGluIHRoZSBwcm92aWRlZCBkb2N1bWVudGF0aW9uLjwvbGk+CjxsaT5JbnN0YWxsIG5lY2Vzc2FyeSBzb2Z0d2FyZSBmb3IgcnVubmluZyBzaW11bGF0aW9ucywgc3VjaCBhcyBSIG9yIFB5dGhvbi48L2xpPgo8bGk+TG9hZCB0aGUgbW9kZWwgY29kZSBhbmQgaW5wdXQgcGFyYW1ldGVyIHZhbHVlcyBiYXNlZCBvbiB0aGUgc3R1ZHkgY29udGV4dC48L2xpPgo8bGk+UnVuIHNpbXVsYXRpb25zIHRvIGV4cGxvcmUgZGlmZmVyZW50IHNjZW5hcmlvcyBhbmQgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMuPC9saT4KPGxpPkFuYWx5emUgdGhlIG91dHB1dCB0byBhc3Nlc3MgdGhlIGltcGFjdCBvZiBpbnRlcnZlbnRpb25zIG9uIHZpcnVzIHRyYW5zbWlzc2lvbi48L2xpPgo8L3VsPjxicj4KPGgyPkdsb3NzYXJ5PC9oMj4KPHVsPgo8bGk+U0VJUiBNb2RlbDogQSBjb21wYXJ0bWVudGFsIG1vZGVsIGluIGVwaWRlbWlvbG9neSB0aGF0IGRpdmlkZXMgdGhlIHBvcHVsYXRpb24gaW50byBzdXNjZXB0aWJsZSwgZXhwb3NlZCwgaW5mZWN0aW91cywgYW5kIHJlY292ZXJlZCBjb21wYXJ0bWVudHMuPC9saT4KPGxpPkJhc2ljIFJlcHJvZHVjdGlvbiBOdW1iZXIgKFIwKTogVGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHNlY29uZGFyeSBpbmZlY3Rpb25zIHByb2R1Y2VkIGJ5IGEgc2luZ2xlIGluZmVjdGVkIGluZGl2aWR1YWwgaW4gYSBjb21wbGV0ZWx5IHN1c2NlcHRpYmxlIHBvcHVsYXRpb24uPC9saT4KPGxpPlByb2Ryb21hbCBTdGFnZTogVGhlIGVhcmx5IHN0YWdlIG9mIGFuIGluZmVjdGlvdXMgZGlzZWFzZSB3aGVyZSBzeW1wdG9tcyBhcmUgbm90IHlldCBmdWxseSBkZXZlbG9wZWQgYnV0IHRoZSBpbmRpdmlkdWFsIGlzIGluZmVjdGlvdXMuPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+TW9oYW1tZWQgTS4gQWwtU2hvbXJhbmk8L2xpPgo8bGk+U2FsaWh1IFMuIE11c2E8L2xpPgo8bGk+QWJkdWxsYWhpIFl1c3VmPC9saT4KPC91bD48YnI+CjxoMj5DaXRhdGlvbnM8L2gyPgo8dWw+CjxsaT5BbC1TaG9tcmFuaSwgTS5NLjsgTXVzYSwgUy5TLjsgWXVzdWYsIEEuIFVuZm9sZGluZyB0aGUgVHJhbnNtaXNzaW9uIER5bmFtaWNzIG9mIE1vbmtleXBveCBWaXJ1czogQW4gRXBpZGVtaW9sb2dpY2FsIE1vZGVsbGluZyBBbmFseXNpcy4gTWF0aGVtYXRpY3MgMjAyMywgMTEsIDExMjEuPC9saT4KPC91bD48YnI+CjxoMj5Nb3JlIEluZm9ybWF0aW9uPC9oMj4KPGg0PkZ1bmRlZCBCeTwvaDQ+CjxwPkluc3RpdHV0aW9uYWwgRnVuZCBQcm9qZWN0cyB1bmRlciBncmFudCBuby4gKElGUElQOiA3NzMtMTMwLTE0NDMpPC9wPjxicj4KPGg0PkxpbmtzPC9oND4KPHVsPgo8bGk+aHR0cHM6Ly93d3cubWRwaS5jb20vam91cm5hbC9tYXRoZW1hdGljczwvbGk+CjwvdWw+PGJyPgo=",
+    "gollmCard": {
+      "summary": "The model described in the document is an SEIR-based deterministic model designed to study the transmission dynamics of the monkeypox virus (mpoxv). It incorporates various stages of infection, including prodromal, mild, and severe stages, and considers both human-to-human and animal-to-human transmission routes. The model is used to compute the basic reproduction number (R0) and analyze the stability of equilibrium states. Sensitivity analysis is performed using the partial rank correlation coefficient to identify key parameters affecting the spread of mpoxv. The model is validated using real-world data from Nigeria and is used to simulate the impact of different intervention strategies. The model can likely be represented in Petri Net format, as it includes states and transitions that can be mapped to places and transitions in a Petri Net.",
+      "specs": {
+        "domain": [
+          "Epidemiology",
+          "Infectious Diseases",
+          "Public Health"
+        ],
+        "type": "Mathematical Model",
+        "specification": "The model includes states such as susceptible, exposed, prodromal, mild infectious, severe infectious, hospitalized, and recovered for both humans and rodents. It has parameters for transmission rates, progression rates, and recovery rates. The model is complex, with multiple compartments and interactions between human and rodent populations.",
+        "states": [
+          "Susceptible (Sh, Sl): Represents individuals at high and low risk of infection. Measured in persons. Transitions to exposed state upon infection.",
+          "Exposed (Eh): Individuals who have been exposed to the virus but are not yet infectious. Measured in persons. Transitions to prodromal state.",
+          "Prodromal (P): Asymptomatic individuals who can transmit the virus. Measured in persons. Transitions to mild infectious state.",
+          "Mild Infectious (I1): Individuals with mild symptoms. Measured in persons. Can transition to severe infectious or hospitalized state.",
+          "Severe Infectious (I2): Individuals with severe symptoms. Measured in persons. Can transition to hospitalized state.",
+          "Hospitalized (H): Individuals receiving treatment in a hospital. Measured in persons. Can transition to recovered state.",
+          "Recovered (Rh): Individuals who have recovered from the infection. Measured in persons. No further transitions."
+        ],
+        "parameters": [
+          "Transmission Rate (βhh, βrh, βrr): Rate at which the virus is transmitted between humans, from rodents to humans, and between rodents. Measured in per day.",
+          "Progression Rate (σh, σr): Rate at which exposed individuals progress to the prodromal stage. Measured in per day.",
+          "Recovery Rate (τ1, τ2, τ3, τr): Rate at which individuals recover from the infection. Measured in per day.",
+          "Hospitalization Rate (k1, k2): Rate at which individuals are hospitalized. Measured in per day.",
+          "Death Rate (δi, δh, δr): Rate at which individuals die from the infection. Measured in per day."
+        ]
+      },
+      "uses": {
+        "directUse": "The model can be used to simulate the spread of monkeypox virus in different populations and evaluate the effectiveness of intervention strategies such as vaccination and isolation.",
+        "outOfScopeUse": "The model should not be used to predict individual-level outcomes or to make clinical decisions for specific patients."
+      },
+      "biasRisksLimitations": {
+        "biases": "The model assumes homogeneous mixing within populations, which may not accurately reflect real-world contact patterns.",
+        "risks": "The model's predictions are sensitive to parameter estimates, which may vary based on data quality and availability.",
+        "limitations": "The model does not account for potential changes in virus transmissibility or virulence over time."
+      },
+      "testing": {
+        "validation": "The model was validated using epidemiological data from Nigeria, comparing model predictions with observed case counts.",
+        "metrics": "Metrics used include the basic reproduction number (R0) and the fit of model predictions to observed data."
+      },
+      "gettingStarted": {
+        "steps": [
+          "Review the model structure and parameters in the provided documentation.",
+          "Install necessary software for running simulations, such as R or Python.",
+          "Load the model code and input parameter values based on the study context.",
+          "Run simulations to explore different scenarios and intervention strategies.",
+          "Analyze the output to assess the impact of interventions on virus transmission."
+        ]
+      },
+      "glossary": [
+        "SEIR Model: A compartmental model in epidemiology that divides the population into susceptible, exposed, infectious, and recovered compartments.",
+        "Basic Reproduction Number (R0): The average number of secondary infections produced by a single infected individual in a completely susceptible population.",
+        "Prodromal Stage: The early stage of an infectious disease where symptoms are not yet fully developed but the individual is infectious."
+      ],
+      "authors": [
+        "Mohammed M. Al-Shomrani",
+        "Salihu S. Musa",
+        "Abdullahi Yusuf"
+      ],
+      "citations": [
+        "Al-Shomrani, M.M.; Musa, S.S.; Yusuf, A. Unfolding the Transmission Dynamics of Monkeypox Virus: An Epidemiological Modelling Analysis. Mathematics 2023, 11, 1121."
+      ],
+      "moreInformation": {
+        "fundedBy": "Institutional Fund Projects under grant no. (IFPIP: 773-130-1443)",
+        "links": [
+          "https://www.mdpi.com/journal/mathematics"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

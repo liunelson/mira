@@ -1,0 +1,1631 @@
+{
+  "id": "ea0ad075-e491-4459-83eb-6d9067e0a4f8",
+  "createdOn": "2024-12-19T02:25:33.606+00:00",
+  "updatedOn": "2024-12-19T13:56:32.500+00:00",
+  "name": "Model A (local, edited)",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Model A (local, edited)",
+    "description": "Model",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "Eh",
+        "name": "Eh",
+        "description": "Exposed humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "P",
+        "name": "P",
+        "description": "Populations of infectious humans in the prodromal stage",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000156"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I1",
+        "name": "I1",
+        "description": "Symptomatically mild infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "I2",
+        "name": "I2",
+        "description": "Symptomatically severe infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "H",
+        "name": "H",
+        "description": "Hospitalised humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Rh",
+        "name": "Rh",
+        "description": "Recovered humans",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C95553"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Er",
+        "name": "Er",
+        "description": "Exposed rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Ir",
+        "name": "Ir",
+        "description": "Infectious rodents",
+        "grounding": {
+          "identifiers": {
+            "idomal": "0001267"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Rr",
+        "name": "Rr",
+        "description": "Recovered rodents",
+        "grounding": {
+          "identifiers": {
+            "vsmo": "0001595"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Sr",
+        "name": "Sr",
+        "description": "Susceptible rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "rodent",
+          "expression_mathml": "<ci>rodent</ci>"
+        }
+      },
+      {
+        "id": "Sl",
+        "name": "Sl",
+        "description": "Population of susceptible humans at low-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000234"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Sh",
+        "name": "Sh",
+        "description": "Population of susceptible humans at high-risk",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000087"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t1",
+        "name": null,
+        "description": "Transition from exposed humans to prodromal stage",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Eh"
+        ],
+        "output": [
+          "Eh",
+          "P"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t1",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t2",
+        "name": null,
+        "description": "Transition from prodromal stage to mild infectious humans",
+        "grounding": {
+          "identifiers": {
+            "opl": "0000380"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "P"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t2",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t3",
+        "name": null,
+        "description": "Transition from mild infectious humans to severe infectious humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "P"
+        ],
+        "output": [
+          "P",
+          "I1"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t3",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t4",
+        "name": null,
+        "description": "Transition from severe infectious humans to hospitalisation",
+        "grounding": {
+          "identifiers": {
+            "ido": "0000630"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t4",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t5",
+        "name": null,
+        "description": "Transition from hospitalisation to recovery",
+        "grounding": {
+          "identifiers": {
+            "ncit": "C102248"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1"
+        ],
+        "output": [
+          "I1",
+          "I2"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t5",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t6",
+        "name": null,
+        "description": "Transition from exposed rodents to infectious rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I2"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t6",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t7",
+        "name": null,
+        "description": "Transition from infectious rodents to recovery",
+        "grounding": {
+          "identifiers": {
+            "idomal": "0000359"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1"
+        ],
+        "output": [
+          "I1",
+          "H"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t7",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t8",
+        "name": null,
+        "description": "Transition from susceptible humans to exposed humans",
+        "grounding": {
+          "identifiers": {
+            "cido": "0000290"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I2"
+        ],
+        "output": [
+          "I2",
+          "H"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t8",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t9",
+        "name": null,
+        "description": "Transition from susceptible rodents to exposed rodents",
+        "grounding": {
+          "identifiers": {
+            "hp": "6000728"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "H"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t9",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t10",
+        "name": null,
+        "description": "Transition from recovery to susceptible humans",
+        "grounding": {
+          "identifiers": {
+            "askemo": "0000013"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Rh"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t10",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t11",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "hp": "0030306"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1"
+        ],
+        "output": [
+          "I1",
+          "Rh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t11",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t12",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "hp": "0030306"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I2"
+        ],
+        "output": [
+          "I2",
+          "Rh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t12",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t13",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9NPJ3"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "H"
+        ],
+        "output": [
+          "H",
+          "Rh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t13",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t14",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9P0S9"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [],
+        "output": [
+          "Er"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t14",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t15",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "fbbt": "00005331"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Ir",
+          "Er"
+        ],
+        "output": [
+          "Ir"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t15",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t16",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9P2K2"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Rr"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t16",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t17",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "doid": "0110257"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Ir"
+        ],
+        "output": [
+          "Ir",
+          "Rr"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t17",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t18",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q07020"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Sr"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t18",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t19",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q8N5T2"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [],
+        "output": [
+          "Sr"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t19",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t20",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "cido": "0000375"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Ir",
+          "Sr"
+        ],
+        "output": [
+          "Ir",
+          "Ir"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t20",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t21",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "O75509"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Er",
+          "Ir"
+        ],
+        "output": [
+          "Er"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t21",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t22",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9NU19"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Sl"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t22",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t23",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9NUY8"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [],
+        "output": [
+          "Sl"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t23",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t24",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q9ULP9"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1",
+          "I2",
+          "Ir",
+          "P",
+          "Sl"
+        ],
+        "output": [
+          "I1",
+          "I2",
+          "Ir",
+          "P",
+          "Eh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t24",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t25",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "P62851"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Sh"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t25",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t26",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "oae": "0004577"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [],
+        "output": [
+          "Sh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t26",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t27",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "Q6P3X3"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "I1",
+          "I2",
+          "Ir",
+          "P",
+          "Sh"
+        ],
+        "output": [
+          "I1",
+          "I2",
+          "Ir",
+          "P",
+          "Eh"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t27",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t28",
+        "name": null,
+        "description": null,
+        "grounding": {
+          "identifiers": {
+            "pr": "P62857"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Eh"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "t28",
+          "grounding": null,
+          "description": null
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t1",
+          "description": "Transition from exposed humans to prodromal stage",
+          "expression": "Eh*sigma_h",
+          "expression_mathml": "<apply><times/><ci>Eh</ci><ci>sigma_h</ci></apply>"
+        },
+        {
+          "target": "t2",
+          "description": "Transition from prodromal stage to mild infectious humans",
+          "expression": "P*(mu_h + omega)",
+          "expression_mathml": "<apply><times/><ci>P</ci><apply><plus/><ci>mu_h</ci><ci>omega</ci></apply></apply>"
+        },
+        {
+          "target": "t3",
+          "description": "Transition from mild infectious humans to severe infectious humans",
+          "expression": "P*omega",
+          "expression_mathml": "<apply><times/><ci>P</ci><ci>omega</ci></apply>"
+        },
+        {
+          "target": "t4",
+          "description": "Transition from severe infectious humans to hospitalisation",
+          "expression": "I1*(k1 + mu_h + tau1 + theta)",
+          "expression_mathml": "<apply><times/><ci>I1</ci><apply><plus/><ci>k1</ci><ci>mu_h</ci><ci>tau1</ci><ci>theta</ci></apply></apply>"
+        },
+        {
+          "target": "t5",
+          "description": "Transition from hospitalisation to recovery",
+          "expression": "I1*theta",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>theta</ci></apply>"
+        },
+        {
+          "target": "t6",
+          "description": "Transition from exposed rodents to infectious rodents",
+          "expression": "I2*(delta_i + k2 + mu_h + tau2)",
+          "expression_mathml": "<apply><times/><ci>I2</ci><apply><plus/><ci>delta_i</ci><ci>k2</ci><ci>mu_h</ci><ci>tau2</ci></apply></apply>"
+        },
+        {
+          "target": "t7",
+          "description": "Transition from infectious rodents to recovery",
+          "expression": "I1*k1",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>k1</ci></apply>"
+        },
+        {
+          "target": "t8",
+          "description": "Transition from susceptible humans to exposed humans",
+          "expression": "I2*k2",
+          "expression_mathml": "<apply><times/><ci>I2</ci><ci>k2</ci></apply>"
+        },
+        {
+          "target": "t9",
+          "description": "Transition from susceptible rodents to exposed rodents",
+          "expression": "H*(delta_h + mu_h + tau3)",
+          "expression_mathml": "<apply><times/><ci>H</ci><apply><plus/><ci>delta_h</ci><ci>mu_h</ci><ci>tau3</ci></apply></apply>"
+        },
+        {
+          "target": "t10",
+          "description": "Transition from recovery to susceptible humans",
+          "expression": "Rh*mu_h",
+          "expression_mathml": "<apply><times/><ci>Rh</ci><ci>mu_h</ci></apply>"
+        },
+        {
+          "target": "t11",
+          "expression": "I1*tau1",
+          "expression_mathml": "<apply><times/><ci>I1</ci><ci>tau1</ci></apply>"
+        },
+        {
+          "target": "t12",
+          "expression": "I2*tau2",
+          "expression_mathml": "<apply><times/><ci>I2</ci><ci>tau2</ci></apply>"
+        },
+        {
+          "target": "t13",
+          "expression": "H*tau3",
+          "expression_mathml": "<apply><times/><ci>H</ci><ci>tau3</ci></apply>"
+        },
+        {
+          "target": "t14",
+          "expression": "Er*sigma_r",
+          "expression_mathml": "<apply><times/><ci>Er</ci><ci>sigma_r</ci></apply>"
+        },
+        {
+          "target": "t15",
+          "expression": "Ir*(delta_r + mu_r + tau_r)",
+          "expression_mathml": "<apply><times/><ci>Ir</ci><apply><plus/><ci>delta_r</ci><ci>mu_r</ci><ci>tau_r</ci></apply></apply>"
+        },
+        {
+          "target": "t16",
+          "expression": "Rr*mu_r",
+          "expression_mathml": "<apply><times/><ci>Rr</ci><ci>mu_r</ci></apply>"
+        },
+        {
+          "target": "t17",
+          "expression": "Ir*tau_r",
+          "expression_mathml": "<apply><times/><ci>Ir</ci><ci>tau_r</ci></apply>"
+        },
+        {
+          "target": "t18",
+          "expression": "Sr*mu_r",
+          "expression_mathml": "<apply><times/><ci>Sr</ci><ci>mu_r</ci></apply>"
+        },
+        {
+          "target": "t19",
+          "expression": "pi_r",
+          "expression_mathml": "<ci>pi_r</ci>"
+        },
+        {
+          "target": "t20",
+          "expression": "Ir*Sr*beta_rr/Nr",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>Ir</ci><ci>Sr</ci><ci>beta_rr</ci></apply><ci>Nr</ci></apply>"
+        },
+        {
+          "target": "t21",
+          "expression": "Er*(mu_r + sigma_r)",
+          "expression_mathml": "<apply><times/><ci>Er</ci><apply><plus/><ci>mu_r</ci><ci>sigma_r</ci></apply></apply>"
+        },
+        {
+          "target": "t22",
+          "expression": "Sl*mu_h",
+          "expression_mathml": "<apply><times/><ci>Sl</ci><ci>mu_h</ci></apply>"
+        },
+        {
+          "target": "t23",
+          "expression": "pi_h*(1 - rho)",
+          "expression_mathml": "<apply><times/><ci>pi_h</ci><apply><minus/><cn>1</cn><ci>rho</ci></apply></apply>"
+        },
+        {
+          "target": "t24",
+          "expression": "Sl*v*(Ir*beta_rh/Nr + beta_hh*(I1*eta + I2 + P*alpha)/Nh)",
+          "expression_mathml": "<apply><times/><ci>Sl</ci><ci>v</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir</ci><ci>beta_rh</ci></apply><ci>Nr</ci></apply><apply><divide/><apply><times/><ci>beta_hh</ci><apply><plus/><apply><times/><ci>I1</ci><ci>eta</ci></apply><ci>I2</ci><apply><times/><ci>P</ci><ci>alpha</ci></apply></apply></apply><ci>Nh</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t25",
+          "expression": "Sh*mu_h",
+          "expression_mathml": "<apply><times/><ci>Sh</ci><ci>mu_h</ci></apply>"
+        },
+        {
+          "target": "t26",
+          "expression": "pi_h*rho",
+          "expression_mathml": "<apply><times/><ci>pi_h</ci><ci>rho</ci></apply>"
+        },
+        {
+          "target": "t27",
+          "expression": "Sh*(Ir*beta_rh/Nr + beta_hh*(I1*eta + I2 + P*alpha)/Nh)",
+          "expression_mathml": "<apply><times/><ci>Sh</ci><apply><plus/><apply><divide/><apply><times/><ci>Ir</ci><ci>beta_rh</ci></apply><ci>Nr</ci></apply><apply><divide/><apply><times/><ci>beta_hh</ci><apply><plus/><apply><times/><ci>I1</ci><ci>eta</ci></apply><ci>I2</ci><apply><times/><ci>P</ci><ci>alpha</ci></apply></apply></apply><ci>Nh</ci></apply></apply></apply>"
+        },
+        {
+          "target": "t28",
+          "expression": "Eh*(mu_h + sigma_h)",
+          "expression_mathml": "<apply><times/><ci>Eh</ci><apply><plus/><ci>mu_h</ci><ci>sigma_h</ci></apply></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "Eh",
+          "description": "Exposed humans",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "P",
+          "description": "Populations of infectious humans in the prodromal stage",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "I1",
+          "description": "Symptomatically mild infectious humans",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "I2",
+          "description": "Symptomatically severe infectious humans",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "H",
+          "description": "Hospitalised humans",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Rh",
+          "description": "Recovered humans",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Er",
+          "description": "Exposed rodents",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Ir",
+          "description": "Infectious rodents",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Rr",
+          "description": "Recovered rodents",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Sr",
+          "description": "Susceptible rodents",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Sl",
+          "description": "Population of susceptible humans at low-risk",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Sh",
+          "description": "Population of susceptible humans at high-risk",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "sigma_h",
+          "description": "Progression rate from exposed to prodromal stage in humans",
+          "grounding": {
+            "identifiers": {
+              "apollosv": "00000482"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "mu_h",
+          "description": "Human natural death rate",
+          "grounding": {
+            "identifiers": {
+              "ncit": "C54197"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "omega",
+          "description": "Rate at which mpoxv progresses from P to I1",
+          "grounding": {
+            "identifiers": {
+              "fbbt": "00001427"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "k1",
+          "description": "Hospitalisation rate for mild infectious humans",
+          "grounding": {
+            "identifiers": {
+              "ido": "0000492"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "tau1",
+          "description": "Recovery rate for mild infectious humans",
+          "grounding": {
+            "identifiers": {
+              "oae": "0001869"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "theta",
+          "description": "Progression rate from mild to severe disease",
+          "grounding": {
+            "identifiers": {
+              "hp": "0003682"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "delta_i",
+          "description": "mpoxv-induced death rate for severe infectious humans",
+          "grounding": {
+            "identifiers": {
+              "apollosv": "00000615"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "k2",
+          "description": "Hospitalisation rate for severe infectious humans",
+          "grounding": {
+            "identifiers": {
+              "idocovid19": "0001273"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "tau2",
+          "description": "Recovery rate for severe infectious humans",
+          "grounding": {
+            "identifiers": {
+              "askemo": "0000013"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "delta_h",
+          "description": "mpoxv-induced death rate for hospitalised humans",
+          "grounding": {
+            "identifiers": {
+              "apollosv": "00000615"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "tau3",
+          "description": "Recovery rate for hospitalised humans",
+          "grounding": {
+            "identifiers": {
+              "ncit": "C49498"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "sigma_r",
+          "description": "Progression rate from exposed to infectious stage in rodents",
+          "grounding": {
+            "identifiers": {
+              "ido": "0000477"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "delta_r",
+          "description": "mpoxv-induced death rate for infectious rodents",
+          "grounding": {
+            "identifiers": {
+              "doid": "8956"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "mu_r",
+          "description": "Rodent natural death rate",
+          "grounding": {
+            "identifiers": {
+              "apollosv": "00000445"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "tau_r",
+          "description": "Recovery rate for infectious rodents",
+          "grounding": {
+            "identifiers": {
+              "askemo": "0000013"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "pi_r",
+          "description": "Rodent recruitment rate",
+          "grounding": {
+            "identifiers": {
+              "vsmo": "0002034"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "rodent/day",
+            "expression_mathml": "<apply><divide/><ci>rodent</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "Nr",
+          "description": "Total rodent population",
+          "grounding": {
+            "identifiers": {
+              "idomal": "0000436"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "rodent",
+            "expression_mathml": "<ci>rodent</ci>"
+          }
+        },
+        {
+          "id": "beta_rr",
+          "description": "Rodent-to-rodent transmission rate",
+          "grounding": {
+            "identifiers": {
+              "vsmo": "0000111"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/(rodent*day)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>rodent</ci><ci>day</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "pi_h",
+          "description": "Human recruitment rate",
+          "grounding": {
+            "identifiers": {
+              "idomal": "0001255"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "person/day",
+            "expression_mathml": "<apply><divide/><ci>person</ci><ci>day</ci></apply>"
+          }
+        },
+        {
+          "id": "rho",
+          "description": "Fraction of newly recruited humans moving to high-risk population",
+          "grounding": {
+            "identifiers": {
+              "askemo": "0000018"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "Nh",
+          "description": "Overall human population",
+          "grounding": {
+            "identifiers": {
+              "idomal": "0001255"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "person",
+            "expression_mathml": "<ci>person</ci>"
+          }
+        },
+        {
+          "id": "alpha",
+          "description": "Modification parameter for human-to-human transmission",
+          "grounding": {
+            "identifiers": {
+              "apollosv": "00000507"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "beta_hh",
+          "description": "Human-to-human transmission rate",
+          "grounding": {
+            "identifiers": {
+              "askemo": "0000005"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/(person*day)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>person</ci><ci>day</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "beta_rh",
+          "description": "Rodent-to-human transmission rate",
+          "grounding": {
+            "identifiers": {
+              "idomal": "0000410"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/(person*day)",
+            "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>person</ci><ci>day</ci></apply></apply>"
+          }
+        },
+        {
+          "id": "eta",
+          "description": "Modification parameter for mild infectious humans",
+          "grounding": {
+            "identifiers": {
+              "cido": "0000290"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        },
+        {
+          "id": "v",
+          "description": "Rate of reduction in infectiousness from low-risk susceptible humans",
+          "grounding": {
+            "identifiers": {
+              "vsmo": "0000016"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<apply><divide/><cn>1</cn><ci>day</ci></apply>"
+          }
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t",
+        "name": "t",
+        "units": {
+          "expression": "date",
+          "expression_mathml": "<ci>date</ci>"
+        }
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgbW9kZWwgZGVzY3JpYmVkIGluIHRoZSBkb2N1bWVudCBpcyBhbiBTRUlSLWJhc2VkIGRldGVybWluaXN0aWMgbW9kZWwgZGVzaWduZWQgdG8gc3R1ZHkgdGhlIHRyYW5zbWlzc2lvbiBkeW5hbWljcyBvZiB0aGUgbW9ua2V5cG94IHZpcnVzIChtcG94dikuIEl0IGluY29ycG9yYXRlcyB2YXJpb3VzIHN0YWdlcyBvZiBpbmZlY3Rpb24sIGluY2x1ZGluZyBwcm9kcm9tYWwsIG1pbGQsIGFuZCBzZXZlcmUgc3RhZ2VzLCBhbmQgY29uc2lkZXJzIGJvdGggaHVtYW4tdG8taHVtYW4gYW5kIGFuaW1hbC10by1odW1hbiB0cmFuc21pc3Npb24gcm91dGVzLiBUaGUgbW9kZWwgaXMgdXNlZCB0byBjb21wdXRlIHRoZSBiYXNpYyByZXByb2R1Y3Rpb24gbnVtYmVyIChSMCkgYW5kIGFuYWx5emUgdGhlIHN0YWJpbGl0eSBvZiBlcXVpbGlicml1bSBzdGF0ZXMuIFNlbnNpdGl2aXR5IGFuYWx5c2lzIGlzIHBlcmZvcm1lZCB1c2luZyB0aGUgcGFydGlhbCByYW5rIGNvcnJlbGF0aW9uIGNvZWZmaWNpZW50IHRvIGlkZW50aWZ5IGtleSBwYXJhbWV0ZXJzIGFmZmVjdGluZyB0aGUgc3ByZWFkIG9mIG1wb3h2LiBUaGUgbW9kZWwgaXMgdmFsaWRhdGVkIHVzaW5nIHJlYWwtd29ybGQgZGF0YSBmcm9tIE5pZ2VyaWEgYW5kIGlzIHVzZWQgdG8gc2ltdWxhdGUgdGhlIGltcGFjdCBvZiBkaWZmZXJlbnQgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMuIFRoZSBtb2RlbCBjYW4gbGlrZWx5IGJlIHJlcHJlc2VudGVkIGluIFBldHJpIE5ldCBmb3JtYXQsIGFzIGl0IGluY2x1ZGVzIHN0YXRlcyBhbmQgdHJhbnNpdGlvbnMgdGhhdCBjYW4gYmUgbWFwcGVkIHRvIHBsYWNlcyBhbmQgdHJhbnNpdGlvbnMgaW4gYSBQZXRyaSBOZXQuPC9wPjxicj4KPGgyPlNwZWNzPC9oMj4KPGg0PkRvbWFpbjwvaDQ+Cjx1bD4KPGxpPkVwaWRlbWlvbG9neTwvbGk+CjxsaT5JbmZlY3Rpb3VzIERpc2Vhc2VzPC9saT4KPGxpPlB1YmxpYyBIZWFsdGg8L2xpPgo8L3VsPjxicj4KPGg0PlR5cGU8L2g0Pgo8cD5NYXRoZW1hdGljYWwgTW9kZWw8L3A+PGJyPgo8aDQ+U3BlY2lmaWNhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCBpbmNsdWRlcyBzdGF0ZXMgc3VjaCBhcyBzdXNjZXB0aWJsZSwgZXhwb3NlZCwgcHJvZHJvbWFsLCBtaWxkIGluZmVjdGlvdXMsIHNldmVyZSBpbmZlY3Rpb3VzLCBob3NwaXRhbGl6ZWQsIGFuZCByZWNvdmVyZWQgZm9yIGJvdGggaHVtYW5zIGFuZCByb2RlbnRzLiBJdCBoYXMgcGFyYW1ldGVycyBmb3IgdHJhbnNtaXNzaW9uIHJhdGVzLCBwcm9ncmVzc2lvbiByYXRlcywgYW5kIHJlY292ZXJ5IHJhdGVzLiBUaGUgbW9kZWwgaXMgY29tcGxleCwgd2l0aCBtdWx0aXBsZSBjb21wYXJ0bWVudHMgYW5kIGludGVyYWN0aW9ucyBiZXR3ZWVuIGh1bWFuIGFuZCByb2RlbnQgcG9wdWxhdGlvbnMuPC9wPjxicj4KPGg0PlN0YXRlczwvaDQ+Cjx1bD4KPGxpPlN1c2NlcHRpYmxlIChTaCwgU2wpOiBSZXByZXNlbnRzIGluZGl2aWR1YWxzIGF0IGhpZ2ggYW5kIGxvdyByaXNrIG9mIGluZmVjdGlvbi4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gZXhwb3NlZCBzdGF0ZSB1cG9uIGluZmVjdGlvbi48L2xpPgo8bGk+RXhwb3NlZCAoRWgpOiBJbmRpdmlkdWFscyB3aG8gaGF2ZSBiZWVuIGV4cG9zZWQgdG8gdGhlIHZpcnVzIGJ1dCBhcmUgbm90IHlldCBpbmZlY3Rpb3VzLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBUcmFuc2l0aW9ucyB0byBwcm9kcm9tYWwgc3RhdGUuPC9saT4KPGxpPlByb2Ryb21hbCAoUCk6IEFzeW1wdG9tYXRpYyBpbmRpdmlkdWFscyB3aG8gY2FuIHRyYW5zbWl0IHRoZSB2aXJ1cy4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gbWlsZCBpbmZlY3Rpb3VzIHN0YXRlLjwvbGk+CjxsaT5NaWxkIEluZmVjdGlvdXMgKEkxKTogSW5kaXZpZHVhbHMgd2l0aCBtaWxkIHN5bXB0b21zLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBDYW4gdHJhbnNpdGlvbiB0byBzZXZlcmUgaW5mZWN0aW91cyBvciBob3NwaXRhbGl6ZWQgc3RhdGUuPC9saT4KPGxpPlNldmVyZSBJbmZlY3Rpb3VzIChJMik6IEluZGl2aWR1YWxzIHdpdGggc2V2ZXJlIHN5bXB0b21zLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBDYW4gdHJhbnNpdGlvbiB0byBob3NwaXRhbGl6ZWQgc3RhdGUuPC9saT4KPGxpPkhvc3BpdGFsaXplZCAoSCk6IEluZGl2aWR1YWxzIHJlY2VpdmluZyB0cmVhdG1lbnQgaW4gYSBob3NwaXRhbC4gTWVhc3VyZWQgaW4gcGVyc29ucy4gQ2FuIHRyYW5zaXRpb24gdG8gcmVjb3ZlcmVkIHN0YXRlLjwvbGk+CjxsaT5SZWNvdmVyZWQgKFJoKTogSW5kaXZpZHVhbHMgd2hvIGhhdmUgcmVjb3ZlcmVkIGZyb20gdGhlIGluZmVjdGlvbi4gTWVhc3VyZWQgaW4gcGVyc29ucy4gTm8gZnVydGhlciB0cmFuc2l0aW9ucy48L2xpPgo8L3VsPjxicj4KPGg0PlBhcmFtZXRlcnM8L2g0Pgo8dWw+CjxsaT5UcmFuc21pc3Npb24gUmF0ZSAozrJoaCwgzrJyaCwgzrJycik6IFJhdGUgYXQgd2hpY2ggdGhlIHZpcnVzIGlzIHRyYW5zbWl0dGVkIGJldHdlZW4gaHVtYW5zLCBmcm9tIHJvZGVudHMgdG8gaHVtYW5zLCBhbmQgYmV0d2VlbiByb2RlbnRzLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5Qcm9ncmVzc2lvbiBSYXRlICjPg2gsIM+Dcik6IFJhdGUgYXQgd2hpY2ggZXhwb3NlZCBpbmRpdmlkdWFscyBwcm9ncmVzcyB0byB0aGUgcHJvZHJvbWFsIHN0YWdlLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5SZWNvdmVyeSBSYXRlICjPhDEsIM+EMiwgz4QzLCDPhHIpOiBSYXRlIGF0IHdoaWNoIGluZGl2aWR1YWxzIHJlY292ZXIgZnJvbSB0aGUgaW5mZWN0aW9uLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5Ib3NwaXRhbGl6YXRpb24gUmF0ZSAoazEsIGsyKTogUmF0ZSBhdCB3aGljaCBpbmRpdmlkdWFscyBhcmUgaG9zcGl0YWxpemVkLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjxsaT5EZWF0aCBSYXRlICjOtGksIM60aCwgzrRyKTogUmF0ZSBhdCB3aGljaCBpbmRpdmlkdWFscyBkaWUgZnJvbSB0aGUgaW5mZWN0aW9uLiBNZWFzdXJlZCBpbiBwZXIgZGF5LjwvbGk+CjwvdWw+PGJyPgo8aDI+VXNlczwvaDI+CjxoND5EaXJlY3QgVXNlPC9oND4KPHA+VGhlIG1vZGVsIGNhbiBiZSB1c2VkIHRvIHNpbXVsYXRlIHRoZSBzcHJlYWQgb2YgbW9ua2V5cG94IHZpcnVzIGluIGRpZmZlcmVudCBwb3B1bGF0aW9ucyBhbmQgZXZhbHVhdGUgdGhlIGVmZmVjdGl2ZW5lc3Mgb2YgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMgc3VjaCBhcyB2YWNjaW5hdGlvbiBhbmQgaXNvbGF0aW9uLjwvcD48YnI+CjxoND5PdXQgT2YgU2NvcGUgVXNlPC9oND4KPHA+VGhlIG1vZGVsIHNob3VsZCBub3QgYmUgdXNlZCB0byBwcmVkaWN0IGluZGl2aWR1YWwtbGV2ZWwgb3V0Y29tZXMgb3IgdG8gbWFrZSBjbGluaWNhbCBkZWNpc2lvbnMgZm9yIHNwZWNpZmljIHBhdGllbnRzLjwvcD48YnI+CjxoMj5CaWFzIFJpc2tzIExpbWl0YXRpb25zPC9oMj4KPGg0PkJpYXNlczwvaDQ+CjxwPlRoZSBtb2RlbCBhc3N1bWVzIGhvbW9nZW5lb3VzIG1peGluZyB3aXRoaW4gcG9wdWxhdGlvbnMsIHdoaWNoIG1heSBub3QgYWNjdXJhdGVseSByZWZsZWN0IHJlYWwtd29ybGQgY29udGFjdCBwYXR0ZXJucy48L3A+PGJyPgo8aDQ+Umlza3M8L2g0Pgo8cD5UaGUgbW9kZWwncyBwcmVkaWN0aW9ucyBhcmUgc2Vuc2l0aXZlIHRvIHBhcmFtZXRlciBlc3RpbWF0ZXMsIHdoaWNoIG1heSB2YXJ5IGJhc2VkIG9uIGRhdGEgcXVhbGl0eSBhbmQgYXZhaWxhYmlsaXR5LjwvcD48YnI+CjxoND5MaW1pdGF0aW9uczwvaDQ+CjxwPlRoZSBtb2RlbCBkb2VzIG5vdCBhY2NvdW50IGZvciBwb3RlbnRpYWwgY2hhbmdlcyBpbiB2aXJ1cyB0cmFuc21pc3NpYmlsaXR5IG9yIHZpcnVsZW5jZSBvdmVyIHRpbWUuPC9wPjxicj4KPGgyPlRlc3Rpbmc8L2gyPgo8aDQ+VmFsaWRhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCB3YXMgdmFsaWRhdGVkIHVzaW5nIGVwaWRlbWlvbG9naWNhbCBkYXRhIGZyb20gTmlnZXJpYSwgY29tcGFyaW5nIG1vZGVsIHByZWRpY3Rpb25zIHdpdGggb2JzZXJ2ZWQgY2FzZSBjb3VudHMuPC9wPjxicj4KPGg0Pk1ldHJpY3M8L2g0Pgo8cD5NZXRyaWNzIHVzZWQgaW5jbHVkZSB0aGUgYmFzaWMgcmVwcm9kdWN0aW9uIG51bWJlciAoUjApIGFuZCB0aGUgZml0IG9mIG1vZGVsIHByZWRpY3Rpb25zIHRvIG9ic2VydmVkIGRhdGEuPC9wPjxicj4KPGgyPkdldHRpbmcgU3RhcnRlZDwvaDI+CjxoND5TdGVwczwvaDQ+Cjx1bD4KPGxpPlJldmlldyB0aGUgbW9kZWwgc3RydWN0dXJlIGFuZCBwYXJhbWV0ZXJzIGluIHRoZSBwcm92aWRlZCBkb2N1bWVudGF0aW9uLjwvbGk+CjxsaT5JbnN0YWxsIG5lY2Vzc2FyeSBzb2Z0d2FyZSBmb3IgcnVubmluZyBzaW11bGF0aW9ucywgc3VjaCBhcyBSIG9yIFB5dGhvbi48L2xpPgo8bGk+TG9hZCB0aGUgbW9kZWwgY29kZSBhbmQgaW5wdXQgcGFyYW1ldGVyIHZhbHVlcyBiYXNlZCBvbiB0aGUgc3R1ZHkgY29udGV4dC48L2xpPgo8bGk+UnVuIHNpbXVsYXRpb25zIHRvIGV4cGxvcmUgZGlmZmVyZW50IHNjZW5hcmlvcyBhbmQgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMuPC9saT4KPGxpPkFuYWx5emUgdGhlIG91dHB1dCB0byBhc3Nlc3MgdGhlIGltcGFjdCBvZiBpbnRlcnZlbnRpb25zIG9uIHZpcnVzIHRyYW5zbWlzc2lvbi48L2xpPgo8L3VsPjxicj4KPGgyPkdsb3NzYXJ5PC9oMj4KPHVsPgo8bGk+U0VJUiBNb2RlbDogQSBjb21wYXJ0bWVudGFsIG1vZGVsIGluIGVwaWRlbWlvbG9neSB0aGF0IGRpdmlkZXMgdGhlIHBvcHVsYXRpb24gaW50byBzdXNjZXB0aWJsZSwgZXhwb3NlZCwgaW5mZWN0aW91cywgYW5kIHJlY292ZXJlZCBjb21wYXJ0bWVudHMuPC9saT4KPGxpPkJhc2ljIFJlcHJvZHVjdGlvbiBOdW1iZXIgKFIwKTogVGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHNlY29uZGFyeSBpbmZlY3Rpb25zIHByb2R1Y2VkIGJ5IGEgc2luZ2xlIGluZmVjdGVkIGluZGl2aWR1YWwgaW4gYSBjb21wbGV0ZWx5IHN1c2NlcHRpYmxlIHBvcHVsYXRpb24uPC9saT4KPGxpPlByb2Ryb21hbCBTdGFnZTogVGhlIGVhcmx5IHN0YWdlIG9mIGFuIGluZmVjdGlvdXMgZGlzZWFzZSB3aGVyZSBzeW1wdG9tcyBhcmUgbm90IHlldCBmdWxseSBkZXZlbG9wZWQgYnV0IHRoZSBpbmRpdmlkdWFsIGlzIGluZmVjdGlvdXMuPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+TW9oYW1tZWQgTS4gQWwtU2hvbXJhbmk8L2xpPgo8bGk+U2FsaWh1IFMuIE11c2E8L2xpPgo8bGk+QWJkdWxsYWhpIFl1c3VmPC9saT4KPC91bD48YnI+CjxoMj5DaXRhdGlvbnM8L2gyPgo8dWw+CjxsaT5BbC1TaG9tcmFuaSwgTS5NLjsgTXVzYSwgUy5TLjsgWXVzdWYsIEEuIFVuZm9sZGluZyB0aGUgVHJhbnNtaXNzaW9uIER5bmFtaWNzIG9mIE1vbmtleXBveCBWaXJ1czogQW4gRXBpZGVtaW9sb2dpY2FsIE1vZGVsbGluZyBBbmFseXNpcy4gTWF0aGVtYXRpY3MgMjAyMywgMTEsIDExMjEuPC9saT4KPC91bD48YnI+CjxoMj5Nb3JlIEluZm9ybWF0aW9uPC9oMj4KPGg0PkZ1bmRlZCBCeTwvaDQ+CjxwPkluc3RpdHV0aW9uYWwgRnVuZCBQcm9qZWN0cyB1bmRlciBncmFudCBuby4gKElGUElQOiA3NzMtMTMwLTE0NDMpPC9wPjxicj4KPGg0PkxpbmtzPC9oND4KPHVsPgo8bGk+aHR0cHM6Ly93d3cubWRwaS5jb20vam91cm5hbC9tYXRoZW1hdGljczwvbGk+CjwvdWw+PGJyPgo=",
+    "gollmCard": {
+      "summary": "The model described in the document is an SEIR-based deterministic model designed to study the transmission dynamics of the monkeypox virus (mpoxv). It incorporates various stages of infection, including prodromal, mild, and severe stages, and considers both human-to-human and animal-to-human transmission routes. The model is used to compute the basic reproduction number (R0) and analyze the stability of equilibrium states. Sensitivity analysis is performed using the partial rank correlation coefficient to identify key parameters affecting the spread of mpoxv. The model is validated using real-world data from Nigeria and is used to simulate the impact of different intervention strategies. The model can likely be represented in Petri Net format, as it includes states and transitions that can be mapped to places and transitions in a Petri Net.",
+      "specs": {
+        "domain": [
+          "Epidemiology",
+          "Infectious Diseases",
+          "Public Health"
+        ],
+        "type": "Mathematical Model",
+        "specification": "The model includes states such as susceptible, exposed, prodromal, mild infectious, severe infectious, hospitalized, and recovered for both humans and rodents. It has parameters for transmission rates, progression rates, and recovery rates. The model is complex, with multiple compartments and interactions between human and rodent populations.",
+        "states": [
+          "Susceptible (Sh, Sl): Represents individuals at high and low risk of infection. Measured in persons. Transitions to exposed state upon infection.",
+          "Exposed (Eh): Individuals who have been exposed to the virus but are not yet infectious. Measured in persons. Transitions to prodromal state.",
+          "Prodromal (P): Asymptomatic individuals who can transmit the virus. Measured in persons. Transitions to mild infectious state.",
+          "Mild Infectious (I1): Individuals with mild symptoms. Measured in persons. Can transition to severe infectious or hospitalized state.",
+          "Severe Infectious (I2): Individuals with severe symptoms. Measured in persons. Can transition to hospitalized state.",
+          "Hospitalized (H): Individuals receiving treatment in a hospital. Measured in persons. Can transition to recovered state.",
+          "Recovered (Rh): Individuals who have recovered from the infection. Measured in persons. No further transitions."
+        ],
+        "parameters": [
+          "Transmission Rate (βhh, βrh, βrr): Rate at which the virus is transmitted between humans, from rodents to humans, and between rodents. Measured in per day.",
+          "Progression Rate (σh, σr): Rate at which exposed individuals progress to the prodromal stage. Measured in per day.",
+          "Recovery Rate (τ1, τ2, τ3, τr): Rate at which individuals recover from the infection. Measured in per day.",
+          "Hospitalization Rate (k1, k2): Rate at which individuals are hospitalized. Measured in per day.",
+          "Death Rate (δi, δh, δr): Rate at which individuals die from the infection. Measured in per day."
+        ]
+      },
+      "uses": {
+        "directUse": "The model can be used to simulate the spread of monkeypox virus in different populations and evaluate the effectiveness of intervention strategies such as vaccination and isolation.",
+        "outOfScopeUse": "The model should not be used to predict individual-level outcomes or to make clinical decisions for specific patients."
+      },
+      "biasRisksLimitations": {
+        "biases": "The model assumes homogeneous mixing within populations, which may not accurately reflect real-world contact patterns.",
+        "risks": "The model's predictions are sensitive to parameter estimates, which may vary based on data quality and availability.",
+        "limitations": "The model does not account for potential changes in virus transmissibility or virulence over time."
+      },
+      "testing": {
+        "validation": "The model was validated using epidemiological data from Nigeria, comparing model predictions with observed case counts.",
+        "metrics": "Metrics used include the basic reproduction number (R0) and the fit of model predictions to observed data."
+      },
+      "gettingStarted": {
+        "steps": [
+          "Review the model structure and parameters in the provided documentation.",
+          "Install necessary software for running simulations, such as R or Python.",
+          "Load the model code and input parameter values based on the study context.",
+          "Run simulations to explore different scenarios and intervention strategies.",
+          "Analyze the output to assess the impact of interventions on virus transmission."
+        ]
+      },
+      "glossary": [
+        "SEIR Model: A compartmental model in epidemiology that divides the population into susceptible, exposed, infectious, and recovered compartments.",
+        "Basic Reproduction Number (R0): The average number of secondary infections produced by a single infected individual in a completely susceptible population.",
+        "Prodromal Stage: The early stage of an infectious disease where symptoms are not yet fully developed but the individual is infectious."
+      ],
+      "authors": [
+        "Mohammed M. Al-Shomrani",
+        "Salihu S. Musa",
+        "Abdullahi Yusuf"
+      ],
+      "citations": [
+        "Al-Shomrani, M.M.; Musa, S.S.; Yusuf, A. Unfolding the Transmission Dynamics of Monkeypox Virus: An Epidemiological Modelling Analysis. Mathematics 2023, 11, 1121."
+      ],
+      "moreInformation": {
+        "fundedBy": "Institutional Fund Projects under grant no. (IFPIP: 773-130-1443)",
+        "links": [
+          "https://www.mdpi.com/journal/mathematics"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}
