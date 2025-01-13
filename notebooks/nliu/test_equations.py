@@ -74,6 +74,59 @@ def generate_summary_table(model):
 
     return df
 
+def post_mira_cleanup(mmt: TemplateModel) -> TemplateModel:
+
+    # Assume time unit = 'day'
+    mmt.time.units = Unit(expression = sympy.Symbol('day'))
+
+    # Assign default display names and units to all concepts in every template
+    for t in mmt.templates:
+        for i in t.get_concepts():
+            i.display_name = f'{i.name}(t)'
+            i.units = Unit(expression = sympy.Integer(1))
+
+    # Ditto for all parameters
+    for p, param in mmt.parameters.items():
+        param.display_name = p
+        param.units = Unit(expression = sympy.Integer(1))
+
+    # Ditto for observables
+    for obs in mmt.observables.values():
+        obs.display_name = f'{obs.name}(t)'
+        obs.units = Unit(expression = sympy.Integer(1))
+
+    # Ensure model templates have unique names/ids
+    if len(mmt.templates) > 0:
+        if len({t.name for t in mmt.templates}) < len(mmt.templates):
+            for i, t in enumerate(mmt.templates):
+                t.name = f't{i}'
+
+                t.display_name = f'{t.type}'
+
+                if 'Production' in t.type:
+                    t.display_name += f' of {t.outcome.display_name}'
+                elif 'Degradation' in t.type:
+                    t.display_name += f' of {t.subject.display_name}'
+                elif 'Conversion' in t.type:
+                    t.display_name += f' from {t.subject.display_name} to {t.outcome.display_name}'
+
+                if getattr(t, 'controller', False):
+                    t.display_name += f' controlled by {t.controller.display_name}'
+                elif getattr(t, 'controllers', False):
+                    t.display_name += f' controlled by {" and ".join([c.display_name for c in t.controllers])}'
+            
+    # Set default values for the model parameters
+    for param in mmt.parameters.values():
+        param.value = 0.0
+
+    # Ensure every state variable has an initial condition
+    mmt.initials = mmt.initials | {c: Initial(concept = concept, expression = sympy.Symbol(f'{c}0')) for c, concept in mmt.get_concepts_name_map().items()}
+
+    # Set default values for the initial condition parameters
+    mmt.parameters = mmt.parameters | {f'{c}0': Parameter(name = f'{c}0', display_name = f'{c}0', description = f'Initial value of state variable "{c}"', value = 0.0) for c in mmt.get_concepts_name_map().keys()}
+    
+    return mmt
+
 # %%
 # Define concepts
 concepts = {k: Concept(name = k, display_name = k) for k in 'SEIVM'}
@@ -336,3 +389,93 @@ generate_summary_table(model2b)
 model2b.draw_jupyter()
 
 # %%
+# Model 3 (grouped controlled conversion)
+
+odes = [
+    sympy.Eq(S(t).diff(t), - b * S(t) * I(t)),
+    sympy.Eq(I(t).diff(t), b * S(t) * I(t) - g * (I(t) + S(t) + R(t))),
+    sympy.Eq(R(t).diff(t), k * g * I(t)),
+    sympy.Eq(V(t).diff(t), (1 - k) * g * I(t))
+]
+
+model3 = template_model_from_sympy_odes(odes)
+
+model3.observables = {
+    'Dummy': Observable(name = 'Dummy', expression = sympy.Symbol('S') + sympy.Symbol('I') + sympy.Symbol('R'))
+}
+
+model3 = post_mira_cleanup(model3)
+
+print(generate_odesys(model3, latex = True, latex_align = True))
+
+with open('./data/model_equations/model3.json', 'w') as fp:
+    json.dump(template_model_to_petrinet_json(model3), fp, indent = 4)
+
+generate_summary_table(model3)
+
+# %%
+model3.draw_jupyter()
+
+# %%
+def generate_model_latex(model):
+
+    odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
+
+    for t in model.templates:
+        if hasattr(t, "subject"):
+            var = t.subject.name
+            odeterms[var] -= t.rate_law.args[0]
+
+        if hasattr(t, "outcome"):
+            var = t.outcome.name
+            odeterms[var] += t.rate_law.args[0]
+
+    # Time
+    if model.time and model.time.name:
+        time = model.time.name
+    else:
+        time = "t"
+
+    t = sympy.Symbol(time)
+
+    # Construct Sympy equations
+    odesys = []
+    for var, terms in odeterms.items():
+        lhs = sympy.diff(sympy.Function(var)(t), t)
+  
+        # Write (time-dependent) symbols with "(t)"
+        rhs = terms
+        for atom in terms.atoms(sympy.Symbol):
+            if str(atom) in odeterms.keys():
+                rhs = rhs.subs(atom, sympy.Function(str(atom))(t))
+
+        odesys.append(sympy.latex(sympy.Eq(lhs, rhs)))
+
+    # Observables
+    if len(model.observables) > 0:
+
+        # Write (time-dependent) symbols with "(t)"
+        obs_eqs = []
+        for obs in model.observables.values():
+            lhs = sympy.Function(obs.name)(t)
+            terms = obs.expression.args[0]
+            rhs = terms
+            for atom in terms.atoms(sympy.Symbol):
+                if str(atom) in odeterms.keys():
+                    rhs = rhs.subs(atom, sympy.Function(str(atom))(t))
+            obs_eqs.append(sympy.latex(sympy.Eq(lhs, rhs)))
+
+        # Add observables
+        odesys += obs_eqs
+
+    # Reformat:
+    odesys = "\\begin{align} \n    " + " \\\\ \n    ".join([eq for eq in odesys]) + "\n\\end{align}"
+
+    return odesys
+
+# %%
+odesys = generate_model_latex(model3)
+print(odesys)
+
+# %%
+

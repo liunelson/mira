@@ -26,14 +26,6 @@
                 }
             },
             {
-                "id": "V",
-                "name": "V",
-                "grounding": {
-                    "identifiers": {},
-                    "modifiers": {}
-                }
-            },
-            {
                 "id": "R",
                 "name": "R",
                 "grounding": {
@@ -46,12 +38,9 @@
             {
                 "id": "t1",
                 "input": [
-                    "I",
                     "S"
                 ],
-                "output": [
-                    "I"
-                ],
+                "output": [],
                 "properties": {
                     "name": "t1"
                 }
@@ -62,7 +51,8 @@
                     "I"
                 ],
                 "output": [
-                    "V"
+                    "I",
+                    "S"
                 ],
                 "properties": {
                     "name": "t2"
@@ -71,6 +61,16 @@
             {
                 "id": "t3",
                 "input": [
+                    "I"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
                     "S"
                 ],
                 "output": [
@@ -78,11 +78,11 @@
                     "I"
                 ],
                 "properties": {
-                    "name": "t3"
+                    "name": "t4"
                 }
             },
             {
-                "id": "t4",
+                "id": "t5",
                 "input": [
                     "I"
                 ],
@@ -91,7 +91,17 @@
                     "R"
                 ],
                 "properties": {
-                    "name": "t4"
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "R"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t6"
                 }
             }
         ]
@@ -101,83 +111,48 @@
             "rates": [
                 {
                     "target": "t1",
-                    "expression": "I*S*b",
-                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply>"
+                    "expression": "S*m",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>m</ci></apply>"
                 },
                 {
                     "target": "t2",
-                    "expression": "I*g*(1 - k)",
-                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci><apply><minus/><cn>1</cn><ci>k</ci></apply></apply>"
+                    "expression": "-I*S*b + l",
+                    "expression_mathml": "<apply><plus/><apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply></apply><ci>l</ci></apply>"
                 },
                 {
                     "target": "t3",
-                    "expression": "I*S*b - I*g*k",
-                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply><apply><times/><ci>I</ci><ci>g</ci><ci>k</ci></apply></apply>"
+                    "expression": "I*m",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>m</ci></apply>"
                 },
                 {
                     "target": "t4",
-                    "expression": "I*g*k",
-                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci><ci>k</ci></apply>"
+                    "expression": "I*S*b - I*g",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply><apply><times/><ci>I</ci><ci>g</ci></apply></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "I*g",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "R*m",
+                    "expression_mathml": "<apply><times/><ci>R</ci><ci>m</ci></apply>"
                 }
             ],
-            "initials": [
-                {
-                    "target": "S",
-                    "expression": "S0",
-                    "expression_mathml": "<ci>S0</ci>"
-                },
-                {
-                    "target": "I",
-                    "expression": "I0",
-                    "expression_mathml": "<ci>I0</ci>"
-                },
-                {
-                    "target": "V",
-                    "expression": "V0",
-                    "expression_mathml": "<ci>V0</ci>"
-                },
-                {
-                    "target": "R",
-                    "expression": "R0",
-                    "expression_mathml": "<ci>R0</ci>"
-                }
-            ],
+            "initials": [],
             "parameters": [
                 {
-                    "id": "b",
-                    "value": 0.0
+                    "id": "m"
                 },
                 {
-                    "id": "g",
-                    "value": 0.0
+                    "id": "b"
                 },
                 {
-                    "id": "k",
-                    "value": 0.0
+                    "id": "l"
                 },
                 {
-                    "id": "S0",
-                    "name": "S0",
-                    "description": "Initial condition of state variable S",
-                    "value": 0.0
-                },
-                {
-                    "id": "I0",
-                    "name": "I0",
-                    "description": "Initial condition of state variable I",
-                    "value": 0.0
-                },
-                {
-                    "id": "V0",
-                    "name": "V0",
-                    "description": "Initial condition of state variable V",
-                    "value": 0.0
-                },
-                {
-                    "id": "R0",
-                    "name": "R0",
-                    "description": "Initial condition of state variable R",
-                    "value": 0.0
+                    "id": "g"
                 }
             ],
             "observables": [],
