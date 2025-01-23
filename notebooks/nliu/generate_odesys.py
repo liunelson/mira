@@ -26,7 +26,6 @@ from mira.sources.amr.petrinet import template_model_from_amr_json
 
 # %%
 # MIRA_REST_URL = 'http://34.230.33.149:8771/api'
-PATH = "./data/milestone_18_evaluation/scenario2"
 
 # %%
 # Generate system of equations from a MIRA template model
@@ -34,14 +33,14 @@ def generate_odesys(model, observables: bool = True, latex: bool = False, latex_
 
     odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
 
-    for t in model.templates:
-        if hasattr(t, "subject"):
-            var = t.subject.name
-            odeterms[var] -= t.rate_law.args[0]
+    for template in model.templates:
+        if hasattr(template, "subject"):
+            var = template.subject.name
+            odeterms[var] -= template.rate_law.args[0]
         
-        if hasattr(t, "outcome"):
-            var = t.outcome.name
-            odeterms[var] += t.rate_law.args[0]
+        if hasattr(template, "outcome"):
+            var = template.outcome.name
+            odeterms[var] += template.rate_law.args[0]
 
     # Time
     symb = lambda x: sympy.Symbol(x)
@@ -52,8 +51,33 @@ def generate_odesys(model, observables: bool = True, latex: bool = False, latex_
     finally:
         t = symb(time)
 
+    # Construct Sympy equations
+    # odesys = [
+    #     sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms) 
+    #     if latex == False
+    #     else sympy.latex(sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms))
+    #     for var, terms in odeterms.items()
+    # ]
+
+
+    # Construct Sympy equations
+    odesys = []
+    for var, terms in odeterms.items():
+        lhs = sympy.diff(sympy.Function(var)(t), t)
+    
+        # Write (time-dependent) symbols with "(t)"
+        rhs = terms
+        if hasattr(terms, 'atoms'):
+            for atom in terms.atoms(sympy.Symbol):
+                if str(atom) in odeterms.keys():
+                    rhs = rhs.subs(atom, sympy.Function(str(atom))(t))
+
+        odesys.append(sympy.latex(sympy.Eq(lhs, rhs)))
+
+
+
     # Observables
-    if len(model.observables) != 0:
+    if (observables == True) & (len(model.observables) != 0):
         obs_eqs = [
             sympy.Eq(sympy.Function(obs.name)(t), obs.expression.args[0])
             if latex == False
@@ -61,15 +85,6 @@ def generate_odesys(model, observables: bool = True, latex: bool = False, latex_
             for obs in model.observables.values()
         ]
 
-    # Construct Sympy equations
-    odesys = [
-        sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms) 
-        if latex == False
-        else sympy.latex(sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms))
-        for var, terms in odeterms.items()
-    ]
-
-    if observables == True:
         odesys += obs_eqs
 
     if (latex == True) & (latex_align == True):

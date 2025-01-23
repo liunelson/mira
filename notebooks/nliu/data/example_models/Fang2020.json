@@ -1,0 +1,443 @@
+{
+  "id": "89fc394e-4b8a-411c-b384-1eb567c6d2a1",
+  "createdOn": "2024-07-12T18:25:52.268+00:00",
+  "updatedOn": "2025-01-20T16:17:24.821+00:00",
+  "name": "Fang2020",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Fang2020",
+    "description": "SEIR model of COVID-19 transmission considering government interventions in Wuhan",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "Susceptible",
+        "name": "Susceptible",
+        "description": "Individuals who are at risk of contracting the infection but are not yet exposed.",
+        "grounding": {
+          "identifiers": {
+            "ido": "0000514",
+            "apollosv": "00000205",
+            "idomal": "0000196"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Infected",
+        "name": "Infected",
+        "description": "Individuals who have contracted the infection and are capable of spreading it.",
+        "grounding": {
+          "identifiers": {
+            "ido": "0000511",
+            "cido": "0000290",
+            "idomal": "0000056"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Total_population",
+        "name": "Total_population",
+        "description": "The total number of individuals in the population being studied.",
+        "grounding": {
+          "identifiers": {
+            "idomal": "0001255",
+            "apollosv": "00000088"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Exposed",
+        "name": "Exposed",
+        "description": "Individuals who have been exposed to the infection but are not yet infectious.",
+        "grounding": {
+          "identifiers": {
+            "apollosv": "00000154",
+            "fbbt": "00005368"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      },
+      {
+        "id": "Recovered",
+        "name": "Recovered",
+        "description": "Individuals who have recovered from the infection and are no longer infectious.",
+        "grounding": {
+          "identifiers": {
+            "ido": "0000592",
+            "ncit": "C49498",
+            "askemo": "0000013"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "person",
+          "expression_mathml": "<ci>person</ci>"
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t1",
+        "name": null,
+        "description": "Transition from Susceptible to Exposed due to contact with Infected individuals.",
+        "grounding": {
+          "identifiers": {
+            "hp": "4000006",
+            "ido": "0000658"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Infected",
+          "Total_population",
+          "Susceptible"
+        ],
+        "output": [
+          "Infected",
+          "Total_population",
+          "Exposed"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t1",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t2",
+        "name": null,
+        "description": "Transition from Exposed to Infected as individuals become infectious.",
+        "grounding": {
+          "identifiers": {
+            "hp": "0012692",
+            "askemo": "0000004"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Exposed"
+        ],
+        "output": [
+          "Infected"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t2",
+          "grounding": null,
+          "description": null
+        }
+      },
+      {
+        "id": "t3",
+        "name": null,
+        "description": "Transition from Infected to Recovered as individuals recover from the infection.",
+        "grounding": {
+          "identifiers": {
+            "fbbt": "00005027",
+            "askemo": "0000013"
+          },
+          "context": {},
+          "modifiers": {}
+        },
+        "input": [
+          "Infected"
+        ],
+        "output": [
+          "Recovered"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "t3",
+          "grounding": null,
+          "description": null
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t1",
+          "description": "Transition from Susceptible to Exposed due to contact with Infected individuals.",
+          "expression": "Infected*Susceptible*beta_o*k/Total_population",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>Infected</ci><ci>Susceptible</ci><ci>beta_o</ci><ci>k</ci></apply><ci>Total_population</ci></apply>"
+        },
+        {
+          "target": "t2",
+          "description": "Transition from Exposed to Infected as individuals become infectious.",
+          "expression": "Exposed*omega",
+          "expression_mathml": "<apply><times/><ci>Exposed</ci><ci>omega</ci></apply>"
+        },
+        {
+          "target": "t3",
+          "description": "Transition from Infected to Recovered as individuals recover from the infection.",
+          "expression": "Infected*gamma",
+          "expression_mathml": "<apply><times/><ci>Infected</ci><ci>gamma</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "Susceptible",
+          "description": "Individuals who are at risk of contracting the infection but are not yet exposed.",
+          "expression": "9999999.0",
+          "expression_mathml": "<cn>9999999.0</cn>"
+        },
+        {
+          "target": "Infected",
+          "description": "Individuals who have contracted the infection and are capable of spreading it.",
+          "expression": "1.0",
+          "expression_mathml": "<cn>1.0</cn>"
+        },
+        {
+          "target": "Total_population",
+          "description": "The total number of individuals in the population being studied.",
+          "expression": "10000000.0",
+          "expression_mathml": "<cn>10000000.0</cn>"
+        },
+        {
+          "target": "Exposed",
+          "description": "Individuals who have been exposed to the infection but are not yet infectious.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "Recovered",
+          "description": "Individuals who have recovered from the infection and are no longer infectious.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "beta_o",
+          "description": "The transmission rate of the infection in the absence of interventions.",
+          "grounding": {
+            "identifiers": {
+              "cl": "0000791",
+              "apollosv": "00000043"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 0.1,
+          "units": {
+            "expression": "1/(person*day)",
+            "expression_mathml": "<mfrac><mn>1</mn><mrow><mi>person</mi><mo>*</mo><mi>day</mi></mrow></mfrac>"
+          }
+        },
+        {
+          "id": "k",
+          "description": "The frequency of exposure to the infection.",
+          "grounding": {
+            "identifiers": {
+              "uberon": "0005095",
+              "apollosv": "00000211"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 10,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<mfrac><mn>1</mn><mi>day</mi></mfrac>"
+          }
+        },
+        {
+          "id": "omega",
+          "description": "The rate at which exposed individuals become infectious.",
+          "grounding": {
+            "identifiers": {
+              "fbbt": "00002478",
+              "askemo": "0000011"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 0.142857,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<mfrac><mn>1</mn><mi>day</mi></mfrac>"
+          }
+        },
+        {
+          "id": "gamma",
+          "description": "The recovery rate of infected individuals.",
+          "grounding": {
+            "identifiers": {
+              "pr": "Q9NUQ3",
+              "askemo": "0000013"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 0.097561,
+          "units": {
+            "expression": "1/day",
+            "expression_mathml": "<mfrac><mn>1</mn><mi>day</mi></mfrac>"
+          }
+        },
+        {
+          "id": "beta",
+          "description": "The effective contact rate in the presence of interventions.",
+          "grounding": {
+            "identifiers": {
+              "fbbt": "00003559",
+              "askemo": "0000005"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "1/(person*day)",
+            "expression_mathml": "<mfrac><mn>1</mn><mrow><mi>person</mi><mo>*</mo><mi>day</mi></mrow></mfrac>"
+          }
+        },
+        {
+          "id": "Wuhan",
+          "description": "A parameter representing the location-specific factor for Wuhan.",
+          "grounding": {
+            "identifiers": {
+              "vo": "0010250"
+            },
+            "context": {},
+            "modifiers": {}
+          },
+          "value": 1,
+          "units": {
+            "expression": "dimensionless",
+            "expression_mathml": "<ci>dimensionless</ci>"
+          }
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t"
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgZG9jdW1lbnQgZGVzY3JpYmVzIGEgU3VzY2VwdGlibGUtRXhwb3NlZC1JbmZlY3Rpb3VzLVJlY292ZXJlZCAoU0VJUikgbW9kZWwgdXNlZCB0byBzaW11bGF0ZSB0aGUgdHJhbnNtaXNzaW9uIGR5bmFtaWNzIG9mIENPVklELTE5IGFuZCBhc3Nlc3MgdGhlIGVmZmVjdGl2ZW5lc3Mgb2YgZ292ZXJubWVudCBpbnRlcnZlbnRpb25zIGluIFd1aGFuLCBDaGluYS4gVGhlIG1vZGVsIGluY29ycG9yYXRlcyB2YXJpb3VzIHBhcmFtZXRlcnMgdG8gc2ltdWxhdGUgdGhlIHNwcmVhZCBvZiB0aGUgdmlydXMgYW5kIGV2YWx1YXRlIHRoZSBpbXBhY3Qgb2YgZGlmZmVyZW50IGNvbnRyb2wgbWVhc3VyZXMuIFRoZSBTRUlSIG1vZGVsIGlzIGEgbWF0aGVtYXRpY2FsIG1vZGVsIHRoYXQgZGl2aWRlcyB0aGUgcG9wdWxhdGlvbiBpbnRvIGZvdXIgY29tcGFydG1lbnRzOiBTdXNjZXB0aWJsZSAoUyksIEV4cG9zZWQgKEUpLCBJbmZlY3Rpb3VzIChJKSwgYW5kIFJlY292ZXJlZCAoUikuIFRoZSBtb2RlbCB1c2VzIGRpZmZlcmVudGlhbCBlcXVhdGlvbnMgdG8gZGVzY3JpYmUgdGhlIGZsb3cgb2YgaW5kaXZpZHVhbHMgYmV0d2VlbiB0aGVzZSBjb21wYXJ0bWVudHMgb3ZlciB0aW1lLiBUaGUgc3R1ZHkgY29uZHVjdGVkIHNlbnNpdGl2aXR5IGFuYWx5c2lzIHRvIGlkZW50aWZ5IGtleSBmYWN0b3JzIGluZmx1ZW5jaW5nIHRoZSBtb2RlbCdzIG91dGNvbWVzIGFuZCBwZXJmb3JtZWQgZGF0YSBmaXR0aW5nIHRvIHZhbGlkYXRlIHRoZSBtb2RlbCdzIHByZWRpY3Rpb25zIGFnYWluc3QgcmVhbC13b3JsZCBkYXRhLiBUaGUgbW9kZWwgZGVtb25zdHJhdGVkIGhpZ2ggcHJlY2lzaW9uIGluIGZpdHRpbmcgdGhlIGRhdGEsIHdpdGggYSBjb2VmZmljaWVudCBvZiBkZXRlcm1pbmF0aW9uIGNsb3NlIHRvIDEgYW5kIGEgZml0dGluZyBiaWFzIG9mIDMuMDIlLiBUaGUgc3R1ZHkgY29uY2x1ZGVkIHRoYXQgbW9yZSByaWdvcm91cyBnb3Zlcm5tZW50IGNvbnRyb2wgbWVhc3VyZXMgd2VyZSBhc3NvY2lhdGVkIHdpdGggYSBzbG93ZXIgaW5jcmVhc2UgaW4gdGhlIGluZmVjdGVkIHBvcHVsYXRpb24sIGhpZ2hsaWdodGluZyB0aGUgaW1wb3J0YW5jZSBvZiBlYXJseSBkZXRlY3Rpb24sIGlzb2xhdGlvbiwgYW5kIHRyZWF0bWVudC4gVGhlIG1vZGVsJ3Mgc3RydWN0dXJlIGFuZCBjb21wbGV4aXR5LCBpbmNsdWRpbmcgdGhlIG51bWJlciBvZiBwbGFjZXMsIHRyYW5zaXRpb25zLCBhbmQgcGFyYW1ldGVycywgc3VnZ2VzdCB0aGF0IGl0IGNhbiBsaWtlbHkgYmUgcmVwcmVzZW50ZWQgaW4gUGV0cmkgTmV0IGZvcm1hdC48L3A+PGJyPgo8aDI+U3BlY3M8L2gyPgo8aDQ+RG9tYWluPC9oND4KPHVsPgo8bGk+RXBpZGVtaW9sb2d5PC9saT4KPGxpPlB1YmxpYyBIZWFsdGg8L2xpPgo8bGk+SW5mZWN0aW91cyBEaXNlYXNlIE1vZGVsaW5nPC9saT4KPC91bD48YnI+CjxoND5UeXBlPC9oND4KPHA+TWF0aGVtYXRpY2FsIE1vZGVsPC9wPjxicj4KPGg0PlNwZWNpZmljYXRpb248L2g0Pgo8cD5UaGUgU0VJUiBtb2RlbCBjb25zaXN0cyBvZiBmb3VyIHN0YXRlczogU3VzY2VwdGlibGUsIEV4cG9zZWQsIEluZmVjdGlvdXMsIGFuZCBSZWNvdmVyZWQuIEl0IGluY2x1ZGVzIHBhcmFtZXRlcnMgc3VjaCBhcyB0aGUgaW5mZWN0aW9uIHJhdGUgKGJldGEpLCB0aGUgbGF0ZW5jeSBwZXJpb2QgKG9tZWdhKSwgYW5kIHRoZSByZWNvdmVyeSByYXRlIChnYW1tYSkuIFRoZSBtb2RlbCB1c2VzIGRpZmZlcmVudGlhbCBlcXVhdGlvbnMgdG8gc2ltdWxhdGUgdGhlIHRyYW5zaXRpb25zIGJldHdlZW4gdGhlc2Ugc3RhdGVzLiBUaGUgbW9kZWwgd2FzIGFwcGxpZWQgdG8gYSBwb3B1bGF0aW9uIG9mIDEwIG1pbGxpb24sIGNvbnNpc3RlbnQgd2l0aCB0aGUgc2l6ZSBvZiBXdWhhbiBjaXR5LiBUaGUgbW9kZWwncyBjb21wbGV4aXR5IGluY2x1ZGVzIG11bHRpcGxlIHBhcmFtZXRlcnMgYW5kIHNlbnNpdGl2aXR5IGFuYWx5c2lzIHRvIGFzc2VzcyB0aGUgaW1wYWN0IG9mIGRpZmZlcmVudCBmYWN0b3JzIG9uIHRoZSBzcHJlYWQgb2YgdGhlIHZpcnVzLjwvcD48YnI+CjxoND5TdGF0ZXM8L2g0Pgo8dWw+CjxsaT5TdXNjZXB0aWJsZTogUmVwcmVzZW50cyBpbmRpdmlkdWFscyB3aG8gYXJlIGF0IHJpc2sgb2YgY29udHJhY3RpbmcgdGhlIHZpcnVzLiBNZWFzdXJlZCBpbiBwZXJzb25zLiBUcmFuc2l0aW9ucyB0byB0aGUgRXhwb3NlZCBzdGF0ZSB1cG9uIGNvbnRhY3Qgd2l0aCBhbiBpbmZlY3Rpb3VzIGluZGl2aWR1YWwuPC9saT4KPGxpPkV4cG9zZWQ6IFJlcHJlc2VudHMgaW5kaXZpZHVhbHMgd2hvIGhhdmUgYmVlbiBleHBvc2VkIHRvIHRoZSB2aXJ1cyBidXQgYXJlIG5vdCB5ZXQgaW5mZWN0aW91cy4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gdGhlIEluZmVjdGlvdXMgc3RhdGUgYWZ0ZXIgdGhlIGxhdGVuY3kgcGVyaW9kLjwvbGk+CjxsaT5JbmZlY3Rpb3VzOiBSZXByZXNlbnRzIGluZGl2aWR1YWxzIHdobyBhcmUgY2FwYWJsZSBvZiB0cmFuc21pdHRpbmcgdGhlIHZpcnVzIHRvIG90aGVycy4gTWVhc3VyZWQgaW4gcGVyc29ucy4gVHJhbnNpdGlvbnMgdG8gdGhlIFJlY292ZXJlZCBzdGF0ZSBhZnRlciB0aGUgcmVjb3ZlcnkgcGVyaW9kLjwvbGk+CjxsaT5SZWNvdmVyZWQ6IFJlcHJlc2VudHMgaW5kaXZpZHVhbHMgd2hvIGhhdmUgcmVjb3ZlcmVkIGZyb20gdGhlIGluZmVjdGlvbiBhbmQgYXJlIG5vIGxvbmdlciBpbmZlY3Rpb3VzLiBNZWFzdXJlZCBpbiBwZXJzb25zLjwvbGk+CjwvdWw+PGJyPgo8aDQ+UGFyYW1ldGVyczwvaDQ+Cjx1bD4KPGxpPmJldGE6IFRoZSBpbmZlY3Rpb24gcmF0ZSwgcmVwcmVzZW50aW5nIHRoZSBwcm9iYWJpbGl0eSBvZiB0cmFuc21pc3Npb24gcGVyIGNvbnRhY3QuIFVuaXRsZXNzLjwvbGk+CjxsaT5vbWVnYTogVGhlIHJhdGUgb2YgdHJhbnNpdGlvbiBmcm9tIHRoZSBFeHBvc2VkIHRvIHRoZSBJbmZlY3Rpb3VzIHN0YXRlLCByZXByZXNlbnRpbmcgdGhlIGludmVyc2Ugb2YgdGhlIGxhdGVuY3kgcGVyaW9kLiBNZWFzdXJlZCBpbiBkYXlzXi0xLjwvbGk+CjxsaT5nYW1tYTogVGhlIHJlY292ZXJ5IHJhdGUsIHJlcHJlc2VudGluZyB0aGUgaW52ZXJzZSBvZiB0aGUgaW5mZWN0aW91cyBwZXJpb2QuIE1lYXN1cmVkIGluIGRheXNeLTEuPC9saT4KPGxpPms6IFRoZSBmcmVxdWVuY3kgb2YgZXhwb3N1cmUsIHJlcHJlc2VudGluZyB0aGUgYXZlcmFnZSBudW1iZXIgb2YgY29udGFjdHMgcGVyIHBlcnNvbiBwZXIgZGF5LiBVbml0bGVzcy48L2xpPgo8L3VsPjxicj4KPGgyPlVzZXM8L2gyPgo8aDQ+RGlyZWN0IFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBjYW4gYmUgdXNlZCB0byBzaW11bGF0ZSB0aGUgc3ByZWFkIG9mIENPVklELTE5IHVuZGVyIGRpZmZlcmVudCBzY2VuYXJpb3MgYW5kIGV2YWx1YXRlIHRoZSBlZmZlY3RpdmVuZXNzIG9mIHZhcmlvdXMgaW50ZXJ2ZW50aW9uIHN0cmF0ZWdpZXMsIHN1Y2ggYXMgc29jaWFsIGRpc3RhbmNpbmcsIHF1YXJhbnRpbmUsIGFuZCB2YWNjaW5hdGlvbi48L3A+PGJyPgo8aDQ+T3V0IE9mIFNjb3BlIFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBtYXkgbm90IGJlIHN1aXRhYmxlIGZvciBwcmVkaWN0aW5nIHRoZSBzcHJlYWQgb2YgQ09WSUQtMTkgaW4gcmVnaW9ucyB3aXRoIHNpZ25pZmljYW50bHkgZGlmZmVyZW50IHBvcHVsYXRpb24gZHluYW1pY3Mgb3IgaGVhbHRoY2FyZSBpbmZyYXN0cnVjdHVyZSBjb21wYXJlZCB0byBXdWhhbi4gSXQgbWF5IGFsc28gbm90IGFjY291bnQgZm9yIG5ldyB2YXJpYW50cyBvZiB0aGUgdmlydXMgd2l0aCBkaWZmZXJlbnQgdHJhbnNtaXNzaW9uIGNoYXJhY3RlcmlzdGljcy48L3A+PGJyPgo8aDI+QmlhcyBSaXNrcyBMaW1pdGF0aW9uczwvaDI+CjxoND5CaWFzZXM8L2g0Pgo8cD5UaGUgbW9kZWwgYXNzdW1lcyBob21vZ2VuZW91cyBtaXhpbmcgb2YgdGhlIHBvcHVsYXRpb24sIHdoaWNoIG1heSBub3QgYWNjdXJhdGVseSByZWZsZWN0IHJlYWwtd29ybGQgY29udGFjdCBwYXR0ZXJucy4gVGhpcyBhc3N1bXB0aW9uIGNhbiBpbnRyb2R1Y2UgYmlhcyBpbiB0aGUgc2ltdWxhdGlvbiByZXN1bHRzLjwvcD48YnI+CjxoND5SaXNrczwvaDQ+CjxwPlRoZSBtb2RlbCdzIHByZWRpY3Rpb25zIGFyZSBzZW5zaXRpdmUgdG8gdGhlIGFjY3VyYWN5IG9mIHRoZSBpbnB1dCBwYXJhbWV0ZXJzLCBzdWNoIGFzIHRoZSBpbmZlY3Rpb24gcmF0ZSBhbmQgcmVjb3ZlcnkgcmF0ZS4gSW5hY2N1cmF0ZSBwYXJhbWV0ZXIgZXN0aW1hdGVzIGNhbiBsZWFkIHRvIGluY29ycmVjdCBwcmVkaWN0aW9ucy48L3A+PGJyPgo8aDQ+TGltaXRhdGlvbnM8L2g0Pgo8cD5UaGUgbW9kZWwgZG9lcyBub3QgYWNjb3VudCBmb3IgZmFjdG9ycyBzdWNoIGFzIGFnZS1zcGVjaWZpYyB0cmFuc21pc3Npb24gcmF0ZXMsIGFzeW1wdG9tYXRpYyBjYXJyaWVycywgb3IgY2hhbmdlcyBpbiBwdWJsaWMgYmVoYXZpb3Igb3ZlciB0aW1lLCB3aGljaCBjYW4gYWZmZWN0IHRoZSBhY2N1cmFjeSBvZiB0aGUgc2ltdWxhdGlvbiByZXN1bHRzLjwvcD48YnI+CjxoMj5UZXN0aW5nPC9oMj4KPGg0PlZhbGlkYXRpb248L2g0Pgo8cD5UaGUgbW9kZWwgd2FzIHZhbGlkYXRlZCB0aHJvdWdoIGRhdGEgZml0dGluZywgY29tcGFyaW5nIHRoZSBzaW11bGF0ZWQgcmVzdWx0cyB3aXRoIHJlYWwtd29ybGQgZGF0YSBmcm9tIFd1aGFuLiBUaGUgZml0dGluZyBwcm9jZXNzIGludm9sdmVkIGFkanVzdGluZyBtb2RlbCBwYXJhbWV0ZXJzIHRvIG1pbmltaXplIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIHNpbXVsYXRlZCBhbmQgb2JzZXJ2ZWQgZGF0YS48L3A+PGJyPgo8aDQ+TWV0cmljczwvaDQ+CjxwPlRoZSBjb2VmZmljaWVudCBvZiBkZXRlcm1pbmF0aW9uIChSMikgYW5kIGZpdHRpbmcgYmlhcyB3ZXJlIHVzZWQgdG8gZXZhbHVhdGUgdGhlIG1vZGVsJ3MgYWNjdXJhY3kuIFRoZSBtb2RlbCBhY2hpZXZlZCBhbiBSMiBjbG9zZSB0byAxIGFuZCBhIGZpdHRpbmcgYmlhcyBvZiAzLjAyJSwgaW5kaWNhdGluZyBoaWdoIHByZWNpc2lvbi48L3A+PGJyPgo8aDI+R2V0dGluZyBTdGFydGVkPC9oMj4KPGg0PlN0ZXBzPC9oND4KPHVsPgo8bGk+RGVmaW5lIHRoZSBpbml0aWFsIGNvbmRpdGlvbnMgZm9yIHRoZSBTdXNjZXB0aWJsZSwgRXhwb3NlZCwgSW5mZWN0aW91cywgYW5kIFJlY292ZXJlZCBzdGF0ZXMgYmFzZWQgb24gdGhlIHBvcHVsYXRpb24gc2l6ZSBhbmQgaW5pdGlhbCBudW1iZXIgb2YgY2FzZXMuPC9saT4KPGxpPlNldCB0aGUgbW9kZWwgcGFyYW1ldGVycywgaW5jbHVkaW5nIHRoZSBpbmZlY3Rpb24gcmF0ZSAoYmV0YSksIGxhdGVuY3kgcGVyaW9kIChvbWVnYSksIHJlY292ZXJ5IHJhdGUgKGdhbW1hKSwgYW5kIGZyZXF1ZW5jeSBvZiBleHBvc3VyZSAoaykuPC9saT4KPGxpPlJ1biB0aGUgbW9kZWwgc2ltdWxhdGlvbiBvdmVyIGEgc3BlY2lmaWVkIHRpbWUgcGVyaW9kIHRvIG9ic2VydmUgdGhlIGR5bmFtaWNzIG9mIHRoZSBDT1ZJRC0xOSBvdXRicmVhay48L2xpPgo8bGk+QW5hbHl6ZSB0aGUgc2ltdWxhdGlvbiByZXN1bHRzIHRvIGFzc2VzcyB0aGUgaW1wYWN0IG9mIGRpZmZlcmVudCBpbnRlcnZlbnRpb24gc3RyYXRlZ2llcyBvbiB0aGUgc3ByZWFkIG9mIHRoZSB2aXJ1cy48L2xpPgo8bGk+UGVyZm9ybSBzZW5zaXRpdml0eSBhbmFseXNpcyB0byBpZGVudGlmeSBrZXkgcGFyYW1ldGVycyBpbmZsdWVuY2luZyB0aGUgbW9kZWwncyBvdXRjb21lcy48L2xpPgo8L3VsPjxicj4KPGg0PkV4YW1wbGVzPC9oND4KPHVsPgo8bGk+VXNlIHRoZSBtb2RlbCB0byBzaW11bGF0ZSB0aGUgaW1wYWN0IG9mIGEgbG9ja2Rvd24gb24gdGhlIHNwcmVhZCBvZiBDT1ZJRC0xOSBpbiBhIGNpdHkgd2l0aCBhIHBvcHVsYXRpb24gb2YgMTAgbWlsbGlvbi48L2xpPgo8bGk+RXZhbHVhdGUgdGhlIGVmZmVjdGl2ZW5lc3Mgb2YgYSB2YWNjaW5hdGlvbiBjYW1wYWlnbiBieSBhZGp1c3RpbmcgdGhlIG1vZGVsIHBhcmFtZXRlcnMgdG8gcmVmbGVjdCBpbmNyZWFzZWQgaW1tdW5pdHkgaW4gdGhlIHBvcHVsYXRpb24uPC9saT4KPC91bD48YnI+CjxoMj5HbG9zc2FyeTwvaDI+Cjx1bD4KPGxpPlNFSVIgTW9kZWw6IEEgY29tcGFydG1lbnRhbCBtb2RlbCB1c2VkIGluIGVwaWRlbWlvbG9neSB0byBzaW11bGF0ZSB0aGUgc3ByZWFkIG9mIGluZmVjdGlvdXMgZGlzZWFzZXMuPC9saT4KPGxpPkJhc2ljIFJlcHJvZHVjdGl2ZSBOdW1iZXIgKFIwKTogVGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHNlY29uZGFyeSBjYXNlcyBnZW5lcmF0ZWQgYnkgYW4gaW5mZWN0aW91cyBpbmRpdmlkdWFsIGluIGEgY29tcGxldGVseSBzdXNjZXB0aWJsZSBwb3B1bGF0aW9uLjwvbGk+CjxsaT5FZmZlY3RpdmUgUmVwcm9kdWN0aXZlIE51bWJlciAoUik6IFRoZSBhdmVyYWdlIG51bWJlciBvZiBzZWNvbmRhcnkgY2FzZXMgZ2VuZXJhdGVkIGJ5IGFuIGluZmVjdGlvdXMgaW5kaXZpZHVhbCBpbiBhIHBvcHVsYXRpb24gd2l0aCBzb21lIGxldmVsIG9mIGltbXVuaXR5IG9yIGludGVydmVudGlvbiBtZWFzdXJlcy48L2xpPgo8bGk+U2Vuc2l0aXZpdHkgQW5hbHlzaXM6IEEgbWV0aG9kIHVzZWQgdG8gZGV0ZXJtaW5lIGhvdyBkaWZmZXJlbnQgcGFyYW1ldGVycyBhZmZlY3QgdGhlIG91dGNvbWVzIG9mIGEgbW9kZWwuPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+WWFxaW5nIEZhbmc8L2xpPgo8bGk+WWl0aW5nIE5pZTwvbGk+CjxsaT5NYXJzaGFyZSBQZW5ueTwvbGk+CjwvdWw+PGJyPgo8aDI+Q2l0YXRpb25zPC9oMj4KPHVsPgo8bGk+TGkgUSwgR3VhbiBYLCBXdSBQLCBldCBhbC4gRWFybHkgdHJhbnNtaXNzaW9uIGR5bmFtaWNzIGluIFd1aGFuLCBDaGluYSwgb2Ygbm92ZWwgY29yb25hdmlydXMtaW5mZWN0ZWQgcG5ldW1vbmlhLiBOIEVuZ2wgSiBNZWQuPC9saT4KPGxpPkxpcHNpdGNoIE0sIENvaGVuIFQsIENvb3BlciBCLCBldCBhbC4gVHJhbnNtaXNzaW9uIGR5bmFtaWNzIGFuZCBjb250cm9sIG9mIHNldmVyZSBhY3V0ZSByZXNwaXJhdG9yeSBzeW5kcm9tZS4gU2NpZW5jZS48L2xpPgo8bGk+V3UgSlQsIExldW5nIEssIExldW5nIEdNLiBOb3djYXN0aW5nIGFuZCBmb3JlY2FzdGluZyB0aGUgcG90ZW50aWFsIGRvbWVzdGljIGFuZCBpbnRlcm5hdGlvbmFsIHNwcmVhZCBvZiB0aGUgMjAxOS1uQ29WIG91dGJyZWFrIG9yaWdpbmF0aW5nIGluIFd1aGFuLCBDaGluYTogYSBtb2RlbGxpbmcgc3R1ZHkuIExhbmNldC48L2xpPgo8L3VsPjxicj4KPGgyPk1vcmUgSW5mb3JtYXRpb248L2gyPgo8aDQ+RnVuZGVkIEJ5PC9oND4KPHA+Tm90IHNwZWNpZmllZCBpbiB0aGUgZG9jdW1lbnQuPC9wPjxicj4KPGg0PkxpbmtzPC9oND4KPHVsPgo8bGk+aHR0cHM6Ly93d3cud2hvLmludC9kb2NzL2RlZmF1bHQtc291cmNlL2Nvcm9uYXZpcnVzZS9zaXR1YXRpb24tcmVwb3J0cy8yMDIwMDIyOS1zaXRyZXAtNDAtY292aWQtMTkucGRmPC9saT4KPGxpPmh0dHA6Ly93d3cubmhjLmdvdi5jbi94Y3MveXF0Yi8yMDIwMDMvOWQ0NjIxOTQyODQ4NDBhZDk2Y2U3NWViOGU0YzgwMzkuc2h0bWw8L2xpPgo8L3VsPjxicj4K",
+    "gollmCard": {
+      "summary": "The document describes a Susceptible-Exposed-Infectious-Recovered (SEIR) model used to simulate the transmission dynamics of COVID-19 and assess the effectiveness of government interventions in Wuhan, China. The model incorporates various parameters to simulate the spread of the virus and evaluate the impact of different control measures. The SEIR model is a mathematical model that divides the population into four compartments: Susceptible (S), Exposed (E), Infectious (I), and Recovered (R). The model uses differential equations to describe the flow of individuals between these compartments over time. The study conducted sensitivity analysis to identify key factors influencing the model's outcomes and performed data fitting to validate the model's predictions against real-world data. The model demonstrated high precision in fitting the data, with a coefficient of determination close to 1 and a fitting bias of 3.02%. The study concluded that more rigorous government control measures were associated with a slower increase in the infected population, highlighting the importance of early detection, isolation, and treatment. The model's structure and complexity, including the number of places, transitions, and parameters, suggest that it can likely be represented in Petri Net format.",
+      "specs": {
+        "domain": [
+          "Epidemiology",
+          "Public Health",
+          "Infectious Disease Modeling"
+        ],
+        "type": "Mathematical Model",
+        "specification": "The SEIR model consists of four states: Susceptible, Exposed, Infectious, and Recovered. It includes parameters such as the infection rate (beta), the latency period (omega), and the recovery rate (gamma). The model uses differential equations to simulate the transitions between these states. The model was applied to a population of 10 million, consistent with the size of Wuhan city. The model's complexity includes multiple parameters and sensitivity analysis to assess the impact of different factors on the spread of the virus.",
+        "states": [
+          "Susceptible: Represents individuals who are at risk of contracting the virus. Measured in persons. Transitions to the Exposed state upon contact with an infectious individual.",
+          "Exposed: Represents individuals who have been exposed to the virus but are not yet infectious. Measured in persons. Transitions to the Infectious state after the latency period.",
+          "Infectious: Represents individuals who are capable of transmitting the virus to others. Measured in persons. Transitions to the Recovered state after the recovery period.",
+          "Recovered: Represents individuals who have recovered from the infection and are no longer infectious. Measured in persons."
+        ],
+        "parameters": [
+          "beta: The infection rate, representing the probability of transmission per contact. Unitless.",
+          "omega: The rate of transition from the Exposed to the Infectious state, representing the inverse of the latency period. Measured in days^-1.",
+          "gamma: The recovery rate, representing the inverse of the infectious period. Measured in days^-1.",
+          "k: The frequency of exposure, representing the average number of contacts per person per day. Unitless."
+        ]
+      },
+      "uses": {
+        "directUse": "The model can be used to simulate the spread of COVID-19 under different scenarios and evaluate the effectiveness of various intervention strategies, such as social distancing, quarantine, and vaccination.",
+        "outOfScopeUse": "The model may not be suitable for predicting the spread of COVID-19 in regions with significantly different population dynamics or healthcare infrastructure compared to Wuhan. It may also not account for new variants of the virus with different transmission characteristics."
+      },
+      "biasRisksLimitations": {
+        "biases": "The model assumes homogeneous mixing of the population, which may not accurately reflect real-world contact patterns. This assumption can introduce bias in the simulation results.",
+        "risks": "The model's predictions are sensitive to the accuracy of the input parameters, such as the infection rate and recovery rate. Inaccurate parameter estimates can lead to incorrect predictions.",
+        "limitations": "The model does not account for factors such as age-specific transmission rates, asymptomatic carriers, or changes in public behavior over time, which can affect the accuracy of the simulation results."
+      },
+      "testing": {
+        "validation": "The model was validated through data fitting, comparing the simulated results with real-world data from Wuhan. The fitting process involved adjusting model parameters to minimize the difference between the simulated and observed data.",
+        "metrics": "The coefficient of determination (R2) and fitting bias were used to evaluate the model's accuracy. The model achieved an R2 close to 1 and a fitting bias of 3.02%, indicating high precision."
+      },
+      "gettingStarted": {
+        "steps": [
+          "Define the initial conditions for the Susceptible, Exposed, Infectious, and Recovered states based on the population size and initial number of cases.",
+          "Set the model parameters, including the infection rate (beta), latency period (omega), recovery rate (gamma), and frequency of exposure (k).",
+          "Run the model simulation over a specified time period to observe the dynamics of the COVID-19 outbreak.",
+          "Analyze the simulation results to assess the impact of different intervention strategies on the spread of the virus.",
+          "Perform sensitivity analysis to identify key parameters influencing the model's outcomes."
+        ],
+        "examples": [
+          "Use the model to simulate the impact of a lockdown on the spread of COVID-19 in a city with a population of 10 million.",
+          "Evaluate the effectiveness of a vaccination campaign by adjusting the model parameters to reflect increased immunity in the population."
+        ]
+      },
+      "glossary": [
+        "SEIR Model: A compartmental model used in epidemiology to simulate the spread of infectious diseases.",
+        "Basic Reproductive Number (R0): The average number of secondary cases generated by an infectious individual in a completely susceptible population.",
+        "Effective Reproductive Number (R): The average number of secondary cases generated by an infectious individual in a population with some level of immunity or intervention measures.",
+        "Sensitivity Analysis: A method used to determine how different parameters affect the outcomes of a model."
+      ],
+      "authors": [
+        "Yaqing Fang",
+        "Yiting Nie",
+        "Marshare Penny"
+      ],
+      "citations": [
+        "Li Q, Guan X, Wu P, et al. Early transmission dynamics in Wuhan, China, of novel coronavirus-infected pneumonia. N Engl J Med.",
+        "Lipsitch M, Cohen T, Cooper B, et al. Transmission dynamics and control of severe acute respiratory syndrome. Science.",
+        "Wu JT, Leung K, Leung GM. Nowcasting and forecasting the potential domestic and international spread of the 2019-nCoV outbreak originating in Wuhan, China: a modelling study. Lancet."
+      ],
+      "moreInformation": {
+        "fundedBy": "Not specified in the document.",
+        "links": [
+          "https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200229-sitrep-40-covid-19.pdf",
+          "http://www.nhc.gov.cn/xcs/yqtb/202003/9d462194284840ad96ce75eb8e4c8039.shtml"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}
