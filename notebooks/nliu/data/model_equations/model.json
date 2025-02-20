@@ -10,14 +10,6 @@
     "model": {
         "states": [
             {
-                "id": "S",
-                "name": "S",
-                "grounding": {
-                    "identifiers": {},
-                    "modifiers": {}
-                }
-            },
-            {
                 "id": "I",
                 "name": "I",
                 "grounding": {
@@ -32,13 +24,21 @@
                     "identifiers": {},
                     "modifiers": {}
                 }
+            },
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
             }
         ],
         "transitions": [
             {
                 "id": "t1",
                 "input": [
-                    "S"
+                    "I"
                 ],
                 "output": [],
                 "properties": {
@@ -50,10 +50,7 @@
                 "input": [
                     "I"
                 ],
-                "output": [
-                    "I",
-                    "S"
-                ],
+                "output": [],
                 "properties": {
                     "name": "t2"
                 }
@@ -63,26 +60,16 @@
                 "input": [
                     "I"
                 ],
-                "output": [],
+                "output": [
+                    "I",
+                    "R"
+                ],
                 "properties": {
                     "name": "t3"
                 }
             },
             {
                 "id": "t4",
-                "input": [
-                    "S"
-                ],
-                "output": [
-                    "S",
-                    "I"
-                ],
-                "properties": {
-                    "name": "t4"
-                }
-            },
-            {
-                "id": "t5",
                 "input": [
                     "I"
                 ],
@@ -91,17 +78,99 @@
                     "R"
                 ],
                 "properties": {
+                    "name": "t4"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "S",
+                    "I"
+                ],
+                "properties": {
                     "name": "t5"
                 }
             },
             {
                 "id": "t6",
                 "input": [
+                    "S"
+                ],
+                "output": [
+                    "S",
+                    "I"
+                ],
+                "properties": {
+                    "name": "t6"
+                }
+            },
+            {
+                "id": "t7",
+                "input": [
+                    "S"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t7"
+                }
+            },
+            {
+                "id": "t8",
+                "input": [
+                    "S"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t8"
+                }
+            },
+            {
+                "id": "t9",
+                "input": [
                     "R"
                 ],
                 "output": [],
                 "properties": {
-                    "name": "t6"
+                    "name": "t9"
+                }
+            },
+            {
+                "id": "t10",
+                "input": [
+                    "R"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t10"
+                }
+            },
+            {
+                "id": "t11",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "I",
+                    "S"
+                ],
+                "properties": {
+                    "name": "t11"
+                }
+            },
+            {
+                "id": "t12",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "I",
+                    "S"
+                ],
+                "properties": {
+                    "name": "t12"
                 }
             }
         ]
@@ -111,33 +180,63 @@
             "rates": [
                 {
                     "target": "t1",
-                    "expression": "S*m",
-                    "expression_mathml": "<apply><times/><ci>S</ci><ci>m</ci></apply>"
+                    "expression": "-I*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>m</ci></apply></apply>"
                 },
                 {
                     "target": "t2",
-                    "expression": "-I*S*b + l",
-                    "expression_mathml": "<apply><plus/><apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply></apply><ci>l</ci></apply>"
+                    "expression": "-I*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>m</ci></apply></apply>"
                 },
                 {
                     "target": "t3",
-                    "expression": "I*m",
-                    "expression_mathml": "<apply><times/><ci>I</ci><ci>m</ci></apply>"
-                },
-                {
-                    "target": "t4",
-                    "expression": "I*S*b - I*g",
-                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply><apply><times/><ci>I</ci><ci>g</ci></apply></apply>"
-                },
-                {
-                    "target": "t5",
                     "expression": "I*g",
                     "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
                 },
                 {
+                    "target": "t4",
+                    "expression": "I*g",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "I*S*b - I*g",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply><apply><times/><ci>I</ci><ci>g</ci></apply></apply>"
+                },
+                {
                     "target": "t6",
-                    "expression": "R*m",
-                    "expression_mathml": "<apply><times/><ci>R</ci><ci>m</ci></apply>"
+                    "expression": "I*S*b - I*g",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply><apply><times/><ci>I</ci><ci>g</ci></apply></apply>"
+                },
+                {
+                    "target": "t7",
+                    "expression": "-S*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>S</ci><ci>m</ci></apply></apply>"
+                },
+                {
+                    "target": "t8",
+                    "expression": "-S*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>S</ci><ci>m</ci></apply></apply>"
+                },
+                {
+                    "target": "t9",
+                    "expression": "-R*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>R</ci><ci>m</ci></apply></apply>"
+                },
+                {
+                    "target": "t10",
+                    "expression": "-R*m",
+                    "expression_mathml": "<apply><minus/><apply><times/><ci>R</ci><ci>m</ci></apply></apply>"
+                },
+                {
+                    "target": "t11",
+                    "expression": "-I*S*b + l",
+                    "expression_mathml": "<apply><plus/><apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply></apply><ci>l</ci></apply>"
+                },
+                {
+                    "target": "t12",
+                    "expression": "-I*S*b + l",
+                    "expression_mathml": "<apply><plus/><apply><minus/><apply><times/><ci>I</ci><ci>S</ci><ci>b</ci></apply></apply><ci>l</ci></apply>"
                 }
             ],
             "initials": [],
@@ -146,13 +245,13 @@
                     "id": "m"
                 },
                 {
+                    "id": "g"
+                },
+                {
                     "id": "b"
                 },
                 {
                     "id": "l"
-                },
-                {
-                    "id": "g"
                 }
             ],
             "observables": [],
