@@ -91,16 +91,16 @@ class Initial(BaseModel):
         Parameters
         ----------
         known_param_names : list[str]
-            List of parameter names.
+            List of symbols that are known to be parameters,
+            typically from the list of parameters of a model.
 
         Returns
         -------
         :
             The set of parameter names.
         """
-        return {str(s) for s in self.expression.free_symbols} & set(
-            known_param_names
-        )
+        return {str(s) for s in self.expression.free_symbols} & \
+            set(known_param_names)
 
 
 class Distribution(BaseModel):
@@ -116,6 +116,43 @@ class Distribution(BaseModel):
                     "point values or symbolic expressions over other "
                     "parameters."
     )
+
+    def get_expression_parameter_names(self, known_param_names) -> Set[str]:
+        """Get the names of all parameters used in expressions, if any.
+
+        Note this only applies to parameters that are referenced in custom
+        expressions defining the distribution parameters.
+
+        Parameters
+        ----------
+        known_param_names : list[str]
+            List of symbols that are known to be parameters,
+            typically from the list of parameters of a model.
+
+        Returns
+        -------
+        :
+            The set of parameter names.
+        """
+        expr_params = set()
+        for param_expr in self.parameters.values():
+            if isinstance(param_expr, SympyExprStr):
+                expr_params |= {str(s) for s in param_expr.free_symbols}
+        return expr_params & set(known_param_names)
+
+    def substitute_parameter(self, name, value):
+        """Substitute a parameter value into the distribution parameter expressions.
+
+        Parameters
+        ----------
+        name : str
+            The name of the parameter to substitute.
+        value :
+            The value to substitute.
+        """
+        for k, v in self.parameters.items():
+            if isinstance(v, SympyExprStr):
+                self.parameters[k] = v.subs(sympy.Symbol(name), value)
 
 
 class Parameter(Concept):
@@ -169,16 +206,16 @@ class Observable(Concept):
         Parameters
         ----------
         known_param_names : list[str]
-            List of parameter names.
+            List of symbols that are known to be parameters,
+            typically from the list of parameters of a model.
 
         Returns
         -------
         :
             The set of parameter names.
         """
-        return {str(s) for s in self.expression.free_symbols} & set(
-            known_param_names
-        )
+        return {str(s) for s in self.expression.free_symbols} & \
+            set(known_param_names)
 
 
 class Time(BaseModel):
@@ -442,11 +479,32 @@ class TemplateModel(BaseModel):
             else:
                 self.parameters[k] = Parameter(name=k, value=v)
 
-    def get_all_used_parameters(self):
-        """Get all parameters that are actually used in rate laws."""
+    def get_all_used_parameters(self) -> Set[str]:
+        """Get all parameters that are actually used in the model
+
+        Usages include rate laws of templates, observable expressions
+        and initial expressions.
+
+        Returns
+        -------
+        :
+            A set of parameter names.
+        """
         used_parameters = set()
         for template in self.templates:
             used_parameters |= template.get_parameter_names()
+        for observable in self.observables.values():
+            used_parameters |= \
+                observable.get_parameter_names(list(self.parameters))
+        for initial in self.initials.values():
+            used_parameters |= \
+                initial.get_parameter_names(list(self.parameters))
+        for parameter in self.parameters.values():
+            if parameter.distribution:
+                used_parameters |= \
+                    parameter.distribution.get_expression_parameter_names(
+                        list(self.parameters)
+                    )
         return used_parameters
 
     def eliminate_unused_parameters(self):
@@ -1021,8 +1079,7 @@ class TemplateModel(BaseModel):
         return self.add_template(template, parameter_mapping=pm)
 
     def substitute_parameter(self, name, value=None):
-        """
-        Substitute a parameter with the value argument if supplied,
+        """Substitute a parameter with the value argument if supplied,
         else substitute the parameter with the parameter's value.
 
         Parameters
@@ -1050,6 +1107,11 @@ class TemplateModel(BaseModel):
             template.substitute_parameter(name, value)
         for observable in self.observables.values():
             observable.substitute_parameter(name, value)
+        for initial in self.initials.values():
+            initial.substitute_parameter(name, value)
+        for param in self.parameters.values():
+            if param.distribution:
+                param.distribution.substitute_parameter(name, value)
 
     def add_parameter(
         self,
