@@ -1,0 +1,225 @@
+{
+    "header": {
+        "name": "Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "R",
+                "name": "R(t)",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "I",
+                "name": "I(t)",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S",
+                "name": "S(t)",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t0:R->",
+                "input": [
+                    "R"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t0:R->"
+                }
+            },
+            {
+                "id": "t1:I->",
+                "input": [
+                    "I"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t1:I->"
+                }
+            },
+            {
+                "id": "t2:S->",
+                "input": [
+                    "S"
+                ],
+                "output": [],
+                "properties": {
+                    "name": "t2:S->"
+                }
+            },
+            {
+                "id": "t3:S->I",
+                "input": [
+                    "R",
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "R",
+                    "I",
+                    "I"
+                ],
+                "properties": {
+                    "name": "t3:S->I"
+                }
+            },
+            {
+                "id": "t4:I->R",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t4:I->R"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t0:R->",
+                    "expression": "R*m",
+                    "expression_mathml": "<apply><times/><ci>R</ci><ci>m</ci></apply>"
+                },
+                {
+                    "target": "t1:I->",
+                    "expression": "I*m",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>m</ci></apply>"
+                },
+                {
+                    "target": "t2:S->",
+                    "expression": "S*m",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>m</ci></apply>"
+                },
+                {
+                    "target": "t3:S->I",
+                    "expression": "S*b*(I + R*a)",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>b</ci><apply><plus/><ci>I</ci><apply><times/><ci>R</ci><ci>a</ci></apply></apply></apply>"
+                },
+                {
+                    "target": "t4:I->R",
+                    "expression": "I*g",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "I",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "S",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "m",
+                    "name": "m",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "a",
+                    "name": "a",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "b",
+                    "name": "b",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "g",
+                    "name": "g",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "R0",
+                    "name": "R0",
+                    "description": "Initial value of state variable \"R\"",
+                    "value": 0.0
+                },
+                {
+                    "id": "I0",
+                    "name": "I0",
+                    "description": "Initial value of state variable \"I\"",
+                    "value": 0.0
+                },
+                {
+                    "id": "S0",
+                    "name": "S0",
+                    "description": "Initial value of state variable \"S\"",
+                    "value": 0.0
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {}
+    }
+}

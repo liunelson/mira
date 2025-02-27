@@ -1,0 +1,3469 @@
+{
+    "header": {
+        "name": "Antagonistic Infection Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Model B (Improved)",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "A_c",
+                "name": "A_c",
+                "description": "Population of COVID-19 asymptomatic infectious individuals",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D_c",
+                "name": "D_c",
+                "description": "Died from COVID",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "V_c_f",
+                "name": "V_c_f",
+                "description": "Population of individuals vaccinated against COVID-19 and RSV",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "A_c_f",
+                "name": "A_c_f",
+                "description": "Population of co-infected COVID-19 and RSV asymptomatic infectious individuals",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                }
+            },
+            {
+                "id": "E_f",
+                "name": "E_f",
+                "description": "Population of individuals exposed to RSV only",
+                "grounding": {
+                    "identifiers": {
+                        "apollosv": "00000154"
+                    },
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_f",
+                "name": "I_f",
+                "description": "Population of RSV infectious individuals",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "A_f",
+                "name": "A_f",
+                "description": "Population of RSV asymptomatic infectious individuals",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                }
+            },
+            {
+                "id": "H_c_f",
+                "name": "H_c_f",
+                "description": "Hospitalized from co-infection",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                }
+            },
+            {
+                "id": "H_f",
+                "name": "H_f",
+                "description": "Hospitalized from RSV",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                }
+            },
+            {
+                "id": "I_c_f",
+                "name": "I_c_f",
+                "description": "Population of COVID-19 and RSV infectious individuals",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "H_c",
+                "name": "H_c",
+                "description": "Population of infectious individuals hospitalized for coronavirus",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_c",
+                "name": "E_c",
+                "description": "Population of individuals exposed to COVID-19 only",
+                "grounding": {
+                    "identifiers": {
+                        "apollosv": "00000154"
+                    },
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_c",
+                "name": "I_c",
+                "description": "Population of COVID-19 symptomatic infectious individuals",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D_c_f",
+                "name": "D_c_f",
+                "description": "Died from coinfection",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R_c",
+                "name": "R_c",
+                "description": "Population of individuals recovered from COVID-19",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D_0",
+                "name": "D_0",
+                "description": "Died from natural causes",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "0"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "D_f",
+                "name": "D_f",
+                "description": "Died from RSV",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "E_c_f",
+                "name": "E_c_f",
+                "description": "Population of individuals exposed to COVID-19 and RSV",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R_c_f",
+                "name": "R_c_f",
+                "description": "Population of individuals recovered from both COVID-19 and RSV",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {
+                        "virus": "c_f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S",
+                "name": "S",
+                "description": "Population of susceptible individuals",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "virus": "0"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "V_f",
+                "name": "V_f",
+                "description": "Population of individuals vaccinated against RSV",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "V_c",
+                "name": "V_c",
+                "description": "Population of individuals vaccinated against COVID-19",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "virus": "c"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R_f",
+                "name": "R_f",
+                "description": "Population of individuals recovered from RSV",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {
+                        "virus": "f"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "A_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2_1",
+                "input": [
+                    "A_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_1"
+                }
+            },
+            {
+                "id": "t2_2",
+                "input": [
+                    "I_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "I_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_2"
+                }
+            },
+            {
+                "id": "t2_3",
+                "input": [
+                    "A_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "A_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_3"
+                }
+            },
+            {
+                "id": "t2_4",
+                "input": [
+                    "H_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_4"
+                }
+            },
+            {
+                "id": "t2_5",
+                "input": [
+                    "H_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "H_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_5"
+                }
+            },
+            {
+                "id": "t2_6",
+                "input": [
+                    "I_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t2_6"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "H_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4_1",
+                "input": [
+                    "A_c",
+                    "V_c_f"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_1"
+                }
+            },
+            {
+                "id": "t4_2",
+                "input": [
+                    "H_c",
+                    "V_c_f"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_2"
+                }
+            },
+            {
+                "id": "t4_3",
+                "input": [
+                    "A_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_3"
+                }
+            },
+            {
+                "id": "t4_4",
+                "input": [
+                    "I_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_4"
+                }
+            },
+            {
+                "id": "t4_5",
+                "input": [
+                    "H_c_f",
+                    "V_c_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_5"
+                }
+            },
+            {
+                "id": "t4_6",
+                "input": [
+                    "I_c",
+                    "V_c_f"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t4_6"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "I_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "I_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t6"
+                }
+            },
+            {
+                "id": "t7",
+                "input": [
+                    "R_c"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t7"
+                }
+            },
+            {
+                "id": "t8",
+                "input": [
+                    "I_f"
+                ],
+                "output": [
+                    "D_f"
+                ],
+                "properties": {
+                    "name": "t8"
+                }
+            },
+            {
+                "id": "t10",
+                "input": [
+                    "E_c_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t10"
+                }
+            },
+            {
+                "id": "t12",
+                "input": [
+                    "R_c_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t12"
+                }
+            },
+            {
+                "id": "t13",
+                "input": [
+                    "E_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t13"
+                }
+            },
+            {
+                "id": "t14",
+                "input": [],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t14"
+                }
+            },
+            {
+                "id": "t15",
+                "input": [
+                    "V_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t15"
+                }
+            },
+            {
+                "id": "t16",
+                "input": [
+                    "A_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t16"
+                }
+            },
+            {
+                "id": "t17",
+                "input": [
+                    "V_c_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t17"
+                }
+            },
+            {
+                "id": "t18",
+                "input": [
+                    "A_c",
+                    "V_c_f"
+                ],
+                "output": [
+                    "A_c"
+                ],
+                "properties": {
+                    "name": "t18"
+                }
+            },
+            {
+                "id": "t19",
+                "input": [
+                    "H_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t19"
+                }
+            },
+            {
+                "id": "t21",
+                "input": [
+                    "I_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "t21"
+                }
+            },
+            {
+                "id": "t22",
+                "input": [
+                    "V_c"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t22"
+                }
+            },
+            {
+                "id": "t23",
+                "input": [
+                    "R_f"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t23"
+                }
+            },
+            {
+                "id": "t24",
+                "input": [
+                    "I_c"
+                ],
+                "output": [
+                    "D_c"
+                ],
+                "properties": {
+                    "name": "t24"
+                }
+            },
+            {
+                "id": "t25",
+                "input": [
+                    "I_f"
+                ],
+                "output": [
+                    "D_f"
+                ],
+                "properties": {
+                    "name": "t25"
+                }
+            },
+            {
+                "id": "t26",
+                "input": [
+                    "E_c"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t26"
+                }
+            },
+            {
+                "id": "t27",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "D_0"
+                ],
+                "properties": {
+                    "name": "t27"
+                }
+            },
+            {
+                "id": "t28",
+                "input": [
+                    "R_c"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t28"
+                }
+            },
+            {
+                "id": "t29",
+                "input": [
+                    "R_c_f"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t29"
+                }
+            },
+            {
+                "id": "t30",
+                "input": [
+                    "R_f"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t30"
+                }
+            },
+            {
+                "id": "t31",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "V_c"
+                ],
+                "properties": {
+                    "name": "t31"
+                }
+            },
+            {
+                "id": "t32",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "V_c_f"
+                ],
+                "properties": {
+                    "name": "t32"
+                }
+            },
+            {
+                "id": "t33",
+                "input": [
+                    "S"
+                ],
+                "output": [
+                    "V_f"
+                ],
+                "properties": {
+                    "name": "t33"
+                }
+            },
+            {
+                "id": "t34",
+                "input": [
+                    "V_c"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t34"
+                }
+            },
+            {
+                "id": "t35",
+                "input": [
+                    "V_c_f"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t35"
+                }
+            },
+            {
+                "id": "t36",
+                "input": [
+                    "V_f"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "t36"
+                }
+            },
+            {
+                "id": "t37_1",
+                "input": [
+                    "A_c",
+                    "S"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_1"
+                }
+            },
+            {
+                "id": "t37_2",
+                "input": [
+                    "H_c",
+                    "S"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_2"
+                }
+            },
+            {
+                "id": "t37_3",
+                "input": [
+                    "A_c_f",
+                    "S"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_3"
+                }
+            },
+            {
+                "id": "t37_4",
+                "input": [
+                    "I_c_f",
+                    "S"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_4"
+                }
+            },
+            {
+                "id": "t37_5",
+                "input": [
+                    "H_c_f",
+                    "S"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_5"
+                }
+            },
+            {
+                "id": "t37_6",
+                "input": [
+                    "I_c",
+                    "S"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t37_6"
+                }
+            },
+            {
+                "id": "t39_1",
+                "input": [
+                    "A_c_f",
+                    "S"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_1"
+                }
+            },
+            {
+                "id": "t39_2",
+                "input": [
+                    "I_f",
+                    "S"
+                ],
+                "output": [
+                    "I_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_2"
+                }
+            },
+            {
+                "id": "t39_3",
+                "input": [
+                    "A_f",
+                    "S"
+                ],
+                "output": [
+                    "A_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_3"
+                }
+            },
+            {
+                "id": "t39_4",
+                "input": [
+                    "H_c_f",
+                    "S"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_4"
+                }
+            },
+            {
+                "id": "t39_5",
+                "input": [
+                    "H_f",
+                    "S"
+                ],
+                "output": [
+                    "H_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_5"
+                }
+            },
+            {
+                "id": "t39_6",
+                "input": [
+                    "I_c_f",
+                    "S"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t39_6"
+                }
+            },
+            {
+                "id": "t43_1",
+                "input": [
+                    "A_c",
+                    "V_c"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_1"
+                }
+            },
+            {
+                "id": "t43_2",
+                "input": [
+                    "H_c",
+                    "V_c"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_2"
+                }
+            },
+            {
+                "id": "t43_3",
+                "input": [
+                    "A_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_3"
+                }
+            },
+            {
+                "id": "t43_4",
+                "input": [
+                    "I_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_4"
+                }
+            },
+            {
+                "id": "t43_5",
+                "input": [
+                    "H_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_5"
+                }
+            },
+            {
+                "id": "t43_6",
+                "input": [
+                    "I_c",
+                    "V_c"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t43_6"
+                }
+            },
+            {
+                "id": "t45_1",
+                "input": [
+                    "A_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_1"
+                }
+            },
+            {
+                "id": "t45_2",
+                "input": [
+                    "I_f",
+                    "V_c"
+                ],
+                "output": [
+                    "I_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_2"
+                }
+            },
+            {
+                "id": "t45_3",
+                "input": [
+                    "A_f",
+                    "V_c"
+                ],
+                "output": [
+                    "A_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_3"
+                }
+            },
+            {
+                "id": "t45_4",
+                "input": [
+                    "H_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_4"
+                }
+            },
+            {
+                "id": "t45_5",
+                "input": [
+                    "H_f",
+                    "V_c"
+                ],
+                "output": [
+                    "H_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_5"
+                }
+            },
+            {
+                "id": "t45_6",
+                "input": [
+                    "I_c_f",
+                    "V_c"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t45_6"
+                }
+            },
+            {
+                "id": "t49",
+                "input": [
+                    "E_c"
+                ],
+                "output": [
+                    "A_c"
+                ],
+                "properties": {
+                    "name": "t49"
+                }
+            },
+            {
+                "id": "t50",
+                "input": [
+                    "E_c"
+                ],
+                "output": [
+                    "I_c"
+                ],
+                "properties": {
+                    "name": "t50"
+                }
+            },
+            {
+                "id": "t51_1",
+                "input": [
+                    "A_c",
+                    "V_f"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_1"
+                }
+            },
+            {
+                "id": "t51_2",
+                "input": [
+                    "H_c",
+                    "V_f"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_2"
+                }
+            },
+            {
+                "id": "t51_3",
+                "input": [
+                    "A_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_3"
+                }
+            },
+            {
+                "id": "t51_4",
+                "input": [
+                    "I_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_4"
+                }
+            },
+            {
+                "id": "t51_5",
+                "input": [
+                    "H_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_5"
+                }
+            },
+            {
+                "id": "t51_6",
+                "input": [
+                    "I_c",
+                    "V_f"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c"
+                ],
+                "properties": {
+                    "name": "t51_6"
+                }
+            },
+            {
+                "id": "t55",
+                "input": [
+                    "A_c"
+                ],
+                "output": [
+                    "R_c"
+                ],
+                "properties": {
+                    "name": "t55"
+                }
+            },
+            {
+                "id": "t56_1",
+                "input": [
+                    "A_c_f",
+                    "A_c"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_1"
+                }
+            },
+            {
+                "id": "t56_2",
+                "input": [
+                    "I_f",
+                    "A_c"
+                ],
+                "output": [
+                    "I_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_2"
+                }
+            },
+            {
+                "id": "t56_3",
+                "input": [
+                    "A_f",
+                    "A_c"
+                ],
+                "output": [
+                    "A_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_3"
+                }
+            },
+            {
+                "id": "t56_4",
+                "input": [
+                    "H_c_f",
+                    "A_c"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_4"
+                }
+            },
+            {
+                "id": "t56_5",
+                "input": [
+                    "H_f",
+                    "A_c"
+                ],
+                "output": [
+                    "H_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_5"
+                }
+            },
+            {
+                "id": "t56_6",
+                "input": [
+                    "I_c_f",
+                    "A_c"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t56_6"
+                }
+            },
+            {
+                "id": "t57",
+                "input": [
+                    "I_c"
+                ],
+                "output": [
+                    "H_c"
+                ],
+                "properties": {
+                    "name": "t57"
+                }
+            },
+            {
+                "id": "t58_1",
+                "input": [
+                    "A_c_f",
+                    "I_c"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_1"
+                }
+            },
+            {
+                "id": "t58_2",
+                "input": [
+                    "I_f",
+                    "I_c"
+                ],
+                "output": [
+                    "I_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_2"
+                }
+            },
+            {
+                "id": "t58_3",
+                "input": [
+                    "A_f",
+                    "I_c"
+                ],
+                "output": [
+                    "A_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_3"
+                }
+            },
+            {
+                "id": "t58_4",
+                "input": [
+                    "H_c_f",
+                    "I_c"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_4"
+                }
+            },
+            {
+                "id": "t58_5",
+                "input": [
+                    "H_f",
+                    "I_c"
+                ],
+                "output": [
+                    "H_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_5"
+                }
+            },
+            {
+                "id": "t58_6",
+                "input": [
+                    "I_c_f",
+                    "I_c"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t58_6"
+                }
+            },
+            {
+                "id": "t59",
+                "input": [
+                    "H_c"
+                ],
+                "output": [
+                    "R_c"
+                ],
+                "properties": {
+                    "name": "t59"
+                }
+            },
+            {
+                "id": "t60_1",
+                "input": [
+                    "A_c_f",
+                    "H_c"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_1"
+                }
+            },
+            {
+                "id": "t60_2",
+                "input": [
+                    "I_f",
+                    "H_c"
+                ],
+                "output": [
+                    "I_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_2"
+                }
+            },
+            {
+                "id": "t60_3",
+                "input": [
+                    "A_f",
+                    "H_c"
+                ],
+                "output": [
+                    "A_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_3"
+                }
+            },
+            {
+                "id": "t60_4",
+                "input": [
+                    "H_c_f",
+                    "H_c"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_4"
+                }
+            },
+            {
+                "id": "t60_5",
+                "input": [
+                    "H_f",
+                    "H_c"
+                ],
+                "output": [
+                    "H_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_5"
+                }
+            },
+            {
+                "id": "t60_6",
+                "input": [
+                    "I_c_f",
+                    "H_c"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t60_6"
+                }
+            },
+            {
+                "id": "t61_1",
+                "input": [
+                    "A_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_1"
+                }
+            },
+            {
+                "id": "t61_2",
+                "input": [
+                    "I_f",
+                    "V_f"
+                ],
+                "output": [
+                    "I_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_2"
+                }
+            },
+            {
+                "id": "t61_3",
+                "input": [
+                    "A_f",
+                    "V_f"
+                ],
+                "output": [
+                    "A_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_3"
+                }
+            },
+            {
+                "id": "t61_4",
+                "input": [
+                    "H_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_4"
+                }
+            },
+            {
+                "id": "t61_5",
+                "input": [
+                    "H_f",
+                    "V_f"
+                ],
+                "output": [
+                    "H_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_5"
+                }
+            },
+            {
+                "id": "t61_6",
+                "input": [
+                    "I_c_f",
+                    "V_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_f"
+                ],
+                "properties": {
+                    "name": "t61_6"
+                }
+            },
+            {
+                "id": "t63",
+                "input": [
+                    "E_f"
+                ],
+                "output": [
+                    "I_f"
+                ],
+                "properties": {
+                    "name": "t63"
+                }
+            },
+            {
+                "id": "t65_1",
+                "input": [
+                    "A_c",
+                    "I_f"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_1"
+                }
+            },
+            {
+                "id": "t65_2",
+                "input": [
+                    "H_c",
+                    "I_f"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_2"
+                }
+            },
+            {
+                "id": "t65_3",
+                "input": [
+                    "A_c_f",
+                    "I_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_3"
+                }
+            },
+            {
+                "id": "t65_4",
+                "input": [
+                    "I_c_f",
+                    "I_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_4"
+                }
+            },
+            {
+                "id": "t65_5",
+                "input": [
+                    "H_c_f",
+                    "I_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_5"
+                }
+            },
+            {
+                "id": "t65_6",
+                "input": [
+                    "I_c",
+                    "I_f"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t65_6"
+                }
+            },
+            {
+                "id": "t68",
+                "input": [
+                    "E_c_f"
+                ],
+                "output": [
+                    "I_c_f"
+                ],
+                "properties": {
+                    "name": "t68"
+                }
+            },
+            {
+                "id": "t70",
+                "input": [
+                    "E_c_f"
+                ],
+                "output": [
+                    "A_c_f"
+                ],
+                "properties": {
+                    "name": "t70"
+                }
+            },
+            {
+                "id": "t74",
+                "input": [
+                    "A_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "t74"
+                }
+            },
+            {
+                "id": "t75",
+                "input": [
+                    "A_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "t75"
+                }
+            },
+            {
+                "id": "t77",
+                "input": [
+                    "A_c_f"
+                ],
+                "output": [
+                    "R_c_f"
+                ],
+                "properties": {
+                    "name": "t77"
+                }
+            },
+            {
+                "id": "t72",
+                "input": [
+                    "I_c_f"
+                ],
+                "output": [
+                    "H_c_f"
+                ],
+                "properties": {
+                    "name": "t72"
+                }
+            },
+            {
+                "id": "t73",
+                "input": [
+                    "H_c_f"
+                ],
+                "output": [
+                    "R_c_f"
+                ],
+                "properties": {
+                    "name": "t73"
+                }
+            },
+            {
+                "id": "t69",
+                "input": [
+                    "E_f"
+                ],
+                "output": [
+                    "A_f"
+                ],
+                "properties": {
+                    "name": "t69"
+                }
+            },
+            {
+                "id": "t76",
+                "input": [
+                    "I_f"
+                ],
+                "output": [
+                    "H_f"
+                ],
+                "properties": {
+                    "name": "t76"
+                }
+            },
+            {
+                "id": "t71",
+                "input": [
+                    "H_f"
+                ],
+                "output": [
+                    "R_f"
+                ],
+                "properties": {
+                    "name": "t71"
+                }
+            },
+            {
+                "id": "t80",
+                "input": [
+                    "A_f"
+                ],
+                "output": [
+                    "D_f"
+                ],
+                "properties": {
+                    "name": "t80"
+                }
+            },
+            {
+                "id": "t81",
+                "input": [
+                    "H_f"
+                ],
+                "output": [
+                    "D_f"
+                ],
+                "properties": {
+                    "name": "t81"
+                }
+            },
+            {
+                "id": "t82",
+                "input": [
+                    "A_f"
+                ],
+                "output": [
+                    "R_f"
+                ],
+                "properties": {
+                    "name": "t82"
+                }
+            },
+            {
+                "id": "t84_1",
+                "input": [
+                    "A_c",
+                    "A_f"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_1"
+                }
+            },
+            {
+                "id": "t84_2",
+                "input": [
+                    "H_c",
+                    "A_f"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_2"
+                }
+            },
+            {
+                "id": "t84_3",
+                "input": [
+                    "A_c_f",
+                    "A_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_3"
+                }
+            },
+            {
+                "id": "t84_4",
+                "input": [
+                    "I_c_f",
+                    "A_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_4"
+                }
+            },
+            {
+                "id": "t84_5",
+                "input": [
+                    "H_c_f",
+                    "A_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_5"
+                }
+            },
+            {
+                "id": "t84_6",
+                "input": [
+                    "I_c",
+                    "A_f"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t84_6"
+                }
+            },
+            {
+                "id": "t85_1",
+                "input": [
+                    "A_c",
+                    "H_f"
+                ],
+                "output": [
+                    "A_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_1"
+                }
+            },
+            {
+                "id": "t85_2",
+                "input": [
+                    "H_c",
+                    "H_f"
+                ],
+                "output": [
+                    "H_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_2"
+                }
+            },
+            {
+                "id": "t85_3",
+                "input": [
+                    "A_c_f",
+                    "H_f"
+                ],
+                "output": [
+                    "A_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_3"
+                }
+            },
+            {
+                "id": "t85_4",
+                "input": [
+                    "I_c_f",
+                    "H_f"
+                ],
+                "output": [
+                    "I_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_4"
+                }
+            },
+            {
+                "id": "t85_5",
+                "input": [
+                    "H_c_f",
+                    "H_f"
+                ],
+                "output": [
+                    "H_c_f",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_5"
+                }
+            },
+            {
+                "id": "t85_6",
+                "input": [
+                    "I_c",
+                    "H_f"
+                ],
+                "output": [
+                    "I_c",
+                    "E_c_f"
+                ],
+                "properties": {
+                    "name": "t85_6"
+                }
+            },
+            {
+                "id": "H_c_f_to_D_c_f_transition",
+                "input": [
+                    "H_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "H_c_f_to_D_c_f_transition"
+                }
+            },
+            {
+                "id": "transition_from_H_c_f_to_D_c_f",
+                "input": [
+                    "H_c_f"
+                ],
+                "output": [
+                    "D_c_f"
+                ],
+                "properties": {
+                    "name": "transition_from_H_c_f_to_D_c_f"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "A_c*delta_c",
+                    "expression_mathml": "<apply><times/><ci>A_c</ci><ci>delta_c</ci></apply>"
+                },
+                {
+                    "target": "t2_1",
+                    "expression": "A_c_f*V_c_f*beta_f_c*conmat*epsilon_f*eta_A*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_A</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t2_2",
+                    "expression": "I_f*V_c_f*beta_f*conmat*epsilon_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_f</ci><ci>V_c_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t2_3",
+                    "expression": "A_f*V_c_f*beta_f*conmat*epsilon_f*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>V_c_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t2_4",
+                    "expression": "H_c_f*V_c_f*beta_f_c*conmat*epsilon_f*eta_H*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_H</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t2_5",
+                    "expression": "H_f*V_c_f*beta_f*conmat*epsilon_f*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>V_c_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t2_6",
+                    "expression": "I_c_f*V_c_f*beta_f_c*conmat*epsilon_f*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "H_c*mu",
+                    "expression_mathml": "<apply><times/><ci>H_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t4_1",
+                    "expression": "A_c*V_c_f*beta_c*epsilon_c*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>V_c_f</ci><ci>beta_c</ci><ci>epsilon_c</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t4_2",
+                    "expression": "H_c*V_c_f*beta_c*epsilon_c*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>V_c_f</ci><ci>beta_c</ci><ci>epsilon_c</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t4_3",
+                    "expression": "A_c_f*V_c_f*beta_c_f*epsilon_c*eta_A*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_c_f</ci><ci>beta_c_f</ci><ci>epsilon_c</ci><ci>eta_A</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t4_4",
+                    "expression": "I_c_f*V_c_f*beta_c_f*epsilon_c*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_c_f</ci><ci>beta_c_f</ci><ci>epsilon_c</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t4_5",
+                    "expression": "H_c_f*V_c_f*beta_c_f*epsilon_c*eta_H*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_c_f</ci><ci>beta_c_f</ci><ci>epsilon_c</ci><ci>eta_H</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t4_6",
+                    "expression": "I_c*V_c_f*beta_c*epsilon_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>V_c_f</ci><ci>beta_c</ci><ci>epsilon_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "I_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>I_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "I_c*delta_c",
+                    "expression_mathml": "<apply><times/><ci>I_c</ci><ci>delta_c</ci></apply>"
+                },
+                {
+                    "target": "t7",
+                    "expression": "R_c*mu",
+                    "expression_mathml": "<apply><times/><ci>R_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t8",
+                    "expression": "I_f*mu",
+                    "expression_mathml": "<apply><times/><ci>I_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t10",
+                    "expression": "E_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>E_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t12",
+                    "expression": "R_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>R_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t13",
+                    "expression": "E_f*mu",
+                    "expression_mathml": "<apply><times/><ci>E_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t14",
+                    "expression": "pi",
+                    "expression_mathml": "<ci>pi</ci>"
+                },
+                {
+                    "target": "t15",
+                    "expression": "V_f*mu",
+                    "expression_mathml": "<apply><times/><ci>V_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t16",
+                    "expression": "A_c*mu",
+                    "expression_mathml": "<apply><times/><ci>A_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t17",
+                    "expression": "V_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>V_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t18",
+                    "expression": "A_c*V_c_f*beta_c*epsilon_c_f*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>V_c_f</ci><ci>beta_c</ci><ci>epsilon_c_f</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t19",
+                    "expression": "H_c*delta_c",
+                    "expression_mathml": "<apply><times/><ci>H_c</ci><ci>delta_c</ci></apply>"
+                },
+                {
+                    "target": "t21",
+                    "expression": "I_c_f*delta_c_f",
+                    "expression_mathml": "<apply><times/><ci>I_c_f</ci><ci>delta_c_f</ci></apply>"
+                },
+                {
+                    "target": "t22",
+                    "expression": "V_c*mu",
+                    "expression_mathml": "<apply><times/><ci>V_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t23",
+                    "expression": "R_f*mu",
+                    "expression_mathml": "<apply><times/><ci>R_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t24",
+                    "expression": "I_c*mu",
+                    "expression_mathml": "<apply><times/><ci>I_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t25",
+                    "expression": "I_f*delta_f",
+                    "expression_mathml": "<apply><times/><ci>I_f</ci><ci>delta_f</ci></apply>"
+                },
+                {
+                    "target": "t26",
+                    "expression": "E_c*mu",
+                    "expression_mathml": "<apply><times/><ci>E_c</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t27",
+                    "expression": "S*mu",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t28",
+                    "expression": "R_c*kappa_c",
+                    "expression_mathml": "<apply><times/><ci>R_c</ci><ci>kappa_c</ci></apply>"
+                },
+                {
+                    "target": "t29",
+                    "expression": "R_c_f*kappa_c_f",
+                    "expression_mathml": "<apply><times/><ci>R_c_f</ci><ci>kappa_c_f</ci></apply>"
+                },
+                {
+                    "target": "t30",
+                    "expression": "R_f*kappa_f",
+                    "expression_mathml": "<apply><times/><ci>R_f</ci><ci>kappa_f</ci></apply>"
+                },
+                {
+                    "target": "t31",
+                    "expression": "S*nu_c",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>nu_c</ci></apply>"
+                },
+                {
+                    "target": "t32",
+                    "expression": "S*nu_c_f",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>nu_c_f</ci></apply>"
+                },
+                {
+                    "target": "t33",
+                    "expression": "S*nu_f",
+                    "expression_mathml": "<apply><times/><ci>S</ci><ci>nu_f</ci></apply>"
+                },
+                {
+                    "target": "t34",
+                    "expression": "V_c*omega_c",
+                    "expression_mathml": "<apply><times/><ci>V_c</ci><ci>omega_c</ci></apply>"
+                },
+                {
+                    "target": "t35",
+                    "expression": "V_c_f*omega_c_f",
+                    "expression_mathml": "<apply><times/><ci>V_c_f</ci><ci>omega_c_f</ci></apply>"
+                },
+                {
+                    "target": "t36",
+                    "expression": "V_f*omega_f",
+                    "expression_mathml": "<apply><times/><ci>V_f</ci><ci>omega_f</ci></apply>"
+                },
+                {
+                    "target": "t37_1",
+                    "expression": "A_c*S*beta_c*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>S</ci><ci>beta_c</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t37_2",
+                    "expression": "H_c*S*beta_c*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>S</ci><ci>beta_c</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t37_3",
+                    "expression": "A_c_f*S*beta_c_f*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>S</ci><ci>beta_c_f</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t37_4",
+                    "expression": "I_c_f*S*beta_c_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>S</ci><ci>beta_c_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t37_5",
+                    "expression": "H_c_f*S*beta_c_f*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>S</ci><ci>beta_c_f</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t37_6",
+                    "expression": "I_c*S*beta_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>S</ci><ci>beta_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_1",
+                    "expression": "A_c_f*S*beta_f_c*conmat*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>S</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_2",
+                    "expression": "I_f*S*beta_f*conmat/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_f</ci><ci>S</ci><ci>beta_f</ci><ci>conmat</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_3",
+                    "expression": "A_f*S*beta_f*conmat*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>S</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_4",
+                    "expression": "H_c_f*S*beta_f_c*conmat*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>S</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_5",
+                    "expression": "H_f*S*beta_f*conmat*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>S</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t39_6",
+                    "expression": "I_c_f*S*beta_f_c*conmat/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>S</ci><ci>beta_f_c</ci><ci>conmat</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_1",
+                    "expression": "A_c*V_c*beta_c*epsilon_c*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>V_c</ci><ci>beta_c</ci><ci>epsilon_c</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_2",
+                    "expression": "H_c*V_c*beta_c*epsilon_c*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>V_c</ci><ci>beta_c</ci><ci>epsilon_c</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_3",
+                    "expression": "A_c_f*V_c*beta_c_f*epsilon_c*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_c</ci><ci>beta_c_f</ci><ci>epsilon_c</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_4",
+                    "expression": "I_c_f*V_c*beta_c_f*epsilon_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_c</ci><ci>beta_c_f</ci><ci>epsilon_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_5",
+                    "expression": "H_c_f*V_c*beta_c_f*epsilon_c*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_c</ci><ci>beta_c_f</ci><ci>epsilon_c</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t43_6",
+                    "expression": "I_c*V_c*beta_c*epsilon_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>V_c</ci><ci>beta_c</ci><ci>epsilon_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_1",
+                    "expression": "A_c_f*V_c*beta_f_c*conmat*eta_A*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_A</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_2",
+                    "expression": "I_f*V_c*beta_f*conmat/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_f</ci><ci>V_c</ci><ci>beta_f</ci><ci>conmat</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_3",
+                    "expression": "A_f*V_c*beta_f*conmat*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>V_c</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_4",
+                    "expression": "H_c_f*V_c*beta_f_c*conmat*eta_H*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_H</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_5",
+                    "expression": "H_f*V_c*beta_f*conmat*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>V_c</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t45_6",
+                    "expression": "I_c_f*V_c*beta_f_c*conmat*(1 - epsilon_c)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_c</ci><ci>beta_f_c</ci><ci>conmat</ci><apply><minus/><cn>1</cn><ci>epsilon_c</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t49",
+                    "expression": "E_c*psi_a*sigma_c",
+                    "expression_mathml": "<apply><times/><ci>E_c</ci><ci>psi_a</ci><ci>sigma_c</ci></apply>"
+                },
+                {
+                    "target": "t50",
+                    "expression": "E_c*psi_s*sigma_c",
+                    "expression_mathml": "<apply><times/><ci>E_c</ci><ci>psi_s</ci><ci>sigma_c</ci></apply>"
+                },
+                {
+                    "target": "t51_1",
+                    "expression": "A_c*V_f*beta_c*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>V_f</ci><ci>beta_c</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t51_2",
+                    "expression": "H_c*V_f*beta_c*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>V_f</ci><ci>beta_c</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t51_3",
+                    "expression": "A_c_f*V_f*beta_c_f*eta_A*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_f</ci><ci>beta_c_f</ci><ci>eta_A</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t51_4",
+                    "expression": "I_c_f*V_f*beta_c_f*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_f</ci><ci>beta_c_f</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t51_5",
+                    "expression": "H_c_f*V_f*beta_c_f*eta_H*(1 - epsilon_f)/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_f</ci><ci>beta_c_f</ci><ci>eta_H</ci><apply><minus/><cn>1</cn><ci>epsilon_f</ci></apply></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t51_6",
+                    "expression": "I_c*V_f*beta_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>V_f</ci><ci>beta_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t55",
+                    "expression": "A_c*theta_c",
+                    "expression_mathml": "<apply><times/><ci>A_c</ci><ci>theta_c</ci></apply>"
+                },
+                {
+                    "target": "t56_1",
+                    "expression": "A_c*A_c_f*beta_f_c*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>A_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t56_2",
+                    "expression": "A_c*I_f*beta_f*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>I_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t56_3",
+                    "expression": "A_c*A_f*beta_f*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>A_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t56_4",
+                    "expression": "A_c*H_c_f*beta_f_c*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>H_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t56_5",
+                    "expression": "A_c*H_f*beta_f*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>H_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t56_6",
+                    "expression": "A_c*I_c_f*beta_f_c*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>I_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t57",
+                    "expression": "I_c*tau_c",
+                    "expression_mathml": "<apply><times/><ci>I_c</ci><ci>tau_c</ci></apply>"
+                },
+                {
+                    "target": "t58_1",
+                    "expression": "A_c_f*I_c*beta_f_c*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>I_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t58_2",
+                    "expression": "I_c*I_f*beta_f*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>I_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t58_3",
+                    "expression": "A_f*I_c*beta_f*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>I_c</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t58_4",
+                    "expression": "H_c_f*I_c*beta_f_c*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>I_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t58_5",
+                    "expression": "H_f*I_c*beta_f*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>I_c</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t58_6",
+                    "expression": "I_c*I_c_f*beta_f_c*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>I_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t59",
+                    "expression": "H_c*gamma_c",
+                    "expression_mathml": "<apply><times/><ci>H_c</ci><ci>gamma_c</ci></apply>"
+                },
+                {
+                    "target": "t60_1",
+                    "expression": "A_c_f*H_c*beta_f_c*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>H_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t60_2",
+                    "expression": "H_c*I_f*beta_f*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>I_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t60_3",
+                    "expression": "A_f*H_c*beta_f*conmat*eta_A*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>H_c</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_A</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t60_4",
+                    "expression": "H_c*H_c_f*beta_f_c*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>H_c</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t60_5",
+                    "expression": "H_c*H_f*beta_f*conmat*eta_H*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>H_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>eta_H</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t60_6",
+                    "expression": "H_c*I_c_f*beta_f_c*conmat*phi_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>I_c_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>phi_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_1",
+                    "expression": "A_c_f*V_f*beta_f_c*conmat*epsilon_f*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>V_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_2",
+                    "expression": "I_f*V_f*beta_f*conmat*epsilon_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_f</ci><ci>V_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_3",
+                    "expression": "A_f*V_f*beta_f*conmat*epsilon_f*eta_A/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>V_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_A</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_4",
+                    "expression": "H_c_f*V_f*beta_f_c*conmat*epsilon_f*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>V_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_5",
+                    "expression": "H_f*V_f*beta_f*conmat*epsilon_f*eta_H/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>V_f</ci><ci>beta_f</ci><ci>conmat</ci><ci>epsilon_f</ci><ci>eta_H</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t61_6",
+                    "expression": "I_c_f*V_f*beta_f_c*conmat*epsilon_f/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>V_f</ci><ci>beta_f_c</ci><ci>conmat</ci><ci>epsilon_f</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t63",
+                    "expression": "E_f*sigma_f*xi_s",
+                    "expression_mathml": "<apply><times/><ci>E_f</ci><ci>sigma_f</ci><ci>xi_s</ci></apply>"
+                },
+                {
+                    "target": "t65_1",
+                    "expression": "A_c*I_f*beta_c*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>I_f</ci><ci>beta_c</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t65_2",
+                    "expression": "H_c*I_f*beta_c*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>I_f</ci><ci>beta_c</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t65_3",
+                    "expression": "A_c_f*I_f*beta_c_f*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>I_f</ci><ci>beta_c_f</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t65_4",
+                    "expression": "I_c_f*I_f*beta_c_f*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c_f</ci><ci>I_f</ci><ci>beta_c_f</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t65_5",
+                    "expression": "H_c_f*I_f*beta_c_f*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>I_f</ci><ci>beta_c_f</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t65_6",
+                    "expression": "I_c*I_f*beta_c*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>I_c</ci><ci>I_f</ci><ci>beta_c</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t68",
+                    "expression": "E_c_f*chi_s*sigma_c_f",
+                    "expression_mathml": "<apply><times/><ci>E_c_f</ci><ci>chi_s</ci><ci>sigma_c_f</ci></apply>"
+                },
+                {
+                    "target": "t70",
+                    "expression": "E_c_f*chi_a*sigma_c_f",
+                    "expression_mathml": "<apply><times/><ci>E_c_f</ci><ci>chi_a</ci><ci>sigma_c_f</ci></apply>"
+                },
+                {
+                    "target": "t74",
+                    "expression": "A_c_f*delta_c_f",
+                    "expression_mathml": "<apply><times/><ci>A_c_f</ci><ci>delta_c_f</ci></apply>"
+                },
+                {
+                    "target": "t75",
+                    "expression": "A_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>A_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "t77",
+                    "expression": "A_c_f*theta_c_f",
+                    "expression_mathml": "<apply><times/><ci>A_c_f</ci><ci>theta_c_f</ci></apply>"
+                },
+                {
+                    "target": "t72",
+                    "expression": "I_c_f*tau_c_f",
+                    "expression_mathml": "<apply><times/><ci>I_c_f</ci><ci>tau_c_f</ci></apply>"
+                },
+                {
+                    "target": "t73",
+                    "expression": "H_c_f*gamma_c_f",
+                    "expression_mathml": "<apply><times/><ci>H_c_f</ci><ci>gamma_c_f</ci></apply>"
+                },
+                {
+                    "target": "t69",
+                    "expression": "E_f*sigma_f*xi_a",
+                    "expression_mathml": "<apply><times/><ci>E_f</ci><ci>sigma_f</ci><ci>xi_a</ci></apply>"
+                },
+                {
+                    "target": "t76",
+                    "expression": "I_f*tau_f",
+                    "expression_mathml": "<apply><times/><ci>I_f</ci><ci>tau_f</ci></apply>"
+                },
+                {
+                    "target": "t71",
+                    "expression": "H_f*gamma_f",
+                    "expression_mathml": "<apply><times/><ci>H_f</ci><ci>gamma_f</ci></apply>"
+                },
+                {
+                    "target": "t80",
+                    "expression": "A_f*delta_f + A_f*mu",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>A_f</ci><ci>delta_f</ci></apply><apply><times/><ci>A_f</ci><ci>mu</ci></apply></apply>"
+                },
+                {
+                    "target": "t81",
+                    "expression": "H_f*delta_f + H_f*mu",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>H_f</ci><ci>delta_f</ci></apply><apply><times/><ci>H_f</ci><ci>mu</ci></apply></apply>"
+                },
+                {
+                    "target": "t82",
+                    "expression": "A_f*theta_f",
+                    "expression_mathml": "<apply><times/><ci>A_f</ci><ci>theta_f</ci></apply>"
+                },
+                {
+                    "target": "t84_1",
+                    "expression": "A_c*A_f*beta_c*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>A_f</ci><ci>beta_c</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t84_2",
+                    "expression": "A_f*H_c*beta_c*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>H_c</ci><ci>beta_c</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t84_3",
+                    "expression": "A_c_f*A_f*beta_c_f*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>A_f</ci><ci>beta_c_f</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t84_4",
+                    "expression": "A_f*I_c_f*beta_c_f*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>I_c_f</ci><ci>beta_c_f</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t84_5",
+                    "expression": "A_f*H_c_f*beta_c_f*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>H_c_f</ci><ci>beta_c_f</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t84_6",
+                    "expression": "A_f*I_c*beta_c*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_f</ci><ci>I_c</ci><ci>beta_c</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_1",
+                    "expression": "A_c*H_f*beta_c*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c</ci><ci>H_f</ci><ci>beta_c</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_2",
+                    "expression": "H_c*H_f*beta_c*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c</ci><ci>H_f</ci><ci>beta_c</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_3",
+                    "expression": "A_c_f*H_f*beta_c_f*eta_A*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>A_c_f</ci><ci>H_f</ci><ci>beta_c_f</ci><ci>eta_A</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_4",
+                    "expression": "H_f*I_c_f*beta_c_f*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>I_c_f</ci><ci>beta_c_f</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_5",
+                    "expression": "H_c_f*H_f*beta_c_f*eta_H*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_c_f</ci><ci>H_f</ci><ci>beta_c_f</ci><ci>eta_H</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "t85_6",
+                    "expression": "H_f*I_c*beta_c*phi_c/N",
+                    "expression_mathml": "<apply><divide/><apply><times/><ci>H_f</ci><ci>I_c</ci><ci>beta_c</ci><ci>phi_c</ci></apply><ci>N</ci></apply>"
+                },
+                {
+                    "target": "H_c_f_to_D_c_f_transition",
+                    "expression": "H_c_f*mu",
+                    "expression_mathml": "<apply><times/><ci>H_c_f</ci><ci>mu</ci></apply>"
+                },
+                {
+                    "target": "transition_from_H_c_f_to_D_c_f",
+                    "expression": "H_c_f*delta_c_f",
+                    "expression_mathml": "<apply><times/><ci>H_c_f</ci><ci>delta_c_f</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "A_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "V_c_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "A_c_f",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "E_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "I_f",
+                    "expression": "300",
+                    "expression_mathml": "<cn>300</cn>"
+                },
+                {
+                    "target": "A_f",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "H_c_f",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "H_f",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "I_c_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "H_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "E_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "I_c",
+                    "expression": "100",
+                    "expression_mathml": "<cn>100</cn>"
+                },
+                {
+                    "target": "D_c_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_0",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "D_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "E_c_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_c_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S",
+                    "expression": "999600",
+                    "expression_mathml": "<cn>999600</cn>"
+                },
+                {
+                    "target": "V_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "V_c",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_f",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "delta_c",
+                    "description": "Death due to COVID-19",
+                    "value": 0.008,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3e-05,
+                            "maximum": 0.008
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "N",
+                    "description": "Total population at time t",
+                    "value": 1000000.0,
+                    "units": {
+                        "expression": "person",
+                        "expression_mathml": "<ci>person</ci>"
+                    }
+                },
+                {
+                    "id": "beta_f_c",
+                    "description": "Transmission rate of RSV in co-infected individuals",
+                    "value": 3.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.1,
+                            "maximum": 0.5
+                        }
+                    },
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "conmat",
+                    "description": "Contact matrix for beta",
+                    "value": 1.0
+                },
+                {
+                    "id": "epsilon_c",
+                    "description": "COVID-19 vaccine efficacy",
+                    "value": 0.3,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "epsilon_f",
+                    "description": "RSV vaccine efficacy",
+                    "value": 0.18,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "eta_A",
+                    "description": "Infection modification parameter for the asymptomatic infection rate",
+                    "value": 0.45,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "beta_f",
+                    "description": "Transmission rate of RSV",
+                    "value": 0.45,
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "eta_H",
+                    "description": "Infection modification parameter for the hospitalized infection rate",
+                    "value": 0.4509,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "mu",
+                    "description": "Natural mortality rate",
+                    "value": 0.0003516,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "beta_c",
+                    "description": "Transmission rate of COVID-19",
+                    "value": 0.5249,
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "beta_c_f",
+                    "description": "Transmission rate of COVID-19 in co-infected individuals",
+                    "value": 0.22,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.1,
+                            "maximum": 0.5
+                        }
+                    },
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "pi",
+                    "description": "Recruitment rate of susceptible individuals",
+                    "value": 12000.0,
+                    "units": {
+                        "expression": "person/day",
+                        "expression_mathml": "<apply><divide/><ci>person</ci><ci>day</ci></apply>"
+                    }
+                },
+                {
+                    "id": "epsilon_c_f",
+                    "description": "COVID-19 and RSV vaccine efficacy",
+                    "value": 0.2,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.18,
+                            "maximum": 0.3
+                        }
+                    },
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "delta_c_f",
+                    "value": 1.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 2.82e-05,
+                            "maximum": 0.008
+                        }
+                    }
+                },
+                {
+                    "id": "delta_f",
+                    "description": "Death due to influenza",
+                    "value": 2.82e-05,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3e-05,
+                            "maximum": 0.008
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "kappa_c",
+                    "description": "Immunity waning rate of recovered individuals with COVID-19",
+                    "value": 0.011,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "kappa_c_f",
+                    "description": "Immunity waning rate of recovered individuals with co-infection",
+                    "value": 0.011,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.011,
+                            "maximum": 0.088
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "kappa_f",
+                    "description": "Immunity waning rate of recovered individuals with RSV",
+                    "value": 0.088,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "nu_c",
+                    "description": "Vaccination rate against COVID-19",
+                    "value": 0.0203,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.000547,
+                            "maximum": 0.0203
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "nu_c_f",
+                    "description": "Vaccination rate against COVID-19 and RSV",
+                    "value": 0.00027375,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.000547,
+                            "maximum": 0.0203
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "nu_f",
+                    "description": "Vaccination rate against RSV",
+                    "value": 0.000547,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.000547,
+                            "maximum": 0.0203
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "omega_c",
+                    "description": "Vaccine waning rate of COVID-19",
+                    "value": 0.000297,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "omega_c_f",
+                    "description": "Vaccine waning rate of COVID-19 and RSV",
+                    "value": 0.000297,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.000297,
+                            "maximum": 0.00191781
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "omega_f",
+                    "description": "Vaccine waning rate of RSV",
+                    "value": 0.00191781,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "psi_a",
+                    "description": "Reduction of susceptibility to COVID-19 infection",
+                    "value": 0.6,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "sigma_c",
+                    "description": "COVID-19 progression rate from the exposed to either asymptomatic or symptomatic infectious",
+                    "value": 0.4,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "psi_s",
+                    "description": "Reduction of susceptibility to RSV infection",
+                    "value": 0.4,
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "theta_c",
+                    "description": "Recovery rate of asymptomatic COVID infectious individuals",
+                    "value": 0.13978,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "phi_f",
+                    "description": "Reduction in succeptibility to flu obtained by those already infected with covid",
+                    "value": 0.008,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3e-05,
+                            "maximum": 0.008
+                        }
+                    },
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "tau_c",
+                    "description": "Recovery rate of COVID-19 asymptomatic infectious individuals",
+                    "value": 0.0624,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "gamma_c",
+                    "description": "Recovery rate of COVID-19 hospitalized infectious individuals",
+                    "value": 0.125,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "sigma_f",
+                    "description": "Influenza progression rate from the exposed to infectious",
+                    "value": 0.22,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "xi_s",
+                    "name": "xi_s",
+                    "description": "Reduction of susceptibility to RSV infection",
+                    "value": 0.4
+                },
+                {
+                    "id": "phi_c",
+                    "description": "Reduction in succeptibility to covid obtained by those already infected with flu",
+                    "value": 0.008,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 3e-05,
+                            "maximum": 0.008
+                        }
+                    },
+                    "units": {
+                        "expression": "dimensionless",
+                        "expression_mathml": "<ci>dimensionless</ci>"
+                    }
+                },
+                {
+                    "id": "chi_s",
+                    "name": "chi_s",
+                    "description": "Reduction of susceptibility to co-infection infection",
+                    "value": 0.6
+                },
+                {
+                    "id": "sigma_c_f",
+                    "description": "Co-infection progression rate from the exposed to infectious",
+                    "value": 0.4,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.1,
+                            "maximum": 0.5
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "chi_a",
+                    "name": "chi_a",
+                    "description": "Reduction of asymptomatic to co-infection infection",
+                    "value": 0.4
+                },
+                {
+                    "id": "theta_c_f",
+                    "description": "Recovery rate of asymptomatic coinfected infectious individual",
+                    "value": 0.13978
+                },
+                {
+                    "id": "tau_c_f",
+                    "description": "Recovery rate of coinfected asymptomatic infectious individuals",
+                    "value": 1.0,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.03933333,
+                            "maximum": 0.0624
+                        }
+                    }
+                },
+                {
+                    "id": "gamma_c_f",
+                    "description": "Recovery rate of co-infected infectious individuals",
+                    "value": 0.125,
+                    "distribution": {
+                        "type": "StandardUniform1",
+                        "parameters": {
+                            "minimum": 0.125,
+                            "maximum": 0.1998
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "xi_a",
+                    "name": "xi_a",
+                    "description": "Reduction of asymptomatic to RSV infection",
+                    "value": 0.6
+                },
+                {
+                    "id": "tau_f",
+                    "description": "Recovery rate of RSV asymptomatic infectious individuals",
+                    "value": 0.03933333
+                },
+                {
+                    "id": "gamma_f",
+                    "description": "Recovery rate of RSV infectious individuals",
+                    "value": 0.1998,
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "theta_f",
+                    "name": "theta_f",
+                    "description": "recovery rate of asymptomatic RSV",
+                    "value": 0.13
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

@@ -1,0 +1,249 @@
+{
+    "header": {
+        "name": "Munz2009 - Zombie SIZRC",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Munz2009 - Zombie SIZRC",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "Susceptible",
+                "name": "Susceptible",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "Removal",
+                "name": "Removal",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "Zombie",
+                "name": "Zombie",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [],
+                "output": [
+                    "Susceptible"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [
+                    "Removal"
+                ],
+                "output": [
+                    "Removal",
+                    "Zombie"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "Susceptible",
+                    "Zombie"
+                ],
+                "output": [
+                    "Susceptible",
+                    "Zombie",
+                    "Zombie"
+                ],
+                "properties": {
+                    "name": "t3"
+                }
+            },
+            {
+                "id": "t4",
+                "input": [
+                    "Zombie",
+                    "Susceptible"
+                ],
+                "output": [
+                    "Zombie"
+                ],
+                "properties": {
+                    "name": "t4"
+                }
+            },
+            {
+                "id": "t5",
+                "input": [
+                    "Susceptible",
+                    "Zombie"
+                ],
+                "output": [
+                    "Susceptible",
+                    "Zombie",
+                    "Removal"
+                ],
+                "properties": {
+                    "name": "t5"
+                }
+            },
+            {
+                "id": "t6",
+                "input": [
+                    "Susceptible",
+                    "Zombie",
+                    "Removal"
+                ],
+                "output": [
+                    "Susceptible",
+                    "Zombie"
+                ],
+                "properties": {
+                    "name": "t6"
+                }
+            },
+            {
+                "id": "t7",
+                "input": [
+                    "Susceptible",
+                    "Zombie"
+                ],
+                "output": [
+                    "Susceptible"
+                ],
+                "properties": {
+                    "name": "t7"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "p",
+                    "expression_mathml": "<ci>p</ci>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "Removal*zeta",
+                    "expression_mathml": "<apply><times/><ci>Removal</ci><ci>zeta</ci></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "Removal*zeta + Susceptible*Zombie*beta",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>Removal</ci><ci>zeta</ci></apply><apply><times/><ci>Susceptible</ci><ci>Zombie</ci><ci>beta</ci></apply></apply>"
+                },
+                {
+                    "target": "t4",
+                    "expression": "Susceptible*Zombie*beta + Susceptible*delta",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>Susceptible</ci><ci>Zombie</ci><ci>beta</ci></apply><apply><times/><ci>Susceptible</ci><ci>delta</ci></apply></apply>"
+                },
+                {
+                    "target": "t5",
+                    "expression": "Susceptible*Zombie*alpha + Susceptible*delta",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>Susceptible</ci><ci>Zombie</ci><ci>alpha</ci></apply><apply><times/><ci>Susceptible</ci><ci>delta</ci></apply></apply>"
+                },
+                {
+                    "target": "t6",
+                    "expression": "Removal*zeta",
+                    "expression_mathml": "<apply><times/><ci>Removal</ci><ci>zeta</ci></apply>"
+                },
+                {
+                    "target": "t7",
+                    "expression": "Susceptible*Zombie*alpha",
+                    "expression_mathml": "<apply><times/><ci>Susceptible</ci><ci>Zombie</ci><ci>alpha</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "Susceptible",
+                    "expression": "500.0",
+                    "expression_mathml": "<cn>500.0</cn>"
+                },
+                {
+                    "target": "Removal",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "Zombie",
+                    "expression": "1.0",
+                    "expression_mathml": "<cn>1.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "p",
+                    "description": "p",
+                    "value": 0.05
+                },
+                {
+                    "id": "zeta",
+                    "description": "zeta",
+                    "value": 0.0001
+                },
+                {
+                    "id": "beta",
+                    "description": "beta",
+                    "value": 0.0095
+                },
+                {
+                    "id": "delta",
+                    "description": "delta",
+                    "value": 0.0001
+                },
+                {
+                    "id": "alpha",
+                    "description": "alpha",
+                    "value": 0.005
+                },
+                {
+                    "id": "compartment",
+                    "description": "compartment",
+                    "value": 1.0
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": "CC0",
+            "authors": [],
+            "references": [
+                "isbn:ISBN:1607413477"
+            ],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [
+                "ncbitaxon:9606"
+            ],
+            "model_types": [
+                "mamo:0000046"
+            ]
+        }
+    }
+}

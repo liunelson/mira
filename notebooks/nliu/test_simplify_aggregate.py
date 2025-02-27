@@ -1,10 +1,12 @@
 # %%
 import os
 import sympy
+from sympy.abc import _clash
 from sympy.parsing.latex import parse_latex
 # pip install antlr4-python3-runtime==4.11
 import json
 import pandas
+from copy import deepcopy
 
 from mira.metamodel import *
 from mira.modeling import Model
@@ -219,13 +221,14 @@ t = sympy.symbols("t")
 S, I, R = sympy.symbols("S I R", cls=sympy.Function)
 
 # Define all parameters
-b, m, g = sympy.symbols("b m g")
+a, b, m, g = sympy.symbols("a b m g")
 
 # Define the equations without time-derivative on the left hand side
 equation_output = [
-    sympy.Eq(S(t).diff(t), (-b * S(t) * I(t) - m * S(t))),
-    sympy.Eq(I(t).diff(t), (b * S(t) * I(t) - g * I(t) - m * I(t))),
-    sympy.Eq(R(t).diff(t), (g * I(t) - m * R(t)))
+    sympy.Eq(S(t).diff(t), -b * S(t) * (I(t) + a * R(t)) - m * S(t)),
+    # sympy.Eq(I(t).diff(t), b * S(t) * I(t) - g * I(t) - m * I(t)),
+    sympy.Eq(I(t).diff(t), b * S(t) * (I(t) + a * R(t)) - g * I(t) - m * I(t)),
+    sympy.Eq(R(t).diff(t), g * I(t) - m * R(t))
 ]
 
 model = template_model_from_sympy_odes(equation_output)
@@ -238,163 +241,32 @@ generate_summary_table(model)
 GraphicalModel.for_jupyter(model)
 
 # %%
-# Stratify the model by location
-model_loc = stratify(
-    template_model = model,
-    key = 'location',
-    strata = ['ca', 'us', 'mx'],
-    structure = [['ca', 'us'], ['us', 'mx']],
-    directed = False,
-    cartesian_control = False,
-    concepts_to_stratify = ['S', 'I', 'R'],
-    params_to_stratify = ['b', 'g', 'm'],
-    param_renaming_uses_strata_names = True
-)
-GraphicalModel.for_jupyter(model_loc)
+model_simp = simplify_rate_laws(model)
+generate_summary_table(model_simp)
 
 # %%
-# Stratify the model by age
-model_age = stratify(
-    template_model = model,
-    key = 'age',
-    strata = ['0to17', '18to64', '65p'],
-    structure = [],
-    directed = False,
-    cartesian_control = True,
-    params_to_stratify = ['b', 'g', 'm'],
-    concepts_to_stratify = ['S', 'I', 'R'],
-    param_renaming_uses_strata_names = True
-)
-GraphicalModel.for_jupyter(model_age)
+generate_odesys(model_simp)
 
 # %%
-# Stratify the model by age and location
-model_age_loc = stratify(
-    template_model = model_age,
-    key = 'location',
-    strata = ['ca', 'us', 'mx'],
-    structure = [['ca', 'us'], ['us', 'mx']],
-    directed = False,
-    cartesian_control = False,
-    concepts_to_stratify = ['S_0to17', 'S_18to64', 'S_65p'],
-    params_to_stratify = [],
-    param_renaming_uses_strata_names = True
-)
-GraphicalModel.for_jupyter(model_age_loc)
+print(f'Number of templates in complex model: {len(model.templates)}')
+print(f'... in the simplified model: {len(model_simp.templates)}')
+
+with open('./data/example_complex_model.json', 'w') as fp:
+    json.dump(template_model_to_petrinet_json(model), fp, indent = 4)
+
+with open('./data/example_simplified_model.json', 'w') as fp:
+    json.dump(template_model_to_petrinet_json(model_simp), fp, indent = 4)
 
 # %%
-model_amr = template_model_to_petrinet_json(model_loc)
+with open('./data/final_evaluation/Antagonistic Infection Model.json', 'r') as fp:
+    large_model = template_model_from_amr_json(json.load(fp))
+
+large_model_simp = simplify_rate_laws(large_model)
+
+print(f'Number of templates in complex model: {len(large_model.templates)}')
+print(f'... in the simplified model: {len(large_model_simp.templates)}')
+
+with open('./data/final_evaluation/Antagonistic Infection Model - Simplified.json', 'w') as fp:
+    json.dump(template_model_to_petrinet_json(large_model_simp), fp, indent = 4)
 
 # %%
-def compact_equations(model: TemplateModel) -> list:
-
-    # Get the time-dependent state variables
-    odeterms = {var: {} for var in sorted(model.get_concepts_name_map().keys())}
-
-    # Group by stratification context
-    vargroups = {}
-    # S: (S_0to17, S_18to64, S_65p)
-    # ...
-
-    # Merge odeterms under groups
-
-
-    for template in model.templates:
-
-        subj = None
-        out = None
-        cont = (None, )
-        if hasattr(template, "subject"):
-            subj = template.subject.name
-            
-        if hasattr(template, "outcome"):
-            out = template.outcome.name
-        
-        if hasattr(template, "controller"):
-            cont = (template.controller.name, )
-        
-        if hasattr(template, "controllers"):
-            cont = (c for c in template.controllers)
-
-        termtype = ('-', subj, out, cont)
-        if subj != None:
-            if termtype in odeterms[subj].keys():
-                odeterms[subj][termtype].append(template.name)
-            else:
-                odeterms[subj][termtype] = [template.name]
-
-        termtype = ('+', subj, out, cont)
-        if out != None:
-            if termtype in odeterms[subj].keys():
-                odeterms[out][termtype].append(template.name)
-            else:
-                odeterms[out][termtype] = [template.name]
-
-    return odeterms
-
-odeterms = compact_equations(model)
-odeterms
-
-# %%
-def generate_model_latex(model):
-
-    odeterms = {var: 0 for var in model.get_concepts_name_map().keys()}
-
-    for t in model.templates:
-        if hasattr(t, "subject"):
-            var = t.subject.name
-            odeterms[var] -= t.rate_law.args[0]
-
-        if hasattr(t, "outcome"):
-            var = t.outcome.name
-            odeterms[var] += t.rate_law.args[0]
-
-    # Time
-    if model.time and model.time.name:
-        time = model.time.name
-    else:
-        time = "t"
-
-    t = sympy.Symbol(time)
-
-    # Construct Sympy equations
-    odesys = []
-    for var, terms in odeterms.items():
-        lhs = sympy.diff(sympy.Function(var)(t), t)
-  
-        # Write (time-dependent) symbols with "(t)"
-        rhs = terms
-        for atom in terms.atoms(sympy.Symbol):
-            if str(atom) in odeterms.keys():
-                rhs = rhs.subs(atom, sympy.Function(str(atom))(t))
-
-        odesys.append(sympy.latex(sympy.Eq(lhs, rhs)))
-
-    # Observables
-    if len(model.observables) > 0:
-
-        # Write (time-dependent) symbols with "(t)"
-        obs_eqs = []
-        for obs in model.observables.values():
-            lhs = sympy.Function(obs.name)(t)
-            terms = obs.expression.args[0]
-            rhs = terms
-            for atom in terms.atoms(sympy.Symbol):
-                if str(atom) in odeterms.keys():
-                    rhs = rhs.subs(atom, sympy.Function(str(atom))(t))
-            obs_eqs.append(sympy.latex(sympy.Eq(lhs, rhs)))
-
-        # Add observables
-        odesys += obs_eqs
-
-    # Reformat:
-    odesys = "\\begin{align} \n    " + " \\\\ \n    ".join([eq for eq in odesys]) + "\n\\end{align}"
-
-    return odesys
-
-# %%
-odesys = generate_model_latex(model3)
-print(odesys)
-
-# %%
-

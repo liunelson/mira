@@ -23,47 +23,6 @@ os.environ["MIRA_REST_URL"] = MIRA_REST_URL
 # %%
 def generate_odesys(model, latex: bool = False, latex_align: bool = False) -> list:
 
-    odeterms = {var: 0 for var in sorted(model.get_concepts_name_map().keys())}
-
-    for t in model.templates:
-        if hasattr(t, "subject"):
-            var = t.subject.name
-            odeterms[var] -= t.rate_law.args[0]
-        
-        if hasattr(t, "outcome"):
-            var = t.outcome.name
-            odeterms[var] += t.rate_law.args[0]
-
-    # Time
-    symb = lambda x: sympy.Symbol(x)
-    try:
-        time = model.time.name
-    except:
-        time = "t"
-    finally:
-        t = symb(time)
-
-    # Construct equations
-    odesys = [
-        sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms) 
-        if latex == False
-        else sympy.latex(sympy.Eq(sympy.diff(sympy.Function(var)(t), t), terms))
-        for var, terms in odeterms.items()
-    ]
-    
-    if (latex == True) & (latex_align == True):
-        # odesys = "\\begin{align*} \n    " + " \\\\ \n    ".join([eq.replace(" = ", " &= ") for eq in odesys]) + "\n\\end{align*}"
-
-        odesys = "\\begin{align*} \n    " + " \\\\ \n    "
-        for eq in odesys:
-            [eq.replace(" = ", " &= ") for eq in odesys]
-            
-        odesys += "\n\\end{align*}"
-
-    return odesys
-
-def generate_odesys2(model, latex: bool = False, latex_align: bool = False) -> list:
-
     # State variables
     odeterms = {var: [] for var in sorted(model.get_concepts_name_map().keys())}
 
