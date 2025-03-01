@@ -31,12 +31,17 @@ def generate_odesys(model, latex: bool = False, latex_align: bool = False) -> li
     # ODE terms from template rate laws
     for template in model.templates:
         if hasattr(template, "subject"):
-            var = template.subject.name
-            odeterms[var].append(-template.rate_law.args[0])
+            if template.rate_law is not None:
+                odeterms[var].append(-template.rate_law.args[0])
+            else:
+                odeterms[var].append(0)
         
         if hasattr(template, "outcome"):
             var = template.outcome.name
-            odeterms[var].append(template.rate_law.args[0])
+            if template.rate_law is not None:
+                odeterms[var].append(template.rate_law.args[0])
+            else:
+                odeterms[var].append(0)
 
     # Sort the terms such that all negative ones come first
     # odeterms = {var: sorted(terms, key = lambda term: 0 if str(term)[0] == '-' else 1) for var, terms in odeterms.items()}
@@ -270,3 +275,5 @@ with open('./data/final_evaluation/Antagonistic Infection Model - Simplified.jso
     json.dump(template_model_to_petrinet_json(large_model_simp), fp, indent = 4)
 
 # %%
+
+
