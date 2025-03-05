@@ -247,6 +247,9 @@ generate_summary_table(model)
 GraphicalModel.for_jupyter(model)
 
 # %%
+check_simplify_rate_laws(model)
+
+# %%
 model_simp = simplify_rate_laws(model)
 generate_summary_table(model_simp)
 
