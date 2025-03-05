@@ -1,0 +1,551 @@
+{
+  "id": "e43ad6ee-51ef-4ebc-8746-c932c9280421",
+  "createdOn": "2025-02-28T15:00:44.405+00:00",
+  "updatedOn": "2025-02-28T15:26:32.359+00:00",
+  "name": "Base Model",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Base Model",
+    "description": "Model",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "transitions": [],
+    "states": [
+      {
+        "id": "TE",
+        "name": "TE(t)",
+        "description": "Trade Exposure, a measure of the degree of exposure to foreign supply disruptions, expressed as a percentage of apparent consumption.",
+        "grounding": {
+          "id": "f35a0653-7a9d-4a21-b8a5-8355b4945ab5",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": true
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "TE"
+      },
+      {
+        "id": "DP",
+        "name": "DP(t)",
+        "description": "Disruption Potential, a measure of the likelihood of a supply disruption, calculated using factors such as political stability and trade ties.",
+        "grounding": {
+          "id": "31cc1afd-1301-4191-861c-956bffee1f63",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "DP"
+      },
+      {
+        "id": "PS",
+        "name": "PS(t)",
+        "description": "Share of world production attributable to a country",
+        "grounding": {
+          "id": "d9104678-d25b-4def-8c55-2f14398ab3fd",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "PS"
+      },
+      {
+        "id": "EV",
+        "name": "EV(t)",
+        "description": "Economic Vulnerability, a measure of the U.S. manufacturing sector's ability to withstand a supply disruption, based on industry expenditure and profitability.",
+        "grounding": {
+          "id": "db8f21e7-a15f-4ce5-bdd8-bb2513922e4d",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": true
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "EV"
+      },
+      {
+        "id": "WSI",
+        "name": "WSI(t)",
+        "description": "Country-specific Willingness to Supply Index.",
+        "grounding": {
+          "id": "8992dade-3736-4f88-a66a-aa9f40d0fa38",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "WSI"
+      },
+      {
+        "id": "ASI",
+        "name": "ASI(t)",
+        "description": "Ability to Supply Index",
+        "grounding": {
+          "id": "e2cf15c5-b857-4f7f-b575-74a3ee862160",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "ASI"
+      },
+      {
+        "id": "I",
+        "name": "I(t)",
+        "description": "Import",
+        "grounding": {
+          "id": "c34f7a29-65e6-4332-a10e-781dc92f1d2a",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "I"
+      },
+      {
+        "id": "PPI",
+        "name": "PPI(t)",
+        "description": "Fraser Institute’s Policy Perception Index. PPI is part of an annual survey of mining and exploration executives that rates jurisdictions on 15 different policy factors including availability of skilled labor, access to infrastructure and power, level of security and political stability, taxation regime, and uncertainties regarding laws and regulations.",
+        "grounding": {
+          "id": "09d2599f-aba5-4306-8664-c6c73445454d",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "PPI"
+      },
+      {
+        "id": "DeltaS",
+        "name": "DeltaS(t)",
+        "description": "Changes in U.S. industry and government stocks of some commodity.",
+        "grounding": {
+          "id": "b0291dda-3071-462e-a3a4-37e721c1ddb0",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "DeltaS"
+      },
+      {
+        "id": "E",
+        "name": "E(t)",
+        "description": "Export",
+        "grounding": {
+          "id": "67af7776-ab53-4a61-9af4-7e9a7aa2b04d",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": true
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "E"
+      },
+      {
+        "id": "SP",
+        "name": "SP(t)",
+        "description": "Secondary (old scrap) production quantities",
+        "grounding": {
+          "id": "834524f6-ecf8-404d-9f3c-688db252bc74",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "SP"
+      },
+      {
+        "id": "PP",
+        "name": "PP(t)",
+        "description": "Primary production quantities",
+        "grounding": {
+          "id": "bc2f26d3-1549-4b62-8ed8-4473292a5b0f",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "PP"
+      },
+      {
+        "id": "GDP",
+        "name": "GDP(t)",
+        "description": "Gross domestic product",
+        "grounding": {
+          "id": "82e9a2f3-2f25-4867-8970-7cbc5a9afbcf",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "GDP"
+      },
+      {
+        "id": "TT",
+        "name": "TT(t)",
+        "description": "Trade ties, the amount of trade that a country has with the United States and is measured as the monetary sum of its imports and exports with the United States relative to its gross domestic product (GDP) in a given year",
+        "grounding": {
+          "id": "aa72076a-b469-4435-8ce2-6abe061ad038",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": true
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "TT"
+      },
+      {
+        "id": "VA",
+        "name": "VA(t)",
+        "description": "Industry’s value added (i.e., its contribution to GDP)",
+        "grounding": {
+          "id": "741d7895-2a3e-4fd0-94c3-ff275a72d261",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": true
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "VA"
+      },
+      {
+        "id": "FWI",
+        "name": "FWI(t)",
+        "description": "Freedom House’s Freedom in the World (FIW) index",
+        "grounding": {
+          "id": "dec7f951-8ff9-42ff-9043-d16af61e7213",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "FWI"
+      },
+      {
+        "id": "OP",
+        "name": "OP(t)",
+        "description": "An industry’s operating profit",
+        "grounding": {
+          "id": "c809aa15-be86-4bfe-ac11-895235ea7851",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "OP"
+      },
+      {
+        "id": "EXP",
+        "name": "EXP(t)",
+        "description": "An industry's expenditure on some commodity in year t",
+        "grounding": {
+          "id": "cc8f31ce-10fd-4b9d-b42c-26ce9511addc",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {},
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "EXP"
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [],
+      "initials": [
+        {
+          "target": "TE",
+          "description": "Trade Exposure, a measure of the degree of exposure to foreign supply disruptions, expressed as a percentage of apparent consumption.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "DP",
+          "description": "Disruption Potential, a measure of the likelihood of a supply disruption, calculated using factors such as political stability and trade ties.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "PS",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "EV",
+          "description": "Economic Vulnerability, a measure of the U.S. manufacturing sector's ability to withstand a supply disruption, based on industry expenditure and profitability.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "WSI",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "ASI",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "PPI",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "DeltaS",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "SP",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "PP",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "GDP",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "TT",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "VA",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "FWI",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "OP",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "EXP",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        }
+      ],
+      "parameters": [],
+      "observables": [],
+      "time": {
+        "id": "t",
+        "units": {
+          "expression": "year",
+          "expression_mathml": "<ci>year</ci>"
+        }
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgbW9kZWwgZGVzY3JpYmVkIGlzIGEgUGV0cmkgTmV0IHJlcHJlc2VudGF0aW9uIG9mIGEgcmlzayBhc3Nlc3NtZW50IGZyYW1ld29yayBmb3IgZXZhbHVhdGluZyB0aGUgc3VwcGx5IHJpc2sgKFNSKSBvZiBtaW5lcmFsIGNvbW1vZGl0aWVzIHRvIHRoZSBVLlMuIG1hbnVmYWN0dXJpbmcgc2VjdG9yLiBUaGUgbW9kZWwgdXNlcyBhIGNvbnZlbnRpb25hbCByaXNrLW1vZGVsaW5nIGZyYW1ld29yayB0byBhc3Nlc3MgdGhlIFNSIGJhc2VkIG9uIHRocmVlIGZhY3RvcnM6IGRpc3J1cHRpb24gcG90ZW50aWFsIChEUCksIHRyYWRlIGV4cG9zdXJlIChURSksIGFuZCBlY29ub21pYyB2dWxuZXJhYmlsaXR5IChFVikuIEVhY2ggZmFjdG9yIGlzIGNhbGN1bGF0ZWQgdXNpbmcgc3BlY2lmaWMgaW5kaWNhdG9ycyBhbmQgZGF0YSBzb3VyY2VzLCBhbmQgdGhlIG92ZXJhbGwgU1IgaXMgZGV0ZXJtaW5lZCBhcyB0aGUgZ2VvbWV0cmljIG1lYW4gb2YgdGhlc2UgdGhyZWUgZmFjdG9ycy4gVGhlIG1vZGVsIGlzIGFwcGxpZWQgdG8gNTIgY29tbW9kaXRpZXMgb3ZlciB0aGUgZGVjYWRlIDIwMDctMjAxNiwgaWRlbnRpZnlpbmcgdGhvc2Ugd2l0aCB0aGUgZ3JlYXRlc3QgU1IuIFRoZSBtb2RlbCBjYW4gYmUgcmVwcmVzZW50ZWQgaW4gUGV0cmkgTmV0IGZvcm1hdCwgd2l0aCBzdGF0ZXMsIHRyYW5zaXRpb25zLCBhbmQgcGFyYW1ldGVycyBjb3JyZXNwb25kaW5nIHRvIHRoZSB2YXJpb3VzIGNvbXBvbmVudHMgb2YgdGhlIHJpc2sgYXNzZXNzbWVudCBmcmFtZXdvcmsuPC9wPjxicj4KPGgyPlNwZWNzPC9oMj4KPGg0PkRvbWFpbjwvaDQ+Cjx1bD4KPGxpPkVjb25vbWljczwvbGk+CjxsaT5TdXBwbHkgQ2hhaW4gTWFuYWdlbWVudDwvbGk+CjxsaT5SaXNrIEFzc2Vzc21lbnQ8L2xpPgo8L3VsPjxicj4KPGg0PlR5cGU8L2g0Pgo8cD5NYXRoZW1hdGljYWwgTW9kZWw8L3A+PGJyPgo8aDQ+U3BlY2lmaWNhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCBjb25zaXN0cyBvZiAxOCBzdGF0ZXMsIGVhY2ggcmVwcmVzZW50aW5nIGEgdmFyaWFibGUgb3Igc3RhdGUgaW4gdGhlIHN5c3RlbSwgc3VjaCBhcyBhIHNwZWNpZXMgY29uY2VudHJhdGlvbiBpbiBhIHJlYWN0aW9uLiBUaGVyZSBhcmUgOSB0cmFuc2l0aW9ucywgZWFjaCByZXByZXNlbnRpbmcgYSBydWxlIG9mIHRoZSBzeXN0ZW0sIGluZGljYXRpbmcgaG93IHRva2VucyBtb3ZlIGJldHdlZW4gcGxhY2VzIGJhc2VkIG9uIHBhcmFtZXRlciByYXRlcy4gVGhlIG1vZGVsIGluY2x1ZGVzIHBhcmFtZXRlcnMgdGhhdCBkZWZpbmUgdGhlIHN5c3RlbSdzIHJ1bGVzIGFuZCByYXRlcyBvZiBldm9sdXRpb24sIGluY2x1ZGluZyB0cmFuc2l0aW9uIHJhdGVzIGFuZCBzdG9pY2hpb21ldHJpYyByZWxhdGlvbnNoaXBzLjwvcD48YnI+CjxoND5TdGF0ZXM8L2g0Pgo8dWw+CjxsaT5URTogVHJhZGUgRXhwb3N1cmUsIGEgbWVhc3VyZSBvZiB0aGUgZGVncmVlIG9mIGV4cG9zdXJlIHRvIGZvcmVpZ24gc3VwcGx5IGRpc3J1cHRpb25zLCBleHByZXNzZWQgYXMgYSBwZXJjZW50YWdlIG9mIGFwcGFyZW50IGNvbnN1bXB0aW9uLiBVbml0czogMSAoZGltZW5zaW9ubGVzcykuPC9saT4KPGxpPkRQOiBEaXNydXB0aW9uIFBvdGVudGlhbCwgYSBtZWFzdXJlIG9mIHRoZSBsaWtlbGlob29kIG9mIGEgc3VwcGx5IGRpc3J1cHRpb24sIGNhbGN1bGF0ZWQgdXNpbmcgZmFjdG9ycyBzdWNoIGFzIHBvbGl0aWNhbCBzdGFiaWxpdHkgYW5kIHRyYWRlIHRpZXMuIFVuaXRzOiAxIChkaW1lbnNpb25sZXNzKS48L2xpPgo8bGk+RVY6IEVjb25vbWljIFZ1bG5lcmFiaWxpdHksIGEgbWVhc3VyZSBvZiB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvcidzIGFiaWxpdHkgdG8gd2l0aHN0YW5kIGEgc3VwcGx5IGRpc3J1cHRpb24sIGJhc2VkIG9uIGluZHVzdHJ5IGV4cGVuZGl0dXJlIGFuZCBwcm9maXRhYmlsaXR5LiBVbml0czogMSAoZGltZW5zaW9ubGVzcykuPC9saT4KPC91bD48YnI+CjxoND5QYXJhbWV0ZXJzPC9oND4KPHVsPgo8bGk+UFM6IFByb2R1Y3Rpb24gU2hhcmUsIHRoZSBzaGFyZSBvZiB3b3JsZCBwcm9kdWN0aW9uIGF0dHJpYnV0YWJsZSB0byBhIGNvdW50cnkuIFVuaXRzOiAxIChkaW1lbnNpb25sZXNzKS48L2xpPgo8bGk+QVNJOiBBYmlsaXR5IHRvIFN1cHBseSBJbmRleCwgYSBjb3VudHJ5LXNwZWNpZmljIGluZGV4IG1lYXN1cmluZyBmYWN0b3JzIGFmZmVjdGluZyBhIGNvdW50cnkncyBhYmlsaXR5IHRvIHN1cHBseSByYXcgbWF0ZXJpYWxzLiBVbml0czogMSAoZGltZW5zaW9ubGVzcykuPC9saT4KPGxpPldTSTogV2lsbGluZ25lc3MgdG8gU3VwcGx5IEluZGV4LCBhIGNvdW50cnktc3BlY2lmaWMgaW5kZXggbWVhc3VyaW5nIGZhY3RvcnMgYWZmZWN0aW5nIGEgY291bnRyeSdzIHdpbGxpbmduZXNzIHRvIHN1cHBseSByYXcgbWF0ZXJpYWxzLiBVbml0czogMSAoZGltZW5zaW9ubGVzcykuPC9saT4KPC91bD48YnI+CjxoMj5Vc2VzPC9oMj4KPGg0PkRpcmVjdCBVc2U8L2g0Pgo8cD5UaGUgbW9kZWwgY2FuIGJlIHVzZWQgdG8gYW5hbHl6ZSB0aGUgc3VwcGx5IHJpc2sgb2YgbWluZXJhbCBjb21tb2RpdGllcyB0byB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvciwgaGVscGluZyBwb2xpY3ltYWtlcnMgYW5kIGluZHVzdHJ5IHN0YWtlaG9sZGVycyBpZGVudGlmeSBjb21tb2RpdGllcyB3aXRoIGhpZ2ggc3VwcGx5IHJpc2sgYW5kIGRldmVsb3Agc3RyYXRlZ2llcyB0byBtaXRpZ2F0ZSB0aGVzZSByaXNrcy48L3A+PGJyPgo8aDQ+T3V0IE9mIFNjb3BlIFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBpcyBub3Qgc3VpdGFibGUgZm9yIGFzc2Vzc2luZyBzdXBwbHkgcmlza3MgZm9yIG5vbi1taW5lcmFsIGNvbW1vZGl0aWVzIG9yIGZvciBzZWN0b3JzIG91dHNpZGUgdGhlIFUuUy4gbWFudWZhY3R1cmluZyBzZWN0b3IuPC9wPjxicj4KPGgyPkJpYXMgUmlza3MgTGltaXRhdGlvbnM8L2gyPgo8aDQ+Qmlhc2VzPC9oND4KPHA+VGhlIG1vZGVsIG1heSBiZSBiaWFzZWQgYnkgdGhlIGF2YWlsYWJpbGl0eSBhbmQgYWNjdXJhY3kgb2YgZGF0YSB1c2VkIHRvIGNhbGN1bGF0ZSB0aGUgaW5kaWNhdG9ycywgc3VjaCBhcyBwcm9kdWN0aW9uIHNoYXJlcyBhbmQgdHJhZGUgdGllcy48L3A+PGJyPgo8aDQ+Umlza3M8L2g0Pgo8cD5UaGUgbW9kZWwncyByZWxpYW5jZSBvbiBoaXN0b3JpY2FsIGRhdGEgbWF5IG5vdCBhY2N1cmF0ZWx5IHByZWRpY3QgZnV0dXJlIHN1cHBseSByaXNrcywgZXNwZWNpYWxseSBpbiByYXBpZGx5IGNoYW5naW5nIGdlb3BvbGl0aWNhbCBvciBlY29ub21pYyBlbnZpcm9ubWVudHMuPC9wPjxicj4KPGg0PkxpbWl0YXRpb25zPC9oND4KPHA+VGhlIG1vZGVsIGRvZXMgbm90IGFjY291bnQgZm9yIGFsbCBwb3NzaWJsZSBmYWN0b3JzIGFmZmVjdGluZyBzdXBwbHkgcmlzaywgc3VjaCBhcyB0ZWNobm9sb2dpY2FsIGFkdmFuY2VtZW50cyBvciBjaGFuZ2VzIGluIGNvbnN1bWVyIGRlbWFuZC48L3A+PGJyPgo8aDI+VGVzdGluZzwvaDI+CjxoND5WYWxpZGF0aW9uPC9oND4KPHA+VGhlIG1vZGVsIHdhcyB2YWxpZGF0ZWQgdGhyb3VnaCBjb21wYXJpc29uIHdpdGggcmVhbC13b3JsZCBkYXRhIG9uIHN1cHBseSBkaXNydXB0aW9ucyBhbmQgaW5kdXN0cnkgcmVzcG9uc2VzLjwvcD48YnI+CjxoND5NZXRyaWNzPC9oND4KPHA+VGhlIG1vZGVsJ3MgcGVyZm9ybWFuY2Ugd2FzIGV2YWx1YXRlZCB1c2luZyBtZXRyaWNzIHN1Y2ggYXMgYWNjdXJhY3kgaW4gcHJlZGljdGluZyBzdXBwbHkgZGlzcnVwdGlvbnMgYW5kIHRoZSBhYmlsaXR5IHRvIGlkZW50aWZ5IGhpZ2gtcmlzayBjb21tb2RpdGllcy48L3A+PGJyPgo8aDI+R2V0dGluZyBTdGFydGVkPC9oMj4KPGg0PlN0ZXBzPC9oND4KPHVsPgo8bGk+UmV2aWV3IHRoZSBtb2RlbCdzIHN0cnVjdHVyZSBhbmQgY29tcG9uZW50cywgaW5jbHVkaW5nIHN0YXRlcywgdHJhbnNpdGlvbnMsIGFuZCBwYXJhbWV0ZXJzLjwvbGk+CjxsaT5HYXRoZXIgcmVsZXZhbnQgZGF0YSBmb3IgdGhlIGNvbW1vZGl0aWVzIGFuZCB0aW1lIHBlcmlvZCBvZiBpbnRlcmVzdC48L2xpPgo8bGk+Q2FsY3VsYXRlIHRoZSBpbmRpY2F0b3JzIChEUCwgVEUsIEVWKSB1c2luZyB0aGUgcHJvdmlkZWQgZXF1YXRpb25zIGFuZCBkYXRhLjwvbGk+CjxsaT5EZXRlcm1pbmUgdGhlIG92ZXJhbGwgc3VwcGx5IHJpc2sgKFNSKSBhcyB0aGUgZ2VvbWV0cmljIG1lYW4gb2YgdGhlIGluZGljYXRvcnMuPC9saT4KPGxpPkFuYWx5emUgdGhlIHJlc3VsdHMgdG8gaWRlbnRpZnkgY29tbW9kaXRpZXMgd2l0aCBoaWdoIHN1cHBseSByaXNrIGFuZCBkZXZlbG9wIG1pdGlnYXRpb24gc3RyYXRlZ2llcy48L2xpPgo8L3VsPjxicj4KPGg0PkV4YW1wbGVzPC9oND4KPHVsPgo8bGk+Q2FsY3VsYXRlIHRoZSBEUCBmb3IgYSBnaXZlbiBjb21tb2RpdHkgdXNpbmcgdGhlIHByb3ZpZGVkIGVxdWF0aW9uIGFuZCBkYXRhIG9uIHByb2R1Y3Rpb24gc2hhcmVzIGFuZCBjb3VudHJ5LXNwZWNpZmljIGluZGljZXMuPC9saT4KPGxpPkRldGVybWluZSB0aGUgVEUgZm9yIGEgY29tbW9kaXR5IGJ5IGNhbGN1bGF0aW5nIHRoZSBVLlMuIG5ldCBpbXBvcnQgcmVsaWFuY2UgYXMgYSBwZXJjZW50YWdlIG9mIGFwcGFyZW50IGNvbnN1bXB0aW9uLjwvbGk+CjxsaT5Bc3Nlc3MgdGhlIEVWIGZvciBhIGNvbW1vZGl0eSBieSBldmFsdWF0aW5nIGluZHVzdHJ5IGV4cGVuZGl0dXJlIGFuZCBwcm9maXRhYmlsaXR5IGRhdGEuPC9saT4KPC91bD48YnI+CjxoMj5HbG9zc2FyeTwvaDI+Cjx1bD4KPGxpPkRpc3J1cHRpb24gUG90ZW50aWFsIChEUCk6IEEgbWVhc3VyZSBvZiB0aGUgbGlrZWxpaG9vZCBvZiBhIHN1cHBseSBkaXNydXB0aW9uLCBiYXNlZCBvbiBmYWN0b3JzIHN1Y2ggYXMgcG9saXRpY2FsIHN0YWJpbGl0eSBhbmQgdHJhZGUgdGllcy48L2xpPgo8bGk+VHJhZGUgRXhwb3N1cmUgKFRFKTogQSBtZWFzdXJlIG9mIHRoZSBkZWdyZWUgb2YgZXhwb3N1cmUgdG8gZm9yZWlnbiBzdXBwbHkgZGlzcnVwdGlvbnMsIGV4cHJlc3NlZCBhcyBhIHBlcmNlbnRhZ2Ugb2YgYXBwYXJlbnQgY29uc3VtcHRpb24uPC9saT4KPGxpPkVjb25vbWljIFZ1bG5lcmFiaWxpdHkgKEVWKTogQSBtZWFzdXJlIG9mIHRoZSBVLlMuIG1hbnVmYWN0dXJpbmcgc2VjdG9yJ3MgYWJpbGl0eSB0byB3aXRoc3RhbmQgYSBzdXBwbHkgZGlzcnVwdGlvbiwgYmFzZWQgb24gaW5kdXN0cnkgZXhwZW5kaXR1cmUgYW5kIHByb2ZpdGFiaWxpdHkuPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+TmVkYWwgVC4gTmFzc2FyPC9saT4KPGxpPkphbWllIEJyYWluYXJkPC9saT4KPGxpPkFuZHJldyBHdWxsZXk8L2xpPgo8bGk+Um9zcyBNYW5sZXk8L2xpPgo8bGk+R3JlY2lhIE1hdG9zPC9saT4KPGxpPkdyYWhhbSBMZWRlcmVyPC9saT4KPGxpPkxhdXJlbmNlIFIuIEJpcmQ8L2xpPgo8bGk+RGF2aWQgUGluZWF1bHQ8L2xpPgo8bGk+RWxpc2EgQWxvbnNvPC9saT4KPGxpPkpvc2VwaCBHYW1ib2dpPC9saT4KPGxpPlN0ZXZlbiBNLiBGb3J0aWVyPC9saT4KPC91bD48YnI+CjxoMj5DaXRhdGlvbnM8L2gyPgo8dWw+CjxsaT5OYXNzYXIgZXQgYWwuLCBTY2kuIEFkdi4gMjAyMDsgNiA6IGVhYXk4NjQ3PC9saT4KPGxpPlRpc3NlcmFudCwgQS4sICYgUGF1bGl1aywgUy4gKDIwMTYpLiBNYXRjaGluZyBnbG9iYWwgY29iYWx0IGRlbWFuZCB1bmRlciBkaWZmZXJlbnQgc2NlbmFyaW9zIGZvciBjby1wcm9kdWN0aW9uIGFuZCBtaW5pbmcgYXR0cmFjdGl2ZW5lc3MuIEouIEVjb24uIFN0cnVjdC4gNSwgNC48L2xpPgo8bGk+TmFzc2FyLCBOLiBULiwgV2lsYnVybiwgRC4gUi4sICYgR29vbmFuLCBULiBHLiAoMjAxNikuIEJ5cHJvZHVjdCBtZXRhbCByZXF1aXJlbWVudHMgZm9yIFUuUy4gd2luZCBhbmQgc29sYXIgcGhvdG92b2x0YWljIGVsZWN0cmljaXR5IGdlbmVyYXRpb24gdXAgdG8gdGhlIHllYXIgMjA0MCB1bmRlciB2YXJpb3VzIENsZWFuIFBvd2VyIFBsYW4gc2NlbmFyaW9zLiBBcHBsLiBFbmVyZ3kgMTgzLCAxMjA54oCTMTIyNi48L2xpPgo8L3VsPjxicj4KPGgyPk1vcmUgSW5mb3JtYXRpb248L2gyPgo8aDQ+RnVuZGVkIEJ5PC9oND4KPHA+VS5TLiBHZW9sb2dpY2FsIFN1cnZleTwvcD48YnI+CjxoND5MaW5rczwvaDQ+Cjx1bD4KPGxpPmh0dHBzOi8vd3d3LnNjaWVuY2Uub3JnL2RvaS8xMC4xMTI2L3NjaWFkdi5hYXk4NjQ3PC9saT4KPGxpPmh0dHBzOi8vb2JhbWF3aGl0ZWhvdXNlLmFyY2hpdmVzLmdvdi9zaXRlcy9kZWZhdWx0L2ZpbGVzL21pY3Jvc2l0ZXMvb3N0cC9OU1RDL2NzbXNjX2Fzc2Vzc21lbnRfb2ZfY3JpdGljYWxfbWluZXJhbHNfcmVwb3J0XzIwMTYtMDMtMTZfZmluYWwucGRmPC9saT4KPC91bD48YnI+Cg==",
+    "gollmCard": {
+      "summary": "The model described is a Petri Net representation of a risk assessment framework for evaluating the supply risk (SR) of mineral commodities to the U.S. manufacturing sector. The model uses a conventional risk-modeling framework to assess the SR based on three factors: disruption potential (DP), trade exposure (TE), and economic vulnerability (EV). Each factor is calculated using specific indicators and data sources, and the overall SR is determined as the geometric mean of these three factors. The model is applied to 52 commodities over the decade 2007-2016, identifying those with the greatest SR. The model can be represented in Petri Net format, with states, transitions, and parameters corresponding to the various components of the risk assessment framework.",
+      "specs": {
+        "domain": [
+          "Economics",
+          "Supply Chain Management",
+          "Risk Assessment"
+        ],
+        "type": "Mathematical Model",
+        "specification": "The model consists of 18 states, each representing a variable or state in the system, such as a species concentration in a reaction. There are 9 transitions, each representing a rule of the system, indicating how tokens move between places based on parameter rates. The model includes parameters that define the system's rules and rates of evolution, including transition rates and stoichiometric relationships.",
+        "states": [
+          "TE: Trade Exposure, a measure of the degree of exposure to foreign supply disruptions, expressed as a percentage of apparent consumption. Units: 1 (dimensionless).",
+          "DP: Disruption Potential, a measure of the likelihood of a supply disruption, calculated using factors such as political stability and trade ties. Units: 1 (dimensionless).",
+          "EV: Economic Vulnerability, a measure of the U.S. manufacturing sector's ability to withstand a supply disruption, based on industry expenditure and profitability. Units: 1 (dimensionless)."
+        ],
+        "parameters": [
+          "PS: Production Share, the share of world production attributable to a country. Units: 1 (dimensionless).",
+          "ASI: Ability to Supply Index, a country-specific index measuring factors affecting a country's ability to supply raw materials. Units: 1 (dimensionless).",
+          "WSI: Willingness to Supply Index, a country-specific index measuring factors affecting a country's willingness to supply raw materials. Units: 1 (dimensionless)."
+        ]
+      },
+      "uses": {
+        "directUse": "The model can be used to analyze the supply risk of mineral commodities to the U.S. manufacturing sector, helping policymakers and industry stakeholders identify commodities with high supply risk and develop strategies to mitigate these risks.",
+        "outOfScopeUse": "The model is not suitable for assessing supply risks for non-mineral commodities or for sectors outside the U.S. manufacturing sector."
+      },
+      "biasRisksLimitations": {
+        "biases": "The model may be biased by the availability and accuracy of data used to calculate the indicators, such as production shares and trade ties.",
+        "risks": "The model's reliance on historical data may not accurately predict future supply risks, especially in rapidly changing geopolitical or economic environments.",
+        "limitations": "The model does not account for all possible factors affecting supply risk, such as technological advancements or changes in consumer demand."
+      },
+      "testing": {
+        "validation": "The model was validated through comparison with real-world data on supply disruptions and industry responses.",
+        "metrics": "The model's performance was evaluated using metrics such as accuracy in predicting supply disruptions and the ability to identify high-risk commodities."
+      },
+      "gettingStarted": {
+        "steps": [
+          "Review the model's structure and components, including states, transitions, and parameters.",
+          "Gather relevant data for the commodities and time period of interest.",
+          "Calculate the indicators (DP, TE, EV) using the provided equations and data.",
+          "Determine the overall supply risk (SR) as the geometric mean of the indicators.",
+          "Analyze the results to identify commodities with high supply risk and develop mitigation strategies."
+        ],
+        "examples": [
+          "Calculate the DP for a given commodity using the provided equation and data on production shares and country-specific indices.",
+          "Determine the TE for a commodity by calculating the U.S. net import reliance as a percentage of apparent consumption.",
+          "Assess the EV for a commodity by evaluating industry expenditure and profitability data."
+        ]
+      },
+      "glossary": [
+        "Disruption Potential (DP): A measure of the likelihood of a supply disruption, based on factors such as political stability and trade ties.",
+        "Trade Exposure (TE): A measure of the degree of exposure to foreign supply disruptions, expressed as a percentage of apparent consumption.",
+        "Economic Vulnerability (EV): A measure of the U.S. manufacturing sector's ability to withstand a supply disruption, based on industry expenditure and profitability."
+      ],
+      "authors": [
+        "Nedal T. Nassar",
+        "Jamie Brainard",
+        "Andrew Gulley",
+        "Ross Manley",
+        "Grecia Matos",
+        "Graham Lederer",
+        "Laurence R. Bird",
+        "David Pineault",
+        "Elisa Alonso",
+        "Joseph Gambogi",
+        "Steven M. Fortier"
+      ],
+      "citations": [
+        "Nassar et al., Sci. Adv. 2020; 6 : eaay8647",
+        "Tisserant, A., & Pauliuk, S. (2016). Matching global cobalt demand under different scenarios for co-production and mining attractiveness. J. Econ. Struct. 5, 4.",
+        "Nassar, N. T., Wilburn, D. R., & Goonan, T. G. (2016). Byproduct metal requirements for U.S. wind and solar photovoltaic electricity generation up to the year 2040 under various Clean Power Plan scenarios. Appl. Energy 183, 1209–1226."
+      ],
+      "moreInformation": {
+        "fundedBy": "U.S. Geological Survey",
+        "links": [
+          "https://www.science.org/doi/10.1126/sciadv.aay8647",
+          "https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/NSTC/csmsc_assessment_of_critical_minerals_report_2016-03-16_final.pdf"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

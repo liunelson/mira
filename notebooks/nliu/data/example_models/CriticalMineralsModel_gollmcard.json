@@ -1,0 +1,728 @@
+{
+  "id": "d1202242-17c6-46ee-a26f-061b532cbb39",
+  "createdOn": "2025-03-01T00:38:54.455+00:00",
+  "updatedOn": "2025-03-01T01:14:58.927+00:00",
+  "name": "CriticalMineralsModel",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "CriticalMineralsModel",
+    "description": "Based on Nassar et al. 2020.",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "R",
+        "name": "R(t)",
+        "description": "Natural resource reserve of a commodity in a country.",
+        "grounding": {
+          "id": "be9fa9ed-701e-48d4-b1e0-6c7a4937ba59",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000592"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "R"
+      },
+      {
+        "id": "S",
+        "name": "S(t)",
+        "description": "Stock of a commodity in a country.",
+        "grounding": {
+          "id": "f429a10a-7bfc-4347-b186-a1fba1ff5c8d",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000514"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "S"
+      },
+      {
+        "id": "OS",
+        "name": "OS(t)",
+        "description": "Stock of old scrap of a commodity in a country.",
+        "grounding": {
+          "id": "8456a1d2-c87a-4fd5-aada-b9a25790ff1f",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000514"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        "conceptReference": "OS"
+      },
+      {
+        "id": "GDP",
+        "name": "GDP(t)",
+        "description": "Gross domestic product of a country.",
+        "grounding": {
+          "id": "24b26d3a-5c95-4028-af42-9c4c2089729a",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000511"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "units": {
+          "expression": "dollar",
+          "expression_mathml": "<ci>dollar</ci>"
+        },
+        "conceptReference": "GDP"
+      }
+    ],
+    "transitions": [
+      {
+        "id": "PrimaryProduction",
+        "name": null,
+        "description": "Transition from natural resource reserve to stock of a commodity through primary production.",
+        "grounding": {
+          "id": "bc5572b1-0c36-4d29-8b51-962b96ca50d5",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000511"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "input": [
+          "R"
+        ],
+        "output": [
+          "S"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "PrimaryProduction",
+          "grounding": null,
+          "description": null
+        },
+        "conceptReference": "PrimaryProduction"
+      },
+      {
+        "id": "SecondaryProduction",
+        "name": null,
+        "description": "Transition from stock of old scrap to stock of a commodity through secondary production.",
+        "grounding": {
+          "id": "0fc7d379-89ed-42c8-be58-7036ac58f5db",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000514"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "input": [
+          "OS"
+        ],
+        "output": [
+          "S"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "SecondaryProduction",
+          "grounding": null,
+          "description": null
+        },
+        "conceptReference": "SecondaryProduction"
+      },
+      {
+        "id": "StockAdjustments",
+        "name": null,
+        "description": "Adjustments in the stock of a commodity.",
+        "grounding": {
+          "id": "63d506c1-deec-4314-9fd0-e984c72bf5a9",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000514"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "input": [
+          "S"
+        ],
+        "output": [],
+        "expression": null,
+        "properties": {
+          "name": "StockAdjustments",
+          "grounding": null,
+          "description": null
+        },
+        "conceptReference": "StockAdjustments"
+      },
+      {
+        "id": "GDPGrowth",
+        "name": null,
+        "description": "Growth in the gross domestic product of a country.",
+        "grounding": {
+          "id": "51bb06bd-5796-4389-8e8e-a34e361c0488",
+          "createdOn": null,
+          "updatedOn": null,
+          "identifiers": {
+            "ido": "0000511"
+          },
+          "modifiers": {},
+          "empty": false
+        },
+        "input": [],
+        "output": [
+          "GDP"
+        ],
+        "expression": null,
+        "properties": {
+          "name": "GDPGrowth",
+          "grounding": null,
+          "description": null
+        },
+        "conceptReference": "GDPGrowth"
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "PrimaryProduction",
+          "description": "Transition from natural resource reserve to stock of a commodity through primary production.",
+          "expression": "PP",
+          "expression_mathml": "<ci>PP</ci>"
+        },
+        {
+          "target": "SecondaryProduction",
+          "description": "Transition from stock of old scrap to stock of a commodity through secondary production.",
+          "expression": "SP",
+          "expression_mathml": "<ci>SP</ci>"
+        },
+        {
+          "target": "StockAdjustments",
+          "description": "Adjustments in the stock of a commodity.",
+          "expression": "DeltaS",
+          "expression_mathml": "<ci>DeltaS</ci>"
+        },
+        {
+          "target": "GDPGrowth",
+          "description": "Growth in the gross domestic product of a country.",
+          "expression": "GDP*g",
+          "expression_mathml": "<apply><times/><ci>GDP</ci><ci>g</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "R",
+          "description": "Natural resource reserve of a commodity in a country.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "S",
+          "description": "Stock of a commodity in a country.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "OS",
+          "description": "Stock of old scrap of a commodity in a country.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "GDP",
+          "description": "Gross domestic product of a country.",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "DeltaS",
+          "name": "DeltaS",
+          "description": "Adjustments of industry and government stocks of a commodity in a country.",
+          "grounding": {
+            "id": "3a9796bf-adbf-43f8-b4a8-c424d5071f55",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "DeltaS"
+        },
+        {
+          "id": "E",
+          "name": "E",
+          "description": "Export of a commodity from a country to another.",
+          "grounding": {
+            "id": "46578170-08c3-43a4-acd9-facb1394ffd9",
+            "identifiers": {
+              "apollosv": "00000154"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "E"
+        },
+        {
+          "id": "I",
+          "name": "I",
+          "description": "Import of a commodity from a country to another.",
+          "grounding": {
+            "id": "bf62162c-9753-4548-8baa-d50fcfec20b6",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "I"
+        },
+        {
+          "id": "PP",
+          "name": "PP",
+          "description": "Primary production of a commodity in a country.",
+          "grounding": {
+            "id": "87ac2afe-5bc2-43c7-8730-c0e2059dbf11",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "PP"
+        },
+        {
+          "id": "SP",
+          "name": "SP",
+          "description": "Secondary production of a commodity in a country.",
+          "grounding": {
+            "id": "44a12b9f-c8ca-487e-82d1-c6f3300fcc4f",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "SP"
+        },
+        {
+          "id": "EXP",
+          "name": "EXP",
+          "description": "Expenditure of an industry on a commodity in the US.",
+          "grounding": {
+            "id": "87d828c4-0c66-4a93-b45b-33229d720d12",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "dollar",
+            "expression_mathml": "<ci>dollar</ci>"
+          },
+          "conceptReference": "EXP"
+        },
+        {
+          "id": "OP",
+          "name": "OP",
+          "description": "Operating profit of an industry in the US.",
+          "grounding": {
+            "id": "074b5d1e-0327-40e2-af7b-ca15d83ef599",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "dollar",
+            "expression_mathml": "<ci>dollar</ci>"
+          },
+          "conceptReference": "OP"
+        },
+        {
+          "id": "VA",
+          "name": "VA",
+          "description": "Value added (i.e. its contribution to a GDP) of an industry in the US.",
+          "value": 1,
+          "units": {
+            "expression": "dollar",
+            "expression_mathml": "<ci>dollar</ci>"
+          },
+          "conceptReference": "VA"
+        },
+        {
+          "id": "PPI",
+          "name": "PPI",
+          "description": "Policy perception index of a country.",
+          "grounding": {
+            "id": "abc17fb4-393f-44a6-a5a3-4bd40e8056cc",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "PPI"
+        },
+        {
+          "id": "FWI",
+          "name": "FWI",
+          "description": "Freedom House's Freedom in the World index of a country.",
+          "grounding": {
+            "id": "ac7ac75f-cf75-46e6-9d1f-ac4f4b247a9b",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "FWI"
+        },
+        {
+          "id": "g",
+          "name": "g",
+          "description": "GDO growth rate of a country.",
+          "grounding": {
+            "id": "4c6eaa95-d467-4190-a2bc-9134eb914649",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "value": 1,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "g"
+        },
+        {
+          "id": "MC",
+          "name": "MC",
+          "description": "Military cooperation, refers to whether the country has a current collective defense arrangement with the US.",
+          "value": 1,
+          "conceptReference": "MC"
+        }
+      ],
+      "observables": [
+        {
+          "id": "SR",
+          "name": "SR(t)",
+          "description": "Supply risk of a commodity for the U.S. manufacturing sector.",
+          "grounding": {
+            "id": "6f8d7f27-a74a-4901-917b-bae8a5008e44",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "expression": "(DP*EV*TE)**(1/3)",
+          "conceptReference": "SR",
+          "expression_mathml": "<apply><root/><degree><cn>3</cn></degree><apply><times/><ci>DP</ci><ci>EV</ci><ci>TE</ci></apply></apply>"
+        },
+        {
+          "id": "DP",
+          "name": "DP(t)",
+          "grounding": {
+            "id": "7a9c50cb-a55a-43bd-9acc-0425883d7882",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "ASI*PS**2*WSI",
+          "conceptReference": "DP",
+          "expression_mathml": "<apply><times/><ci>ASI</ci><apply><power/><ci>PS</ci><cn>2</cn></apply><ci>WSI</ci></apply>"
+        },
+        {
+          "id": "TE",
+          "name": "TE(t)",
+          "expression": "(DeltaS - E + I)/(DeltaS - E + I + PP + SP)",
+          "conceptReference": "TE",
+          "expression_mathml": "<apply><divide/><apply><plus/><apply><minus/><ci>DeltaS</ci><ci>E</ci></apply><ci>I</ci></apply><apply><plus/><apply><minus/><ci>DeltaS</ci><ci>E</ci></apply><ci>I</ci><ci>PP</ci><ci>SP</ci></apply></apply>"
+        },
+        {
+          "id": "AC",
+          "name": "AC(t)",
+          "expression": "DeltaS - E + I + PP + SP",
+          "conceptReference": "AC",
+          "expression_mathml": "<apply><plus/><apply><minus/><ci>DeltaS</ci><ci>E</ci></apply><ci>I</ci><ci>PP</ci><ci>SP</ci></apply>"
+        },
+        {
+          "id": "EV",
+          "name": "EV(t)",
+          "expression": "EXP*VA/(GDP*OP)",
+          "conceptReference": "EV",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>EXP</ci><ci>VA</ci></apply><apply><times/><ci>GDP</ci><ci>OP</ci></apply></apply>"
+        },
+        {
+          "id": "PS",
+          "name": "PS(t)",
+          "grounding": {
+            "id": "a869bb75-857b-47f2-b6de-43b3942a9d65",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "1",
+          "conceptReference": "PS",
+          "expression_mathml": "<cn>1</cn>"
+        },
+        {
+          "id": "P",
+          "name": "P(t)",
+          "grounding": {
+            "id": "933ea3ef-23f4-4968-b2a4-d99ceb4d1e57",
+            "identifiers": {
+              "ido": "0000511"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "PP + SP",
+          "conceptReference": "P",
+          "expression_mathml": "<apply><plus/><ci>PP</ci><ci>SP</ci></apply>"
+        },
+        {
+          "id": "ASI",
+          "name": "ASI(t)",
+          "grounding": {
+            "id": "cf6ba73d-23b0-40b6-918d-3c4065afbbdf",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "1 - PPI/100",
+          "conceptReference": "ASI",
+          "expression_mathml": "<apply><minus/><cn>1</cn><apply><divide/><ci>PPI</ci><cn>100</cn></apply></apply>"
+        },
+        {
+          "id": "WSI",
+          "name": "WSI(t)",
+          "grounding": {
+            "id": "323a41e1-e510-469a-bc78-ff2e00580a3d",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "SV/2 + TT/2",
+          "conceptReference": "WSI",
+          "expression_mathml": "<apply><plus/><apply><divide/><ci>SV</ci><cn>2</cn></apply><apply><divide/><ci>TT</ci><cn>2</cn></apply></apply>"
+        },
+        {
+          "id": "TT",
+          "name": "TT(t)",
+          "expression": "(E + I)/GDP",
+          "conceptReference": "TT",
+          "expression_mathml": "<apply><divide/><apply><plus/><ci>E</ci><ci>I</ci></apply><ci>GDP</ci></apply>"
+        },
+        {
+          "id": "SV",
+          "name": "SV(t)",
+          "grounding": {
+            "id": "d167f334-12c7-4def-9384-d870a9242102",
+            "identifiers": {
+              "ido": "0000514"
+            },
+            "modifiers": {},
+            "empty": false
+          },
+          "expression": "FWI",
+          "conceptReference": "SV",
+          "expression_mathml": "<ci>FWI</ci>"
+        }
+      ],
+      "time": {
+        "id": "t",
+        "units": {
+          "expression": "year",
+          "expression_mathml": "<ci>year</ci>"
+        }
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgbW9kZWwgZGVzY3JpYmVkIGluIHRoZSBkb2N1bWVudCBpcyBhIG1hdGhlbWF0aWNhbCBtb2RlbCB1c2VkIHRvIGV2YWx1YXRlIHRoZSBtaW5lcmFsIGNvbW1vZGl0eSBzdXBwbHkgcmlzayAoU1IpIGZvciB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3Rvci4gSXQgaXMgYmFzZWQgb24gYSBjb252ZW50aW9uYWwgcmlzay1tb2RlbGluZyBmcmFtZXdvcmsgdGhhdCBjb25zaWRlcnMgdGhyZWUgbWFpbiBmYWN0b3JzOiBkaXNydXB0aW9uIHBvdGVudGlhbCAoRFApLCB0cmFkZSBleHBvc3VyZSAoVEUpLCBhbmQgZWNvbm9taWMgdnVsbmVyYWJpbGl0eSAoRVYpLiBUaGUgbW9kZWwgYXNzZXNzZXMgdGhlIHN1cHBseSByaXNrIGZvciA1MiBub25mdWVsIG1pbmVyYWwgY29tbW9kaXRpZXMgb3ZlciB0aGUgZGVjYWRlIGZyb20gMjAwNyB0byAyMDE2LiBUaGUgbW9kZWwgY2FuIGxpa2VseSBiZSByZXByZXNlbnRlZCBpbiBQZXRyaSBOZXQgZm9ybWF0LCBhcyBpdCBpbnZvbHZlcyBzdGF0ZXMsIHRyYW5zaXRpb25zLCBhbmQgcGFyYW1ldGVycyB0aGF0IGNhbiBiZSBtYXBwZWQgdG8gcGxhY2VzLCB0cmFuc2l0aW9ucywgYW5kIGFyY3MgaW4gYSBQZXRyaSBOZXQuPC9wPjxicj4KPGgyPlNwZWNzPC9oMj4KPGg0PkRvbWFpbjwvaDQ+Cjx1bD4KPGxpPkVjb25vbWljczwvbGk+CjxsaT5TdXBwbHkgQ2hhaW4gTWFuYWdlbWVudDwvbGk+CjxsaT5SaXNrIEFzc2Vzc21lbnQ8L2xpPgo8L3VsPjxicj4KPGg0PlR5cGU8L2g0Pgo8cD5NYXRoZW1hdGljYWwgTW9kZWw8L3A+PGJyPgo8aDQ+U3BlY2lmaWNhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCBpcyBzdHJ1Y3R1cmVkIHRvIGNhbGN1bGF0ZSB0aGUgc3VwcGx5IHJpc2sgKFNSKSBhcyB0aGUgZ2VvbWV0cmljIG1lYW4gb2YgdGhyZWUgaW5kaWNhdG9yczogZGlzcnVwdGlvbiBwb3RlbnRpYWwgKERQKSwgdHJhZGUgZXhwb3N1cmUgKFRFKSwgYW5kIGVjb25vbWljIHZ1bG5lcmFiaWxpdHkgKEVWKS4gRWFjaCBpbmRpY2F0b3IgaXMgbm9ybWFsaXplZCBvbiBhIDAgdG8gMSBzY2FsZS4gVGhlIG1vZGVsIGludm9sdmVzIG11bHRpcGxlIHN0YXRlcyByZXByZXNlbnRpbmcgZGlmZmVyZW50IGNvbW1vZGl0aWVzIGFuZCB0aGVpciBwcm9kdWN0aW9uIHN0YWdlcywgdHJhbnNpdGlvbnMgcmVwcmVzZW50aW5nIGNoYW5nZXMgaW4gc3VwcGx5IHJpc2sgZmFjdG9ycywgYW5kIHBhcmFtZXRlcnMgZGVmaW5pbmcgdGhlIHJhdGVzIGFuZCByZWxhdGlvbnNoaXBzIGJldHdlZW4gdGhlc2UgZmFjdG9ycy48L3A+PGJyPgo8aDQ+U3RhdGVzPC9oND4KPHVsPgo8bGk+UjogTmF0dXJhbCByZXNvdXJjZSByZXNlcnZlIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+UzogU3RvY2sgb2YgYSBjb21tb2RpdHkgaW4gYSBjb3VudHJ5LiBVbml0czogMTwvbGk+CjxsaT5PUzogU3RvY2sgb2Ygb2xkIHNjcmFwIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+R0RQOiBHcm9zcyBkb21lc3RpYyBwcm9kdWN0IG9mIGEgY291bnRyeS4gVW5pdHM6IGRvbGxhcjwvbGk+CjwvdWw+PGJyPgo8aDQ+UGFyYW1ldGVyczwvaDQ+Cjx1bD4KPGxpPkRlbHRhUzogQWRqdXN0bWVudHMgb2YgaW5kdXN0cnkgYW5kIGdvdmVybm1lbnQgc3RvY2tzIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+RTogRXhwb3J0IG9mIGEgY29tbW9kaXR5IGZyb20gYSBjb3VudHJ5IHRvIGFub3RoZXIuIFVuaXRzOiAxPC9saT4KPGxpPkk6IEltcG9ydCBvZiBhIGNvbW1vZGl0eSBmcm9tIGEgY291bnRyeSB0byBhbm90aGVyLiBVbml0czogMTwvbGk+CjxsaT5QUDogUHJpbWFyeSBwcm9kdWN0aW9uIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+U1A6IFNlY29uZGFyeSBwcm9kdWN0aW9uIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+RVhQOiBFeHBlbmRpdHVyZSBvZiBhbiBpbmR1c3RyeSBvbiBhIGNvbW1vZGl0eSBpbiB0aGUgVVMuIFVuaXRzOiBkb2xsYXI8L2xpPgo8bGk+T1A6IE9wZXJhdGluZyBwcm9maXQgb2YgYW4gaW5kdXN0cnkgaW4gdGhlIFVTLiBVbml0czogZG9sbGFyPC9saT4KPGxpPlZBOiBWYWx1ZSBhZGRlZCAoaS5lLiwgaXRzIGNvbnRyaWJ1dGlvbiB0byBhIEdEUCkgb2YgYW4gaW5kdXN0cnkgaW4gdGhlIFVTLiBVbml0czogZG9sbGFyPC9saT4KPGxpPlBQSTogUG9saWN5IHBlcmNlcHRpb24gaW5kZXggb2YgYSBjb3VudHJ5LiBVbml0czogMTwvbGk+CjxsaT5GV0k6IEZyZWVkb20gSG91c2UncyBGcmVlZG9tIGluIHRoZSBXb3JsZCBpbmRleCBvZiBhIGNvdW50cnkuIFVuaXRzOiAxPC9saT4KPGxpPmc6IEdEUCBncm93dGggcmF0ZSBvZiBhIGNvdW50cnkuIFVuaXRzOiAxPC9saT4KPGxpPk1DOiBNaWxpdGFyeSBjb29wZXJhdGlvbiwgcmVmZXJzIHRvIHdoZXRoZXIgdGhlIGNvdW50cnkgaGFzIGEgY3VycmVudCBjb2xsZWN0aXZlIGRlZmVuc2UgYXJyYW5nZW1lbnQgd2l0aCB0aGUgVVMuIFVuaXRzOiBOL0E8L2xpPgo8L3VsPjxicj4KPGgyPlVzZXM8L2gyPgo8aDQ+RGlyZWN0IFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBjYW4gYmUgdXNlZCB0byBhbmFseXplIHRoZSBzdXBwbHkgcmlzayBvZiBtaW5lcmFsIGNvbW1vZGl0aWVzIGZvciB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvciwgaGVscGluZyBwb2xpY3ltYWtlcnMgYW5kIGluZHVzdHJ5IHN0YWtlaG9sZGVycyBpZGVudGlmeSBjb21tb2RpdGllcyB3aXRoIGhpZ2ggc3VwcGx5IHJpc2sgYW5kIGRldmVsb3Agc3RyYXRlZ2llcyB0byBtaXRpZ2F0ZSB0aGVzZSByaXNrcy48L3A+PGJyPgo8aDQ+T3V0IE9mIFNjb3BlIFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBpcyBub3Qgc3VpdGFibGUgZm9yIGFzc2Vzc2luZyBzdXBwbHkgcmlza3MgZm9yIG5vbi1taW5lcmFsIGNvbW1vZGl0aWVzIG9yIGZvciByZWdpb25zIG91dHNpZGUgdGhlIFUuUy4gbWFudWZhY3R1cmluZyBzZWN0b3IuPC9wPjxicj4KPGgyPkJpYXMgUmlza3MgTGltaXRhdGlvbnM8L2gyPgo8aDQ+Qmlhc2VzPC9oND4KPHA+VGhlIG1vZGVsIG1heSBiZSBiaWFzZWQgYnkgdGhlIGF2YWlsYWJpbGl0eSBhbmQgYWNjdXJhY3kgb2YgZGF0YSBmb3IgZGlmZmVyZW50IGNvbW1vZGl0aWVzIGFuZCBjb3VudHJpZXMuIEl0IHJlbGllcyBvbiBoaXN0b3JpY2FsIGRhdGEsIHdoaWNoIG1heSBub3QgZnVsbHkgY2FwdHVyZSBmdXR1cmUgbWFya2V0IGR5bmFtaWNzLjwvcD48YnI+CjxoND5SaXNrczwvaDQ+CjxwPlRoZSBtb2RlbCdzIHJlbGlhbmNlIG9uIGhpc3RvcmljYWwgZGF0YSBhbmQgYXNzdW1wdGlvbnMgYWJvdXQgZnV0dXJlIG1hcmtldCBjb25kaXRpb25zIG1heSBsZWFkIHRvIGluYWNjdXJhdGUgcHJlZGljdGlvbnMgb2Ygc3VwcGx5IHJpc2suPC9wPjxicj4KPGg0PkxpbWl0YXRpb25zPC9oND4KPHA+VGhlIG1vZGVsIGRvZXMgbm90IGFjY291bnQgZm9yIGFsbCBwb3NzaWJsZSBmYWN0b3JzIGFmZmVjdGluZyBzdXBwbHkgcmlzaywgc3VjaCBhcyB0ZWNobm9sb2dpY2FsIGFkdmFuY2VtZW50cyBvciBjaGFuZ2VzIGluIGNvbnN1bWVyIGRlbWFuZC48L3A+PGJyPgo8aDI+VGVzdGluZzwvaDI+CjxoND5WYWxpZGF0aW9uPC9oND4KPHA+VGhlIG1vZGVsIHdhcyB2YWxpZGF0ZWQgdGhyb3VnaCBjb21wYXJpc29uIHdpdGggaGlzdG9yaWNhbCBkYXRhIGFuZCBleHBlcnQgYXNzZXNzbWVudHMgb2Ygc3VwcGx5IHJpc2sgZm9yIGRpZmZlcmVudCBjb21tb2RpdGllcy48L3A+PGJyPgo8aDQ+TWV0cmljczwvaDQ+CjxwPlRoZSBtb2RlbCB1c2VzIG5vcm1hbGl6ZWQgc2NvcmVzIGZvciBkaXNydXB0aW9uIHBvdGVudGlhbCwgdHJhZGUgZXhwb3N1cmUsIGFuZCBlY29ub21pYyB2dWxuZXJhYmlsaXR5IHRvIGV2YWx1YXRlIHN1cHBseSByaXNrLjwvcD48YnI+CjxoMj5HZXR0aW5nIFN0YXJ0ZWQ8L2gyPgo8aDQ+U3RlcHM8L2g0Pgo8dWw+CjxsaT5SZXZpZXcgdGhlIG1vZGVsJ3Mgc3RydWN0dXJlIGFuZCBhc3N1bXB0aW9ucy48L2xpPgo8bGk+R2F0aGVyIGRhdGEgb24gZGlzcnVwdGlvbiBwb3RlbnRpYWwsIHRyYWRlIGV4cG9zdXJlLCBhbmQgZWNvbm9taWMgdnVsbmVyYWJpbGl0eSBmb3IgdGhlIGNvbW1vZGl0aWVzIG9mIGludGVyZXN0LjwvbGk+CjxsaT5DYWxjdWxhdGUgdGhlIHN1cHBseSByaXNrIGZvciBlYWNoIGNvbW1vZGl0eSB1c2luZyB0aGUgbW9kZWwncyBlcXVhdGlvbnMuPC9saT4KPGxpPkFuYWx5emUgdGhlIHJlc3VsdHMgdG8gaWRlbnRpZnkgY29tbW9kaXRpZXMgd2l0aCBoaWdoIHN1cHBseSByaXNrLjwvbGk+CjxsaT5EZXZlbG9wIHN0cmF0ZWdpZXMgdG8gbWl0aWdhdGUgc3VwcGx5IHJpc2sgZm9yIHRoZXNlIGNvbW1vZGl0aWVzLjwvbGk+CjwvdWw+PGJyPgo8aDQ+RXhhbXBsZXM8L2g0Pgo8dWw+CjxsaT5FeGFtcGxlIDE6IENhbGN1bGF0aW5nIHRoZSBzdXBwbHkgcmlzayBmb3IgY29iYWx0IGluIDIwMTYuPC9saT4KPGxpPkV4YW1wbGUgMjogQW5hbHl6aW5nIHRoZSBpbXBhY3Qgb2YgYSBzdXBwbHkgZGlzcnVwdGlvbiBvbiB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3Rvci48L2xpPgo8L3VsPjxicj4KPGgyPkdsb3NzYXJ5PC9oMj4KPHVsPgo8bGk+RGlzcnVwdGlvbiBQb3RlbnRpYWwgKERQKTogQSBtZWFzdXJlIG9mIHRoZSBsaWtlbGlob29kIG9mIGEgc3VwcGx5IGRpc3J1cHRpb24gZm9yIGEgY29tbW9kaXR5LjwvbGk+CjxsaT5UcmFkZSBFeHBvc3VyZSAoVEUpOiBBIG1lYXN1cmUgb2YgdGhlIFUuUy4gbWFudWZhY3R1cmluZyBzZWN0b3IncyByZWxpYW5jZSBvbiBmb3JlaWduIHN1cHBsaWVzIG9mIGEgY29tbW9kaXR5LjwvbGk+CjxsaT5FY29ub21pYyBWdWxuZXJhYmlsaXR5IChFVik6IEEgbWVhc3VyZSBvZiB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvcidzIGFiaWxpdHkgdG8gd2l0aHN0YW5kIGEgc3VwcGx5IGRpc3J1cHRpb24uPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+TmVkYWwgVC4gTmFzc2FyPC9saT4KPGxpPkphbWllIEJyYWluYXJkPC9saT4KPGxpPkFuZHJldyBHdWxsZXk8L2xpPgo8bGk+Um9zcyBNYW5sZXk8L2xpPgo8bGk+R3JlY2lhIE1hdG9zPC9saT4KPGxpPkdyYWhhbSBMZWRlcmVyPC9saT4KPGxpPkxhdXJlbmNlIFIuIEJpcmQ8L2xpPgo8bGk+RGF2aWQgUGluZWF1bHQ8L2xpPgo8bGk+RWxpc2EgQWxvbnNvPC9saT4KPGxpPkpvc2VwaCBHYW1ib2dpPC9saT4KPGxpPlN0ZXZlbiBNLiBGb3J0aWVyPC9saT4KPC91bD48YnI+CjxoMj5DaXRhdGlvbnM8L2gyPgo8dWw+CjxsaT5OYXNzYXIgZXQgYWwuLCBTY2kuIEFkdi4gMjAyMDsgNiA6IGVhYXk4NjQ3PC9saT4KPGxpPlRpc3NlcmFudCwgQS4sICYgUGF1bGl1aywgUy4gKDIwMTYpLiBNYXRjaGluZyBnbG9iYWwgY29iYWx0IGRlbWFuZCB1bmRlciBkaWZmZXJlbnQgc2NlbmFyaW9zIGZvciBjby1wcm9kdWN0aW9uIGFuZCBtaW5pbmcgYXR0cmFjdGl2ZW5lc3MuIEouIEVjb24uIFN0cnVjdC4gNSwgNC48L2xpPgo8bGk+TmFzc2FyLCBOLiBULiwgV2lsYnVybiwgRC4gUi4sICYgR29vbmFuLCBULiBHLiAoMjAxNikuIEJ5cHJvZHVjdCBtZXRhbCByZXF1aXJlbWVudHMgZm9yIFUuUy4gd2luZCBhbmQgc29sYXIgcGhvdG92b2x0YWljIGVsZWN0cmljaXR5IGdlbmVyYXRpb24gdXAgdG8gdGhlIHllYXIgMjA0MCB1bmRlciB2YXJpb3VzIENsZWFuIFBvd2VyIFBsYW4gc2NlbmFyaW9zLiBBcHBsLiBFbmVyZ3kgMTgzLCAxMjA54oCTMTIyNi48L2xpPgo8L3VsPjxicj4KPGgyPk1vcmUgSW5mb3JtYXRpb248L2gyPgo8aDQ+RnVuZGVkIEJ5PC9oND4KPHA+VS5TLiBHZW9sb2dpY2FsIFN1cnZleTwvcD48YnI+CjxoND5MaW5rczwvaDQ+Cjx1bD4KPGxpPmh0dHBzOi8vZG9pLm9yZy8xMC41MjgxL3plbm9kby4zNTk1MzgyPC9saT4KPC91bD48YnI+Cg==",
+    "gollmCard": {
+      "summary": "The model described in the document is a mathematical model used to evaluate the mineral commodity supply risk (SR) for the U.S. manufacturing sector. It is based on a conventional risk-modeling framework that considers three main factors: disruption potential (DP), trade exposure (TE), and economic vulnerability (EV). The model assesses the supply risk for 52 nonfuel mineral commodities over the decade from 2007 to 2016. The model can likely be represented in Petri Net format, as it involves states, transitions, and parameters that can be mapped to places, transitions, and arcs in a Petri Net.",
+      "specs": {
+        "domain": [
+          "Economics",
+          "Supply Chain Management",
+          "Risk Assessment"
+        ],
+        "type": "Mathematical Model",
+        "specification": "The model is structured to calculate the supply risk (SR) as the geometric mean of three indicators: disruption potential (DP), trade exposure (TE), and economic vulnerability (EV). Each indicator is normalized on a 0 to 1 scale. The model involves multiple states representing different commodities and their production stages, transitions representing changes in supply risk factors, and parameters defining the rates and relationships between these factors.",
+        "states": [
+          "R: Natural resource reserve of a commodity in a country. Units: 1",
+          "S: Stock of a commodity in a country. Units: 1",
+          "OS: Stock of old scrap of a commodity in a country. Units: 1",
+          "GDP: Gross domestic product of a country. Units: dollar"
+        ],
+        "parameters": [
+          "DeltaS: Adjustments of industry and government stocks of a commodity in a country. Units: 1",
+          "E: Export of a commodity from a country to another. Units: 1",
+          "I: Import of a commodity from a country to another. Units: 1",
+          "PP: Primary production of a commodity in a country. Units: 1",
+          "SP: Secondary production of a commodity in a country. Units: 1",
+          "EXP: Expenditure of an industry on a commodity in the US. Units: dollar",
+          "OP: Operating profit of an industry in the US. Units: dollar",
+          "VA: Value added (i.e., its contribution to a GDP) of an industry in the US. Units: dollar",
+          "PPI: Policy perception index of a country. Units: 1",
+          "FWI: Freedom House's Freedom in the World index of a country. Units: 1",
+          "g: GDP growth rate of a country. Units: 1",
+          "MC: Military cooperation, refers to whether the country has a current collective defense arrangement with the US. Units: N/A"
+        ]
+      },
+      "uses": {
+        "directUse": "The model can be used to analyze the supply risk of mineral commodities for the U.S. manufacturing sector, helping policymakers and industry stakeholders identify commodities with high supply risk and develop strategies to mitigate these risks.",
+        "outOfScopeUse": "The model is not suitable for assessing supply risks for non-mineral commodities or for regions outside the U.S. manufacturing sector."
+      },
+      "biasRisksLimitations": {
+        "biases": "The model may be biased by the availability and accuracy of data for different commodities and countries. It relies on historical data, which may not fully capture future market dynamics.",
+        "risks": "The model's reliance on historical data and assumptions about future market conditions may lead to inaccurate predictions of supply risk.",
+        "limitations": "The model does not account for all possible factors affecting supply risk, such as technological advancements or changes in consumer demand."
+      },
+      "testing": {
+        "validation": "The model was validated through comparison with historical data and expert assessments of supply risk for different commodities.",
+        "metrics": "The model uses normalized scores for disruption potential, trade exposure, and economic vulnerability to evaluate supply risk."
+      },
+      "gettingStarted": {
+        "steps": [
+          "Review the model's structure and assumptions.",
+          "Gather data on disruption potential, trade exposure, and economic vulnerability for the commodities of interest.",
+          "Calculate the supply risk for each commodity using the model's equations.",
+          "Analyze the results to identify commodities with high supply risk.",
+          "Develop strategies to mitigate supply risk for these commodities."
+        ],
+        "examples": [
+          "Example 1: Calculating the supply risk for cobalt in 2016.",
+          "Example 2: Analyzing the impact of a supply disruption on the U.S. manufacturing sector."
+        ]
+      },
+      "glossary": [
+        "Disruption Potential (DP): A measure of the likelihood of a supply disruption for a commodity.",
+        "Trade Exposure (TE): A measure of the U.S. manufacturing sector's reliance on foreign supplies of a commodity.",
+        "Economic Vulnerability (EV): A measure of the U.S. manufacturing sector's ability to withstand a supply disruption."
+      ],
+      "authors": [
+        "Nedal T. Nassar",
+        "Jamie Brainard",
+        "Andrew Gulley",
+        "Ross Manley",
+        "Grecia Matos",
+        "Graham Lederer",
+        "Laurence R. Bird",
+        "David Pineault",
+        "Elisa Alonso",
+        "Joseph Gambogi",
+        "Steven M. Fortier"
+      ],
+      "citations": [
+        "Nassar et al., Sci. Adv. 2020; 6 : eaay8647",
+        "Tisserant, A., & Pauliuk, S. (2016). Matching global cobalt demand under different scenarios for co-production and mining attractiveness. J. Econ. Struct. 5, 4.",
+        "Nassar, N. T., Wilburn, D. R., & Goonan, T. G. (2016). Byproduct metal requirements for U.S. wind and solar photovoltaic electricity generation up to the year 2040 under various Clean Power Plan scenarios. Appl. Energy 183, 1209–1226."
+      ],
+      "moreInformation": {
+        "fundedBy": "U.S. Geological Survey",
+        "links": [
+          "https://doi.org/10.5281/zenodo.3595382"
+        ]
+      }
+    },
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

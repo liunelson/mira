@@ -29,6 +29,7 @@ def generate_odesys(model, latex: bool = False, latex_align: bool = False) -> li
     # ODE terms from template rate laws
     for template in model.templates:
         if hasattr(template, "subject"):
+            var = template.subject.name
             if template.rate_law is not None:
                 odeterms[var].append(-template.rate_law.args[0])
             else:
@@ -40,6 +41,7 @@ def generate_odesys(model, latex: bool = False, latex_align: bool = False) -> li
                 odeterms[var].append(template.rate_law.args[0])
             else:
                 odeterms[var].append(0)
+
     # Sort the terms such that all negative ones come first
     # odeterms = {var: sorted(terms, key = lambda term: 0 if str(term)[0] == '-' else 1) for var, terms in odeterms.items()}
     odeterms = {var: sorted(terms, key = lambda term: str(term)) for var, terms in odeterms.items()}
@@ -251,7 +253,8 @@ params_to_stratify = ['beta', 'gamma']
 model_ = copy.deepcopy(model)
 if add_param_factor:
 
-    new_params = {param: 'f_' + param for param in params_to_stratify}
+    # Not f_ to avoid Terarium grouping issue
+    new_params = {param: 'f' + param for param in params_to_stratify}
 
     for param, factor in new_params.items():
 
@@ -295,6 +298,12 @@ model_strat = stratify(
     modify_names = True,
     param_renaming_uses_strata_names = True
 )
+
+# %%
+# Remove unused`f<param>` parameters (should be automatic?)
+for __, factor in new_params.items():
+    if factor in model_strat.parameters.keys():
+        __ = model_strat.parameters.pop(factor)
 
 # %%
 generate_summary_table(model_strat)

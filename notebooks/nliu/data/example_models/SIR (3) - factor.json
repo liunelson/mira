@@ -1,0 +1,216 @@
+{
+    "header": {
+        "name": "Test SIR Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Test SIR model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "Susceptible",
+                "description": "Number of individuals that are 'susceptible' to a disease infection",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I",
+                "name": "Infected",
+                "description": "Number of individuals that are 'infected' by a disease",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R",
+                "name": "Recovered",
+                "description": "Number of individuals that have 'recovered' from a disease infection",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "inf",
+                "input": [
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "I",
+                    "I"
+                ],
+                "properties": {
+                    "name": "inf"
+                }
+            },
+            {
+                "id": "rec",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "rec"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "inf",
+                    "expression": "I*S*beta*f_beta",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>S</ci><ci>beta</ci><ci>f_beta</ci></apply>"
+                },
+                {
+                    "target": "rec",
+                    "expression": "I*f_gamma*gamma",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>f_gamma</ci><ci>gamma</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S",
+                    "expression": "S0",
+                    "expression_mathml": "<ci>S0</ci>"
+                },
+                {
+                    "target": "I",
+                    "expression": "I0",
+                    "expression_mathml": "<ci>I0</ci>"
+                },
+                {
+                    "target": "R",
+                    "expression": "R0",
+                    "expression_mathml": "<ci>R0</ci>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "beta",
+                    "name": "\u03b2",
+                    "description": "infection rate",
+                    "value": 2.7e-07,
+                    "distribution": {
+                        "type": "Uniform1",
+                        "parameters": {
+                            "minimum": 2.6e-07,
+                            "maximum": 2.8e-07
+                        }
+                    },
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "f_beta",
+                    "name": "f_beta",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "f_gamma",
+                    "name": "f_gamma",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "gamma",
+                    "name": "\u03b3",
+                    "description": "recovery rate",
+                    "value": 0.14,
+                    "distribution": {
+                        "type": "Uniform1",
+                        "parameters": {
+                            "minimum": 0.1,
+                            "maximum": 0.18
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "S0",
+                    "name": "S\u2080",
+                    "description": "Total susceptible population at timestep 0",
+                    "value": 1000.0
+                },
+                {
+                    "id": "I0",
+                    "name": "I\u2080",
+                    "description": "Total infected population at timestep 0",
+                    "value": 1.0
+                },
+                {
+                    "id": "R0",
+                    "name": "R\u2080",
+                    "description": "Total recovered population at timestep 0",
+                    "value": 0.0
+                }
+            ],
+            "observables": [
+                {
+                    "id": "noninf",
+                    "name": "Non-infectious",
+                    "expression": "R + S",
+                    "expression_mathml": "<apply><plus/><ci>R</ci><ci>S</ci></apply>"
+                }
+            ],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

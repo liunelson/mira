@@ -1,0 +1,362 @@
+{
+    "header": {
+        "name": "Test SIR Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Test SIR model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S_y",
+                "name": "Susceptible",
+                "description": "Number of individuals that are 'susceptible' to a disease infection",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "age": "y"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_y",
+                "name": "Infected",
+                "description": "Number of individuals that are 'infected' by a disease",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "age": "y"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "I_o",
+                "name": "Infected",
+                "description": "Number of individuals that are 'infected' by a disease",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000511"
+                    },
+                    "modifiers": {
+                        "age": "o"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "S_o",
+                "name": "Susceptible",
+                "description": "Number of individuals that are 'susceptible' to a disease infection",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000514"
+                    },
+                    "modifiers": {
+                        "age": "o"
+                    }
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            },
+            {
+                "id": "R",
+                "name": "Recovered",
+                "description": "Number of individuals that have 'recovered' from a disease infection",
+                "grounding": {
+                    "identifiers": {
+                        "ido": "0000592"
+                    },
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "person",
+                    "expression_mathml": "<ci>person</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "inf_y_y",
+                "input": [
+                    "I_y",
+                    "S_y"
+                ],
+                "output": [
+                    "I_y",
+                    "I_y"
+                ],
+                "properties": {
+                    "name": "inf_y_y"
+                }
+            },
+            {
+                "id": "inf_y_o",
+                "input": [
+                    "I_o",
+                    "S_y"
+                ],
+                "output": [
+                    "I_o",
+                    "I_y"
+                ],
+                "properties": {
+                    "name": "inf_y_o"
+                }
+            },
+            {
+                "id": "inf_o_y",
+                "input": [
+                    "I_y",
+                    "S_o"
+                ],
+                "output": [
+                    "I_y",
+                    "I_o"
+                ],
+                "properties": {
+                    "name": "inf_o_y"
+                }
+            },
+            {
+                "id": "inf_o_o",
+                "input": [
+                    "I_o",
+                    "S_o"
+                ],
+                "output": [
+                    "I_o",
+                    "I_o"
+                ],
+                "properties": {
+                    "name": "inf_o_o"
+                }
+            },
+            {
+                "id": "rec_y",
+                "input": [
+                    "I_y"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "rec_y"
+                }
+            },
+            {
+                "id": "rec_o",
+                "input": [
+                    "I_o"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "rec_o"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "inf_y_y",
+                    "expression": "I_y*S_y*beta*f_beta_y_y",
+                    "expression_mathml": "<apply><times/><ci>I_y</ci><ci>S_y</ci><ci>beta</ci><ci>f_beta_y_y</ci></apply>"
+                },
+                {
+                    "target": "inf_y_o",
+                    "expression": "I_o*S_y*beta*f_beta_y_o",
+                    "expression_mathml": "<apply><times/><ci>I_o</ci><ci>S_y</ci><ci>beta</ci><ci>f_beta_y_o</ci></apply>"
+                },
+                {
+                    "target": "inf_o_y",
+                    "expression": "I_y*S_o*beta*f_beta_o_y",
+                    "expression_mathml": "<apply><times/><ci>I_y</ci><ci>S_o</ci><ci>beta</ci><ci>f_beta_o_y</ci></apply>"
+                },
+                {
+                    "target": "inf_o_o",
+                    "expression": "I_o*S_o*beta*f_beta_o_o",
+                    "expression_mathml": "<apply><times/><ci>I_o</ci><ci>S_o</ci><ci>beta</ci><ci>f_beta_o_o</ci></apply>"
+                },
+                {
+                    "target": "rec_y",
+                    "expression": "I_y*f_gamma_y*gamma",
+                    "expression_mathml": "<apply><times/><ci>I_y</ci><ci>f_gamma_y</ci><ci>gamma</ci></apply>"
+                },
+                {
+                    "target": "rec_o",
+                    "expression": "I_o*f_gamma_o*gamma",
+                    "expression_mathml": "<apply><times/><ci>I_o</ci><ci>f_gamma_o</ci><ci>gamma</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "S_y",
+                    "expression": "S0/2",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>2</cn></apply>"
+                },
+                {
+                    "target": "I_y",
+                    "expression": "I0/2",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>2</cn></apply>"
+                },
+                {
+                    "target": "I_o",
+                    "expression": "I0/2",
+                    "expression_mathml": "<apply><divide/><ci>I0</ci><cn>2</cn></apply>"
+                },
+                {
+                    "target": "S_o",
+                    "expression": "S0/2",
+                    "expression_mathml": "<apply><divide/><ci>S0</ci><cn>2</cn></apply>"
+                },
+                {
+                    "target": "R",
+                    "expression": "R0",
+                    "expression_mathml": "<ci>R0</ci>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "beta",
+                    "name": "\u03b2",
+                    "description": "infection rate",
+                    "value": 2.7e-07,
+                    "distribution": {
+                        "type": "Uniform1",
+                        "parameters": {
+                            "minimum": 2.6e-07,
+                            "maximum": 2.8e-07
+                        }
+                    },
+                    "units": {
+                        "expression": "1/(day*person)",
+                        "expression_mathml": "<apply><divide/><cn>1</cn><apply><times/><ci>day</ci><ci>person</ci></apply></apply>"
+                    }
+                },
+                {
+                    "id": "f_beta_y_y",
+                    "name": "f_beta",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "f_beta_y_o",
+                    "name": "f_beta",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "f_beta_o_y",
+                    "name": "f_beta",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "f_beta_o_o",
+                    "name": "f_beta",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "f_gamma_y",
+                    "name": "f_gamma",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "gamma",
+                    "name": "\u03b3",
+                    "description": "recovery rate",
+                    "value": 0.14,
+                    "distribution": {
+                        "type": "Uniform1",
+                        "parameters": {
+                            "minimum": 0.1,
+                            "maximum": 0.18
+                        }
+                    },
+                    "units": {
+                        "expression": "1/day",
+                        "expression_mathml": "<apply><power/><ci>day</ci><cn>-1</cn></apply>"
+                    }
+                },
+                {
+                    "id": "f_gamma_o",
+                    "name": "f_gamma",
+                    "description": "Stratification factor of the parameter {param}.",
+                    "value": 1.0
+                },
+                {
+                    "id": "S0",
+                    "name": "S\u2080",
+                    "description": "Total susceptible population at timestep 0",
+                    "value": 1000.0
+                },
+                {
+                    "id": "I0",
+                    "name": "I\u2080",
+                    "description": "Total infected population at timestep 0",
+                    "value": 1.0
+                },
+                {
+                    "id": "R0",
+                    "name": "R\u2080",
+                    "description": "Total recovered population at timestep 0",
+                    "value": 0.0
+                }
+            ],
+            "observables": [
+                {
+                    "id": "noninf",
+                    "name": "Non-infectious",
+                    "expression": "R + S_o + S_y",
+                    "expression_mathml": "<apply><plus/><ci>R</ci><ci>S_o</ci><ci>S_y</ci></apply>"
+                }
+            ],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "day",
+                    "expression_mathml": "<ci>day</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

@@ -31,6 +31,7 @@ def generate_odesys(model, latex: bool = False, latex_align: bool = False) -> li
     # ODE terms from template rate laws
     for template in model.templates:
         if hasattr(template, "subject"):
+            var = template.subject.name
             if template.rate_law is not None:
                 odeterms[var].append(-template.rate_law.args[0])
             else:

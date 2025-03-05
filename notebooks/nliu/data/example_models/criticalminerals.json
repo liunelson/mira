@@ -1,0 +1,271 @@
+{
+    "header": {
+        "name": "CriticalMineralsModel",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Based on Nassar et al. 2020.",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "R",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "GDP",
+                "name": "GDP(t)",
+                "description": "Gross domestric product of a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                },
+                "units": {
+                    "expression": "dollar",
+                    "expression_mathml": "<ci>dollar</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "PrimaryProduction",
+                "input": [
+                    "R"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction"
+                }
+            },
+            {
+                "id": "SecondaryProduction",
+                "input": [
+                    "OS"
+                ],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction"
+                }
+            },
+            {
+                "id": "StockAdjustments",
+                "input": [],
+                "output": [
+                    "S"
+                ],
+                "properties": {
+                    "name": "StockAdjustments"
+                }
+            },
+            {
+                "id": "GDPGrowth",
+                "input": [],
+                "output": [
+                    "GDP"
+                ],
+                "properties": {
+                    "name": "GDPGrowth"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "PrimaryProduction",
+                    "expression": "PP",
+                    "expression_mathml": "<ci>PP</ci>"
+                },
+                {
+                    "target": "SecondaryProduction",
+                    "expression": "SP",
+                    "expression_mathml": "<ci>SP</ci>"
+                },
+                {
+                    "target": "StockAdjustments",
+                    "expression": "DeltaS",
+                    "expression_mathml": "<ci>DeltaS</ci>"
+                },
+                {
+                    "target": "GDPGrowth",
+                    "expression": "GDP*g",
+                    "expression_mathml": "<apply><times/><ci>GDP</ci><ci>g</ci></apply>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "R",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "S",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "OS",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                },
+                {
+                    "target": "GDP",
+                    "expression": "0.0",
+                    "expression_mathml": "<cn>0.0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "PP",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "g",
+                    "name": "g",
+                    "description": "GDO growth rate of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PPI",
+                    "name": "PPI",
+                    "description": "Policy perception index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "FWI",
+                    "name": "FWI",
+                    "description": "Freedom House's Freedom in the World index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "MC",
+                    "name": "MC",
+                    "description": "Military cooperation, refers to whether the country has a current collective defense arrangement with the US."
+                },
+                {
+                    "id": "VA",
+                    "name": "VA",
+                    "description": "Value added (i.e. its contribution to a GDP) of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "OP",
+                    "name": "OP",
+                    "description": "Operating profit of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP",
+                    "name": "EXP",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                }
+            ],
+            "observables": [],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "year",
+                    "expression_mathml": "<ci>year</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "license": null,
+            "authors": [],
+            "references": [],
+            "time_scale": null,
+            "time_start": null,
+            "time_end": null,
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        }
+    }
+}

@@ -1,0 +1,2462 @@
+{
+    "header": {
+        "name": "CriticalMineralsModel",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Based on Nassar et al. 2020.",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "R_us_bauxite",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_us_bauxite",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_us_alumina",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_us_alumina",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_us_aluminum",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_us_aluminum",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_ua_bauxite",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_ua_bauxite",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_ua_alumina",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_ua_alumina",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_ua_aluminum",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_ua_aluminum",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_cn_bauxite",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_cn_bauxite",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_cn_alumina",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_cn_alumina",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "R_cn_aluminum",
+                "name": "R(t)",
+                "description": "Natural resource reserve of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "S_cn_aluminum",
+                "name": "S(t)",
+                "description": "Stock of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_us_bauxite",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_us_alumina",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_us_aluminum",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_ua_bauxite",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_ua_alumina",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_ua_aluminum",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_cn_bauxite",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "bauxite"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_cn_alumina",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "alumina"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "OS_cn_aluminum",
+                "name": "OS(t)",
+                "description": "Stock of old scrap of a commodity in a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn",
+                        "commodity": "aluminum"
+                    }
+                },
+                "units": {
+                    "expression": "1",
+                    "expression_mathml": "<cn>1</cn>"
+                }
+            },
+            {
+                "id": "GDP_us",
+                "name": "GDP(t)",
+                "description": "Gross domestric product of a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "us"
+                    }
+                },
+                "units": {
+                    "expression": "dollar",
+                    "expression_mathml": "<ci>dollar</ci>"
+                }
+            },
+            {
+                "id": "GDP_ua",
+                "name": "GDP(t)",
+                "description": "Gross domestric product of a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "ua"
+                    }
+                },
+                "units": {
+                    "expression": "dollar",
+                    "expression_mathml": "<ci>dollar</ci>"
+                }
+            },
+            {
+                "id": "GDP_cn",
+                "name": "GDP(t)",
+                "description": "Gross domestric product of a country.",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {
+                        "country": "cn"
+                    }
+                },
+                "units": {
+                    "expression": "dollar",
+                    "expression_mathml": "<ci>dollar</ci>"
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "PrimaryProduction_us_bauxite",
+                "input": [
+                    "R_us_bauxite"
+                ],
+                "output": [
+                    "S_us_bauxite"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_us_bauxite"
+                }
+            },
+            {
+                "id": "PrimaryProduction_us_alumina",
+                "input": [
+                    "R_us_alumina"
+                ],
+                "output": [
+                    "S_us_alumina"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_us_alumina"
+                }
+            },
+            {
+                "id": "PrimaryProduction_us_aluminum",
+                "input": [
+                    "R_us_aluminum"
+                ],
+                "output": [
+                    "S_us_aluminum"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_us_aluminum"
+                }
+            },
+            {
+                "id": "PrimaryProduction_ua_bauxite",
+                "input": [
+                    "R_ua_bauxite"
+                ],
+                "output": [
+                    "S_ua_bauxite"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_ua_bauxite"
+                }
+            },
+            {
+                "id": "PrimaryProduction_ua_alumina",
+                "input": [
+                    "R_ua_alumina"
+                ],
+                "output": [
+                    "S_ua_alumina"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_ua_alumina"
+                }
+            },
+            {
+                "id": "PrimaryProduction_ua_aluminum",
+                "input": [
+                    "R_ua_aluminum"
+                ],
+                "output": [
+                    "S_ua_aluminum"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_ua_aluminum"
+                }
+            },
+            {
+                "id": "PrimaryProduction_cn_bauxite",
+                "input": [
+                    "R_cn_bauxite"
+                ],
+                "output": [
+                    "S_cn_bauxite"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_cn_bauxite"
+                }
+            },
+            {
+                "id": "PrimaryProduction_cn_alumina",
+                "input": [
+                    "R_cn_alumina"
+                ],
+                "output": [
+                    "S_cn_alumina"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_cn_alumina"
+                }
+            },
+            {
+                "id": "PrimaryProduction_cn_aluminum",
+                "input": [
+                    "R_cn_aluminum"
+                ],
+                "output": [
+                    "S_cn_aluminum"
+                ],
+                "properties": {
+                    "name": "PrimaryProduction_cn_aluminum"
+                }
+            },
+            {
+                "id": "SecondaryProduction_us_bauxite",
+                "input": [
+                    "OS_us_bauxite"
+                ],
+                "output": [
+                    "S_us_bauxite"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_us_bauxite"
+                }
+            },
+            {
+                "id": "SecondaryProduction_us_alumina",
+                "input": [
+                    "OS_us_alumina"
+                ],
+                "output": [
+                    "S_us_alumina"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_us_alumina"
+                }
+            },
+            {
+                "id": "SecondaryProduction_us_aluminum",
+                "input": [
+                    "OS_us_aluminum"
+                ],
+                "output": [
+                    "S_us_aluminum"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_us_aluminum"
+                }
+            },
+            {
+                "id": "SecondaryProduction_ua_bauxite",
+                "input": [
+                    "OS_ua_bauxite"
+                ],
+                "output": [
+                    "S_ua_bauxite"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_ua_bauxite"
+                }
+            },
+            {
+                "id": "SecondaryProduction_ua_alumina",
+                "input": [
+                    "OS_ua_alumina"
+                ],
+                "output": [
+                    "S_ua_alumina"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_ua_alumina"
+                }
+            },
+            {
+                "id": "SecondaryProduction_ua_aluminum",
+                "input": [
+                    "OS_ua_aluminum"
+                ],
+                "output": [
+                    "S_ua_aluminum"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_ua_aluminum"
+                }
+            },
+            {
+                "id": "SecondaryProduction_cn_bauxite",
+                "input": [
+                    "OS_cn_bauxite"
+                ],
+                "output": [
+                    "S_cn_bauxite"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_cn_bauxite"
+                }
+            },
+            {
+                "id": "SecondaryProduction_cn_alumina",
+                "input": [
+                    "OS_cn_alumina"
+                ],
+                "output": [
+                    "S_cn_alumina"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_cn_alumina"
+                }
+            },
+            {
+                "id": "SecondaryProduction_cn_aluminum",
+                "input": [
+                    "OS_cn_aluminum"
+                ],
+                "output": [
+                    "S_cn_aluminum"
+                ],
+                "properties": {
+                    "name": "SecondaryProduction_cn_aluminum"
+                }
+            },
+            {
+                "id": "StockAdjustments_us_bauxite",
+                "input": [],
+                "output": [
+                    "S_us_bauxite"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_us_bauxite"
+                }
+            },
+            {
+                "id": "StockAdjustments_us_alumina",
+                "input": [],
+                "output": [
+                    "S_us_alumina"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_us_alumina"
+                }
+            },
+            {
+                "id": "StockAdjustments_us_aluminum",
+                "input": [],
+                "output": [
+                    "S_us_aluminum"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_us_aluminum"
+                }
+            },
+            {
+                "id": "StockAdjustments_ua_bauxite",
+                "input": [],
+                "output": [
+                    "S_ua_bauxite"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_ua_bauxite"
+                }
+            },
+            {
+                "id": "StockAdjustments_ua_alumina",
+                "input": [],
+                "output": [
+                    "S_ua_alumina"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_ua_alumina"
+                }
+            },
+            {
+                "id": "StockAdjustments_ua_aluminum",
+                "input": [],
+                "output": [
+                    "S_ua_aluminum"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_ua_aluminum"
+                }
+            },
+            {
+                "id": "StockAdjustments_cn_bauxite",
+                "input": [],
+                "output": [
+                    "S_cn_bauxite"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_cn_bauxite"
+                }
+            },
+            {
+                "id": "StockAdjustments_cn_alumina",
+                "input": [],
+                "output": [
+                    "S_cn_alumina"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_cn_alumina"
+                }
+            },
+            {
+                "id": "StockAdjustments_cn_aluminum",
+                "input": [],
+                "output": [
+                    "S_cn_aluminum"
+                ],
+                "properties": {
+                    "name": "StockAdjustments_cn_aluminum"
+                }
+            },
+            {
+                "id": "GDPGrowth_us",
+                "input": [],
+                "output": [
+                    "GDP_us"
+                ],
+                "properties": {
+                    "name": "GDPGrowth_us"
+                }
+            },
+            {
+                "id": "GDPGrowth_ua",
+                "input": [],
+                "output": [
+                    "GDP_ua"
+                ],
+                "properties": {
+                    "name": "GDPGrowth_ua"
+                }
+            },
+            {
+                "id": "GDPGrowth_cn",
+                "input": [],
+                "output": [
+                    "GDP_cn"
+                ],
+                "properties": {
+                    "name": "GDPGrowth_cn"
+                }
+            },
+            {
+                "id": "Trade_us_ua_bauxite",
+                "input": [
+                    "S_us_bauxite"
+                ],
+                "output": [
+                    "S_ua_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_us_ua_bauxite"
+                }
+            },
+            {
+                "id": "Trade_us_ua_alumina",
+                "input": [
+                    "S_us_alumina"
+                ],
+                "output": [
+                    "S_ua_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_us_ua_alumina"
+                }
+            },
+            {
+                "id": "Trade_us_ua_aluminum",
+                "input": [
+                    "S_us_aluminum"
+                ],
+                "output": [
+                    "S_ua_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_us_ua_aluminum"
+                }
+            },
+            {
+                "id": "Trade_us_cn_bauxite",
+                "input": [
+                    "S_us_bauxite"
+                ],
+                "output": [
+                    "S_cn_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_us_cn_bauxite"
+                }
+            },
+            {
+                "id": "Trade_us_cn_alumina",
+                "input": [
+                    "S_us_alumina"
+                ],
+                "output": [
+                    "S_cn_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_us_cn_alumina"
+                }
+            },
+            {
+                "id": "Trade_us_cn_aluminum",
+                "input": [
+                    "S_us_aluminum"
+                ],
+                "output": [
+                    "S_cn_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_us_cn_aluminum"
+                }
+            },
+            {
+                "id": "Trade_ua_us_bauxite",
+                "input": [
+                    "S_ua_bauxite"
+                ],
+                "output": [
+                    "S_us_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_ua_us_bauxite"
+                }
+            },
+            {
+                "id": "Trade_ua_us_alumina",
+                "input": [
+                    "S_ua_alumina"
+                ],
+                "output": [
+                    "S_us_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_ua_us_alumina"
+                }
+            },
+            {
+                "id": "Trade_ua_us_aluminum",
+                "input": [
+                    "S_ua_aluminum"
+                ],
+                "output": [
+                    "S_us_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_ua_us_aluminum"
+                }
+            },
+            {
+                "id": "Trade_ua_cn_bauxite",
+                "input": [
+                    "S_ua_bauxite"
+                ],
+                "output": [
+                    "S_cn_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_ua_cn_bauxite"
+                }
+            },
+            {
+                "id": "Trade_ua_cn_alumina",
+                "input": [
+                    "S_ua_alumina"
+                ],
+                "output": [
+                    "S_cn_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_ua_cn_alumina"
+                }
+            },
+            {
+                "id": "Trade_ua_cn_aluminum",
+                "input": [
+                    "S_ua_aluminum"
+                ],
+                "output": [
+                    "S_cn_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_ua_cn_aluminum"
+                }
+            },
+            {
+                "id": "Trade_cn_us_bauxite",
+                "input": [
+                    "S_cn_bauxite"
+                ],
+                "output": [
+                    "S_us_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_cn_us_bauxite"
+                }
+            },
+            {
+                "id": "Trade_cn_us_alumina",
+                "input": [
+                    "S_cn_alumina"
+                ],
+                "output": [
+                    "S_us_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_cn_us_alumina"
+                }
+            },
+            {
+                "id": "Trade_cn_us_aluminum",
+                "input": [
+                    "S_cn_aluminum"
+                ],
+                "output": [
+                    "S_us_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_cn_us_aluminum"
+                }
+            },
+            {
+                "id": "Trade_cn_ua_bauxite",
+                "input": [
+                    "S_cn_bauxite"
+                ],
+                "output": [
+                    "S_ua_bauxite"
+                ],
+                "properties": {
+                    "name": "Trade_cn_ua_bauxite"
+                }
+            },
+            {
+                "id": "Trade_cn_ua_alumina",
+                "input": [
+                    "S_cn_alumina"
+                ],
+                "output": [
+                    "S_ua_alumina"
+                ],
+                "properties": {
+                    "name": "Trade_cn_ua_alumina"
+                }
+            },
+            {
+                "id": "Trade_cn_ua_aluminum",
+                "input": [
+                    "S_cn_aluminum"
+                ],
+                "output": [
+                    "S_ua_aluminum"
+                ],
+                "properties": {
+                    "name": "Trade_cn_ua_aluminum"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "PrimaryProduction_us_bauxite",
+                    "expression": "PP_us_bauxite",
+                    "expression_mathml": "<ci>PP_us_bauxite</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_us_alumina",
+                    "expression": "PP_us_alumina",
+                    "expression_mathml": "<ci>PP_us_alumina</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_us_aluminum",
+                    "expression": "PP_us_aluminum",
+                    "expression_mathml": "<ci>PP_us_aluminum</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_ua_bauxite",
+                    "expression": "PP_ua_bauxite",
+                    "expression_mathml": "<ci>PP_ua_bauxite</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_ua_alumina",
+                    "expression": "PP_ua_alumina",
+                    "expression_mathml": "<ci>PP_ua_alumina</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_ua_aluminum",
+                    "expression": "PP_ua_aluminum",
+                    "expression_mathml": "<ci>PP_ua_aluminum</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_cn_bauxite",
+                    "expression": "PP_cn_bauxite",
+                    "expression_mathml": "<ci>PP_cn_bauxite</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_cn_alumina",
+                    "expression": "PP_cn_alumina",
+                    "expression_mathml": "<ci>PP_cn_alumina</ci>"
+                },
+                {
+                    "target": "PrimaryProduction_cn_aluminum",
+                    "expression": "PP_cn_aluminum",
+                    "expression_mathml": "<ci>PP_cn_aluminum</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_us_bauxite",
+                    "expression": "SP_us_bauxite",
+                    "expression_mathml": "<ci>SP_us_bauxite</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_us_alumina",
+                    "expression": "SP_us_alumina",
+                    "expression_mathml": "<ci>SP_us_alumina</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_us_aluminum",
+                    "expression": "SP_us_aluminum",
+                    "expression_mathml": "<ci>SP_us_aluminum</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_ua_bauxite",
+                    "expression": "SP_ua_bauxite",
+                    "expression_mathml": "<ci>SP_ua_bauxite</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_ua_alumina",
+                    "expression": "SP_ua_alumina",
+                    "expression_mathml": "<ci>SP_ua_alumina</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_ua_aluminum",
+                    "expression": "SP_ua_aluminum",
+                    "expression_mathml": "<ci>SP_ua_aluminum</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_cn_bauxite",
+                    "expression": "SP_cn_bauxite",
+                    "expression_mathml": "<ci>SP_cn_bauxite</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_cn_alumina",
+                    "expression": "SP_cn_alumina",
+                    "expression_mathml": "<ci>SP_cn_alumina</ci>"
+                },
+                {
+                    "target": "SecondaryProduction_cn_aluminum",
+                    "expression": "SP_cn_aluminum",
+                    "expression_mathml": "<ci>SP_cn_aluminum</ci>"
+                },
+                {
+                    "target": "StockAdjustments_us_bauxite",
+                    "expression": "DeltaS_us_bauxite",
+                    "expression_mathml": "<ci>DeltaS_us_bauxite</ci>"
+                },
+                {
+                    "target": "StockAdjustments_us_alumina",
+                    "expression": "DeltaS_us_alumina",
+                    "expression_mathml": "<ci>DeltaS_us_alumina</ci>"
+                },
+                {
+                    "target": "StockAdjustments_us_aluminum",
+                    "expression": "DeltaS_us_aluminum",
+                    "expression_mathml": "<ci>DeltaS_us_aluminum</ci>"
+                },
+                {
+                    "target": "StockAdjustments_ua_bauxite",
+                    "expression": "DeltaS_ua_bauxite",
+                    "expression_mathml": "<ci>DeltaS_ua_bauxite</ci>"
+                },
+                {
+                    "target": "StockAdjustments_ua_alumina",
+                    "expression": "DeltaS_ua_alumina",
+                    "expression_mathml": "<ci>DeltaS_ua_alumina</ci>"
+                },
+                {
+                    "target": "StockAdjustments_ua_aluminum",
+                    "expression": "DeltaS_ua_aluminum",
+                    "expression_mathml": "<ci>DeltaS_ua_aluminum</ci>"
+                },
+                {
+                    "target": "StockAdjustments_cn_bauxite",
+                    "expression": "DeltaS_cn_bauxite",
+                    "expression_mathml": "<ci>DeltaS_cn_bauxite</ci>"
+                },
+                {
+                    "target": "StockAdjustments_cn_alumina",
+                    "expression": "DeltaS_cn_alumina",
+                    "expression_mathml": "<ci>DeltaS_cn_alumina</ci>"
+                },
+                {
+                    "target": "StockAdjustments_cn_aluminum",
+                    "expression": "DeltaS_cn_aluminum",
+                    "expression_mathml": "<ci>DeltaS_cn_aluminum</ci>"
+                },
+                {
+                    "target": "GDPGrowth_us",
+                    "expression": "GDP_us*g_us",
+                    "expression_mathml": "<apply><times/><ci>GDP_us</ci><ci>g_us</ci></apply>"
+                },
+                {
+                    "target": "GDPGrowth_ua",
+                    "expression": "GDP_ua*g_ua",
+                    "expression_mathml": "<apply><times/><ci>GDP_ua</ci><ci>g_ua</ci></apply>"
+                },
+                {
+                    "target": "GDPGrowth_cn",
+                    "expression": "GDP_cn*g_cn",
+                    "expression_mathml": "<apply><times/><ci>GDP_cn</ci><ci>g_cn</ci></apply>"
+                },
+                {
+                    "target": "Trade_us_ua_bauxite",
+                    "expression": "IE_us_ua_bauxite",
+                    "expression_mathml": "<ci>IE_us_ua_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_us_ua_alumina",
+                    "expression": "IE_us_ua_alumina",
+                    "expression_mathml": "<ci>IE_us_ua_alumina</ci>"
+                },
+                {
+                    "target": "Trade_us_ua_aluminum",
+                    "expression": "IE_us_ua_aluminum",
+                    "expression_mathml": "<ci>IE_us_ua_aluminum</ci>"
+                },
+                {
+                    "target": "Trade_us_cn_bauxite",
+                    "expression": "IE_us_cn_bauxite",
+                    "expression_mathml": "<ci>IE_us_cn_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_us_cn_alumina",
+                    "expression": "IE_us_cn_alumina",
+                    "expression_mathml": "<ci>IE_us_cn_alumina</ci>"
+                },
+                {
+                    "target": "Trade_us_cn_aluminum",
+                    "expression": "IE_us_cn_aluminum",
+                    "expression_mathml": "<ci>IE_us_cn_aluminum</ci>"
+                },
+                {
+                    "target": "Trade_ua_us_bauxite",
+                    "expression": "IE_ua_us_bauxite",
+                    "expression_mathml": "<ci>IE_ua_us_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_ua_us_alumina",
+                    "expression": "IE_ua_us_alumina",
+                    "expression_mathml": "<ci>IE_ua_us_alumina</ci>"
+                },
+                {
+                    "target": "Trade_ua_us_aluminum",
+                    "expression": "IE_ua_us_aluminum",
+                    "expression_mathml": "<ci>IE_ua_us_aluminum</ci>"
+                },
+                {
+                    "target": "Trade_ua_cn_bauxite",
+                    "expression": "IE_ua_cn_bauxite",
+                    "expression_mathml": "<ci>IE_ua_cn_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_ua_cn_alumina",
+                    "expression": "IE_ua_cn_alumina",
+                    "expression_mathml": "<ci>IE_ua_cn_alumina</ci>"
+                },
+                {
+                    "target": "Trade_ua_cn_aluminum",
+                    "expression": "IE_ua_cn_aluminum",
+                    "expression_mathml": "<ci>IE_ua_cn_aluminum</ci>"
+                },
+                {
+                    "target": "Trade_cn_us_bauxite",
+                    "expression": "IE_cn_us_bauxite",
+                    "expression_mathml": "<ci>IE_cn_us_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_cn_us_alumina",
+                    "expression": "IE_cn_us_alumina",
+                    "expression_mathml": "<ci>IE_cn_us_alumina</ci>"
+                },
+                {
+                    "target": "Trade_cn_us_aluminum",
+                    "expression": "IE_cn_us_aluminum",
+                    "expression_mathml": "<ci>IE_cn_us_aluminum</ci>"
+                },
+                {
+                    "target": "Trade_cn_ua_bauxite",
+                    "expression": "IE_cn_ua_bauxite",
+                    "expression_mathml": "<ci>IE_cn_ua_bauxite</ci>"
+                },
+                {
+                    "target": "Trade_cn_ua_alumina",
+                    "expression": "IE_cn_ua_alumina",
+                    "expression_mathml": "<ci>IE_cn_ua_alumina</ci>"
+                },
+                {
+                    "target": "Trade_cn_ua_aluminum",
+                    "expression": "IE_cn_ua_aluminum",
+                    "expression_mathml": "<ci>IE_cn_ua_aluminum</ci>"
+                }
+            ],
+            "initials": [
+                {
+                    "target": "R_us_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_us_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_us_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_us_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_us_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_us_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_ua_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_ua_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_ua_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_ua_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_ua_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_ua_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_cn_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_cn_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_cn_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_cn_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "R_cn_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "S_cn_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_us_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_us_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_us_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_ua_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_ua_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_ua_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_cn_bauxite",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_cn_alumina",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "OS_cn_aluminum",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "GDP_us",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "GDP_ua",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                },
+                {
+                    "target": "GDP_cn",
+                    "expression": "0",
+                    "expression_mathml": "<cn>0</cn>"
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "IE_ua_us_alumina",
+                    "name": "IE_ua_us",
+                    "description": "Trade from ua to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_ua_us_aluminum",
+                    "name": "IE_ua_us",
+                    "description": "Trade from ua to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_ua_us_bauxite",
+                    "name": "IE_ua_us",
+                    "description": "Trade from ua to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_ua_alumina",
+                    "name": "IE_us_ua",
+                    "description": "Trade from us to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_ua_aluminum",
+                    "name": "IE_us_ua",
+                    "description": "Trade from us to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_ua_bauxite",
+                    "name": "IE_us_ua",
+                    "description": "Trade from us to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_us_alumina",
+                    "name": "IE_cn_us",
+                    "description": "Trade from cn to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_us_aluminum",
+                    "name": "IE_cn_us",
+                    "description": "Trade from cn to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_us_bauxite",
+                    "name": "IE_cn_us",
+                    "description": "Trade from cn to us",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_cn_alumina",
+                    "name": "IE_us_cn",
+                    "description": "Trade from us to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_cn_aluminum",
+                    "name": "IE_us_cn",
+                    "description": "Trade from us to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_us_cn_bauxite",
+                    "name": "IE_us_cn",
+                    "description": "Trade from us to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_ua_alumina",
+                    "name": "IE_cn_ua",
+                    "description": "Trade from cn to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_ua_aluminum",
+                    "name": "IE_cn_ua",
+                    "description": "Trade from cn to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_cn_ua_bauxite",
+                    "name": "IE_cn_ua",
+                    "description": "Trade from cn to ua",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_ua_cn_alumina",
+                    "name": "IE_ua_cn",
+                    "description": "Trade from ua to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_ua_cn_aluminum",
+                    "name": "IE_ua_cn",
+                    "description": "Trade from ua to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "IE_ua_cn_bauxite",
+                    "name": "IE_ua_cn",
+                    "description": "Trade from ua to cn",
+                    "value": 0.0,
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "FWI_ua",
+                    "name": "FWI_cn(t)",
+                    "description": "Freedom House's Freedom in the World index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "FWI_us",
+                    "name": "FWI_cn(t)",
+                    "description": "Freedom House's Freedom in the World index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "FWI_cn",
+                    "name": "FWI_cn(t)",
+                    "description": "Freedom House's Freedom in the World index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PPI_us",
+                    "name": "PPI_cn(t)",
+                    "description": "Policy perception index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PPI_ua",
+                    "name": "PPI_cn(t)",
+                    "description": "Policy perception index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PPI_cn",
+                    "name": "PPI_cn(t)",
+                    "description": "Policy perception index of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_cn_aluminum",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_ua_aluminum",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_us_aluminum",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_cn_aluminum",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_ua_aluminum",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_us_aluminum",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_us_bauxite",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_us_bauxite",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_us_alumina",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_us_alumina",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_ua_bauxite",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_ua_bauxite",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_ua_alumina",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_ua_alumina",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_cn_bauxite",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_cn_bauxite",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "PP_cn_alumina",
+                    "name": "PP",
+                    "description": "Primary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "SP_cn_alumina",
+                    "name": "SP",
+                    "description": "Secondary production of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "EXP_cars_bauxite",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_containers_bauxite",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_foil_bauxite",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "OP_cars",
+                    "name": "OP_cars(t)",
+                    "description": "Operating profit of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "OP_containers",
+                    "name": "OP_cars(t)",
+                    "description": "Operating profit of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "OP_foil",
+                    "name": "OP_cars(t)",
+                    "description": "Operating profit of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "VA_cars",
+                    "name": "VA_cars(t)",
+                    "description": "Value added (i.e. its contribution to a GDP) of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "VA_containers",
+                    "name": "VA_cars(t)",
+                    "description": "Value added (i.e. its contribution to a GDP) of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "VA_foil",
+                    "name": "VA_cars(t)",
+                    "description": "Value added (i.e. its contribution to a GDP) of an industry in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_cars_alumina",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_containers_alumina",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_foil_alumina",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_cars_aluminum",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_containers_aluminum",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "EXP_foil_aluminum",
+                    "name": "EXP_cars_aluminum(t)",
+                    "description": "Expenditure of an industry on a commodity in the US.",
+                    "units": {
+                        "expression": "dollar",
+                        "expression_mathml": "<ci>dollar</ci>"
+                    }
+                },
+                {
+                    "id": "DeltaS_us_bauxite",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_us_alumina",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_us_aluminum",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_ua_bauxite",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_ua_alumina",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_ua_aluminum",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_cn_bauxite",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_cn_alumina",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "DeltaS_cn_aluminum",
+                    "name": "DeltaS",
+                    "description": "Adjustments of industry and government stocks of a commodity in a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "g_us",
+                    "name": "g",
+                    "description": "GDO growth rate of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "g_ua",
+                    "name": "g",
+                    "description": "GDO growth rate of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "g_cn",
+                    "name": "g",
+                    "description": "GDO growth rate of a country.",
+                    "units": {
+                        "expression": "1",
+                        "expression_mathml": "<cn>1</cn>"
+                    }
+                },
+                {
+                    "id": "MC_us",
+                    "name": "MC_cn(t)",
+                    "description": "Military cooperation, refers to whether the country has a current collective defense arrangement with the US."
+                },
+                {
+                    "id": "MC_ua",
+                    "name": "MC_cn(t)",
+                    "description": "Military cooperation, refers to whether the country has a current collective defense arrangement with the US."
+                },
+                {
+                    "id": "MC_cn",
+                    "name": "MC_cn(t)",
+                    "description": "Military cooperation, refers to whether the country has a current collective defense arrangement with the US."
+                }
+            ],
+            "observables": [
+                {
+                    "id": "TT_us_ua",
+                    "name": "TT_us_ua(t)",
+                    "expression": "(IE_ua_us_alumina + IE_ua_us_aluminum + IE_ua_us_bauxite + IE_us_ua_alumina + IE_us_ua_aluminum + IE_us_ua_bauxite)/GDP_us",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_ua_us_alumina</ci><ci>IE_ua_us_aluminum</ci><ci>IE_ua_us_bauxite</ci><ci>IE_us_ua_alumina</ci><ci>IE_us_ua_aluminum</ci><ci>IE_us_ua_bauxite</ci></apply><ci>GDP_us</ci></apply>"
+                },
+                {
+                    "id": "TT_us_cn",
+                    "name": "TT_us_cn(t)",
+                    "expression": "(IE_cn_us_alumina + IE_cn_us_aluminum + IE_cn_us_bauxite + IE_us_cn_alumina + IE_us_cn_aluminum + IE_us_cn_bauxite)/GDP_us",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_cn_us_alumina</ci><ci>IE_cn_us_aluminum</ci><ci>IE_cn_us_bauxite</ci><ci>IE_us_cn_alumina</ci><ci>IE_us_cn_aluminum</ci><ci>IE_us_cn_bauxite</ci></apply><ci>GDP_us</ci></apply>"
+                },
+                {
+                    "id": "TT_ua_us",
+                    "name": "TT_ua_us(t)",
+                    "expression": "(IE_ua_us_alumina + IE_ua_us_aluminum + IE_ua_us_bauxite + IE_us_ua_alumina + IE_us_ua_aluminum + IE_us_ua_bauxite)/GDP_ua",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_ua_us_alumina</ci><ci>IE_ua_us_aluminum</ci><ci>IE_ua_us_bauxite</ci><ci>IE_us_ua_alumina</ci><ci>IE_us_ua_aluminum</ci><ci>IE_us_ua_bauxite</ci></apply><ci>GDP_ua</ci></apply>"
+                },
+                {
+                    "id": "TT_ua_cn",
+                    "name": "TT_ua_cn(t)",
+                    "expression": "(IE_cn_ua_alumina + IE_cn_ua_aluminum + IE_cn_ua_bauxite + IE_ua_cn_alumina + IE_ua_cn_aluminum + IE_ua_cn_bauxite)/GDP_ua",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_cn_ua_alumina</ci><ci>IE_cn_ua_aluminum</ci><ci>IE_cn_ua_bauxite</ci><ci>IE_ua_cn_alumina</ci><ci>IE_ua_cn_aluminum</ci><ci>IE_ua_cn_bauxite</ci></apply><ci>GDP_ua</ci></apply>"
+                },
+                {
+                    "id": "TT_cn_us",
+                    "name": "TT_cn_us(t)",
+                    "expression": "(IE_cn_us_alumina + IE_cn_us_aluminum + IE_cn_us_bauxite + IE_us_cn_alumina + IE_us_cn_aluminum + IE_us_cn_bauxite)/GDP_cn",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_cn_us_alumina</ci><ci>IE_cn_us_aluminum</ci><ci>IE_cn_us_bauxite</ci><ci>IE_us_cn_alumina</ci><ci>IE_us_cn_aluminum</ci><ci>IE_us_cn_bauxite</ci></apply><ci>GDP_cn</ci></apply>"
+                },
+                {
+                    "id": "TT_cn_ua",
+                    "name": "TT_cn_ua(t)",
+                    "expression": "(IE_cn_ua_alumina + IE_cn_ua_aluminum + IE_cn_ua_bauxite + IE_ua_cn_alumina + IE_ua_cn_aluminum + IE_ua_cn_bauxite)/GDP_cn",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>IE_cn_ua_alumina</ci><ci>IE_cn_ua_aluminum</ci><ci>IE_cn_ua_bauxite</ci><ci>IE_ua_cn_alumina</ci><ci>IE_ua_cn_aluminum</ci><ci>IE_ua_cn_bauxite</ci></apply><ci>GDP_cn</ci></apply>"
+                },
+                {
+                    "id": "SV_us_ua",
+                    "name": "SV_us_ua(t)",
+                    "expression": "sqrt((-FWI_ua + FWI_us)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><plus/><apply><minus/><ci>FWI_ua</ci></apply><ci>FWI_us</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "SV_us_cn",
+                    "name": "SV_us_cn(t)",
+                    "expression": "sqrt((-FWI_cn + FWI_us)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><plus/><apply><minus/><ci>FWI_cn</ci></apply><ci>FWI_us</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "SV_ua_us",
+                    "name": "SV_ua_us(t)",
+                    "expression": "sqrt((FWI_ua - FWI_us)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><minus/><ci>FWI_ua</ci><ci>FWI_us</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "SV_ua_cn",
+                    "name": "SV_ua_cn(t)",
+                    "expression": "sqrt((-FWI_cn + FWI_ua)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><plus/><apply><minus/><ci>FWI_cn</ci></apply><ci>FWI_ua</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "SV_cn_us",
+                    "name": "SV_cn_us(t)",
+                    "expression": "sqrt((FWI_cn - FWI_us)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><minus/><ci>FWI_cn</ci><ci>FWI_us</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "SV_cn_ua",
+                    "name": "SV_cn_ua(t)",
+                    "expression": "sqrt((FWI_cn - FWI_ua)**2)",
+                    "expression_mathml": "<apply><root/><apply><power/><apply><minus/><ci>FWI_cn</ci><ci>FWI_ua</ci></apply><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_us_ua",
+                    "name": "WSI_us_ua(t)",
+                    "expression": "SV_us_ua/2 + TT_us_ua/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_us_ua</ci><cn>2</cn></apply><apply><divide/><ci>TT_us_ua</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_us_cn",
+                    "name": "WSI_us_cn(t)",
+                    "expression": "SV_us_cn/2 + TT_us_cn/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_us_cn</ci><cn>2</cn></apply><apply><divide/><ci>TT_us_cn</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_ua_us",
+                    "name": "WSI_ua_us(t)",
+                    "expression": "SV_ua_us/2 + TT_ua_us/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_ua_us</ci><cn>2</cn></apply><apply><divide/><ci>TT_ua_us</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_ua_cn",
+                    "name": "WSI_ua_cn(t)",
+                    "expression": "SV_ua_cn/2 + TT_ua_cn/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_ua_cn</ci><cn>2</cn></apply><apply><divide/><ci>TT_ua_cn</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_cn_us",
+                    "name": "WSI_cn_us(t)",
+                    "expression": "SV_cn_us/2 + TT_cn_us/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_cn_us</ci><cn>2</cn></apply><apply><divide/><ci>TT_cn_us</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "WSI_cn_ua",
+                    "name": "WSI_cn_ua(t)",
+                    "expression": "SV_cn_ua/2 + TT_cn_ua/2",
+                    "expression_mathml": "<apply><plus/><apply><divide/><ci>SV_cn_ua</ci><cn>2</cn></apply><apply><divide/><ci>TT_cn_ua</ci><cn>2</cn></apply></apply>"
+                },
+                {
+                    "id": "ASI_us",
+                    "name": "ASI_us",
+                    "expression": "1 - PPI_us/100",
+                    "expression_mathml": "<apply><minus/><cn>1</cn><apply><divide/><ci>PPI_us</ci><cn>100</cn></apply></apply>"
+                },
+                {
+                    "id": "ASI_ua",
+                    "name": "ASI_ua",
+                    "expression": "1 - PPI_ua/100",
+                    "expression_mathml": "<apply><minus/><cn>1</cn><apply><divide/><ci>PPI_ua</ci><cn>100</cn></apply></apply>"
+                },
+                {
+                    "id": "ASI_cn",
+                    "name": "ASI_cn",
+                    "expression": "1 - PPI_cn/100",
+                    "expression_mathml": "<apply><minus/><cn>1</cn><apply><divide/><ci>PPI_cn</ci><cn>100</cn></apply></apply>"
+                },
+                {
+                    "id": "PS_us_aluminum",
+                    "name": "PS_us_aluminum",
+                    "expression": "(PP_us_aluminum + SP_us_aluminum)/(PP_cn_aluminum + PP_ua_aluminum + PP_us_aluminum + SP_cn_aluminum + SP_ua_aluminum + SP_us_aluminum)",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>PP_us_aluminum</ci><ci>SP_us_aluminum</ci></apply><apply><plus/><ci>PP_cn_aluminum</ci><ci>PP_ua_aluminum</ci><ci>PP_us_aluminum</ci><ci>SP_cn_aluminum</ci><ci>SP_ua_aluminum</ci><ci>SP_us_aluminum</ci></apply></apply>"
+                },
+                {
+                    "id": "PS_ua_aluminum",
+                    "name": "PS_ua_aluminum",
+                    "expression": "(PP_ua_aluminum + SP_ua_aluminum)/(PP_cn_aluminum + PP_ua_aluminum + PP_us_aluminum + SP_cn_aluminum + SP_ua_aluminum + SP_us_aluminum)",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>PP_ua_aluminum</ci><ci>SP_ua_aluminum</ci></apply><apply><plus/><ci>PP_cn_aluminum</ci><ci>PP_ua_aluminum</ci><ci>PP_us_aluminum</ci><ci>SP_cn_aluminum</ci><ci>SP_ua_aluminum</ci><ci>SP_us_aluminum</ci></apply></apply>"
+                },
+                {
+                    "id": "PS_cn_aluminum",
+                    "name": "PS_cn_aluminum",
+                    "expression": "(PP_cn_aluminum + SP_cn_aluminum)/(PP_cn_aluminum + PP_ua_aluminum + PP_us_aluminum + SP_cn_aluminum + SP_ua_aluminum + SP_us_aluminum)",
+                    "expression_mathml": "<apply><divide/><apply><plus/><ci>PP_cn_aluminum</ci><ci>SP_cn_aluminum</ci></apply><apply><plus/><ci>PP_cn_aluminum</ci><ci>PP_ua_aluminum</ci><ci>PP_us_aluminum</ci><ci>SP_cn_aluminum</ci><ci>SP_ua_aluminum</ci><ci>SP_us_aluminum</ci></apply></apply>"
+                },
+                {
+                    "id": "DP_bauxite",
+                    "name": "DP_bauxite",
+                    "expression": "ASI_cn*PS_cn_bauxite**2*WSI_us_cn + ASI_cn*PS_ua_bauxite**2*WSI_us_ua + ASI_cn*PS_us_bauxite**2*WSI_us_us",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_cn_bauxite</ci><cn>2</cn></apply><ci>WSI_us_cn</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_ua_bauxite</ci><cn>2</cn></apply><ci>WSI_us_ua</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_us_bauxite</ci><cn>2</cn></apply><ci>WSI_us_us</ci></apply></apply>"
+                },
+                {
+                    "id": "DP_alumina",
+                    "name": "DP_alumina",
+                    "expression": "ASI_cn*PS_cn_alumina**2*WSI_us_cn + ASI_cn*PS_ua_alumina**2*WSI_us_ua + ASI_cn*PS_us_alumina**2*WSI_us_us",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_cn_alumina</ci><cn>2</cn></apply><ci>WSI_us_cn</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_ua_alumina</ci><cn>2</cn></apply><ci>WSI_us_ua</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_us_alumina</ci><cn>2</cn></apply><ci>WSI_us_us</ci></apply></apply>"
+                },
+                {
+                    "id": "DP_aluminum",
+                    "name": "DP_aluminum",
+                    "expression": "ASI_cn*PS_cn_aluminum**2*WSI_us_cn + ASI_cn*PS_ua_aluminum**2*WSI_us_ua + ASI_cn*PS_us_aluminum**2*WSI_us_us",
+                    "expression_mathml": "<apply><plus/><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_cn_aluminum</ci><cn>2</cn></apply><ci>WSI_us_cn</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_ua_aluminum</ci><cn>2</cn></apply><ci>WSI_us_ua</ci></apply><apply><times/><ci>ASI_cn</ci><apply><power/><ci>PS_us_aluminum</ci><cn>2</cn></apply><ci>WSI_us_us</ci></apply></apply>"
+                },
+                {
+                    "id": "TE_us_bauxite",
+                    "name": "TE_us_bauxite",
+                    "expression": "1/((PP_us_bauxite + SP_us_bauxite)/(DeltaS_us_bauxiteIE_us_ua_bauxite - IE_cn_us_bauxite - IE_ua_us_bauxite + IE_us_cn_bauxite) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_us_bauxite</ci><ci>SP_us_bauxite</ci></apply><apply><plus/><apply><minus/><apply><minus/><ci>DeltaS_us_bauxiteIE_us_ua_bauxite</ci><ci>IE_cn_us_bauxite</ci></apply><ci>IE_ua_us_bauxite</ci></apply><ci>IE_us_cn_bauxite</ci></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_us_alumina",
+                    "name": "TE_us_alumina",
+                    "expression": "1/((PP_us_alumina + SP_us_alumina)/(DeltaS_us_aluminaIE_us_ua_alumina - IE_cn_us_alumina - IE_ua_us_alumina + IE_us_cn_alumina) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_us_alumina</ci><ci>SP_us_alumina</ci></apply><apply><plus/><apply><minus/><apply><minus/><ci>DeltaS_us_aluminaIE_us_ua_alumina</ci><ci>IE_cn_us_alumina</ci></apply><ci>IE_ua_us_alumina</ci></apply><ci>IE_us_cn_alumina</ci></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_us_aluminum",
+                    "name": "TE_us_aluminum",
+                    "expression": "1/((PP_us_aluminum + SP_us_aluminum)/(DeltaS_us_aluminumIE_us_ua_aluminum - IE_cn_us_aluminum - IE_ua_us_aluminum + IE_us_cn_aluminum) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_us_aluminum</ci><ci>SP_us_aluminum</ci></apply><apply><plus/><apply><minus/><apply><minus/><ci>DeltaS_us_aluminumIE_us_ua_aluminum</ci><ci>IE_cn_us_aluminum</ci></apply><ci>IE_ua_us_aluminum</ci></apply><ci>IE_us_cn_aluminum</ci></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_ua_bauxite",
+                    "name": "TE_ua_bauxite",
+                    "expression": "1/((PP_ua_bauxite + SP_ua_bauxite)/(DeltaS_ua_bauxiteIE_ua_us_bauxite - IE_cn_ua_bauxite + IE_ua_cn_bauxite - IE_us_ua_bauxite) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_ua_bauxite</ci><ci>SP_ua_bauxite</ci></apply><apply><plus/><apply><minus/><ci>DeltaS_ua_bauxiteIE_ua_us_bauxite</ci><ci>IE_cn_ua_bauxite</ci></apply><apply><minus/><ci>IE_ua_cn_bauxite</ci><ci>IE_us_ua_bauxite</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_ua_alumina",
+                    "name": "TE_ua_alumina",
+                    "expression": "1/((PP_ua_alumina + SP_ua_alumina)/(DeltaS_ua_aluminaIE_ua_us_alumina - IE_cn_ua_alumina + IE_ua_cn_alumina - IE_us_ua_alumina) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_ua_alumina</ci><ci>SP_ua_alumina</ci></apply><apply><plus/><apply><minus/><ci>DeltaS_ua_aluminaIE_ua_us_alumina</ci><ci>IE_cn_ua_alumina</ci></apply><apply><minus/><ci>IE_ua_cn_alumina</ci><ci>IE_us_ua_alumina</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_ua_aluminum",
+                    "name": "TE_ua_aluminum",
+                    "expression": "1/((PP_ua_aluminum + SP_ua_aluminum)/(DeltaS_ua_aluminumIE_ua_us_aluminum - IE_cn_ua_aluminum + IE_ua_cn_aluminum - IE_us_ua_aluminum) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_ua_aluminum</ci><ci>SP_ua_aluminum</ci></apply><apply><plus/><apply><minus/><ci>DeltaS_ua_aluminumIE_ua_us_aluminum</ci><ci>IE_cn_ua_aluminum</ci></apply><apply><minus/><ci>IE_ua_cn_aluminum</ci><ci>IE_us_ua_aluminum</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_cn_bauxite",
+                    "name": "TE_cn_bauxite",
+                    "expression": "1/((PP_cn_bauxite + SP_cn_bauxite)/(DeltaS_cn_bauxiteIE_cn_us_bauxite + IE_cn_ua_bauxite - IE_ua_cn_bauxite - IE_us_cn_bauxite) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_cn_bauxite</ci><ci>SP_cn_bauxite</ci></apply><apply><plus/><ci>DeltaS_cn_bauxiteIE_cn_us_bauxite</ci><apply><minus/><apply><minus/><ci>IE_cn_ua_bauxite</ci><ci>IE_ua_cn_bauxite</ci></apply><ci>IE_us_cn_bauxite</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_cn_alumina",
+                    "name": "TE_cn_alumina",
+                    "expression": "1/((PP_cn_alumina + SP_cn_alumina)/(DeltaS_cn_aluminaIE_cn_us_alumina + IE_cn_ua_alumina - IE_ua_cn_alumina - IE_us_cn_alumina) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_cn_alumina</ci><ci>SP_cn_alumina</ci></apply><apply><plus/><ci>DeltaS_cn_aluminaIE_cn_us_alumina</ci><apply><minus/><apply><minus/><ci>IE_cn_ua_alumina</ci><ci>IE_ua_cn_alumina</ci></apply><ci>IE_us_cn_alumina</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "TE_cn_aluminum",
+                    "name": "TE_cn_aluminum",
+                    "expression": "1/((PP_cn_aluminum + SP_cn_aluminum)/(DeltaS_cn_aluminumIE_cn_us_aluminum + IE_cn_ua_aluminum - IE_ua_cn_aluminum - IE_us_cn_aluminum) + 1)",
+                    "expression_mathml": "<apply><power/><apply><plus/><apply><divide/><apply><plus/><ci>PP_cn_aluminum</ci><ci>SP_cn_aluminum</ci></apply><apply><plus/><ci>DeltaS_cn_aluminumIE_cn_us_aluminum</ci><apply><minus/><apply><minus/><ci>IE_cn_ua_aluminum</ci><ci>IE_ua_cn_aluminum</ci></apply><ci>IE_us_cn_aluminum</ci></apply></apply></apply><cn>1</cn></apply><cn>-1</cn></apply>"
+                },
+                {
+                    "id": "EV_us_bauxite",
+                    "name": "EV_us_bauxite",
+                    "expression": "(EXP_cars_bauxite*VA_cars/OP_cars + EXP_containers_bauxite*VA_containers/OP_containers + EXP_foil_bauxite*VA_foil/OP_foil)/GDP_us",
+                    "expression_mathml": "<apply><divide/><apply><plus/><apply><divide/><apply><times/><ci>EXP_cars_bauxite</ci><ci>VA_cars</ci></apply><ci>OP_cars</ci></apply><apply><divide/><apply><times/><ci>EXP_containers_bauxite</ci><ci>VA_containers</ci></apply><ci>OP_containers</ci></apply><apply><divide/><apply><times/><ci>EXP_foil_bauxite</ci><ci>VA_foil</ci></apply><ci>OP_foil</ci></apply></apply><ci>GDP_us</ci></apply>"
+                },
+                {
+                    "id": "EV_us_alumina",
+                    "name": "EV_us_alumina",
+                    "expression": "(EXP_cars_alumina*VA_cars/OP_cars + EXP_containers_alumina*VA_containers/OP_containers + EXP_foil_alumina*VA_foil/OP_foil)/GDP_us",
+                    "expression_mathml": "<apply><divide/><apply><plus/><apply><divide/><apply><times/><ci>EXP_cars_alumina</ci><ci>VA_cars</ci></apply><ci>OP_cars</ci></apply><apply><divide/><apply><times/><ci>EXP_containers_alumina</ci><ci>VA_containers</ci></apply><ci>OP_containers</ci></apply><apply><divide/><apply><times/><ci>EXP_foil_alumina</ci><ci>VA_foil</ci></apply><ci>OP_foil</ci></apply></apply><ci>GDP_us</ci></apply>"
+                },
+                {
+                    "id": "EV_us_aluminum",
+                    "name": "EV_us_aluminum",
+                    "expression": "(EXP_cars_aluminum*VA_cars/OP_cars + EXP_containers_aluminum*VA_containers/OP_containers + EXP_foil_aluminum*VA_foil/OP_foil)/GDP_us",
+                    "expression_mathml": "<apply><divide/><apply><plus/><apply><divide/><apply><times/><ci>EXP_cars_aluminum</ci><ci>VA_cars</ci></apply><ci>OP_cars</ci></apply><apply><divide/><apply><times/><ci>EXP_containers_aluminum</ci><ci>VA_containers</ci></apply><ci>OP_containers</ci></apply><apply><divide/><apply><times/><ci>EXP_foil_aluminum</ci><ci>VA_foil</ci></apply><ci>OP_foil</ci></apply></apply><ci>GDP_us</ci></apply>"
+                },
+                {
+                    "id": "SR_us_bauxite",
+                    "name": "SR_us_bauxite",
+                    "expression": "(DP_bauxite*EV_us_bauxite*TE_us_bauxite)**(1/3)",
+                    "expression_mathml": "<apply><root/><degree><cn>3</cn></degree><apply><times/><ci>DP_bauxite</ci><ci>EV_us_bauxite</ci><ci>TE_us_bauxite</ci></apply></apply>"
+                },
+                {
+                    "id": "SR_us_alumina",
+                    "name": "SR_us_alumina",
+                    "expression": "(DP_alumina*EV_us_alumina*TE_us_alumina)**(1/3)",
+                    "expression_mathml": "<apply><root/><degree><cn>3</cn></degree><apply><times/><ci>DP_alumina</ci><ci>EV_us_alumina</ci><ci>TE_us_alumina</ci></apply></apply>"
+                },
+                {
+                    "id": "SR_us_aluminum",
+                    "name": "SR_us_aluminum",
+                    "expression": "(DP_aluminum*EV_us_aluminum*TE_us_aluminum)**(1/3)",
+                    "expression_mathml": "<apply><root/><degree><cn>3</cn></degree><apply><times/><ci>DP_aluminum</ci><ci>EV_us_aluminum</ci><ci>TE_us_aluminum</ci></apply></apply>"
+                }
+            ],
+            "time": {
+                "id": "t",
+                "units": {
+                    "expression": "year",
+                    "expression_mathml": "<ci>year</ci>"
+                }
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {
+            "authors": [],
+            "references": [],
+            "locations": [],
+            "pathogens": [],
+            "diseases": [],
+            "hosts": [],
+            "model_types": []
+        },
+        "source": null,
+        "description": "PGgyPlN1bW1hcnk8L2gyPgo8cD5UaGUgbW9kZWwgZGVzY3JpYmVkIGluIHRoZSBkb2N1bWVudCBpcyBhIG1hdGhlbWF0aWNhbCBtb2RlbCB1c2VkIHRvIGV2YWx1YXRlIHRoZSBtaW5lcmFsIGNvbW1vZGl0eSBzdXBwbHkgcmlzayAoU1IpIGZvciB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3Rvci4gSXQgaXMgYmFzZWQgb24gYSBjb252ZW50aW9uYWwgcmlzay1tb2RlbGluZyBmcmFtZXdvcmsgdGhhdCBjb25zaWRlcnMgdGhyZWUgbWFpbiBmYWN0b3JzOiBkaXNydXB0aW9uIHBvdGVudGlhbCAoRFApLCB0cmFkZSBleHBvc3VyZSAoVEUpLCBhbmQgZWNvbm9taWMgdnVsbmVyYWJpbGl0eSAoRVYpLiBUaGUgbW9kZWwgYXNzZXNzZXMgdGhlIHN1cHBseSByaXNrIGZvciA1MiBub25mdWVsIG1pbmVyYWwgY29tbW9kaXRpZXMgb3ZlciB0aGUgZGVjYWRlIGZyb20gMjAwNyB0byAyMDE2LiBUaGUgbW9kZWwgY2FuIGxpa2VseSBiZSByZXByZXNlbnRlZCBpbiBQZXRyaSBOZXQgZm9ybWF0LCBhcyBpdCBpbnZvbHZlcyBzdGF0ZXMsIHRyYW5zaXRpb25zLCBhbmQgcGFyYW1ldGVycyB0aGF0IGNhbiBiZSBtYXBwZWQgdG8gcGxhY2VzLCB0cmFuc2l0aW9ucywgYW5kIGFyY3MgaW4gYSBQZXRyaSBOZXQuPC9wPjxicj4KPGgyPlNwZWNzPC9oMj4KPGg0PkRvbWFpbjwvaDQ+Cjx1bD4KPGxpPkVjb25vbWljczwvbGk+CjxsaT5TdXBwbHkgQ2hhaW4gTWFuYWdlbWVudDwvbGk+CjxsaT5SaXNrIEFzc2Vzc21lbnQ8L2xpPgo8L3VsPjxicj4KPGg0PlR5cGU8L2g0Pgo8cD5NYXRoZW1hdGljYWwgTW9kZWw8L3A+PGJyPgo8aDQ+U3BlY2lmaWNhdGlvbjwvaDQ+CjxwPlRoZSBtb2RlbCBpcyBzdHJ1Y3R1cmVkIHRvIGNhbGN1bGF0ZSB0aGUgc3VwcGx5IHJpc2sgKFNSKSBhcyB0aGUgZ2VvbWV0cmljIG1lYW4gb2YgdGhyZWUgaW5kaWNhdG9yczogZGlzcnVwdGlvbiBwb3RlbnRpYWwgKERQKSwgdHJhZGUgZXhwb3N1cmUgKFRFKSwgYW5kIGVjb25vbWljIHZ1bG5lcmFiaWxpdHkgKEVWKS4gRWFjaCBpbmRpY2F0b3IgaXMgbm9ybWFsaXplZCBvbiBhIDAgdG8gMSBzY2FsZS4gVGhlIG1vZGVsIGludm9sdmVzIG11bHRpcGxlIHN0YXRlcyByZXByZXNlbnRpbmcgZGlmZmVyZW50IGNvbW1vZGl0aWVzIGFuZCB0aGVpciBwcm9kdWN0aW9uIHN0YWdlcywgdHJhbnNpdGlvbnMgcmVwcmVzZW50aW5nIGNoYW5nZXMgaW4gc3VwcGx5IHJpc2sgZmFjdG9ycywgYW5kIHBhcmFtZXRlcnMgZGVmaW5pbmcgdGhlIHJhdGVzIGFuZCByZWxhdGlvbnNoaXBzIGJldHdlZW4gdGhlc2UgZmFjdG9ycy48L3A+PGJyPgo8aDQ+U3RhdGVzPC9oND4KPHVsPgo8bGk+UjogTmF0dXJhbCByZXNvdXJjZSByZXNlcnZlIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+UzogU3RvY2sgb2YgYSBjb21tb2RpdHkgaW4gYSBjb3VudHJ5LiBVbml0czogMTwvbGk+CjxsaT5PUzogU3RvY2sgb2Ygb2xkIHNjcmFwIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+R0RQOiBHcm9zcyBkb21lc3RpYyBwcm9kdWN0IG9mIGEgY291bnRyeS4gVW5pdHM6IGRvbGxhcjwvbGk+CjwvdWw+PGJyPgo8aDQ+UGFyYW1ldGVyczwvaDQ+Cjx1bD4KPGxpPkRlbHRhUzogQWRqdXN0bWVudHMgb2YgaW5kdXN0cnkgYW5kIGdvdmVybm1lbnQgc3RvY2tzIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+RTogRXhwb3J0IG9mIGEgY29tbW9kaXR5IGZyb20gYSBjb3VudHJ5IHRvIGFub3RoZXIuIFVuaXRzOiAxPC9saT4KPGxpPkk6IEltcG9ydCBvZiBhIGNvbW1vZGl0eSBmcm9tIGEgY291bnRyeSB0byBhbm90aGVyLiBVbml0czogMTwvbGk+CjxsaT5QUDogUHJpbWFyeSBwcm9kdWN0aW9uIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+U1A6IFNlY29uZGFyeSBwcm9kdWN0aW9uIG9mIGEgY29tbW9kaXR5IGluIGEgY291bnRyeS4gVW5pdHM6IDE8L2xpPgo8bGk+RVhQOiBFeHBlbmRpdHVyZSBvZiBhbiBpbmR1c3RyeSBvbiBhIGNvbW1vZGl0eSBpbiB0aGUgVVMuIFVuaXRzOiBkb2xsYXI8L2xpPgo8bGk+T1A6IE9wZXJhdGluZyBwcm9maXQgb2YgYW4gaW5kdXN0cnkgaW4gdGhlIFVTLiBVbml0czogZG9sbGFyPC9saT4KPGxpPlZBOiBWYWx1ZSBhZGRlZCAoaS5lLiwgaXRzIGNvbnRyaWJ1dGlvbiB0byBhIEdEUCkgb2YgYW4gaW5kdXN0cnkgaW4gdGhlIFVTLiBVbml0czogZG9sbGFyPC9saT4KPGxpPlBQSTogUG9saWN5IHBlcmNlcHRpb24gaW5kZXggb2YgYSBjb3VudHJ5LiBVbml0czogMTwvbGk+CjxsaT5GV0k6IEZyZWVkb20gSG91c2UncyBGcmVlZG9tIGluIHRoZSBXb3JsZCBpbmRleCBvZiBhIGNvdW50cnkuIFVuaXRzOiAxPC9saT4KPGxpPmc6IEdEUCBncm93dGggcmF0ZSBvZiBhIGNvdW50cnkuIFVuaXRzOiAxPC9saT4KPGxpPk1DOiBNaWxpdGFyeSBjb29wZXJhdGlvbiwgcmVmZXJzIHRvIHdoZXRoZXIgdGhlIGNvdW50cnkgaGFzIGEgY3VycmVudCBjb2xsZWN0aXZlIGRlZmVuc2UgYXJyYW5nZW1lbnQgd2l0aCB0aGUgVVMuIFVuaXRzOiBOL0E8L2xpPgo8L3VsPjxicj4KPGgyPlVzZXM8L2gyPgo8aDQ+RGlyZWN0IFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBjYW4gYmUgdXNlZCB0byBhbmFseXplIHRoZSBzdXBwbHkgcmlzayBvZiBtaW5lcmFsIGNvbW1vZGl0aWVzIGZvciB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvciwgaGVscGluZyBwb2xpY3ltYWtlcnMgYW5kIGluZHVzdHJ5IHN0YWtlaG9sZGVycyBpZGVudGlmeSBjb21tb2RpdGllcyB3aXRoIGhpZ2ggc3VwcGx5IHJpc2sgYW5kIGRldmVsb3Agc3RyYXRlZ2llcyB0byBtaXRpZ2F0ZSB0aGVzZSByaXNrcy48L3A+PGJyPgo8aDQ+T3V0IE9mIFNjb3BlIFVzZTwvaDQ+CjxwPlRoZSBtb2RlbCBpcyBub3Qgc3VpdGFibGUgZm9yIGFzc2Vzc2luZyBzdXBwbHkgcmlza3MgZm9yIG5vbi1taW5lcmFsIGNvbW1vZGl0aWVzIG9yIGZvciByZWdpb25zIG91dHNpZGUgdGhlIFUuUy4gbWFudWZhY3R1cmluZyBzZWN0b3IuPC9wPjxicj4KPGgyPkJpYXMgUmlza3MgTGltaXRhdGlvbnM8L2gyPgo8aDQ+Qmlhc2VzPC9oND4KPHA+VGhlIG1vZGVsIG1heSBiZSBiaWFzZWQgYnkgdGhlIGF2YWlsYWJpbGl0eSBhbmQgYWNjdXJhY3kgb2YgZGF0YSBmb3IgZGlmZmVyZW50IGNvbW1vZGl0aWVzIGFuZCBjb3VudHJpZXMuIEl0IHJlbGllcyBvbiBoaXN0b3JpY2FsIGRhdGEsIHdoaWNoIG1heSBub3QgZnVsbHkgY2FwdHVyZSBmdXR1cmUgbWFya2V0IGR5bmFtaWNzLjwvcD48YnI+CjxoND5SaXNrczwvaDQ+CjxwPlRoZSBtb2RlbCdzIHJlbGlhbmNlIG9uIGhpc3RvcmljYWwgZGF0YSBhbmQgYXNzdW1wdGlvbnMgYWJvdXQgZnV0dXJlIG1hcmtldCBjb25kaXRpb25zIG1heSBsZWFkIHRvIGluYWNjdXJhdGUgcHJlZGljdGlvbnMgb2Ygc3VwcGx5IHJpc2suPC9wPjxicj4KPGg0PkxpbWl0YXRpb25zPC9oND4KPHA+VGhlIG1vZGVsIGRvZXMgbm90IGFjY291bnQgZm9yIGFsbCBwb3NzaWJsZSBmYWN0b3JzIGFmZmVjdGluZyBzdXBwbHkgcmlzaywgc3VjaCBhcyB0ZWNobm9sb2dpY2FsIGFkdmFuY2VtZW50cyBvciBjaGFuZ2VzIGluIGNvbnN1bWVyIGRlbWFuZC48L3A+PGJyPgo8aDI+VGVzdGluZzwvaDI+CjxoND5WYWxpZGF0aW9uPC9oND4KPHA+VGhlIG1vZGVsIHdhcyB2YWxpZGF0ZWQgdGhyb3VnaCBjb21wYXJpc29uIHdpdGggaGlzdG9yaWNhbCBkYXRhIGFuZCBleHBlcnQgYXNzZXNzbWVudHMgb2Ygc3VwcGx5IHJpc2sgZm9yIGRpZmZlcmVudCBjb21tb2RpdGllcy48L3A+PGJyPgo8aDQ+TWV0cmljczwvaDQ+CjxwPlRoZSBtb2RlbCB1c2VzIG5vcm1hbGl6ZWQgc2NvcmVzIGZvciBkaXNydXB0aW9uIHBvdGVudGlhbCwgdHJhZGUgZXhwb3N1cmUsIGFuZCBlY29ub21pYyB2dWxuZXJhYmlsaXR5IHRvIGV2YWx1YXRlIHN1cHBseSByaXNrLjwvcD48YnI+CjxoMj5HZXR0aW5nIFN0YXJ0ZWQ8L2gyPgo8aDQ+U3RlcHM8L2g0Pgo8dWw+CjxsaT5SZXZpZXcgdGhlIG1vZGVsJ3Mgc3RydWN0dXJlIGFuZCBhc3N1bXB0aW9ucy48L2xpPgo8bGk+R2F0aGVyIGRhdGEgb24gZGlzcnVwdGlvbiBwb3RlbnRpYWwsIHRyYWRlIGV4cG9zdXJlLCBhbmQgZWNvbm9taWMgdnVsbmVyYWJpbGl0eSBmb3IgdGhlIGNvbW1vZGl0aWVzIG9mIGludGVyZXN0LjwvbGk+CjxsaT5DYWxjdWxhdGUgdGhlIHN1cHBseSByaXNrIGZvciBlYWNoIGNvbW1vZGl0eSB1c2luZyB0aGUgbW9kZWwncyBlcXVhdGlvbnMuPC9saT4KPGxpPkFuYWx5emUgdGhlIHJlc3VsdHMgdG8gaWRlbnRpZnkgY29tbW9kaXRpZXMgd2l0aCBoaWdoIHN1cHBseSByaXNrLjwvbGk+CjxsaT5EZXZlbG9wIHN0cmF0ZWdpZXMgdG8gbWl0aWdhdGUgc3VwcGx5IHJpc2sgZm9yIHRoZXNlIGNvbW1vZGl0aWVzLjwvbGk+CjwvdWw+PGJyPgo8aDQ+RXhhbXBsZXM8L2g0Pgo8dWw+CjxsaT5FeGFtcGxlIDE6IENhbGN1bGF0aW5nIHRoZSBzdXBwbHkgcmlzayBmb3IgY29iYWx0IGluIDIwMTYuPC9saT4KPGxpPkV4YW1wbGUgMjogQW5hbHl6aW5nIHRoZSBpbXBhY3Qgb2YgYSBzdXBwbHkgZGlzcnVwdGlvbiBvbiB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3Rvci48L2xpPgo8L3VsPjxicj4KPGgyPkdsb3NzYXJ5PC9oMj4KPHVsPgo8bGk+RGlzcnVwdGlvbiBQb3RlbnRpYWwgKERQKTogQSBtZWFzdXJlIG9mIHRoZSBsaWtlbGlob29kIG9mIGEgc3VwcGx5IGRpc3J1cHRpb24gZm9yIGEgY29tbW9kaXR5LjwvbGk+CjxsaT5UcmFkZSBFeHBvc3VyZSAoVEUpOiBBIG1lYXN1cmUgb2YgdGhlIFUuUy4gbWFudWZhY3R1cmluZyBzZWN0b3IncyByZWxpYW5jZSBvbiBmb3JlaWduIHN1cHBsaWVzIG9mIGEgY29tbW9kaXR5LjwvbGk+CjxsaT5FY29ub21pYyBWdWxuZXJhYmlsaXR5IChFVik6IEEgbWVhc3VyZSBvZiB0aGUgVS5TLiBtYW51ZmFjdHVyaW5nIHNlY3RvcidzIGFiaWxpdHkgdG8gd2l0aHN0YW5kIGEgc3VwcGx5IGRpc3J1cHRpb24uPC9saT4KPC91bD48YnI+CjxoMj5BdXRob3JzPC9oMj4KPHVsPgo8bGk+TmVkYWwgVC4gTmFzc2FyPC9saT4KPGxpPkphbWllIEJyYWluYXJkPC9saT4KPGxpPkFuZHJldyBHdWxsZXk8L2xpPgo8bGk+Um9zcyBNYW5sZXk8L2xpPgo8bGk+R3JlY2lhIE1hdG9zPC9saT4KPGxpPkdyYWhhbSBMZWRlcmVyPC9saT4KPGxpPkxhdXJlbmNlIFIuIEJpcmQ8L2xpPgo8bGk+RGF2aWQgUGluZWF1bHQ8L2xpPgo8bGk+RWxpc2EgQWxvbnNvPC9saT4KPGxpPkpvc2VwaCBHYW1ib2dpPC9saT4KPGxpPlN0ZXZlbiBNLiBGb3J0aWVyPC9saT4KPC91bD48YnI+CjxoMj5DaXRhdGlvbnM8L2gyPgo8dWw+CjxsaT5OYXNzYXIgZXQgYWwuLCBTY2kuIEFkdi4gMjAyMDsgNiA6IGVhYXk4NjQ3PC9saT4KPGxpPlRpc3NlcmFudCwgQS4sICYgUGF1bGl1aywgUy4gKDIwMTYpLiBNYXRjaGluZyBnbG9iYWwgY29iYWx0IGRlbWFuZCB1bmRlciBkaWZmZXJlbnQgc2NlbmFyaW9zIGZvciBjby1wcm9kdWN0aW9uIGFuZCBtaW5pbmcgYXR0cmFjdGl2ZW5lc3MuIEouIEVjb24uIFN0cnVjdC4gNSwgNC48L2xpPgo8bGk+TmFzc2FyLCBOLiBULiwgV2lsYnVybiwgRC4gUi4sICYgR29vbmFuLCBULiBHLiAoMjAxNikuIEJ5cHJvZHVjdCBtZXRhbCByZXF1aXJlbWVudHMgZm9yIFUuUy4gd2luZCBhbmQgc29sYXIgcGhvdG92b2x0YWljIGVsZWN0cmljaXR5IGdlbmVyYXRpb24gdXAgdG8gdGhlIHllYXIgMjA0MCB1bmRlciB2YXJpb3VzIENsZWFuIFBvd2VyIFBsYW4gc2NlbmFyaW9zLiBBcHBsLiBFbmVyZ3kgMTgzLCAxMjA54oCTMTIyNi48L2xpPgo8L3VsPjxicj4KPGgyPk1vcmUgSW5mb3JtYXRpb248L2gyPgo8aDQ+RnVuZGVkIEJ5PC9oND4KPHA+VS5TLiBHZW9sb2dpY2FsIFN1cnZleTwvcD48YnI+CjxoND5MaW5rczwvaDQ+Cjx1bD4KPGxpPmh0dHBzOi8vZG9pLm9yZy8xMC41MjgxL3plbm9kby4zNTk1MzgyPC9saT4KPC91bD48YnI+Cg==",
+        "gollmCard": {
+            "summary": "The model described in the document is a mathematical model used to evaluate the mineral commodity supply risk (SR) for the U.S. manufacturing sector. It is based on a conventional risk-modeling framework that considers three main factors: disruption potential (DP), trade exposure (TE), and economic vulnerability (EV). The model assesses the supply risk for 52 nonfuel mineral commodities over the decade from 2007 to 2016. The model can likely be represented in Petri Net format, as it involves states, transitions, and parameters that can be mapped to places, transitions, and arcs in a Petri Net.",
+            "specs": {
+                "domain": [
+                    "Economics",
+                    "Supply Chain Management",
+                    "Risk Assessment"
+                ],
+                "type": "Mathematical Model",
+                "specification": "The model is structured to calculate the supply risk (SR) as the geometric mean of three indicators: disruption potential (DP), trade exposure (TE), and economic vulnerability (EV). Each indicator is normalized on a 0 to 1 scale. The model involves multiple states representing different commodities and their production stages, transitions representing changes in supply risk factors, and parameters defining the rates and relationships between these factors.",
+                "states": [
+                    "R: Natural resource reserve of a commodity in a country. Units: 1",
+                    "S: Stock of a commodity in a country. Units: 1",
+                    "OS: Stock of old scrap of a commodity in a country. Units: 1",
+                    "GDP: Gross domestic product of a country. Units: dollar"
+                ],
+                "parameters": [
+                    "DeltaS: Adjustments of industry and government stocks of a commodity in a country. Units: 1",
+                    "E: Export of a commodity from a country to another. Units: 1",
+                    "I: Import of a commodity from a country to another. Units: 1",
+                    "PP: Primary production of a commodity in a country. Units: 1",
+                    "SP: Secondary production of a commodity in a country. Units: 1",
+                    "EXP: Expenditure of an industry on a commodity in the US. Units: dollar",
+                    "OP: Operating profit of an industry in the US. Units: dollar",
+                    "VA: Value added (i.e., its contribution to a GDP) of an industry in the US. Units: dollar",
+                    "PPI: Policy perception index of a country. Units: 1",
+                    "FWI: Freedom House's Freedom in the World index of a country. Units: 1",
+                    "g: GDP growth rate of a country. Units: 1",
+                    "MC: Military cooperation, refers to whether the country has a current collective defense arrangement with the US. Units: N/A"
+                ]
+            },
+            "uses": {
+                "directUse": "The model can be used to analyze the supply risk of mineral commodities for the U.S. manufacturing sector, helping policymakers and industry stakeholders identify commodities with high supply risk and develop strategies to mitigate these risks.",
+                "outOfScopeUse": "The model is not suitable for assessing supply risks for non-mineral commodities or for regions outside the U.S. manufacturing sector."
+            },
+            "biasRisksLimitations": {
+                "biases": "The model may be biased by the availability and accuracy of data for different commodities and countries. It relies on historical data, which may not fully capture future market dynamics.",
+                "risks": "The model's reliance on historical data and assumptions about future market conditions may lead to inaccurate predictions of supply risk.",
+                "limitations": "The model does not account for all possible factors affecting supply risk, such as technological advancements or changes in consumer demand."
+            },
+            "testing": {
+                "validation": "The model was validated through comparison with historical data and expert assessments of supply risk for different commodities.",
+                "metrics": "The model uses normalized scores for disruption potential, trade exposure, and economic vulnerability to evaluate supply risk."
+            },
+            "gettingStarted": {
+                "steps": [
+                    "Review the model's structure and assumptions.",
+                    "Gather data on disruption potential, trade exposure, and economic vulnerability for the commodities of interest.",
+                    "Calculate the supply risk for each commodity using the model's equations.",
+                    "Analyze the results to identify commodities with high supply risk.",
+                    "Develop strategies to mitigate supply risk for these commodities."
+                ],
+                "examples": [
+                    "Example 1: Calculating the supply risk for cobalt in 2016.",
+                    "Example 2: Analyzing the impact of a supply disruption on the U.S. manufacturing sector."
+                ]
+            },
+            "glossary": [
+                "Disruption Potential (DP): A measure of the likelihood of a supply disruption for a commodity.",
+                "Trade Exposure (TE): A measure of the U.S. manufacturing sector's reliance on foreign supplies of a commodity.",
+                "Economic Vulnerability (EV): A measure of the U.S. manufacturing sector's ability to withstand a supply disruption."
+            ],
+            "authors": [
+                "Nedal T. Nassar",
+                "Jamie Brainard",
+                "Andrew Gulley",
+                "Ross Manley",
+                "Grecia Matos",
+                "Graham Lederer",
+                "Laurence R. Bird",
+                "David Pineault",
+                "Elisa Alonso",
+                "Joseph Gambogi",
+                "Steven M. Fortier"
+            ],
+            "citations": [
+                "Nassar et al., Sci. Adv. 2020; 6 : eaay8647",
+                "Tisserant, A., & Pauliuk, S. (2016). Matching global cobalt demand under different scenarios for co-production and mining attractiveness. J. Econ. Struct. 5, 4.",
+                "Nassar, N. T., Wilburn, D. R., & Goonan, T. G. (2016). Byproduct metal requirements for U.S. wind and solar photovoltaic electricity generation up to the year 2040 under various Clean Power Plan scenarios. Appl. Energy 183, 1209\u20131226."
+            ],
+            "moreInformation": {
+                "fundedBy": "U.S. Geological Survey",
+                "links": [
+                    "https://doi.org/10.5281/zenodo.3595382"
+                ]
+            }
+        },
+        "gollmExtractions": null,
+        "templateCard": null
+    }
+}
