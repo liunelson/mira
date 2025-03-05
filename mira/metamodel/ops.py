@@ -1,7 +1,7 @@
 """Operations for template models."""
 import logging
 from copy import deepcopy
-from collections import defaultdict, Counter
+from collections import defaultdict
 import itertools as itt
 from typing import Callable, Collection, Iterable, List, Mapping, Optional, \
     Tuple, Type, Union
@@ -10,13 +10,13 @@ import sympy
 
 from .template_model import TemplateModel, Initial, Parameter, Observable
 from .templates import *
-from .comparison import get_dkg_refinement_closure
 from .units import Unit
 from .utils import SympyExprStr
 
 __all__ = [
     "stratify",
     "simplify_rate_laws",
+    "check_simplify_rate_laws",
     "aggregate_parameters",
     "get_term_roles",
     "counts_to_dimensionless",
@@ -571,6 +571,67 @@ def simplify_rate_laws(template_model: TemplateModel):
     return template_model
 
 
+def check_simplify_rate_laws(template_model: TemplateModel) -> \
+        Mapping[str, Union[str, int, TemplateModel]]:
+    """Return a summary of what changes upon rate law simplification
+
+    Parameters
+    ----------
+    template_model :
+        A template model
+
+    Returns
+    -------
+    :
+        A dictionary with the result of the check under the `result` key.
+        The result can be one of the following:
+        - {'result': 'NO_GROUP_CONTROLLERS'}: If there are no templates with
+           grouped controllers
+        - {'result': 'NO_CHANGE'}: If the model does contain templates with
+           grouped controllers but simplification does not change the model.
+        - {'result': 'NO_CHANGE_IN_MAX_CONTROLLERS',
+           'max_controller_count': n}: If the model is simplified but the
+           maximum number of controllers remains the same so it might not be
+           worth doing the simplification. In this case the max controller
+           count in the model is returned. The simplified model
+           itself is also returned.
+        - {'result': 'MEANINGFUL_CHANGE',
+           'max_controller_decrease': n}: If the model is simplified and the
+           maximum number of controllers also meaningfully changes. In this
+           case the decrease in the maximum controller count is returned.
+           The simplified model itself is also returned.
+    """
+    if not any(isinstance(template, (GroupedControlledConversion,
+                                     GroupedControlledProduction,
+                                     GroupedControlledDegradation))
+               for template in template_model.templates):
+        return {'result': 'NO_GROUP_CONTROLLERS'}
+    simplified_model = simplify_rate_laws(template_model)
+    old_template_count = len(template_model.templates)
+    new_template_count = len(simplified_model.templates)
+    if old_template_count == new_template_count:
+        return {'result': 'NO_CHANGE'}
+
+    def max_controller_count(template_model):
+        max_count = 0
+        for template in template_model.templates:
+            if hasattr(template, 'controllers'):
+                max_count = max(len(template.get_controllers()), max_count)
+            elif hasattr(template, 'controller'):
+                max_count = max(1, max_count)
+        return max_count
+
+    old_max_count = max_controller_count(template_model)
+    new_max_count = max_controller_count(simplified_model)
+    if old_max_count == new_max_count:
+        return {'result': 'NO_CHANGE_IN_MAX_CONTROLLERS',
+                'max_controller_count': old_max_count,
+                'simplified_model': simplified_model}
+    return {'result': 'MEANINGFUL_CHANGE',
+            'max_controller_decrease': old_max_count - new_max_count,
+            'simplified_model': simplified_model}
+
+
 def aggregate_parameters(template_model: TemplateModel) -> TemplateModel:
     """Return a template model after aggregating parameters for mass-action
     rate laws.
@@ -630,6 +691,7 @@ def aggregate_parameters(template_model: TemplateModel) -> TemplateModel:
     return template_model
 
 
+
 def simplify_rate_law(template: Template,
                       parameters: Mapping[str, Parameter]) \
         -> Union[List[Template], None]:
@@ -649,7 +711,8 @@ def simplify_rate_law(template: Template,
         A list of templates, which may be empty if the template could not
     """
     if not isinstance(template, (GroupedControlledConversion,
-                                 GroupedControlledProduction)):
+                                 GroupedControlledProduction,
+                                 GroupedControlledDegradation)):
         return
     # Make a deepcopy up front so we don't change the original template
     template = deepcopy(template)
@@ -662,7 +725,7 @@ def simplify_rate_law(template: Template,
     for controller in deepcopy(template.controllers):
         # We use a trick here where we take the derivative of the rate law
         # with respect to the controller, and if it takes an expected form
-        # we conclue that the controller is controlling the process in a
+        # we conclude that the controller is controlling the process in a
         # mass-action way and can therefore be spun off.
         controller_rate = sympy.diff(rate_law,
                                      sympy.Symbol(controller.name))
@@ -685,6 +748,13 @@ def simplify_rate_law(template: Template,
                 controller=deepcopy(controller),
                 subject=deepcopy(template.subject),
                 outcome=deepcopy(template.outcome),
+                rate_law=new_rate_law
+            )
+        elif isinstance(template, GroupedControlledDegradation) and \
+                set(term_roles) == {'parameter', 'subject'}:
+            new_template = ControlledDegradation(
+                controller=deepcopy(controller),
+                subject=deepcopy(template.subject),
                 rate_law=new_rate_law
             )
         # In this case, the rate law derivative contains just the parameter
@@ -742,7 +812,8 @@ def get_term_roles(
     for symbol in term.free_symbols:
         if symbol.name in parameters:
             term_roles['parameter'].append(symbol.name)
-        elif isinstance(template, GroupedControlledConversion) and \
+        elif isinstance(template, (GroupedControlledConversion,
+                                   GroupedControlledDegradation)) and \
                 symbol.name == template.subject.name:
             term_roles['subject'].append(symbol.name)
         else:
