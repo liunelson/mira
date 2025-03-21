@@ -1,0 +1,146 @@
+{
+    "header": {
+        "name": "Model",
+        "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+        "schema_name": "petrinet",
+        "description": "Model",
+        "model_version": "0.1"
+    },
+    "properties": {},
+    "model": {
+        "states": [
+            {
+                "id": "S",
+                "name": "S",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "V",
+                "name": "V",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "R",
+                "name": "R",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            },
+            {
+                "id": "I",
+                "name": "I",
+                "grounding": {
+                    "identifiers": {},
+                    "modifiers": {}
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "t1",
+                "input": [
+                    "V",
+                    "R",
+                    "I",
+                    "S"
+                ],
+                "output": [
+                    "V",
+                    "R",
+                    "I",
+                    "I"
+                ],
+                "properties": {
+                    "name": "t1"
+                }
+            },
+            {
+                "id": "t2",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "V"
+                ],
+                "properties": {
+                    "name": "t2"
+                }
+            },
+            {
+                "id": "t3",
+                "input": [
+                    "I"
+                ],
+                "output": [
+                    "R"
+                ],
+                "properties": {
+                    "name": "t3"
+                }
+            }
+        ]
+    },
+    "semantics": {
+        "ode": {
+            "rates": [
+                {
+                    "target": "t1",
+                    "expression": "S*(I*a + R*b + R*c + V*d)",
+                    "expression_mathml": "<apply><times/><ci>S</ci><apply><plus/><apply><times/><ci>I</ci><ci>a</ci></apply><apply><times/><ci>R</ci><ci>b</ci></apply><apply><times/><ci>R</ci><ci>c</ci></apply><apply><times/><ci>V</ci><ci>d</ci></apply></apply></apply>"
+                },
+                {
+                    "target": "t2",
+                    "expression": "I*g*(1 - k)",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci><apply><minus/><cn>1</cn><ci>k</ci></apply></apply>"
+                },
+                {
+                    "target": "t3",
+                    "expression": "I*g*k",
+                    "expression_mathml": "<apply><times/><ci>I</ci><ci>g</ci><ci>k</ci></apply>"
+                }
+            ],
+            "initials": [],
+            "parameters": [
+                {
+                    "id": "a"
+                },
+                {
+                    "id": "b"
+                },
+                {
+                    "id": "c"
+                },
+                {
+                    "id": "d"
+                },
+                {
+                    "id": "g"
+                },
+                {
+                    "id": "k"
+                }
+            ],
+            "observables": [
+                {
+                    "id": "Dummy",
+                    "name": "Dummy",
+                    "expression": "I + R + S + V + sympy.sin(t)",
+                    "expression_mathml": "<apply><plus/><ci>I</ci><ci>R</ci><ci>S</ci><ci>V</ci><apply><sympyxx_xxsin/><ci>t</ci></apply></apply>"
+                }
+            ],
+            "time": {
+                "id": "t"
+            }
+        }
+    },
+    "metadata": {
+        "annotations": {}
+    }
+}

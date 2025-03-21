@@ -1,0 +1,732 @@
+{
+  "id": "58f8b86c-d28e-4824-b0d1-24457e080ffa",
+  "createdOn": "2025-03-17T22:12:00.134+00:00",
+  "updatedOn": "2025-03-17T22:12:00.360+00:00",
+  "name": "Model",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Model",
+    "description": "Model",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "S",
+        "name": "S(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I_1",
+        "name": "I_1(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I_12",
+        "name": "I_12(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I_3",
+        "name": "I_3(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "E_1",
+        "name": "E_1(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I_2",
+        "name": "I_2(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "E_3",
+        "name": "E_3(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I_21",
+        "name": "I_21(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "E_2",
+        "name": "E_2(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "R",
+        "name": "R(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "S_21",
+        "name": "S_21(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "S_12",
+        "name": "S_12(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "E_12",
+        "name": "E_12(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "E_21",
+        "name": "E_21(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t0:S->E_1",
+        "input": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "S"
+        ],
+        "output": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "E_1"
+        ],
+        "properties": {
+          "name": "t0:S->E_1"
+        }
+      },
+      {
+        "id": "t1:S->E_2",
+        "input": [
+          "I_2",
+          "I_3",
+          "E_3",
+          "I_21",
+          "S"
+        ],
+        "output": [
+          "I_2",
+          "I_3",
+          "E_3",
+          "I_21",
+          "E_2"
+        ],
+        "properties": {
+          "name": "t1:S->E_2"
+        }
+      },
+      {
+        "id": "t2:E_1->I_1",
+        "input": [
+          "E_1"
+        ],
+        "output": [
+          "I_1"
+        ],
+        "properties": {
+          "name": "t2:E_1->I_1"
+        }
+      },
+      {
+        "id": "t3:E_2->I_2",
+        "input": [
+          "E_2"
+        ],
+        "output": [
+          "I_2"
+        ],
+        "properties": {
+          "name": "t3:E_2->I_2"
+        }
+      },
+      {
+        "id": "t4:E_3->I_3",
+        "input": [
+          "E_3"
+        ],
+        "output": [
+          "I_3"
+        ],
+        "properties": {
+          "name": "t4:E_3->I_3"
+        }
+      },
+      {
+        "id": "t5:I_1->R",
+        "input": [
+          "I_1"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t5:I_1->R"
+        }
+      },
+      {
+        "id": "t6:I_1->S_21",
+        "input": [
+          "I_1"
+        ],
+        "output": [
+          "S_21"
+        ],
+        "properties": {
+          "name": "t6:I_1->S_21"
+        }
+      },
+      {
+        "id": "t7:I_2->R",
+        "input": [
+          "I_2"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t7:I_2->R"
+        }
+      },
+      {
+        "id": "t8:I_2->S_12",
+        "input": [
+          "I_2"
+        ],
+        "output": [
+          "S_12"
+        ],
+        "properties": {
+          "name": "t8:I_2->S_12"
+        }
+      },
+      {
+        "id": "t9:I_3->R",
+        "input": [
+          "I_3"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t9:I_3->R"
+        }
+      },
+      {
+        "id": "t10:S_12->E_12",
+        "input": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "S_12"
+        ],
+        "output": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "E_12"
+        ],
+        "properties": {
+          "name": "t10:S_12->E_12"
+        }
+      },
+      {
+        "id": "t11:S_21->E_21",
+        "input": [
+          "I_2",
+          "I_3",
+          "E_3",
+          "I_21",
+          "S_21"
+        ],
+        "output": [
+          "I_2",
+          "I_3",
+          "E_3",
+          "I_21",
+          "E_21"
+        ],
+        "properties": {
+          "name": "t11:S_21->E_21"
+        }
+      },
+      {
+        "id": "t12:E_12->I_12",
+        "input": [
+          "E_12"
+        ],
+        "output": [
+          "I_12"
+        ],
+        "properties": {
+          "name": "t12:E_12->I_12"
+        }
+      },
+      {
+        "id": "t13:E_21->I_21",
+        "input": [
+          "E_21"
+        ],
+        "output": [
+          "I_21"
+        ],
+        "properties": {
+          "name": "t13:E_21->I_21"
+        }
+      },
+      {
+        "id": "t14:I_12->R",
+        "input": [
+          "I_12"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t14:I_12->R"
+        }
+      },
+      {
+        "id": "t15:I_21->R",
+        "input": [
+          "I_21"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t15:I_21->R"
+        }
+      },
+      {
+        "id": "t16:I_2->E_3",
+        "input": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "I_2"
+        ],
+        "output": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "E_3"
+        ],
+        "properties": {
+          "name": "t16:I_2->E_3"
+        }
+      },
+      {
+        "id": "t17:E_2->E_3",
+        "input": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "E_2"
+        ],
+        "output": [
+          "I_1",
+          "I_12",
+          "I_3",
+          "E_3"
+        ],
+        "properties": {
+          "name": "t17:E_2->E_3"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t0:S->E_1",
+          "expression": "S*beta_1*(I_1 + I_12 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>S</ci><ci>beta_1</ci><apply><plus/><ci>I_12</ci><ci>I_1</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t1:S->E_2",
+          "expression": "S*beta_2*(E_3 + I_2 + I_21 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>S</ci><ci>beta_2</ci><apply><plus/><ci>E_3</ci><ci>I_21</ci><ci>I_2</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t2:E_1->I_1",
+          "expression": "E_1*k_1",
+          "expression_mathml": "<apply><times/><ci>E_1</ci><ci>k_1</ci></apply>"
+        },
+        {
+          "target": "t3:E_2->I_2",
+          "expression": "E_2*k_2",
+          "expression_mathml": "<apply><times/><ci>E_2</ci><ci>k_2</ci></apply>"
+        },
+        {
+          "target": "t4:E_3->I_3",
+          "expression": "E_3*k_1",
+          "expression_mathml": "<apply><times/><ci>E_3</ci><ci>k_1</ci></apply>"
+        },
+        {
+          "target": "t5:I_1->R",
+          "expression": "I_1*delta_1*rho_1",
+          "expression_mathml": "<apply><times/><ci>I_1</ci><ci>delta_1</ci><ci>rho_1</ci></apply>"
+        },
+        {
+          "target": "t6:I_1->S_21",
+          "expression": "I_1*delta_1",
+          "expression_mathml": "<apply><times/><ci>I_1</ci><ci>delta_1</ci></apply>"
+        },
+        {
+          "target": "t7:I_2->R",
+          "expression": "I_2*delta_2*rho_2",
+          "expression_mathml": "<apply><times/><ci>I_2</ci><ci>delta_2</ci><ci>rho_2</ci></apply>"
+        },
+        {
+          "target": "t8:I_2->S_12",
+          "expression": "I_2*delta_2",
+          "expression_mathml": "<apply><times/><ci>I_2</ci><ci>delta_2</ci></apply>"
+        },
+        {
+          "target": "t9:I_3->R",
+          "expression": "I_3*delta_3",
+          "expression_mathml": "<apply><times/><ci>I_3</ci><ci>delta_3</ci></apply>"
+        },
+        {
+          "target": "t10:S_12->E_12",
+          "expression": "S_12*beta_1*(I_1 + I_12 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>S_12</ci><ci>beta_1</ci><apply><plus/><ci>I_12</ci><ci>I_1</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t11:S_21->E_21",
+          "expression": "S_21*beta_2*(E_3 + I_2 + I_21 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>S_21</ci><ci>beta_2</ci><apply><plus/><ci>E_3</ci><ci>I_21</ci><ci>I_2</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t12:E_12->I_12",
+          "expression": "E_12*k_1",
+          "expression_mathml": "<apply><times/><ci>E_12</ci><ci>k_1</ci></apply>"
+        },
+        {
+          "target": "t13:E_21->I_21",
+          "expression": "E_21*k_2",
+          "expression_mathml": "<apply><times/><ci>E_21</ci><ci>k_2</ci></apply>"
+        },
+        {
+          "target": "t14:I_12->R",
+          "expression": "I_12*delta_1",
+          "expression_mathml": "<apply><times/><ci>I_12</ci><ci>delta_1</ci></apply>"
+        },
+        {
+          "target": "t15:I_21->R",
+          "expression": "I_21*delta_2",
+          "expression_mathml": "<apply><times/><ci>I_21</ci><ci>delta_2</ci></apply>"
+        },
+        {
+          "target": "t16:I_2->E_3",
+          "expression": "beta_1*(E_2 + I_2)*(I_1 + I_12 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>beta_1</ci><apply><plus/><ci>E_2</ci><ci>I_2</ci></apply><apply><plus/><ci>I_12</ci><ci>I_1</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t17:E_2->E_3",
+          "expression": "beta_1*(E_2 + I_2)*(I_1 + I_12 + I_3)/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>beta_1</ci><apply><plus/><ci>E_2</ci><ci>I_2</ci></apply><apply><plus/><ci>I_12</ci><ci>I_1</ci><ci>I_3</ci></apply></apply><ci>N</ci></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "S",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I_1",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I_12",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I_3",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E_1",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I_2",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E_3",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I_21",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E_2",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "R",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "S_21",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "S_12",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E_12",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "E_21",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "N",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "N"
+        },
+        {
+          "id": "beta_1",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "beta_1"
+        },
+        {
+          "id": "beta_2",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "beta_2"
+        },
+        {
+          "id": "k_1",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "k_1"
+        },
+        {
+          "id": "k_2",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "k_2"
+        },
+        {
+          "id": "delta_1",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "delta_1"
+        },
+        {
+          "id": "rho_1",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "rho_1"
+        },
+        {
+          "id": "delta_2",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "delta_2"
+        },
+        {
+          "id": "rho_2",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "rho_2"
+        },
+        {
+          "id": "delta_3",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "delta_3"
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t",
+        "units": {
+          "expression": "date",
+          "expression_mathml": "<ci>date</ci>"
+        }
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "gollmCard": null,
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

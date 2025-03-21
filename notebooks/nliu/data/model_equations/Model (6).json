@@ -1,0 +1,345 @@
+{
+  "id": "cc1d6a15-7ac3-48a2-8448-5d68cbfbd370",
+  "createdOn": "2025-03-17T16:24:46.916+00:00",
+  "updatedOn": "2025-03-17T16:24:47.531+00:00",
+  "name": "Model",
+  "fileNames": [],
+  "temporary": false,
+  "publicAsset": false,
+  "header": {
+    "name": "Model",
+    "description": "Model",
+    "schema": "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/petrinet_v0.6/petrinet/petrinet_schema.json",
+    "schema_name": "petrinet",
+    "model_version": "0.1"
+  },
+  "model": {
+    "states": [
+      {
+        "id": "S",
+        "name": "S(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "I",
+        "name": "I(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "L",
+        "name": "L(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "theta",
+        "name": "theta(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "Z",
+        "name": "Z(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      },
+      {
+        "id": "R",
+        "name": "R(t)",
+        "grounding": {
+          "identifiers": {},
+          "modifiers": {}
+        },
+        "units": {
+          "expression": "1",
+          "expression_mathml": "<cn>1</cn>"
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "id": "t0:S->L",
+        "input": [
+          "I",
+          "S"
+        ],
+        "output": [
+          "I",
+          "L"
+        ],
+        "properties": {
+          "name": "t0:S->L"
+        }
+      },
+      {
+        "id": "t1:S->Z",
+        "input": [
+          "theta",
+          "S"
+        ],
+        "output": [
+          "theta",
+          "Z"
+        ],
+        "properties": {
+          "name": "t1:S->Z"
+        }
+      },
+      {
+        "id": "t2:L->I",
+        "input": [
+          "L"
+        ],
+        "output": [
+          "I"
+        ],
+        "properties": {
+          "name": "t2:L->I"
+        }
+      },
+      {
+        "id": "t3:R->I",
+        "input": [
+          "R"
+        ],
+        "output": [
+          "I"
+        ],
+        "properties": {
+          "name": "t3:R->I"
+        }
+      },
+      {
+        "id": "t4:I->Z",
+        "input": [
+          "I"
+        ],
+        "output": [
+          "Z"
+        ],
+        "properties": {
+          "name": "t4:I->Z"
+        }
+      },
+      {
+        "id": "t5:I->R",
+        "input": [
+          "I"
+        ],
+        "output": [
+          "R"
+        ],
+        "properties": {
+          "name": "t5:I->R"
+        }
+      }
+    ]
+  },
+  "properties": {},
+  "semantics": {
+    "ode": {
+      "rates": [
+        {
+          "target": "t0:S->L",
+          "expression": "I*S*beta/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>I</ci><ci>S</ci><ci>beta</ci></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t1:S->Z",
+          "expression": "S*omega*tau*theta/N",
+          "expression_mathml": "<apply><divide/><apply><times/><ci>S</ci><ci>omega</ci><ci>tau</ci><ci>theta</ci></apply><ci>N</ci></apply>"
+        },
+        {
+          "target": "t2:L->I",
+          "expression": "L*alpha",
+          "expression_mathml": "<apply><times/><ci>L</ci><ci>alpha</ci></apply>"
+        },
+        {
+          "target": "t3:R->I",
+          "expression": "R*sigma",
+          "expression_mathml": "<apply><times/><ci>R</ci><ci>sigma</ci></apply>"
+        },
+        {
+          "target": "t4:I->Z",
+          "expression": "I*eta*gamma",
+          "expression_mathml": "<apply><times/><ci>I</ci><ci>eta</ci><ci>gamma</ci></apply>"
+        },
+        {
+          "target": "t5:I->R",
+          "expression": "I*gamma*(1 - eta)",
+          "expression_mathml": "<apply><times/><ci>I</ci><ci>gamma</ci><apply><minus/><cn>1</cn><ci>eta</ci></apply></apply>"
+        }
+      ],
+      "initials": [
+        {
+          "target": "S",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "I",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "L",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "theta",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "Z",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        },
+        {
+          "target": "R",
+          "expression": "0.0",
+          "expression_mathml": "<cn>0.0</cn>"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "N",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "N"
+        },
+        {
+          "id": "beta",
+          "name": "β",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "beta"
+        },
+        {
+          "id": "omega",
+          "name": "ω",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "omega"
+        },
+        {
+          "id": "tau",
+          "name": "τ",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "tau"
+        },
+        {
+          "id": "alpha",
+          "name": "α",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "alpha"
+        },
+        {
+          "id": "sigma",
+          "name": "σ",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "sigma"
+        },
+        {
+          "id": "eta",
+          "name": "η",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "eta"
+        },
+        {
+          "id": "gamma",
+          "name": "γ",
+          "value": 0,
+          "units": {
+            "expression": "1",
+            "expression_mathml": "<cn>1</cn>"
+          },
+          "conceptReference": "gamma"
+        }
+      ],
+      "observables": [],
+      "time": {
+        "id": "t",
+        "units": {
+          "expression": "date",
+          "expression_mathml": "<ci>date</ci>"
+        }
+      }
+    },
+    "span": [],
+    "typing": null
+  },
+  "metadata": {
+    "annotations": {
+      "authors": [],
+      "references": [],
+      "locations": [],
+      "pathogens": [],
+      "diseases": [],
+      "hosts": [],
+      "model_types": []
+    },
+    "source": null,
+    "gollmCard": null,
+    "gollmExtractions": null,
+    "templateCard": null
+  }
+}

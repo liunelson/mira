@@ -1,6 +1,7 @@
 # %%
 import os
 import sympy
+from sympy.abc import _clash
 from sympy.parsing.latex import parse_latex
 # pip install antlr4-python3-runtime==4.11
 import json
@@ -566,4 +567,87 @@ odesys = generate_model_latex(model3)
 print(odesys)
 
 # %%
+# Model 4 (sympy functions)
 
+t = sympy.Symbol('t')
+S, I, R, V = sympy.symbols('S I R V', cls = sympy.Function)
+a, b, c, d, g, k = sympy.symbols('a b c d g k')
+
+odes = [
+    sympy.Eq(S(t).diff(t), - S(t) * (a * I(t) + b * R(t) + c * R(t) + d * V(t)) - sympy.exp(-a * S(t))),
+    sympy.Eq(I(t).diff(t), S(t) * (a * I(t) + b * R(t) + c * R(t) + d * V(t)) - g * I(t)),
+    sympy.Eq(R(t).diff(t), k * g * I(t)),
+    # sympy.Eq(V(t).diff(t), (1 - k) * g * I(t) - sympy.exp(a) * V(t))
+    sympy.Eq(V(t).diff(t), (1 - k) * g * I(t))
+]
+
+model4 = template_model_from_sympy_odes(odes)
+
+model4.observables = {
+    'Dummy': Observable(name = 'Dummy', expression = safe_parse_expr('S + I + R + V + sympy.sin(t)', local_dict = _clash))
+}
+
+# model4 = post_mira_cleanup(model4)
+
+GraphicalModel.for_jupyter(model4)
+
+# %%
+generate_odesys(model4)
+
+# %%
+generate_summary_table(model4)
+
+# %%
+check_simplify_rate_laws(model4)
+
+# %%
+with open('./data/model_equations/model4.json', 'w') as fp:
+    j = template_model_to_petrinet_json(model4)
+    json.dump(j, fp, indent = 4)
+
+# %%
+m = template_model_from_amr_json(j)
+
+# %%
+# Model 5 (Hepatitis A)
+
+# odes_latex = [
+#     r'\frac{d S(t)}{d t} = - \frac{\beta * S(t) * I(t)}{N} - \frac{\omega * \tau * \theta * S(t)}{N}',
+#     r'\frac{d L(t)}{d t} = \frac{\beta * S(t) * I(t)}{N} - \alpha * L(t)',
+#     r'\frac{d I(t)}{d t} = \alpha * L(t) + \sigma * R(t) - \gamma * I(t)',
+#     r'\frac{d Z(t)}{d t} = \frac{\omega * \tau * \theta * S(t)}{N} + \eta * \gamma * I(t)',
+#     r'\frac{d R(t)}{d t} = (1 - \eta) * \gamma * I(t) - \sigma * R(t)',
+#     r'\beta = \beta_s + \frac{\beta_l - \beta_s}{1 + \exp{(-c * (t - t_s))}}'
+# ]
+
+odes_latex = [
+    "\\frac{d S(t)}{d t} = - \\frac{\\beta * S(t) * I(t)}{N} - \\frac{\\omega * \\tau * \\theta * S(t)}{N}",
+    "\\frac{d L(t)}{d t} = \\frac{\\beta * S(t) * I(t)}{N} - \\alpha * L(t)",
+    "\\frac{d I(t)}{d t} = \\alpha * L(t) + \\sigma * R(t) - \\gamma * I(t)",
+    "\\frac{d Z(t)}{d t} = \\frac{\\omega * \\tau * \\theta * S(t)}{N} + \\eta * \\gamma * I(t)",
+    "\\frac{d R(t)}{d t} = (1 - \\eta) * \\gamma * I(t) - \\sigma * R(t)",
+    "\\beta = \\beta_s + \\frac{\\beta_l - \\beta_s}{1 + \\exp{-c * (t - t_s)}}"
+]
+
+
+import sympy
+from sympy.abc import _clash
+t = sympy.symbols('t')
+beta_s, beta_l, c, t_s, omega, tau, theta, alpha, sigma, gamma, eta, N = sympy.symbols('beta_s beta_l c t_s omega tau theta alpha sigma gamma eta N')
+S, L, I, Z, R = sympy.symbols('S L I Z R', cls=sympy.Function)
+beta = beta_s + (beta_l - beta_s) / (1 + 2.7183**(-c * (t - t_s)))
+odes_sympy = [
+    sympy.Eq(S(t).diff(t), -beta * S(t) * I(t) / N - omega * tau * theta * S(t) / N),
+    sympy.Eq(L(t).diff(t), beta * S(t) * I(t) / N - alpha * L(t)),
+    sympy.Eq(I(t).diff(t), alpha * L(t) + sigma * R(t) - gamma * I(t)),
+    sympy.Eq(Z(t).diff(t), omega * tau * theta * S(t) / N + eta * gamma * I(t)),
+    sympy.Eq(R(t).diff(t), (1 - eta) * gamma * I(t) - sigma * R(t))
+]
+
+model5 = template_model_from_sympy_odes(odes_sympy)
+generate_summary_table(model5)
+
+# %%
+GraphicalModel.for_jupyter(model5)
+
+# %%
