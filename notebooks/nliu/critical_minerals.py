@@ -251,18 +251,21 @@ with open('./data/example_models/criticalminerals.json', 'w') as fp:
 # %%
 # Selectively stratify by country
 
-# countries = ['us', 'ua', 'cn']
-countries = ['US', 'UA', 'CN']
+# United States (US)
+# Democratic Republic of the Congo (CD)
+# Zambia (ZM)
+# South Africa (SA)
+# Rwanda (RW)
+# People's Republic of China (CN)
+countries = ['US', 'CD', 'ZM', 'SA', 'RW', 'CN']
 
 model_country = stratify(
     template_model = model,
     key = 'country',
     strata = countries,
-    # structure = [['ua', 'us'], ['cn', 'us'], ['ua', 'cn']],
     structure = [],
     directed = False,
     cartesian_control = False,
-    # params_to_stratify = ['PPI', 'FWI', 'MC', 'DeltaS', 'PP', 'SP', 'g'],
     params_to_stratify = ['DeltaS', 'PP', 'SP', 'g'],
     concepts_to_stratify = ['GDP', 'R', 'OS', 'S'],
     param_renaming_uses_strata_names = True
@@ -306,8 +309,14 @@ generate_summary_table(model_country)
 # %%
 # Selectively stratify by industry/application (for trade exposure)
 
-# industries = ['331313', '332431', '336111'] # household/industrial foil, containers/packaging, transportation (passengers and light trucks), 
-industries = ['foil', 'containers', 'cars']
+# North American Industry Classification System (NAICS)
+# for cobalt refinery
+# * cemented carbides: 333131, ...
+# * chemicals and ceramics: 335911
+# * magnetic alloys: 334112
+# # steels and other alloys: 33911(3,4,6), ...
+# * superalloys: 336412, ...
+industries = ['superalloys', 'steels', 'magneticalloys']
 
 # model_country_industry = stratify(
 #     template_model = model_country,
@@ -335,7 +344,12 @@ GraphicalModel.for_jupyter(model_country_industry)
 # %% 
 # Selectively stratify by commodity
 
-commodities = ['bauxite', 'alumina', 'aluminum']
+# HS code
+# cobalt ores and concentrates: 260500
+# cobalt oxides and hydroxides, commercial cobalt: 282200
+# cobalt, unwrought, matte, and other intermediates: 810510
+# cobalt and articles, thereof, nes: 810590
+commodities = ['CoOre', 'CoOxides', 'CoUnwrought', 'CoArticles']
 
 model_country_industry_commodity = stratify(
     template_model = model_country_industry,
