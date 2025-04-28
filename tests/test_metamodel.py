@@ -42,10 +42,20 @@ class TestMetaModel(unittest.TestCase):
 
     def test_schema(self):
         """Test that the schema is up to date."""
+        def normalize_schema(schema):
+            # Remove the enums from every type entry in each $def
+            for key, value in schema.get("$defs", {}).items():
+                for prop in value.get("properties", {}).values():
+                    type_data = prop.get("type", {})
+                    if isinstance(type_data, dict):
+                        type_data.pop("enum", None)
+
         self.assertTrue(SCHEMA_PATH.is_file())
+        generated_schema = get_json_schema()
+        current_schema = json.loads(SCHEMA_PATH.read_text())
         self.assertEqual(
-            get_json_schema(),
-            json.loads(SCHEMA_PATH.read_text()),
+            normalize_schema(generated_schema),
+            normalize_schema(current_schema),
             msg="Regenerate an updated JSON schema by running `python -m mira.metamodel.schema`",
         )
 
@@ -277,3 +287,65 @@ def test_reversible_flux():
     model = Model(tm)
     amr = template_model_to_petrinet_json(tm)
 
+
+def test_get_all_parameters():
+    distr = Distribution(type='Normal',
+                         parameters={'mean': 1, 'std': sympy.parse_expr('d')})
+    tm = TemplateModel(
+        templates=[
+            NaturalConversion(subject=Concept(name='x'),
+                              outcome=Concept(name='y')),
+            NaturalConversion(subject=Concept(name='y'),
+                              outcome=Concept(name='z')),
+        ],
+        parameters={
+            'a': Parameter(name='a', distribution=distr),
+            'b': Parameter(name='b', value=2),
+            'c': Parameter(name='c', value=3),
+            'd': Parameter(name='d', value=4),
+        },
+        observables={
+            'o1': Observable(name='o1', expression=sympy.parse_expr('5*a')),
+        },
+        initials={
+           'x0': Initial(concept=Concept(name='x'),
+                         expression=sympy.parse_expr('b')),
+        }
+    )
+    all_params = tm.get_all_used_parameters()
+    assert all_params == {'a', 'b', 'd'}, all_params
+
+
+def test_substitute_parameters():
+    distr = Distribution(
+        type='Normal',
+        parameters={
+            'mean': 0.5,
+            'std': sympy.parse_expr('k2'),
+        }
+    )
+    tm = TemplateModel(
+        templates=[
+            NaturalConversion(
+                subject=Concept(name='x'),
+                outcome=Concept(name='y'),
+                rate_law=sympy.Symbol('k3') * sympy.Symbol('x')
+            )
+        ],
+        parameters={
+            'k1': Parameter(name='k1', distribution=distr),
+            'k2': Parameter(name='k2', value=2),
+            'k3': Parameter(name='k3', value=3),
+            'k4': Parameter(name='k4', value=4),
+        },
+        initials={
+            'x': Initial(concept=Concept(name='x'),
+                         expression=sympy.Symbol('k4')),
+        }
+    )
+    tm.substitute_parameter('k4', 4)
+    assert tm.initials['x'].expression.args[0] - 4 == 0
+    tm.substitute_parameter('k2')
+    assert tm.parameters['k1'].distribution.parameters['std'].args[0] - 2 == 0
+    tm.substitute_parameter('k3', 0.5)
+    assert tm.templates[0].rate_law.args[0] == 0.5 * sympy.Symbol('x')

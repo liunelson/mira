@@ -1,7 +1,7 @@
 """Operations for template models."""
 import logging
 from copy import deepcopy
-from collections import defaultdict, Counter
+from collections import defaultdict
 import itertools as itt
 from typing import Callable, Collection, Iterable, List, Mapping, Optional, \
     Tuple, Type, Union
@@ -10,13 +10,13 @@ import sympy
 
 from .template_model import TemplateModel, Initial, Parameter, Observable
 from .templates import *
-from .comparison import get_dkg_refinement_closure
 from .units import Unit
 from .utils import SympyExprStr
 
 __all__ = [
     "stratify",
     "simplify_rate_laws",
+    "check_simplify_rate_laws",
     "aggregate_parameters",
     "get_term_roles",
     "counts_to_dimensionless",
@@ -258,6 +258,98 @@ def stratify(
                         all_param_mappings[old_param].add(new_param)
                     templates.append(stratified_template)
 
+    # Handle initial values and expressions depending on different
+    # criteria
+    initials = {}
+    param_value_mappings = {}
+    for initial_key, initial in template_model.initials.items():
+        # We need to keep track of whether we stratified any parameters in
+        # the expression for this initial and if the parameter is being
+        # replaced by multiple stratified parameters
+        any_param_stratified = False
+        param_replacements = defaultdict(set)
+
+        for stratum_idx, stratum in enumerate(strata):
+            # Figure out if the concept for this initial is one that we
+            # need to stratify or not
+            if (exclude_concepts and initial.concept.name in exclude_concepts) or \
+                    (concepts_to_preserve and initial.concept.name in concepts_to_preserve):
+                # Just make a copy of the original initial concept
+                new_concept = deepcopy(initial.concept)
+                concept_stratified = False
+            else:
+                # We create a new concept for the given stratum
+                new_concept = initial.concept.with_context(
+                    do_rename=modify_names,
+                    curie_to_name_map=strata_curie_to_name,
+                    **{key: stratum},
+                )
+                concept_stratified = True
+            # Now we may have to rewrite the expression so that we can
+            # update for stratified parameters so we make a copy and figure
+            # out what parameters are in the expression
+            new_expression = deepcopy(initial.expression)
+            init_expr_params = template_model.get_parameters_from_expression(
+                new_expression.args[0]
+            )
+            template_strata = [stratum if
+                               param_renaming_uses_strata_names else stratum_idx]
+            for parameter in init_expr_params:
+                # If a parameter is explicitly listed as one to preserve, then
+                # don't stratify it
+                if params_to_preserve is not None and parameter in params_to_preserve:
+                    continue
+                # If we have an explicit stratification list then if something isn't
+                # in the list then don't stratify it.
+                elif params_to_stratify is not None and parameter not in params_to_stratify:
+                    continue
+                # Otherwise we go ahead with stratification, i.e., in cases
+                # where nothing was said about parameter stratification or the
+                # parameter was listed explicitly to be stratified
+                else:
+                    # We create a new parameter symbol for the given stratum
+                    param_suffix = '_'.join([str(s) for s in template_strata])
+                    new_param = f'{parameter}_{param_suffix}'
+                    any_param_stratified = True
+                    all_param_mappings[parameter].add(new_param)
+                    # We need to update the new, stratified parameter's value
+                    # to be the original parameter's value divided by the number
+                    # of strata
+                    param_value_mappings[new_param] = \
+                        template_model.parameters[parameter].value / len(strata)
+                    # If the concept is not stratified then we have to replace
+                    # the original parameter with the sum of stratified ones
+                    # so we just keep track of that in a set
+                    if not concept_stratified:
+                        param_replacements[parameter].add(new_param)
+                    # Otherwise we have to rewrite the expression to use the
+                    # new parameter as replacement for the original one
+                    else:
+                        new_expression = new_expression.subs(parameter,
+                                                             sympy.Symbol(new_param))
+
+            # If we stratified any parameters in the expression then we have
+            # to update the initial value expression to reflect that
+            if any_param_stratified:
+                if param_replacements:
+                    for orig_param, new_params in param_replacements.items():
+                        new_expression = new_expression.subs(
+                            orig_param,
+                            sympy.Add(*[sympy.Symbol(np) for np in new_params])
+                        )
+                new_initial = new_expression
+            # Otherwise we can just use the original expression, except if the
+            # concept was stratified, then we have to divide the initial
+            # expression into as many parts as there are strata
+            else:
+                if concept_stratified:
+                    new_initial = SympyExprStr(new_expression.args[0] / len(strata))
+                else:
+                    new_initial = new_expression
+
+            initials[new_concept.name] = \
+                Initial(concept=new_concept, expression=new_initial)
+
     parameters = {}
     for parameter_key, parameter in template_model.parameters.items():
         if parameter_key not in all_param_mappings:
@@ -273,25 +365,9 @@ def stratify(
         for stratified_param in all_param_mappings[parameter_key]:
             d = deepcopy(parameter)
             d.name = stratified_param
+            if stratified_param in param_value_mappings:
+                d.value = param_value_mappings[stratified_param]
             parameters[stratified_param] = d
-
-    # Create new initial values for each of the strata
-    # of the original compartments, copied from the initial
-    # values of the original compartments
-    initials = {}
-    for initial_key, initial in template_model.initials.items():
-        if initial.concept.name in exclude_concepts:
-            initials[initial.concept.name] = deepcopy(initial)
-            continue
-        for stratum in strata:
-            new_concept = initial.concept.with_context(
-                do_rename=modify_names,
-                curie_to_name_map=strata_curie_to_name,
-                **{key: stratum},
-            )
-            initials[new_concept.name] = Initial(
-                concept=new_concept, expression=SympyExprStr(initial.expression.args[0] / len(strata))
-            )
 
     observables = {}
     for observable_key, observable in template_model.observables.items():
@@ -495,6 +571,67 @@ def simplify_rate_laws(template_model: TemplateModel):
     return template_model
 
 
+def check_simplify_rate_laws(template_model: TemplateModel) -> \
+        Mapping[str, Union[str, int, TemplateModel]]:
+    """Return a summary of what changes upon rate law simplification
+
+    Parameters
+    ----------
+    template_model :
+        A template model
+
+    Returns
+    -------
+    :
+        A dictionary with the result of the check under the `result` key.
+        The result can be one of the following:
+        - {'result': 'NO_GROUP_CONTROLLERS'}: If there are no templates with
+           grouped controllers
+        - {'result': 'NO_CHANGE'}: If the model does contain templates with
+           grouped controllers but simplification does not change the model.
+        - {'result': 'NO_CHANGE_IN_MAX_CONTROLLERS',
+           'max_controller_count': n}: If the model is simplified but the
+           maximum number of controllers remains the same so it might not be
+           worth doing the simplification. In this case the max controller
+           count in the model is returned. The simplified model
+           itself is also returned.
+        - {'result': 'MEANINGFUL_CHANGE',
+           'max_controller_decrease': n}: If the model is simplified and the
+           maximum number of controllers also meaningfully changes. In this
+           case the decrease in the maximum controller count is returned.
+           The simplified model itself is also returned.
+    """
+    if not any(isinstance(template, (GroupedControlledConversion,
+                                     GroupedControlledProduction,
+                                     GroupedControlledDegradation))
+               for template in template_model.templates):
+        return {'result': 'NO_GROUP_CONTROLLERS'}
+    simplified_model = simplify_rate_laws(template_model)
+    old_template_count = len(template_model.templates)
+    new_template_count = len(simplified_model.templates)
+    if old_template_count == new_template_count:
+        return {'result': 'NO_CHANGE'}
+
+    def max_controller_count(template_model):
+        max_count = 0
+        for template in template_model.templates:
+            if hasattr(template, 'controllers'):
+                max_count = max(len(template.get_controllers()), max_count)
+            elif hasattr(template, 'controller'):
+                max_count = max(1, max_count)
+        return max_count
+
+    old_max_count = max_controller_count(template_model)
+    new_max_count = max_controller_count(simplified_model)
+    if old_max_count == new_max_count:
+        return {'result': 'NO_CHANGE_IN_MAX_CONTROLLERS',
+                'max_controller_count': old_max_count,
+                'simplified_model': simplified_model}
+    return {'result': 'MEANINGFUL_CHANGE',
+            'max_controller_decrease': old_max_count - new_max_count,
+            'simplified_model': simplified_model}
+
+
 def aggregate_parameters(template_model: TemplateModel) -> TemplateModel:
     """Return a template model after aggregating parameters for mass-action
     rate laws.
@@ -554,6 +691,7 @@ def aggregate_parameters(template_model: TemplateModel) -> TemplateModel:
     return template_model
 
 
+
 def simplify_rate_law(template: Template,
                       parameters: Mapping[str, Parameter]) \
         -> Union[List[Template], None]:
@@ -573,7 +711,8 @@ def simplify_rate_law(template: Template,
         A list of templates, which may be empty if the template could not
     """
     if not isinstance(template, (GroupedControlledConversion,
-                                 GroupedControlledProduction)):
+                                 GroupedControlledProduction,
+                                 GroupedControlledDegradation)):
         return
     # Make a deepcopy up front so we don't change the original template
     template = deepcopy(template)
@@ -582,10 +721,11 @@ def simplify_rate_law(template: Template,
     new_templates = []
     # We go controller by controller and check if it's controlling the process
     # in a mass-action way.
+    new_template_counter = 1
     for controller in deepcopy(template.controllers):
         # We use a trick here where we take the derivative of the rate law
         # with respect to the controller, and if it takes an expected form
-        # we conclue that the controller is controlling the process in a
+        # we conclude that the controller is controlling the process in a
         # mass-action way and can therefore be spun off.
         controller_rate = sympy.diff(rate_law,
                                      sympy.Symbol(controller.name))
@@ -610,6 +750,13 @@ def simplify_rate_law(template: Template,
                 outcome=deepcopy(template.outcome),
                 rate_law=new_rate_law
             )
+        elif isinstance(template, GroupedControlledDegradation) and \
+                set(term_roles) == {'parameter', 'subject'}:
+            new_template = ControlledDegradation(
+                controller=deepcopy(controller),
+                subject=deepcopy(template.subject),
+                rate_law=new_rate_law
+            )
         # In this case, the rate law derivative contains just the parameter
         elif isinstance(template, GroupedControlledProduction) and \
                 set(term_roles) == {'parameter'}:
@@ -620,6 +767,12 @@ def simplify_rate_law(template: Template,
             )
         else:
             continue
+        # Generate a new name for the template being created
+        # but don't create a name if the original template didn't
+        # have one either
+        new_template.name = f"{template.name}_{new_template_counter}" if \
+            template.name else None
+        new_template_counter += 1
         new_templates.append(new_template)
         template.controllers.remove(controller)
         # We simply deduct the mass-action term for the controller
@@ -659,7 +812,8 @@ def get_term_roles(
     for symbol in term.free_symbols:
         if symbol.name in parameters:
             term_roles['parameter'].append(symbol.name)
-        elif isinstance(template, GroupedControlledConversion) and \
+        elif isinstance(template, (GroupedControlledConversion,
+                                   GroupedControlledDegradation)) and \
                 symbol.name == template.subject.name:
             term_roles['subject'].append(symbol.name)
         else:

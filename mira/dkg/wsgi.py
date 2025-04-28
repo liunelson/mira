@@ -38,7 +38,7 @@ tags_metadata = [
         "description": "Identify appropriate ontology/database terms for text.",
         "externalDocs": {
             "description": "External documentation",
-            "url": "https://github.com/indralab/gilda",
+            "url": "https://github.com/gyorilab/gilda",
         },
     },
     {
@@ -64,7 +64,7 @@ app = FastAPI(
     A service for building and interacting with domain knowledge graphs.
 
     Further information can be found at:
-    - https://github.com/indralab/mira
+    - https://github.com/gyorilab/mira
     """
     ),
     contact={
@@ -73,7 +73,7 @@ app = FastAPI(
     },
     license_info={
         "name": "BSD-2-Clause license",
-        "url": "https://github.com/indralab/mira/blob/main/LICENSE",
+        "url": "https://github.com/gyorilab/mira/blob/main/LICENSE",
     },
 )
 app.include_router(api_blueprint, prefix="/api")
@@ -107,6 +107,19 @@ def startup_event():
                 curie: np.array([float(p) for p in parts])
                 for curie, *parts in reader
             }
+
+    # If the OpenAI API key is set, enable the LLM UI
+    if api_key := os.environ.get("OPENAI_API_KEY"):
+        from mira.openai import OpenAIClient
+        from mira.sources.sympy_ode.llm_ui import llm_ui_blueprint
+        from mira.sources.sympy_ode.proxies import OPEN_AI_CLIENT
+        openai_client = OpenAIClient(api_key)
+        flask_app.extensions[OPEN_AI_CLIENT] = openai_client
+        flask_app.register_blueprint(llm_ui_blueprint)
+    else:
+        logger.warning(
+            "OpenAI API key not found in environment, LLM capabilities will be disabled"
+        )
 
     # Set MIRA_NEO4J_URL in the environment
     # to point this somewhere specific

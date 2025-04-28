@@ -55,7 +55,6 @@ class SbmlProcessor:
         )
         reporter_ids = set(self.reporter_ids or [])
         concepts = self._extract_concepts()
-
         def _lookup_concepts_filtered(species_ids) -> List[Concept]:
             return [
                 concepts[species_id]
@@ -70,7 +69,6 @@ class SbmlProcessor:
         # https://sbml.org/software/libsbml/5.18.0/docs/formatted/python-api/
         # classlibsbml_1_1_reaction.html
         all_species = {species.id for species in self.sbml_model.species}
-
         all_parameters = {
             parameter.id: {
                 "value": parameter.value,
@@ -238,8 +236,8 @@ class SbmlProcessor:
                     if reversible:
                         templates.append(
                             ReversibleFlux(
-                                left=[reactants],
-                                right=[products],
+                                left=reactants,
+                                right=products,
                                 rate_law=rate_expr,
                             )
                         )
@@ -805,7 +803,7 @@ def _extract_all_copasi_attrib(
 
 
 def get_distribution(obj):
-    """Return a Distribution oextracted from an SBML object if available."""
+    """Return a Distribution extracted from an SBML object if available."""
     distr_tag = obj.getPlugin("distrib")
     if distr_tag:
         # We import only if needed

@@ -10,7 +10,7 @@ import sympy
 from mira.metamodel import *
 from mira.metamodel.ops import stratify, simplify_rate_law, \
     counts_to_dimensionless, add_observable_pattern, \
-    get_observable_for_concepts
+    get_observable_for_concepts, check_simplify_rate_laws
 from mira.examples.sir import cities, sir, sir_2_city, sir_parameterized
 from mira.examples.concepts import infected, susceptible
 from mira.examples.chime import sviivr
@@ -342,25 +342,44 @@ class TestOperations(unittest.TestCase):
 
     def test_simplify_rate_law(self):
         parameters = ['alpha', 'beta', 'gamma', 'delta']
+        controllers = [
+            Concept(name='Ailing'),
+            Concept(name='Diagnosed'),
+            Concept(name='Infected'),
+            Concept(name='Recognized')
+        ]
+        rate_law = safe_parse_expr('1.0*Susceptible*(Ailing*gamma + '
+                                   'Diagnosed*beta + Infected*alpha + '
+                                   'Recognized*delta)',
+                                   local_dict={p: _s(p) for p in parameters})
         template = GroupedControlledConversion(
-            controllers=[
-                Concept(name='Ailing'),
-                Concept(name='Diagnosed'),
-                Concept(name='Infected'),
-                Concept(name='Recognized')
-            ],
+            name='t1',
+            controllers=controllers,
             subject=Concept(name='Susceptible'),
             outcome=Concept(name='Infected'),
-            rate_law=safe_parse_expr('1.0*Susceptible*(Ailing*gamma + '
-                                     'Diagnosed*beta + Infected*alpha + '
-                                     'Recognized*delta)',
-                                     local_dict={p: _s(p) for p in parameters})
+            rate_law=rate_law
         )
-        simplified_templates = \
-            simplify_rate_law(template, parameters)
+        simplified_templates = simplify_rate_law(template, parameters)
         assert len(simplified_templates) == 4, simplified_templates
         assert all(isinstance(t, ControlledConversion)
                    for t in simplified_templates)
+        assert all(t.name is not None for t in simplified_templates)
+        assert len({t.name for t in simplified_templates}) \
+            == len(simplified_templates)
+
+        template = GroupedControlledDegradation(
+            name='t1',
+            controllers=controllers,
+            subject=Concept(name='Susceptible'),
+            rate_law=rate_law
+        )
+        simplified_templates = simplify_rate_law(template, parameters)
+        assert len(simplified_templates) == 4, simplified_templates
+        assert all(isinstance(t, ControlledDegradation)
+                   for t in simplified_templates)
+        assert all(t.name is not None for t in simplified_templates)
+        assert len({t.name for t in simplified_templates}) \
+               == len(simplified_templates)
 
     def test_simplify_rate_law2(self):
         def _make_template(rate_law):
@@ -636,3 +655,91 @@ def test_add_observable_pattern():
     assert 'young' in tm.observables
     obs = tm.observables['young']
     assert obs.expression.args[0] == sympy.Symbol('A_young') + sympy.Symbol('B_young')
+
+
+def test_stratify_initials_parameters():
+    s = Concept(name='S')
+    t = NaturalDegradation(subject=s, rate_law=sympy.Symbol('alpha') *
+                                               sympy.Symbol(s.name))
+    S0 = Initial(concept=s, expression=sympy.Symbol('S0'))
+    tm = TemplateModel(templates=[t],
+                       parameters={'alpha': Parameter(name='alpha', value=0.1),
+                                   'S0': Parameter(name='S0', value=1000)},
+                       initials={'S': S0})
+    tm1 = stratify(tm, key='age', strata=['young', 'old'], structure=[],
+                   param_renaming_uses_strata_names=True)
+    assert 'S_young' in tm1.initials
+    assert tm1.initials['S_young'].expression.args[0] == sympy.Symbol('S0_young')
+    assert 'S_old' in tm1.initials
+    assert tm1.initials['S_old'].expression.args[0] == sympy.Symbol('S0_old')
+    assert 'S0_young' in tm1.parameters
+    assert tm1.parameters['S0_young'].value == 500
+    assert 'S0_old' in tm1.parameters
+    assert tm1.parameters['S0_old'].value == 500
+
+    tm2 = stratify(tm, key='age', strata=['young', 'old'], structure=[],
+                   param_renaming_uses_strata_names=True,
+                   params_to_preserve={'S0'})
+    assert 'S_young' in tm2.initials
+    assert tm2.initials['S_young'].expression.args[0] == sympy.Symbol('S0') / 2
+    assert 'S_old' in tm2.initials
+    assert tm2.initials['S_old'].expression.args[0] == sympy.Symbol('S0') / 2
+    assert 'S0' in tm2.parameters
+    assert tm2.parameters['S0'].value == 1000
+
+    tm3 = stratify(tm, key='age', strata=['young', 'old'], structure=[],
+                   param_renaming_uses_strata_names=True,
+                   concepts_to_preserve={'S'})
+    assert set(tm3.initials) == {'S'}
+    assert tm3.initials['S'].expression.args[0] == \
+        sympy.Symbol('S0_old') + sympy.Symbol('S0_young')
+    assert set(tm3.parameters) == {'alpha', 'S0_old', 'S0_young'}
+    assert tm3.parameters['S0_old'].value == 500
+    assert tm3.parameters['S0_young'].value == 500
+
+
+def test_check_simplify():
+    a, b, c, A, B, C, D = sympy.symbols('a b c A B C D')
+
+    # No group controllers at all so nothing to simplify
+    assert check_simplify_rate_laws(
+        TemplateModel(
+            templates=[NaturalProduction(outcome=Concept(name='A'),
+                                         rate_law=SympyExprStr(a * A))],
+        )
+    ) == {'result': 'NO_GROUP_CONTROLLERS'}
+
+    # No simplification possible due to form of rate law
+    template = GroupedControlledDegradation(
+        subject=Concept(name='A'),
+        controllers=[Concept(name='B'), Concept(name='C')],
+        rate_law=SympyExprStr(b * B/C * A + a),
+    )
+    parameters = {'a': Parameter(name='a', value=1),
+                  'b': Parameter(name='b', value=1),
+                  'c': Parameter(name='c', value=1)}
+    tm = TemplateModel(templates=[template],
+                       parameters=parameters)
+    res = check_simplify_rate_laws(tm)
+    assert res['result'] == 'NO_CHANGE'
+
+    # Meaningful simplification with decrease in max controller count
+    template.rate_law = SympyExprStr((b * B + c * C) * A)
+    res = check_simplify_rate_laws(tm)
+    assert res['result'] == 'MEANINGFUL_CHANGE'
+    assert res['max_controller_decrease'] == 1
+
+    # Some simplification happens but the max controller
+    # count cannot be decreased due to a second template
+    # with 3 controllers that cannot be simplified
+    template2 = GroupedControlledDegradation(
+        subject=Concept(name='A'),
+        controllers=[Concept(name='B'), Concept(name='C'),
+                     Concept(name='D')],
+        rate_law=SympyExprStr(b * B/C*D * A + a),
+    )
+    tm = TemplateModel(templates=[template, template2],
+                       parameters=parameters)
+    res = check_simplify_rate_laws(tm)
+    assert res['result'] == 'NO_CHANGE_IN_MAX_CONTROLLERS'
+    assert res['max_controller_count'] == 3
